@@ -12,7 +12,7 @@ const userSchema = new Schema(
     location: { type: String, default: '' },
     website: { type: String, default: '' },
     handle: { type: String, required: true },
-    active: { type: Number, default: 1 },
+    active: { type: Boolean, default: true },
 
     followers: [{ type: Schema.Types.ObjectId, ref: 'Users' }],
     following: [{ type: Schema.Types.ObjectId, ref: 'Users' }],
