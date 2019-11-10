@@ -1,29 +1,31 @@
-//import the require dependencies
+// import the require dependencies
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import Promise from 'bluebird';
-mongoose.Promise = Promise;
 import cors from 'cors';
+
+mongoose.Promise = Promise;
 const app = express();
 
-//use cors to allow cross origin resource sharing. Take value from .env file
+// use cors to allow cross origin resource sharing. Take value from .env file
 app.use(
   cors({
     origin: 'http://localhost:3000',
     credentials: true,
-  }),
+  })
 );
 
 app.use(
   bodyParser.urlencoded({
     extended: true,
-  }),
+  })
 );
 app.use(bodyParser.json());
 
-//Allow Access Control
-app.use(function(req, res, next) {
+// Allow Access Control
+// eslint-disable-next-line func-names
+app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
@@ -35,7 +37,8 @@ app.use(function(req, res, next) {
   next();
 });
 
-//start your server on port 3001
+// start your server on port 3001
 app.listen(3001);
+// eslint-disable-next-line no-console
 console.log('Server Listening on port 3001');
 module.exports = app;
