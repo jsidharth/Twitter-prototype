@@ -4,12 +4,18 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon -r esm ./server.js",
+    "debug": "nodemon -r esm --inspect-brk --inspect=0.0.0.0:9229 ./server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "kafka-node": "^3.0.1"
+    "esm": "^3.2.25",
+    "jsonwebtoken": "^8.5.1",
+    "kafka-node": "^3.0.1",
+    "moment": "^2.24.0",
+    "mongoose": "^5.7.10"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
