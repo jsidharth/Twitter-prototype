@@ -31,9 +31,8 @@ class Sidebar extends Component {
             </ListGroup.Item>
             <NavLink>
               <ListGroup.Item action href="/home">
-                <FaHome size={50} />
+                <FaHome size={40} />
                 Home
-                <br />
                 <br />
                 <br />
               </ListGroup.Item>
@@ -44,14 +43,12 @@ class Sidebar extends Component {
                 Notifications
                 <br />
                 <br />
-                <br />
               </ListGroup.Item>
             </NavLink>
             <NavLink>
               <ListGroup.Item action href="/home">
                 <FaEnvelope size={40} />
                 Messages
-                <br />
                 <br />
                 <br />
               </ListGroup.Item>
@@ -62,7 +59,6 @@ class Sidebar extends Component {
                 Lists
                 <br />
                 <br />
-                <br />
               </ListGroup.Item>
             </NavLink>
             <NavLink>
@@ -71,14 +67,12 @@ class Sidebar extends Component {
                 Profile
                 <br />
                 <br />
-                <br />
               </ListGroup.Item>
             </NavLink>
             <NavLink>
               <ListGroup.Item action href="/home">
                 <FaFirstdraft size={40} />
                 Analytics
-                <br />
                 <br />
                 <br />
               </ListGroup.Item>
