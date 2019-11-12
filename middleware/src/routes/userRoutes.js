@@ -12,7 +12,7 @@ userRouter.post('/register', passport.authenticate('register'), (req, res) => {
     'userTopic',
     {
       body: req.body,
-      action: 1,
+      action: 'USER_REGISTER',
     },
     (err, result) => {
       if (err) {
