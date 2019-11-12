@@ -22,4 +22,4 @@ sequelize
     console.log('DB Creation Error: ', err.message);
   });
 
-export default { Users };
+export { Users };

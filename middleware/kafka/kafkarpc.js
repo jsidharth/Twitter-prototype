@@ -1,8 +1,10 @@
 const crypto = require('crypto');
-const conn = require('./connection').default;
+const conn = require('./connection');
 
 const TIMEOUT = 8000; // time to wait for response in ms
 let self;
+
+exports = module.exports = KafkaRPC;
 
 function KafkaRPC() {
   self = this;
@@ -12,7 +14,7 @@ function KafkaRPC() {
   this.producer = this.connection.getProducer();
 }
 
-KafkaRPC.prototype.makeRequest = (topicName, content, callback) => {
+KafkaRPC.prototype.makeRequest = function(topicName, content, callback) {
   self = this;
   // generate a unique correlation id for this call
   const correlationId = crypto.randomBytes(16).toString('hex');
@@ -66,7 +68,7 @@ KafkaRPC.prototype.makeRequest = (topicName, content, callback) => {
   });
 };
 
-KafkaRPC.prototype.setupResponseQueue = (producer, topicName, next) => {
+KafkaRPC.prototype.setupResponseQueue = function(producer, topicName, next) {
   // don't mess around if we have a queue
   if (this.response_queue) return next();
 
@@ -97,5 +99,3 @@ KafkaRPC.prototype.setupResponseQueue = (producer, topicName, next) => {
   console.log('returning next');
   return next();
 };
-
-module.exports = KafkaRPC;

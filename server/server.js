@@ -1,37 +1,42 @@
-var connection = new require("./kafka/Connection");
-//topics files
-//var Books = require("./services/books.js");
+import connection from './kafka/Connection';
+// eslint-disable-next-line no-unused-vars
+import mongoDBConnection from './config/mongoose';
 
-function handleTopicRequest(topic_name, fname) {
-  //var topic_name = 'root_topic';
-  var consumer = connection.getConsumer(topic_name);
-  var producer = connection.getProducer();
-  console.log("server is running ");
-  consumer.on("message", function (message) {
-    console.log("message received for " + topic_name + " ", fname);
+// topics files
+import * as userController from './controller/user.controller';
+
+// eslint-disable-next-line no-unused-vars
+function handleTopicRequest(topicName, fname) {
+  const consumer = connection.getConsumer(topicName);
+  const producer = connection.getProducer();
+  console.log('server is running ');
+  consumer.on('message', function(message) {
+    console.log(`message received for ${topicName} `, fname);
     console.log(JSON.stringify(message.value));
-    var data = JSON.parse(message.value);
+    const data = JSON.parse(message.value);
 
-    fname.handle_request(data.data, function (err, res) {
-      console.log("after handle" + res);
-      var payloads = [{
-        topic: data.replyTo,
-        messages: JSON.stringify({
-          correlationId: data.correlationId,
-          data: res
-        }),
-        partition: 0
-      }];
-      console.log(payloads)
-      producer.send(payloads, function (err, data) {
+    fname.handleRequest(data.data, function(err, res) {
+      console.log(`after handle ${res}`);
+      const payloads = [
+        {
+          topic: data.replyTo,
+          messages: JSON.stringify({
+            correlationId: data.correlationId,
+            data: res,
+          }),
+          partition: 0,
+        },
+      ];
+      console.log(payloads);
+      // eslint-disable-next-line no-shadow
+      producer.send(payloads, function(err, data) {
         console.log(data);
       });
-      return;
     });
   });
 }
 
 // Add your TOPICs here
-//first argument is topic name
-//second argument is a function that will handle this topic request
-//handleTopicRequest("post_book", Books);
+// first argument is topic name
+// second argument is a function that will handle this topic request
+handleTopicRequest('userTopic', userController);

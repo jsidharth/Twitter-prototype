@@ -28,4 +28,4 @@ function ConnectionProvider() {
     return this.kafkaProducerConnection;
   };
 }
-module.exports = new ConnectionProvider();
+exports = module.exports = new ConnectionProvider();

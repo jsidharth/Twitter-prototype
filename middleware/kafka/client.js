@@ -1,4 +1,4 @@
-const rpc = new './kafkarpc'();
+const rpc = new (require('./kafkarpc'))();
 
 // make request to kafka
 function makeRequest(queueName, msgPayload, callback) {
