@@ -2,7 +2,7 @@ import register from '../services/user.services/register';
 
 const handleRequest = (payload, callback) => {
   switch (payload.action) {
-    case 1:
+    case 'USER_REGISTER':
       register.handleRequest(payload.body, callback);
       break;
     default:
