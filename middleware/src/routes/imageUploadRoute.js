@@ -24,3 +24,5 @@ imageUploadRouter.post('/upload/image', multerUploads, cloudinaryConfig, (req, r
       res.status(500).json(err);
     });
 });
+
+export default imageUploadRouter;
