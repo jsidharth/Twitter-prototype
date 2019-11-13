@@ -1,3 +1,6 @@
+/* eslint-disable no-shadow */
+/* eslint-disable func-names */
+/* eslint-disable no-console */
 import connection from './kafka/Connection';
 // eslint-disable-next-line no-unused-vars
 import mongoDBConnection from './config/mongoose';
@@ -29,6 +32,7 @@ function handleTopicRequest(topicName, fname) {
       ];
       console.log(payloads);
       // eslint-disable-next-line no-shadow
+      // eslint-disable-next-line func-names
       producer.send(payloads, function(err, data) {
         console.log(data);
       });

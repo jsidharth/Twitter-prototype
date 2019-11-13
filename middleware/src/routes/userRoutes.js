@@ -26,4 +26,25 @@ userRouter.post('/register', passport.authenticate('register'), (req, res) => {
   );
 });
 
+userRouter.post('/login', passport.authenticate('login'), (req, res) => {
+  console.log('Inside POST user Login');
+  console.log('Request Body: ', req.body);
+  kafka.makeRequest(
+    'userTopic',
+    {
+      body: req.body,
+      action: 'USER_LOGIN',
+    },
+    (err, result) => {
+      if (err) {
+        console.log('Error ', err);
+        res.status(500).json({
+          message: err.message,
+        });
+      }
+      res.status(200).json(result);
+    }
+  );
+});
+
 export default userRouter;

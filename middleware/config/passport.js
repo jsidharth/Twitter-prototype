@@ -64,7 +64,9 @@ passport.use(
     async (username, password, done) => {
       try {
         const user = await Users.findOne({
-          email: username,
+          where: {
+            email: username,
+          },
         });
         if (!user) {
           return done(null, false);
@@ -92,7 +94,9 @@ passport.use(
   new JWTStrategy(options, async (jwtPayload, done) => {
     try {
       const user = await Users.findOne({
-        id: jwtPayload.id,
+        where: {
+          id: jwtPayload.id,
+        },
       });
       if (user) done(null, true);
       else done(null, false);

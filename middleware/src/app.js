@@ -6,7 +6,8 @@ import Promise from 'bluebird';
 import cors from 'cors';
 import passport from 'passport';
 
-import routes from './routes';
+// import routes from './routes';
+import userRoutes from './routes/userRoutes';
 
 mongoose.Promise = Promise;
 const app = express();
@@ -47,7 +48,7 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.use('/', routes);
+app.use('/', userRoutes);
 
 // start your server on port 3001
 app.listen(3001);
