@@ -27,6 +27,8 @@ class Sidebar extends Component {
                   className="d-inline-block align-top"
                   alt="Main logo link to home"
                 />
+                <br />
+                <br />
               </Navbar.Brand>
             </ListGroup.Item>
             <NavLink>
