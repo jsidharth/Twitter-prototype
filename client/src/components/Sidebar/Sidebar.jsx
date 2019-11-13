@@ -16,7 +16,6 @@ class Sidebar extends Component {
   render() {
     return (
       <div className="fixed">
-          
         <nav className="sidebar flex-column">
           <ListGroup variant="flush">
             <ListGroup.Item>
@@ -28,82 +27,72 @@ class Sidebar extends Component {
                   className="d-inline-block align-top"
                   alt="Main logo link to home"
                 />
-                <br />
-                <br />
-                <br />
               </Navbar.Brand>
             </ListGroup.Item>
             <NavLink>
               <ListGroup.Item action href="/home">
-                <GoHome size={40} />
-                Home
-                <br />
-                <br />
+                <div className="flexSidebars">
+                  <GoHome size={40} />
+                  <p className="sidebarTopics">Home</p>
+                </div>
               </ListGroup.Item>
             </NavLink>
             <NavLink>
               <ListGroup.Item action href="/home">
-                <IoMdNotificationsOutline size={40} />
-                Notifications
-                <br />
-                <br />
+                <div className="flexSidebars">
+                  <IoMdNotificationsOutline size={40} />
+                  <p className="sidebarTopics">Notifications</p>
+                </div>
               </ListGroup.Item>
             </NavLink>
             <NavLink>
               <ListGroup.Item action href="/home">
-                <GoMail size={40} />
-                Messages
-                <br />
-                <br />
+                <div className="flexSidebars">
+                  <GoMail size={40} />
+                  <p className="sidebarTopics">Messages</p>
+                </div>
               </ListGroup.Item>
             </NavLink>
             <NavLink>
               <ListGroup.Item action href="/home">
-                <FiBookmark size={40} />
-                Bookmarks
-                <br />
-                <br />
+                <div className="flexSidebars">
+                  <FiBookmark size={40} />
+                  <p className="sidebarTopics">Bookmarks</p>
+                </div>
               </ListGroup.Item>
             </NavLink>
             <NavLink>
               <ListGroup.Item action href="/home">
-                <GoNote size={40} />
-                Lists
-                <br />
-                <br />
+                <div className="flexSidebars">
+                  <GoNote size={40} />
+                  <p className="sidebarTopics">Lists</p>
+                </div>
               </ListGroup.Item>
             </NavLink>
             <NavLink>
               <ListGroup.Item action href="/home">
-                <FaRegUserCircle size={40} />
-                Profile
-                <br />
-                <br />
+                <div className="flexSidebars">
+                  <FaRegUserCircle size={40} />
+                  <p className="sidebarTopics">Profile</p>
+                </div>
               </ListGroup.Item>
             </NavLink>
             <NavLink>
               <ListGroup.Item action href="/home">
-                <GoGraph size={40} />
-                Analytics
-                <br />
-                <br />
-                <br />
-                <br />
+                <div className="flexSidebars">
+                  <GoGraph size={40} />
+                  <p className="sidebarTopics">Analytics</p>
+                </div>
               </ListGroup.Item>
             </NavLink>
             <NavLink>
-              <a
-                href="https://twitter.com/share?url=http://www.bootstrapbeginners.com/twitter-button/"
-                title="Twitter"
-                className="btn btn-twitter btn-lg"
-              >
-                <i className="fa fa-twitter fa-fw" /> Tweet
-              </a>
+              <button className="tweetBtn" type="button">
+                Tweet
+              </button>
             </NavLink>
           </ListGroup>
-        </nav></div>
-        
-        
+        </nav>
+      </div>
     );
   }
 }
