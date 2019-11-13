@@ -15,7 +15,8 @@
     "jsonwebtoken": "^8.5.1",
     "kafka-node": "^3.0.1",
     "moment": "^2.24.0",
-    "mongoose": "^5.7.10"
+    "mongoose": "^5.7.10",
+    "nodemon": "^1.19.4"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
