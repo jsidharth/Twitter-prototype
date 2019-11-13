@@ -26,7 +26,7 @@ userRouter.post('/register', passport.authenticate('register'), (req, res) => {
   );
 });
 userRouter.get('/details/(:data)', (req, res) => {
-  console.log('Inside POST user register');
+  console.log('Inside get user details');
   console.log('Request Body: ', req.params.data);
   kafka.makeRequest(
     'userTopic',
@@ -46,7 +46,7 @@ userRouter.get('/details/(:data)', (req, res) => {
   );
 });
 userRouter.put('/details', (req, res) => {
-  console.log('Inside POST user register');
+  console.log('Inside put user details');
   console.log('Request Body: ', req.body);
   kafka.makeRequest(
     'userTopic',
