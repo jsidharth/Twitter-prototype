@@ -5,7 +5,7 @@ import { handleUpload } from '../../config/imageUploader';
 
 const imageUploadRouter = express.Router();
 
-imageUploadRouter.post('/upload/image', multerUploads, cloudinaryConfig, (req, res) => {
+imageUploadRouter.post('/upload', multerUploads, cloudinaryConfig, (req, res) => {
   console.log('Inside POST user upload image');
   console.log('Request Body: ', req.body);
   let file;

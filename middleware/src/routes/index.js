@@ -5,6 +5,6 @@ import imageUploadRoute from './imageUploadRoute'
 const routes = express.Router();
 
 routes.use('/user', userRoutes);
-routes.use('/', imageUploadRoute);
+routes.use('/image', imageUploadRoute);
 
 export default routes;
