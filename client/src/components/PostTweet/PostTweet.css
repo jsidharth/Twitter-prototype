@@ -1,0 +1,85 @@
+input {
+  display: none;
+}
+
+.cardWidth {
+    width: 40%;
+}
+
+.paperHeight {
+  height: 50px;
+  line-height: 50px;
+  font-weight: 800;
+  font-size: 19px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+  padding-left: 15px;
+}
+
+.cardContent {
+  font-size: inherit;
+  margin-bottom: 0px;
+}
+.flexImageTweet {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+}
+
+.profileImage {
+    margin: 0 auto; 
+    max-width: 50px;
+    max-height: 50px;
+}
+
+.tweetText {
+  margin-left: 20px;
+  margin-top: 0px;
+  width: 95%;
+  height: 50px;
+  outline: none;
+}
+
+.textField {
+  margin-left: 20px;
+  margin-top: 0px;
+  width: 95%;
+  height: 50px;
+  outline: none;
+  width: 200;
+  margin-top: 0px;
+  width: 100%;
+  color: #9197A3;
+  font-weight: 600;
+  overflow: auto;
+  border: none;
+  resize: none;
+}
+
+.iconUpload {
+  margin-left: 70px;
+  display: 'none';
+}
+
+.tweetBtn {
+  background-color: #1DA1F2;
+  color: white;
+  text-align: center;
+  font-weight: 700;
+  float: right;
+  margin-top: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border-radius: 20px;
+}
+
+.flexUploadTweet {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.input {
+  display: 'none';
+}
