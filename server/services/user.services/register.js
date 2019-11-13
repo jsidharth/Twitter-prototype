@@ -6,7 +6,7 @@ import jwtSecret from '../../config/jwtConfig';
 const handleRequest = async (userDetails, callback) => {
   const newUser = await Users.create({
     email: userDetails.email,
-    name: userDetails.email,
+    name: userDetails.name,
     dob: userDetails.dob,
     handle: userDetails.handle,
   });

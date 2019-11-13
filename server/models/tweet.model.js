@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const tweetSchema = new Schema({
-    body: { 
+    body: {
       type: String,
       required: [true, 'Tweet is mandatory'],
       minlength: 1,
@@ -15,7 +15,7 @@ const tweetSchema = new Schema({
     comments: [{ type: Schema.Types.ObjectId, ref: 'Tweets' }],
     views: { type: Number },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 const Tweets = mongoose.model('Tweets', tweetSchema);
