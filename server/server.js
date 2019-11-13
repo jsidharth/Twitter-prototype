@@ -1,9 +1,13 @@
+/* eslint-disable no-shadow */
+/* eslint-disable func-names */
+/* eslint-disable no-console */
 import connection from './kafka/Connection';
 // eslint-disable-next-line no-unused-vars
 import mongoDBConnection from './config/mongoose';
 
 // topics files
 import * as userController from './controller/user.controller';
+import * as tweetController from './controller/tweet.controller';
 
 // eslint-disable-next-line no-unused-vars
 function handleTopicRequest(topicName, fname) {
@@ -29,6 +33,7 @@ function handleTopicRequest(topicName, fname) {
       ];
       console.log(payloads);
       // eslint-disable-next-line no-shadow
+      // eslint-disable-next-line func-names
       producer.send(payloads, function(err, data) {
         console.log(data);
       });
@@ -40,3 +45,4 @@ function handleTopicRequest(topicName, fname) {
 // first argument is topic name
 // second argument is a function that will handle this topic request
 handleTopicRequest('userTopic', userController);
+handleTopicRequest('tweetTopic', tweetController);

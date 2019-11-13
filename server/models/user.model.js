@@ -10,7 +10,7 @@ const userSchema = new Schema(
     bio: { type: String, default: '' },
     location: { type: String, default: '' },
     website: { type: String, default: '' },
-    handle: { type: String, required: true },
+    handle: { type: String },
     active: { type: Boolean, default: true },
 
     followers: [{ type: Schema.Types.ObjectId, ref: 'Users' }],
@@ -25,7 +25,7 @@ const userSchema = new Schema(
 
     views: [{ date: { type: Date, required: true }, count_views: { type: Number, default: 0 } }],
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 const Users = mongoose.model('Users', userSchema);

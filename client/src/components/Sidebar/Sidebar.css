@@ -1,0 +1,70 @@
+.sidebar {
+    padding-top: 20px;
+    padding-left: 20px;
+    position: fixed;
+    height: 100vh;
+    width: 200px;
+    overflow-x: hidden;
+}
+
+.sidebar a:hover {
+    color:#00acee;
+    text-decoration: none;
+    font-family: Helvetica Neue;
+    font-weight: bold;
+}
+
+.sidebar a {
+    color:black;
+    text-decoration: none;
+    font-family: Helvetica Neue;
+    font-weight: bold; 
+}
+
+.btn-twitter {
+    background: #00ACEE;
+    color: #fff;
+    border-width: 10px;
+    border-style: solid;
+    border-color: #00ACEE;
+    border-radius: 15px;
+    font-size: medium;
+    
+}
+.btn-twitter:link, .btn-twitter:visited {
+    color: #fff;
+}
+
+.btn-twitter:active {
+    color: #fff;
+}
+
+.sidebar .btn-twitter:hover {
+    color: #fff
+}
+
+.flexSidebars {
+    display: flex;
+    flex-direction: row;
+}
+
+.sidebarTopics {
+    margin-left: 10px;
+}
+
+.tweetBtn {
+    background-color: #1DA1F2;
+    color: white;
+    text-align: center;
+    font-weight: 700;
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border-radius: 20px;
+    width: 100%;
+    height: 45px;
+    font-size: 15px;
+    outline: none;
+}

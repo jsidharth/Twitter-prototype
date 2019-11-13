@@ -26,4 +26,65 @@ userRouter.post('/register', passport.authenticate('register'), (req, res) => {
   );
 });
 
+userRouter.post('/login', passport.authenticate('login'), (req, res) => {
+  console.log('Inside POST user Login');
+  console.log('Request Body: ', req.body);
+  kafka.makeRequest(
+    'userTopic',
+    {
+      body: req.body,
+      action: 'USER_LOGIN',
+    },
+    (err, result) => {
+      if (err) {
+        console.log('Error ', err);
+        res.status(500).json({
+          message: err.message,
+        });
+      }
+      res.status(200).json(result);
+    }
+  );
+});
+
+userRouter.get('/details/(:data)', (req, res) => {
+  console.log('Inside get user details');
+  console.log('Request Body: ', req.params.data);
+  kafka.makeRequest(
+    'userTopic',
+    {
+      userId: req.params.data,
+      action: 'USER_GET_DETAILS',
+    },
+    (err, result) => {
+      if (err) {
+        console.log('Error ', err);
+        res.status(500).json({
+          message: err.message,
+        });
+      }
+      res.status(200).json(result);
+    }
+  );
+});
+userRouter.put('/details', (req, res) => {
+  console.log('Inside put user details');
+  console.log('Request Body: ', req.body);
+  kafka.makeRequest(
+    'userTopic',
+    {
+      body: req.body,
+      action: 'USER_PUT_DETAILS',
+    },
+    (err, result) => {
+      if (err) {
+        console.log('Error ', err);
+        res.status(500).json({
+          message: err.message,
+        });
+      }
+      res.status(200).json(result);
+    }
+  );
+});
 export default userRouter;
