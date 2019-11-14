@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import _ from 'lodash';
 import moment from 'moment';
+import Promise from 'bluebird';
 import Users from '../../models/user.model';
 import Tweets from '../../models/tweet.model';
 
@@ -28,7 +29,7 @@ const handleRequest = (userId, callback) => {
       let followingTweets = [];
       if (user.tweets && user.tweets.length) {
         userTweets = _.map(user.tweets, tweet => ({
-          id: tweet._id,
+          _id: tweet._id,
           name: user.name,
           handle: user.handle,
           likes_count: tweet.likes.length || 0,
@@ -46,7 +47,7 @@ const handleRequest = (userId, callback) => {
           .map(followingUser => {
             if (followingUser.tweets && followingUser.tweets.length) {
               return _.map(followingUser.tweets, tweet => ({
-                id: tweet._id,
+                _id: tweet._id,
                 name: followingUser.name,
                 handle: followingUser.handle,
                 likes_count: tweet.likes.length || 0,
@@ -64,13 +65,22 @@ const handleRequest = (userId, callback) => {
       }
       results.push(followingTweets);
       results = _.chain(results)
+        .compact()
         .flattenDeep()
         .value();
       results =
         results && results.length
           ? results.sort((first, second) => moment(second.created_at).diff(first.created_at))
           : [];
-      callback(null, results);
+      let updateTweetViewsPromise = Promise.resolve();
+      if (results && results.length) {
+        updateTweetViewsPromise = Promise.map(results, tweet => {
+          return Tweets.findOneAndUpdate({ _id: tweet._id }, { $inc: { views: 1 } });
+        });
+      }
+      updateTweetViewsPromise.then(() => {
+        callback(null, results);
+      });
     });
 };
 
