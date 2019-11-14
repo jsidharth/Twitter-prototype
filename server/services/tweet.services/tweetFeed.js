@@ -4,7 +4,7 @@ import moment from 'moment';
 import Users from '../../models/user.model';
 import Tweets from '../../models/tweet.model';
 
-const handleRequest = async (userId, callback) => {
+const handleRequest = (userId, callback) => {
   Users.findById(userId)
     .populate({
       path: 'following',
@@ -66,7 +66,10 @@ const handleRequest = async (userId, callback) => {
       results = _.chain(results)
         .flattenDeep()
         .value();
-      results = results.sort((first, second) => moment(second.created_at).diff(first.created_at));
+      results =
+        results && results.length
+          ? results.sort((first, second) => moment(second.created_at).diff(first.created_at))
+          : [];
       callback(null, results);
     });
 };
