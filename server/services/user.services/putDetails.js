@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import Users from '../../models/user.model';
 
 const handleRequest = (userDetails, callback) => {
