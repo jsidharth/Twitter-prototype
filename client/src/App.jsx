@@ -7,16 +7,13 @@ import Main from './components/Main';
 
 function App() {
   return (
-    //Use Browser Router to route to different pages
-    // <Provider store={store}>
-    // <Provider>
+    <Provider store={store}>
       <BrowserRouter>
         <div>
-          {/* App Component Has a Child Component called Main*/}
           <Main />
         </div>
       </BrowserRouter>
-    // </Provider>
+    </Provider>
   );
 }
 

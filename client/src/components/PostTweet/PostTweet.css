@@ -19,6 +19,15 @@ input {
   font-size: inherit;
   margin-bottom: 0px;
 }
+
+.tweetImage {
+  object-fit: cover;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 250px;
+}
+
 .flexImageTweet {
   display: flex;
   flex-direction: row;
@@ -48,7 +57,6 @@ input {
   width: 200;
   margin-top: 0px;
   width: 100%;
-  color: #9197A3;
   font-weight: 600;
   overflow: auto;
   border: none;
