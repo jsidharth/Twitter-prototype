@@ -19,8 +19,9 @@ tweetRouter.get('/feed/:userId', (req, res) => {
         res.status(500).json({
           message: err.message,
         });
+      } else {
+        res.status(200).json(result);
       }
-      res.status(200).json(result);
     }
   );
 });

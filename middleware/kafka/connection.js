@@ -28,4 +28,5 @@ function ConnectionProvider() {
     return this.kafkaProducerConnection;
   };
 }
+// eslint-disable-next-line no-multi-assign
 exports = module.exports = new ConnectionProvider();

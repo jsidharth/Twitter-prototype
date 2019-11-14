@@ -27,6 +27,7 @@ function handleTopicRequest(topicName, fname) {
           messages: JSON.stringify({
             correlationId: data.correlationId,
             data: res,
+            err,
           }),
           partition: 0,
         },

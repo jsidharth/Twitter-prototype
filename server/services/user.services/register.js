@@ -9,16 +9,16 @@ const handleRequest = async (userDetails, callback) => {
   let randomNumber;
   let user;
   let randomHandle;
-  const firstName = userDetails.name.split(' ')[0];
+  const firstName = userDetails.name.split(' ')[0]; // extracts the first name of user
   do {
     // eslint-disable-next-line no-undef
-    randomNumber = random.int(1, 1000);
+    randomNumber = random.int(1, 1000); // generates random number for use in handle
     randomHandle = firstName + randomNumber;
     // eslint-disable-next-line no-await-in-loop
     user = await Users.findOne({
       handle: randomHandle,
-    });
-  } while (user);
+    }); // checks whether the handle already exists in backend
+  } while (user); // if handle exists, restart loop
   const newUser = await Users.create({
     email: userDetails.email,
     name: userDetails.name,

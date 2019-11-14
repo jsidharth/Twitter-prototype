@@ -14,23 +14,27 @@ const handleRequest = async (userDetails, callback) => {
       },
       null
     );
-  }
-  const token = jwt.sign(
-    {
+  } else {
+    user.active = true;
+    await user.save();
+    const token = jwt.sign(
+      {
+        // eslint-disable-next-line no-underscore-dangle
+        _id: user._id,
+      },
+      jwtSecret.secret
+    );
+
+    callback(null, {
       // eslint-disable-next-line no-underscore-dangle
       _id: user._id,
-    },
-    jwtSecret.secret
-  );
-
-  callback(null, {
-    // eslint-disable-next-line no-underscore-dangle
-    _id: user._id,
-    name: user.name,
-    email: user.email,
-    dob: moment(user.dob).format('MM-DD-YYYY'),
-    token,
-  });
+      name: user.name,
+      email: user.email,
+      dob: moment(user.dob).format('MM-DD-YYYY'),
+      token,
+      active: user.active,
+    });
+  }
 };
 
 // eslint-disable-next-line import/prefer-default-export

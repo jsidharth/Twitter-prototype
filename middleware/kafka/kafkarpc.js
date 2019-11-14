@@ -92,7 +92,11 @@ KafkaRPC.prototype.setupResponseQueue = function(producer, topicName, next) {
       // delete the entry from hash
       delete self.requests[correlationId];
       // callback, no err
-      entry.callback(null, data.data);
+      if (!data.err) {
+        entry.callback(null, data.data);
+      } else {
+        entry.callback(data.err, null);
+      }
     }
   });
   self.response_queue = true;
