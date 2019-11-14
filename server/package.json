@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.7.1",
     "esm": "^3.2.25",
     "jsonwebtoken": "^8.5.1",
     "kafka-node": "^3.0.1",
