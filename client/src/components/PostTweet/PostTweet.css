@@ -3,7 +3,7 @@ input {
 }
 
 .cardWidth {
-    width: 40%;
+  width: 40%;
 }
 
 .paperHeight {
@@ -11,7 +11,8 @@ input {
   line-height: 50px;
   font-weight: 800;
   font-size: 19px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu,
+    'Helvetica Neue', sans-serif;
   padding-left: 15px;
 }
 
@@ -35,9 +36,9 @@ input {
 }
 
 .profileImage {
-    margin: 0 auto; 
-    max-width: 50px;
-    max-height: 50px;
+  margin: 0 auto;
+  max-width: 50px;
+  max-height: 50px;
 }
 
 .tweetText {
@@ -48,19 +49,27 @@ input {
   outline: none;
 }
 
-.textField {
+.autoExpandDiv {
+  display: inline-block;
+  border: solid 1px #000;
+  min-height: 50px;
   margin-left: 20px;
   margin-top: 0px;
   width: 95%;
-  height: 50px;
   outline: none;
   width: 200;
   margin-top: 0px;
   width: 100%;
   font-weight: 600;
-  overflow: auto;
+  overflow: hidden;
   border: none;
-  resize: none;
+}
+
+div[data-placeholder]:not(:focus):not([data-div-placeholder-content]):before {
+  content: attr(data-placeholder);
+  float: left;
+  margin-left: 2px;
+  color: #b3b3b3;
 }
 
 .iconUpload {
@@ -69,7 +78,7 @@ input {
 }
 
 .tweetBtn {
-  background-color: #1DA1F2;
+  background-color: #1da1f2;
   color: white;
   text-align: center;
   font-weight: 700;

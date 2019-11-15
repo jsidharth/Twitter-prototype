@@ -11,7 +11,7 @@ class PostTweet extends Component {
     super(props);
     this.state = {
       tweetText: '',
-      pictures: []
+      pictures: [],
     };
 
     this.tweetTextHandler = this.tweetTextHandler.bind(this);
@@ -24,16 +24,16 @@ class PostTweet extends Component {
     });
   };
 
-  uploadImage = (e) => {
-      const data = new FormData();
-      if(this.upladTweetImage.files && this.upladTweetImage.files.length) {
-        data.append('file', this.upladTweetImage.files[0] || '');
-        this.props.upload(data)
-      }
+  uploadImage = e => {
+    const data = new FormData();
+    if (this.upladTweetImage.files && this.upladTweetImage.files.length) {
+      data.append('file', this.upladTweetImage.files[0] || '');
+      this.props.upload(data);
+    }
   };
 
   render() {
-    console.log(this.props.imageUrl)
+    console.log(this.props.imageUrl);
     return (
       <Card className="cardWidth">
         <Paper className="paperHeight">Home</Paper>
@@ -47,21 +47,22 @@ class PostTweet extends Component {
                 className="profileImage"
               />
             </div>
-            <textarea
-              type="text"
-              className="textField"
-              name="description"
-              placeholder="What's happening?"
-              onChange={this.tweetTextHandler}
-            />
+            <div contentEditable="true" className="autoExpandDiv" data-placeholder="What's happening?"></div>
           </div>
-          <img src={this.props.imageUrl} className="tweetImage" alt='Tweet Image'/>
+          {this.props.imageUrl ? (
+            <img src={this.props.imageUrl} className="tweetImage" alt="Tweet Image" />
+          ) : null}
           <div className="flexUploadTweet">
             <div className="iconUpload">
-              <input accept="image/*" id="icon-button-file" type="file" onChange={this.uploadImage} 
-              ref={ref => {
-                this.upladTweetImage = ref;
-              }}/>
+              <input
+                accept="image/*"
+                id="icon-button-file"
+                type="file"
+                onChange={this.uploadImage}
+                ref={ref => {
+                  this.upladTweetImage = ref;
+                }}
+              />
               <label htmlFor="icon-button-file">
                 <Icon color="primary">
                   <InsertPhoto />
