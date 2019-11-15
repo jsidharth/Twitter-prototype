@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
+import PostTweet from '../PostTweet/PostTweet';
+import './Home.css';
 
 class Home extends Component {
   constructor(props) {
@@ -9,8 +11,13 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
-        <Sidebar />
+      <div className="flexHomeScreen">
+        <div className="sideBarWidths">
+          <Sidebar />
+        </div>
+        <div className="postTweetHeight">
+          <PostTweet />
+        </div>
       </div>
     );
   }
