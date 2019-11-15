@@ -2,7 +2,8 @@ import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
-const tweetSchema = new Schema({
+const tweetSchema = new Schema(
+  {
     body: {
       type: String,
       required: [true, 'Tweet is mandatory'],
@@ -13,6 +14,7 @@ const tweetSchema = new Schema({
     likes: [{ type: Schema.Types.ObjectId, ref: 'Users' }],
     retweets: [{ type: Schema.Types.ObjectId, ref: 'Tweets' }],
     comments: [{ type: Schema.Types.ObjectId, ref: 'Tweets' }],
+    hashtags: [{ type: String }],
     views: { type: Number },
   },
   { timestamps: true }
