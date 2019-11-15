@@ -13,7 +13,7 @@ const handleRequest = async (userDetails, callback) => {
   do {
     // eslint-disable-next-line no-undef
     randomNumber = random.int(1, 1000); // generates random number for use in handle
-    randomHandle = firstName + randomNumber;
+    randomHandle = firstName.toLowerCase() + randomNumber;
     // eslint-disable-next-line no-await-in-loop
     user = await Users.findOne({
       handle: randomHandle,
