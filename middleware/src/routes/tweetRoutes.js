@@ -26,4 +26,26 @@ tweetRouter.get('/feed/:userId', (req, res) => {
   );
 });
 
+tweetRouter.post('/post', (req, res) => {
+  console.log('Inside POST Tweet');
+  console.log('Request Body: ', req.body);
+  kafka.makeRequest(
+    'tweetTopic',
+    {
+      body: req.body,
+      action: 'TWEET_POST',
+    },
+    (err, result) => {
+      if (err) {
+        console.log('Error ', err);
+        res.status(500).json({
+          message: err.message,
+        });
+      } else {
+        res.status(200).json(result);
+      }
+    }
+  );
+});
+
 export default tweetRouter;
