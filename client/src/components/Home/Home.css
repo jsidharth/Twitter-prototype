@@ -1,0 +1,13 @@
+.flexHomeScreen {
+  display: flex;
+  flex-direction: row;
+}
+
+.sideBarWidths {
+  margin-left: 50px;
+}
+
+.postTweetHeight {
+  margin-left: 50px;
+  width: 100%;
+}
