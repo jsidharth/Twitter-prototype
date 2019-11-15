@@ -26,4 +26,25 @@ tweetRouter.get('/feed/:userId', (req, res) => {
   );
 });
 
+tweetRouter.get('/detail/:tweetId', (req, res) => {
+  const { tweetId } = req.params;
+  kafka.makeRequest(
+    'tweetTopic',
+    {
+      tweetId,
+      action: 'TWEET_DETAIL',
+    },
+    (err, result) => {
+      if (err) {
+        console.log('Error ', err);
+        res.status(500).json({
+          message: err.message,
+        });
+      } else {
+        res.status(200).json(result);
+      }
+    }
+  );
+});
+
 export default tweetRouter;

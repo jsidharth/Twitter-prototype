@@ -2,7 +2,8 @@ import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
-const tweetSchema = new Schema({
+const tweetSchema = new Schema(
+  {
     body: {
       type: String,
       required: [true, 'Tweet is mandatory'],
