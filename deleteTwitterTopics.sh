@@ -9,9 +9,13 @@ bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic userTopic
 #Tweet Topic
 bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic tweetTopic
 
+#
+bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic searchTopic
+
+
 #Delete Log files
 echo 'Deleting log files...'
-rm -r /Users/sidharth/Documents/kafka_2.11-1.1.0/F:Kafkakafka_2.11-1.1.0kafka-logs
+rm -r /Users/savya/Downloads/kafka_2.11-1.1.0/F:Kafkakafka_2.11-1.1.0kafka-logs
 rm -r /tmp/zookeeper
 
 echo 'Deleted log files'
