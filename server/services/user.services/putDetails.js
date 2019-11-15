@@ -12,6 +12,7 @@ const handleRequest = (userDetails, callback) => {
     handle: userDetails.handle,
   };
 
+  // eslint-disable-next-line no-underscore-dangle
   Users.findOneAndUpdate({ _id: userDetails._id }, updateData, { new: true }).exec(
     (err, result) => {
       if (err || result == null) {
