@@ -1,5 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-import _ from 'lodash';
 import Promise from 'bluebird';
 import moment from 'moment';
 import Users from '../../models/user.model';
