@@ -9,7 +9,7 @@ const handleRequest = async (searchTerm, callback) => {
       $in: [searchTerm],
     },
   });
-  if (searchTweets) {
+  if (searchTweets && searchTweets.length) {
     let updatedTweets = await Promise.map(searchTweets, tweet => {
       return Users.findOne(
         {
@@ -53,7 +53,7 @@ const handleRequest = async (searchTerm, callback) => {
       );
     });
     updateTweetViewsPromise.then(() => {
-      callback(null, updatedTweets);
+      callback(null, { tweet: updatedTweets });
     });
   } else {
     callback(null, {
