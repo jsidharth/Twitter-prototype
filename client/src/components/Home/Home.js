@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import PostTweet from '../PostTweet/PostTweet';
 import './Home.css';
+import TweetCard from '../TweetCard/TweetCard';
 
 class Home extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class Home extends Component {
         </div>
         <div className="postTweetHeight">
           <PostTweet />
+          <TweetCard />
         </div>
       </div>
     );

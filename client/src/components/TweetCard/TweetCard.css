@@ -1,0 +1,34 @@
+.flexNameHandle {
+    display: flex;
+    flex-direction: row;
+}
+
+.flexCardBtns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.flexBtnCnt {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 7%;
+}
+
+.tweetUserName {
+    margin-right: 10px;
+    font-weight:bold;
+    font-size: 17px;
+}
+
+.tweetUserHandle {
+    font-size: 17px;
+    color: #657786;
+    margin-right: 10px;
+}
+
+.tweetDate {
+    font-size: 17px;
+    color: #657786;
+}
