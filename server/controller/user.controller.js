@@ -4,6 +4,7 @@ import getDetails from '../services/user.services/getDetails';
 import putDetails from '../services/user.services/putDetails';
 import deactivate from '../services/user.services/deactivate';
 import followUser from '../services/user.services/followUser';
+import unfollowUser from '../services/user.services/unfollowUser';
 
 const handleRequest = (payload, callback) => {
   switch (payload.action) {
@@ -24,6 +25,9 @@ const handleRequest = (payload, callback) => {
       break;
     case 'USER_FOLLOW':
       followUser.handleRequest(payload.body, callback);
+      break;
+    case 'USER_UNFOLLOW':
+      unfollowUser.handleRequest(payload.body, callback);
       break;
     default:
       break;
