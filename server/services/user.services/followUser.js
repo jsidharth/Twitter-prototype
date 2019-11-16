@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import Users from '../../models/user.model';
 
-const handleRequest = async (payload, callback) => {
+const handleRequest = (payload, callback) => {
   const { userId, followerId } = payload;
   // Find the current user
   Users.findById(userId).then(user => {
