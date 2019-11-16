@@ -4,7 +4,7 @@ import Image from 'react-bootstrap/Image';
 import { Card, CardContent, Paper, Icon } from '@material-ui/core';
 import { InsertPhoto } from '@material-ui/icons';
 import { connect } from 'react-redux';
-import { imageActions } from '../../js/actions/index';
+import { imageActions, tweetActions } from '../../js/actions/index';
 
 class PostTweet extends Component {
   constructor(props) {
@@ -16,6 +16,7 @@ class PostTweet extends Component {
 
     this.tweetTextHandler = this.tweetTextHandler.bind(this);
     this.uploadImage = this.uploadImage.bind(this);
+    this.postTweet = this.postTweet.bind(this);
   }
 
   tweetTextHandler = e => {
@@ -32,8 +33,20 @@ class PostTweet extends Component {
     }
   };
 
+  postTweet = () => {
+    // change userId
+    const data = {
+      userId: '5dcb31841c9d440000b0d332',
+      tweetText: this.state.tweetText,
+      imageUrl: this.props.imageUrl,
+    };
+    console.log(data);
+    this.props.postTweet(data);
+  };
+
   render() {
-    console.log(this.props.imageUrl);
+    var count = 280 - this.state.tweetText.length;
+
     return (
       <Card className="cardWidth">
         <Paper className="paperHeight">Home</Paper>
@@ -47,29 +60,43 @@ class PostTweet extends Component {
                 className="profileImage"
               />
             </div>
-            <div contentEditable="true" className="autoExpandDiv" data-placeholder="What's happening?"></div>
+
+            <div className="autoExpandDiv">
+              <textarea
+                className="textArea"
+                onChange={this.tweetTextHandler}
+                placeholder="What's happening?"
+              ></textarea>
+            </div>
           </div>
+
           {this.props.imageUrl ? (
             <img src={this.props.imageUrl} className="tweetImage" alt="Tweet Image" />
           ) : null}
           <div className="flexUploadTweet">
-            <div className="iconUpload">
-              <input
-                accept="image/*"
-                id="icon-button-file"
-                type="file"
-                onChange={this.uploadImage}
-                ref={ref => {
-                  this.upladTweetImage = ref;
-                }}
-              />
-              <label htmlFor="icon-button-file">
-                <Icon color="primary">
-                  <InsertPhoto />
-                </Icon>
-              </label>
+            <div className="flexIconCharsCount">
+              <div className="iconUpload">
+                <input
+                  accept="image/*"
+                  id="icon-button-file"
+                  type="file"
+                  onChange={this.uploadImage}
+                  ref={ref => {
+                    this.upladTweetImage = ref;
+                  }}
+                />
+                <label htmlFor="icon-button-file">
+                  <Icon color="primary">
+                    <InsertPhoto />
+                  </Icon>
+                </label>
+              </div>
+              <div className="countStyle">{`${count} characters remaining`}</div>
             </div>
-            <button className="postTweetBtn">Tweet</button>
+            <button className="postTweetBtn" onClick={this.postTweet}>
+              Tweet
+            </button>
+            <input type="text" name="tweetText" onChange={this.tweetTextHandler} required maxLength="280"/>
           </div>
         </CardContent>
       </Card>
@@ -80,11 +107,13 @@ class PostTweet extends Component {
 const mapStateToProps = state => {
   return {
     imageUrl: state.image.imageUrl,
+    tweetPostedFlag: state.tweet.tweetPostedFlag,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   upload: data => dispatch(imageActions.upload(data)),
+  postTweet: data => dispatch(tweetActions.postTweet(data)),
 });
 
 export default connect(

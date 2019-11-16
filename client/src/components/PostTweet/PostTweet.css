@@ -12,7 +12,8 @@ input {
   line-height: 50px;
   font-weight: 800;
   font-size: 19px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu,
+    'Helvetica Neue', sans-serif;
   padding-left: 15px;
 }
 
@@ -51,18 +52,24 @@ input {
 
 .autoExpandDiv {
   display: inline-block;
-  border: solid 1px #000;
-  min-height: 50px;
+  min-height: 70px;
+  width: 95%;
+  margin-bottom: 10px;
+}
+
+.textArea {
   margin-left: 20px;
   margin-top: 0px;
-  width: 95%;
+  width: 97%;
+  height: 100%;
   outline: none;
-  width: 200;
   margin-top: 0px;
-  width: 100%;
-  font-weight: 600;
-  overflow: hidden;
+  overflow: auto;
+  resize: none;
   border: none;
+  font-size: 19px;
+  font-weight: 400;
+  overflow-wrap: break-word;
 }
 
 div[data-placeholder]:empty:not(:focus):not([data-div-placeholder-content]):before {
@@ -100,4 +107,17 @@ div[data-placeholder]:empty:not(:focus):not([data-div-placeholder-content]):befo
 
 .input {
   display: 'none';
+}
+
+.flexIconCharsCount {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.countStyle {
+  font-size: 17px;
+  font-weight: 400;
+  color: #b3b3b3;
+  margin-left: 5px;
 }
