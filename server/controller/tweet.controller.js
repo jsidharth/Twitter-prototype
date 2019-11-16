@@ -1,9 +1,6 @@
 import getTweetFeed from '../services/tweet.services/tweetFeed';
 import postTweet from '../services/tweet.services/postTweet';
-<<<<<<< HEAD
-=======
 import getTweetDetail from '../services/tweet.services/tweetDetail';
->>>>>>> master
 
 const handleRequest = (payload, callback) => {
   switch (payload.action) {
@@ -13,12 +10,9 @@ const handleRequest = (payload, callback) => {
     case 'TWEET_POST':
       postTweet.handleRequest(payload.body, callback);
       break;
-<<<<<<< HEAD
-=======
     case 'TWEET_DETAIL':
       getTweetDetail.handleRequest(payload.tweetId, callback);
       break;
->>>>>>> master
     default:
       break;
   }

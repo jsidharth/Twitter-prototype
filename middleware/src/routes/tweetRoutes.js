@@ -48,8 +48,6 @@ tweetRouter.post('/post', (req, res) => {
   );
 });
 
-<<<<<<< HEAD
-=======
 tweetRouter.get('/detail/:tweetId', (req, res) => {
   const { tweetId } = req.params;
   kafka.makeRequest(
@@ -71,5 +69,4 @@ tweetRouter.get('/detail/:tweetId', (req, res) => {
   );
 });
 
->>>>>>> master
 export default tweetRouter;
