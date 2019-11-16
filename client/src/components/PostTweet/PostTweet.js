@@ -35,13 +35,18 @@ class PostTweet extends Component {
 
   postTweet = () => {
     // change userId
-    const data = {
-      userId: '5dcb31841c9d440000b0d332',
-      tweetText: this.state.tweetText,
-      imageUrl: this.props.imageUrl,
-    };
-    console.log(data);
-    this.props.postTweet(data);
+
+    if (this.state.tweetText.length > 280) {
+      console.log('max length exceeded');
+    } else {
+      const data = {
+        userId: '5dcb31841c9d440000b0d332',
+        tweetText: this.state.tweetText,
+        imageUrl: this.props.imageUrl,
+      };
+      console.log(data);
+      this.props.postTweet(data);
+    }
   };
 
   render() {
@@ -96,7 +101,13 @@ class PostTweet extends Component {
             <button className="postTweetBtn" onClick={this.postTweet}>
               Tweet
             </button>
-            <input type="text" name="tweetText" onChange={this.tweetTextHandler} required maxLength="280"/>
+            <input
+              type="text"
+              name="tweetText"
+              onChange={this.tweetTextHandler}
+              required
+              maxlength="280"
+            />
           </div>
         </CardContent>
       </Card>
