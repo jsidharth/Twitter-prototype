@@ -1,4 +1,5 @@
 import Promise from 'bluebird';
+import moment from 'moment';
 import Users from '../../models/user.model';
 import Tweets from '../../models/tweet.model';
 
@@ -9,7 +10,7 @@ const handleRequest = async (searchTerm, callback) => {
     },
   });
   if (searchTweets) {
-    const updatedTweets = await Promise.map(searchTweets, tweet => {
+    let updatedTweets = await Promise.map(searchTweets, tweet => {
       return Users.findOne(
         {
           // eslint-disable-next-line no-underscore-dangle
@@ -34,8 +35,25 @@ const handleRequest = async (searchTerm, callback) => {
         };
       });
     });
-    callback(null, {
-      tweets: updatedTweets,
+    updatedTweets = updatedTweets.sort((first, second) =>
+      moment(second.created_at).diff(first.created_at)
+    );
+    let updateTweetViewsPromise = Promise.resolve();
+    updateTweetViewsPromise = Promise.map(updatedTweets, tweet => {
+      return Tweets.findOneAndUpdate(
+        {
+          // eslint-disable-next-line no-underscore-dangle
+          _id: tweet._id,
+        },
+        {
+          $inc: {
+            views: 1,
+          },
+        }
+      );
+    });
+    updateTweetViewsPromise.then(() => {
+      callback(null, updatedTweets);
     });
   } else {
     callback(null, {
