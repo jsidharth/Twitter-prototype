@@ -3,6 +3,7 @@ import login from '../services/user.services/login';
 import getDetails from '../services/user.services/getDetails';
 import putDetails from '../services/user.services/putDetails';
 import deactivate from '../services/user.services/deactivate';
+import followUser from '../services/user.services/followUser';
 
 const handleRequest = (payload, callback) => {
   switch (payload.action) {
@@ -20,6 +21,9 @@ const handleRequest = (payload, callback) => {
       break;
     case 'USER_DEACTIVATE':
       deactivate.handleRequest(payload.body, callback);
+      break;
+    case 'USER_FOLLOW':
+      followUser.handleRequest(payload.body, callback);
       break;
     default:
       break;

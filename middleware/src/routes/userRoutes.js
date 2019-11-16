@@ -115,4 +115,24 @@ userRouter.put('/deactivate/(:data)', (req, res) => {
   );
 });
 
+userRouter.post('/follow', (req, res) => {
+  kafka.makeRequest(
+    'userTopic',
+    {
+      body: req.body,
+      action: 'USER_FOLLOW',
+    },
+    (err, result) => {
+      if (err) {
+        console.log('Error ', err);
+        res.status(500).json({
+          message: err.message,
+        });
+      } else {
+        res.status(200).json(result);
+      }
+    }
+  );
+});
+
 export default userRouter;
