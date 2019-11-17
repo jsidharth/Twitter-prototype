@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './PostTweet.css';
-import Image from 'react-bootstrap/Image';
 import { Card, CardContent, Paper, Icon } from '@material-ui/core';
 import { InsertPhoto } from '@material-ui/icons';
 import { connect } from 'react-redux';
@@ -53,64 +52,57 @@ class PostTweet extends Component {
     var count = 280 - this.state.tweetText.length;
 
     return (
-      <Card className="cardWidth">
-        <Paper className="paperHeight">Home</Paper>
-        <CardContent className="cardContent">
-          <div className="flexImageTweet">
-            <div>
-              {/* Include user profile image if available */}
-              <Image
-                src="/images/default_profile_bigger.png"
-                roundedCircle
-                className="profileImage"
-              />
-            </div>
-
-            <div className="autoExpandDiv">
-              <textarea
-                className="textArea"
-                onChange={this.tweetTextHandler}
-                placeholder="What's happening?"
-              ></textarea>
-            </div>
-          </div>
-
-          {this.props.imageUrl ? (
-            <img src={this.props.imageUrl} className="tweetImage" alt="Tweet Image" />
-          ) : null}
-          <div className="flexUploadTweet">
-            <div className="flexIconCharsCount">
-              <div className="iconUpload">
-                <input
-                  accept="image/*"
-                  id="icon-button-file"
-                  type="file"
-                  onChange={this.uploadImage}
-                  ref={ref => {
-                    this.upladTweetImage = ref;
-                  }}
-                />
-                <label htmlFor="icon-button-file">
-                  <Icon color="primary">
-                    <InsertPhoto />
-                  </Icon>
-                </label>
+      <div className="cardContainer">
+        <Card className="cardWidth">
+          <Paper className="paperHeight">Home</Paper>
+          <CardContent className="cardContent">
+            <div className="flexImageTweet">
+              <div>
+                {/* Include user profile image if available */}
+                <img src="/images/default_profile_bigger.png" className="profileImage" />
               </div>
-              <div className="countStyle">{`${count} characters remaining`}</div>
+
+              <div className="autoExpandDiv">
+                <textarea
+                  className="textArea"
+                  onChange={this.tweetTextHandler}
+                  placeholder="What's happening?"
+                  maxLength="280"
+                ></textarea>
+              </div>
             </div>
-            <button className="postTweetBtn" onClick={this.postTweet}>
-              Tweet
-            </button>
-            <input
-              type="text"
-              name="tweetText"
-              onChange={this.tweetTextHandler}
-              required
-              maxlength="280"
-            />
-          </div>
-        </CardContent>
-      </Card>
+
+            {this.props.imageUrl ? (
+              <img src={this.props.imageUrl} className="tweetImage" alt="Tweet Image" />
+            ) : null}
+            <div className="flexUploadTweet">
+              <div className="flexIconCharsCount">
+                <div className="iconUpload">
+                  <input
+                    className="inputStyle"
+                    accept="image/*"
+                    id="icon-button-file"
+                    type="file"
+                    onChange={this.uploadImage}
+                    ref={ref => {
+                      this.upladTweetImage = ref;
+                    }}
+                  />
+                  <label htmlFor="icon-button-file">
+                    <Icon color="primary">
+                      <InsertPhoto />
+                    </Icon>
+                  </label>
+                </div>
+                <div className="countStyle">{`${count} characters remaining`}</div>
+              </div>
+              <button className="postTweetBtn" onClick={this.postTweet}>
+                Tweet
+              </button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     );
   }
 }
