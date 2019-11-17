@@ -2,7 +2,7 @@
 import Users from '../../models/user.model';
 import Tweets from '../../models/tweet.model';
 
-const handleRequest = async (retweetDetails, callback) => {
+const handleRequest = (retweetDetails, callback) => {
   const { tweetId, userId } = retweetDetails;
   Tweets.findById(tweetId).then(tweet => {
     if (!tweet) {
