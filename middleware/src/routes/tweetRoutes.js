@@ -90,4 +90,24 @@ tweetRouter.delete('/delete/:tweetId', (req, res) => {
   );
 });
 
+tweetRouter.post('/retweet', (req, res) => {
+  kafka.makeRequest(
+    'tweetTopic',
+    {
+      body: req.body,
+      action: 'TWEET_RETWEET',
+    },
+    (err, result) => {
+      if (err) {
+        console.log('Error ', err);
+        res.status(500).json({
+          message: err.message,
+        });
+      } else {
+        res.status(200).json(result);
+      }
+    }
+  );
+});
+
 export default tweetRouter;
