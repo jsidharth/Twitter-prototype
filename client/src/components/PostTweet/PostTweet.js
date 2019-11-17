@@ -71,6 +71,7 @@ class PostTweet extends Component {
                 className="textArea"
                 onChange={this.tweetTextHandler}
                 placeholder="What's happening?"
+                maxlength="280"
               ></textarea>
             </div>
           </div>
@@ -82,6 +83,7 @@ class PostTweet extends Component {
             <div className="flexIconCharsCount">
               <div className="iconUpload">
                 <input
+                  className="inputStyle"
                   accept="image/*"
                   id="icon-button-file"
                   type="file"
@@ -101,13 +103,6 @@ class PostTweet extends Component {
             <button className="postTweetBtn" onClick={this.postTweet}>
               Tweet
             </button>
-            <input
-              type="text"
-              name="tweetText"
-              onChange={this.tweetTextHandler}
-              required
-              maxlength="280"
-            />
           </div>
         </CardContent>
       </Card>

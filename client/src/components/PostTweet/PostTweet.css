@@ -1,4 +1,4 @@
-input {
+.inputStyle {
   display: none;
   float: right;
 }
@@ -104,10 +104,6 @@ div[data-placeholder]:empty:not(:focus):not([data-div-placeholder-content]):befo
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
-
-.input {
-  display: 'none';
 }
 
 .flexIconCharsCount {
