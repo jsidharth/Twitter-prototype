@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, ListGroup } from 'react-bootstrap';
 import './Sidebar.css';
-import NavLink from 'react-bootstrap/NavLink';
+import { Link } from 'react-router-dom';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { GoHome, GoMail, GoNote, GoGraph } from 'react-icons/go';
 import { IoMdNotificationsOutline } from 'react-icons/io';
@@ -32,67 +32,73 @@ class Sidebar extends Component {
                   <br />
                 </Navbar.Brand>
               </ListGroup.Item>
-              <NavLink>
-                <ListGroup.Item action href="/home">
-                  <div className="flexSidebars">
-                    <GoHome size={40} />
+
+              <ListGroup.Item>
+                <div className="flexSidebars">
+                  <GoHome size={40} />
+                  <Link to="/home">
                     <p className="sidebarTopics">Home</p>
-                  </div>
-                </ListGroup.Item>
-              </NavLink>
-              <NavLink>
-                <ListGroup.Item action href="/home">
-                  <div className="flexSidebars">
-                    <IoMdNotificationsOutline size={40} />
+                  </Link>
+                </div>
+              </ListGroup.Item>
+
+              <ListGroup.Item>
+                <div className="flexSidebars">
+                  <IoMdNotificationsOutline size={40} />
+                  <Link to="/notifications">
                     <p className="sidebarTopics">Notifications</p>
-                  </div>
-                </ListGroup.Item>
-              </NavLink>
-              <NavLink>
-                <ListGroup.Item action href="/home">
-                  <div className="flexSidebars">
-                    <GoMail size={40} />
+                  </Link>
+                </div>
+              </ListGroup.Item>
+
+              <ListGroup.Item>
+                <div className="flexSidebars">
+                  <GoMail size={40} />
+                  <Link to="/messages">
                     <p className="sidebarTopics">Messages</p>
-                  </div>
-                </ListGroup.Item>
-              </NavLink>
-              <NavLink>
-                <ListGroup.Item action href="/home">
-                  <div className="flexSidebars">
-                    <FiBookmark size={40} />
+                  </Link>
+                </div>
+              </ListGroup.Item>
+
+              <ListGroup.Item>
+                <div className="flexSidebars">
+                  <FiBookmark size={40} />
+                  <Link to="/bookmarks">
                     <p className="sidebarTopics">Bookmarks</p>
-                  </div>
-                </ListGroup.Item>
-              </NavLink>
-              <NavLink>
-                <ListGroup.Item action href="/home">
-                  <div className="flexSidebars">
-                    <GoNote size={40} />
+                  </Link>
+                </div>
+              </ListGroup.Item>
+
+              <ListGroup.Item>
+                <div className="flexSidebars">
+                  <GoNote size={40} />
+                  <Link to="/lists">
                     <p className="sidebarTopics">Lists</p>
-                  </div>
-                </ListGroup.Item>
-              </NavLink>
-              <NavLink>
-                <ListGroup.Item action href="/home">
-                  <div className="flexSidebars">
-                    <FaRegUserCircle size={40} />
+                  </Link>
+                </div>
+              </ListGroup.Item>
+
+              <ListGroup.Item>
+                <div className="flexSidebars">
+                  <FaRegUserCircle size={40} />
+                  <Link to="/profile">
                     <p className="sidebarTopics">Profile</p>
-                  </div>
-                </ListGroup.Item>
-              </NavLink>
-              <NavLink>
-                <ListGroup.Item action href="/home">
-                  <div className="flexSidebars">
-                    <GoGraph size={40} />
+                  </Link>
+                </div>
+              </ListGroup.Item>
+
+              <ListGroup.Item>
+                <div className="flexSidebars">
+                  <GoGraph size={40} />
+                  <Link to="/analytics">
                     <p className="sidebarTopics">Analytics</p>
-                  </div>
-                </ListGroup.Item>
-              </NavLink>
-              <NavLink>
-                <button className="tweetBtn" type="button">
-                  Tweet
+                  </Link>
+                </div>
+              </ListGroup.Item>
+
+              <button className="tweetBtn" type="button">
+                Tweet
               </button>
-              </NavLink>
             </ListGroup>
           </nav>
         </div>

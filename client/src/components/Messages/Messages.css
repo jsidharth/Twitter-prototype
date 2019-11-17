@@ -1,0 +1,15 @@
+.flexMessagesIcon {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.MessageIcon {
+    margin-right: 30px;
+    color: black;
+}
+
+.MessageIcon:hover {
+    margin-right: 30px;
+    color: #00ACEE;
+}

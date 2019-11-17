@@ -1,3 +1,5 @@
+/* eslint-disable import/no-named-as-default-member */
+/* eslint-disable import/no-named-as-default */
 import React, { Component } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import PostTweet from '../PostTweet/PostTweet';

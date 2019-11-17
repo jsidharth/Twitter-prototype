@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import Image from 'react-bootstrap/Image';
-import { Card, CardContent, Paper, Icon } from '@material-ui/core';
-import { InsertPhoto, ControlCamera } from '@material-ui/icons';
-// import { connect } from 'react-redux';
-// import { imageActions } from '../../js/actions/index';
+import { Card, CardContent } from '@material-ui/core';
 import { FiMessageCircle, FiUpload } from 'react-icons/fi';
 import { FaRegHeart } from 'react-icons/fa';
 import { AiOutlineRetweet } from 'react-icons/ai';
@@ -16,7 +13,7 @@ class TweetCard extends Component {
   }
 
   render() {
-    const mock_data = [
+    const mockData = [
       {
         _id: '5dcb33ef1c9d440000b0d338',
         name: 'Savyasachi J',
@@ -41,8 +38,8 @@ class TweetCard extends Component {
       },
     ];
 
-    const feed = mock_data.map(data => {
-      var myDate = new Date(data.created_at);
+    const feed = mockData.map(data => {
+      let myDate = new Date(data.created_at);
       myDate = myDate.toString();
       myDate = myDate.split(' ');
       console.log(myDate);
@@ -59,15 +56,15 @@ class TweetCard extends Component {
                 />
               </div>
               <div className="flexNameHandle">
-              <p className="tweetUserName">{data.name}</p>
-              <p className="tweetUserHandle">@{data.handle}</p>
-              <p className="tweetUserName">.</p>
-              <p className="tweetDate">
-                {myDate[1]} {myDate[2]}, {myDate[3]}
-              </p>
+                <p className="tweetUserName">{data.name}</p>
+                <p className="tweetUserHandle">@{data.handle}</p>
+                <p className="tweetUserName">.</p>
+                <p className="tweetDate">
+                  {myDate[1]} {myDate[2]}, {myDate[3]}
+                </p>
+              </div>
             </div>
-            </div>
-            
+
             <p>{data.body}</p>
             <div className="flexCardBtns">
               <div className="flexBtnCnt">
@@ -96,4 +93,3 @@ class TweetCard extends Component {
 }
 
 export default TweetCard;
-
