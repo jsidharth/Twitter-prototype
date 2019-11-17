@@ -1,4 +1,10 @@
-input {
+.cardContainer {
+  padding-bottom: 10px;
+  background-color: #E6ECF0;
+  width: 600px;
+}
+
+.inputStyle {
   display: none;
   float: right;
 }
@@ -40,6 +46,7 @@ input {
   margin: 0 auto;
   max-width: 50px;
   max-height: 50px;
+  border-radius: 50%;
 }
 
 .tweetText {
@@ -104,10 +111,6 @@ div[data-placeholder]:empty:not(:focus):not([data-div-placeholder-content]):befo
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
-
-.input {
-  display: 'none';
 }
 
 .flexIconCharsCount {
