@@ -2,6 +2,7 @@ import getTweetFeed from '../services/tweet.services/tweetFeed';
 import postTweet from '../services/tweet.services/postTweet';
 import getTweetDetail from '../services/tweet.services/tweetDetail';
 import deleteTweet from '../services/tweet.services/deleteTweet';
+import retweet from '../services/tweet.services/retweet';
 
 const handleRequest = (payload, callback) => {
   switch (payload.action) {
@@ -16,6 +17,9 @@ const handleRequest = (payload, callback) => {
       break;
     case 'TWEET_DELETE':
       deleteTweet.handleRequest(payload.tweetId, callback);
+      break;
+    case 'TWEET_RETWEET':
+      retweet.handleRequest(payload.body, callback);
       break;
     default:
       break;
