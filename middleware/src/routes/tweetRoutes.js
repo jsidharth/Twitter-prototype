@@ -69,4 +69,45 @@ tweetRouter.get('/detail/:tweetId', (req, res) => {
   );
 });
 
+tweetRouter.delete('/delete/:tweetId', (req, res) => {
+  const { tweetId } = req.params;
+  kafka.makeRequest(
+    'tweetTopic',
+    {
+      tweetId,
+      action: 'TWEET_DELETE',
+    },
+    (err, result) => {
+      if (err) {
+        console.log('Error ', err);
+        res.status(500).json({
+          message: err.message,
+        });
+      } else {
+        res.status(200).json(result);
+      }
+    }
+  );
+});
+
+tweetRouter.post('/retweet', (req, res) => {
+  kafka.makeRequest(
+    'tweetTopic',
+    {
+      body: req.body,
+      action: 'TWEET_RETWEET',
+    },
+    (err, result) => {
+      if (err) {
+        console.log('Error ', err);
+        res.status(500).json({
+          message: err.message,
+        });
+      } else {
+        res.status(200).json(result);
+      }
+    }
+  );
+});
+
 export default tweetRouter;
