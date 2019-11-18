@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 import UserModel from '../models/user.sql';
 
-const sequelize = new Sequelize('twitterDB', 'root', 'root1234', {
+const sequelize = new Sequelize('twitterDB', 'root', 'mahalasa', {
   host: 'localhost',
   dialect: 'mysql',
   pool: {
