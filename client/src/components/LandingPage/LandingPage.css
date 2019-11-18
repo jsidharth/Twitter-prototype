@@ -42,7 +42,7 @@
   height: 50%;
   width: 100%;
   margin-top: 25%;
-   margin-left: 30%;
+  margin-left: 30%;
 }
 
 .container {
@@ -55,8 +55,9 @@
 .main1 {
   height: 100vh;
 }
+
 .home {
- background-image: url('../Image/twitter.png'); 
+  background-image: url('../Image/twitter.png');
   background-repeat: repeat-y;
   width: 50%;
 }
@@ -101,7 +102,7 @@
   letter-spacing: 1px;
 }
 
-.login-username{
+.login-username {
   border: none;
   background-color: #f0f0f5;
   border-bottom: 2px solid darkgray;
@@ -112,10 +113,10 @@
   color: black;
   padding-left: 0px;
   height: 45px;
-  width: 100%!important;
+  width: 100% !important;
   margin-left: 10%;
 }
-.login-label{
+.login-label {
   margin-top: 5%;
   margin-left: 10%;
 }
@@ -197,7 +198,7 @@ input[type='email'] {
 }
 .step2-modal-body {
   padding-left: 10% !important;
-  padding-bottom: 8% !important;
+  padding-bottom: 0% !important;
 }
 .modal-footer {
   padding-bottom: 10% !important;
@@ -222,6 +223,57 @@ input[type='email'] {
   font-size: 10px;
 }
 .registerModal {
-  width: 50vw !important; 
+  width: 50vw !important;
   max-width: 50vw !important;
+}
+.loginUserNameError {
+  margin-left: 5%;
+  color: red;
+  font-weight: bold;
+  font-size: 10px;
+}
+.twitterImage {
+  margin-top: 22% !important;
+  margin-bottom: 5% !important;
+}
+.joinTwitter {
+  margin-top: 8%;
+  margin-bottom: 3%;
+}
+.bolder {
+  font-weight: bolder;
+}
+.colorP {
+  color: #00acee;
+  display: inline;
+}
+.next {
+  margin-bottom: 10%;
+  margin-top: 5%;
+}
+.createAccount {
+  margin-bottom: 3%;
+}
+.margin{
+  margin-top: 0%;
+}
+.marginTop20{
+  margin-top:1%;
+}
+.marginTop2{
+  margin-top:3%;
+}
+.signupMargin{
+  margin-top: 10%;
+  width:100%;
+}
+.form-label-margin {
+  color: gray;
+  font-size: 13px;
+  text-align: justify;
+  margin-top: 0%;
+}
+.marginLeft{
+  padding-left: 0% !important;
+
 }

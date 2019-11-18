@@ -142,26 +142,25 @@ class LandingPage extends Component {
   hideStep2Modal = () => {
     this.setState({ showStep2: false });
   };
-  isLoginNameValid =()=>{
-    if(/\S+@\S+\.\S+/.test(this.state.loginUserName)){
-      this.setState({loginUserNameError:''})
+  isLoginNameValid = () => {
+    if (/\S+@\S+\.\S+/.test(this.state.loginUserName)) {
+      this.setState({ loginUserNameError: '' });
       return true;
-    }else{
-      this.setState({loginUserNameError:'Wrong format of Email'});
+    } else {
+      this.setState({ loginUserNameError: 'Wrong format of Email' });
       return false;
-   
     }
-  }
-  login=()=>{
+  };
+  login = () => {
     let userDetails = {
       email: this.state.loginUserName,
       password: this.state.loginPassword,
     };
-    let loginNameValidity=this.isLoginNameValid();
-    if(loginNameValidity && this.state.loginPassword){
+    let loginNameValidity = this.isLoginNameValid();
+    if (loginNameValidity && this.state.loginPassword) {
       this.props.login(userDetails);
     }
-  }
+  };
   register = () => {
     let userDetails = {
       email: this.state.email,
@@ -195,7 +194,7 @@ class LandingPage extends Component {
                     onChange={this.loginUserNameChangeHandler}
                   />
                 </Row>
-                <label class="error" style={{marginLeft:'5%'}}>{this.state.loginUserNameError}</label>
+                <label class="loginUserNameError">{this.state.loginUserNameError}</label>
               </Col>
               <Col md={4}>
                 <Row>
@@ -209,38 +208,39 @@ class LandingPage extends Component {
                     onChange={this.loginPasswordChangeHandler}
                   />
                 </Row>
-                <label class="error">{this.state.loginPasswordError}</label>
+                <label className="error">{this.state.loginPasswordError}</label>
               </Col>
-              <Col md={2} >
+              <Col md={2}>
                 <button type="button" className=" btn-info-transparent-login" onClick={this.login}>
                   Log In
                 </button>
               </Col>
               <Col md={1}></Col>
             </Row>
-            <Row style={{marginTop:'22%',marginBottom:'5%'}}>
-            <Col md={3}></Col>
-              <Col md={6}>
-              <img
-                    src="https://upload.wikimedia.org/wikipedia/fr/thumb/c/c8/Twitter_Bird.svg/944px-Twitter_Bird.svg.png"
-                    width="40px"
-                    height="40px"
-                    alt="Main logo link to home"
-                  />              </Col>
-              <Col md={3}></Col>
-            </Row>
-            <Row className="" >
+            <Row className="twitterImage">
               <Col md={3}></Col>
               <Col md={6}>
-               <h2 style={{fontWeight:'bolder'}}>See what's happening in the world right now.</h2>
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/fr/thumb/c/c8/Twitter_Bird.svg/944px-Twitter_Bird.svg.png"
+                  width="40px"
+                  height="40px"
+                  alt="Main logo link to home"
+                />{' '}
               </Col>
               <Col md={3}></Col>
             </Row>
-            <Row style={{marginTop:'8%',marginBottom:'3%'}}>
-            <Col md={3}></Col>
+            <Row className="">
+              <Col md={3}></Col>
               <Col md={6}>
-              <h4 style={{fontWeight:'bolder'}}>Join Twitter Today.</h4>
-                        </Col>
+                <h2 className="bolder">See what's happening in the world right now.</h2>
+              </Col>
+              <Col md={3}></Col>
+            </Row>
+            <Row className="joinTwitter">
+              <Col md={3}></Col>
+              <Col md={6}>
+                <h4 className="bolder">Join Twitter Today.</h4>
+              </Col>
               <Col md={3}></Col>
             </Row>
             <Row className="">
@@ -287,14 +287,14 @@ class LandingPage extends Component {
                     className="btn-info-solid-next"
                     onClick={this.showStep2Modal}
                   >
-                    <p style={{ marginBottom: '20px', marginTop: '5px' }}>Next</p>
+                    <p className="next">Next</p>
                   </button>
                 </Col>
               </Modal.Header>
               <Modal.Body className="step1-modal-body">
-                <Row style={{ marginBottom: '20px' }}>
+                <Row className="createAccount">
                   <Col md={10}>
-                    <h3 style={{ fontWeight: 'bolder' }}>Create Your Account</h3>
+                    <h3 className="bolder">Create Your Account</h3>
                   </Col>
                   <Col md={1} />
                 </Row>
@@ -311,14 +311,14 @@ class LandingPage extends Component {
                         onChange={this.nameChangeHandler}
                       />
                     </Row>
-                    <label class="error">{this.state.nameError}</label>
+                    <label className="error">{this.state.nameError}</label>
                   </Col>
                   <Col md={1} />
                 </Row>
                 <Row>
                   <Col md={1}></Col>
                   <Col md={10}>
-                    <Row style={{ marginTop: '15px' }}>
+                    <Row className="margin">
                       <h6 className="">Email</h6>
                     </Row>
                     <Row>
@@ -328,14 +328,14 @@ class LandingPage extends Component {
                         onChange={this.emailChangeHandler}
                       />
                     </Row>
-                    <label class="error">{this.state.emailError}</label>
+                    <label className="error">{this.state.emailError}</label>
                   </Col>
                   <Col md={1} />
                 </Row>
                 <Row>
                   <Col md={1}></Col>
                   <Col md={10}>
-                    <Row style={{ marginTop: '15px' }}>
+                    <Row className="margin">
                       <h6 className="">Password</h6>
                     </Row>
                     <Row>
@@ -345,15 +345,15 @@ class LandingPage extends Component {
                         onChange={this.passwordChangeHandler}
                       />
                     </Row>
-                    <label class="error">{this.state.passwordError}</label>
+                    <label className="error">{this.state.passwordError}</label>
                   </Col>
                   <Col md={1} />
                 </Row>
                 <Row>
                   <Col md={1} />
                   <Col md={10}>
-                    <Row style={{ marginTop: '20px' }}>
-                      <h6 style={{ fontWeight: 'bolder' }}>Date of Birth</h6>
+                    <Row className="margin">
+                      <h6 className="bolder">Date of Birth</h6>
                     </Row>
                     <Row>
                       <h6 className="form-label">
@@ -365,7 +365,7 @@ class LandingPage extends Component {
                     <Row>
                       <DatePicker onChange={this.dateChangeHandler} value={this.state.date} />
                     </Row>
-                    <label class="error">{this.state.dateError}</label>
+                    <label className="error">{this.state.dateError}</label>
                   </Col>
                   <Col md={1} />
                 </Row>
@@ -384,19 +384,19 @@ class LandingPage extends Component {
                     className="btn-info-solid-next"
                     onClick={this.showStep1Modal}
                   >
-                    <p style={{ marginBottom: '20px', marginTop: '5px' }}>Back</p>
+                    <p className="next">Back</p>
                   </button>
                 </Col>
                 <Col md={2}></Col>
                 <Col md={4}>
-                  <h4 style={{ fontWeight: 'bolder' }}>Step 2 of 2</h4>
+                  <h4 className="bolder">Step 2 of 2</h4>
                 </Col>
                 <Col md={4}></Col>
               </Modal.Header>
               <Modal.Body className="step2-modal-body">
-                <Row style={{ marginBottom: '20px' }}>
+                <Row className="marginTop20">
                   <Col md={10}>
-                    <h3 style={{ fontWeight: 'bolder' }}>Create Your Account</h3>
+                    <h3 className="bolder">Create Your Account</h3>
                   </Col>
                   <Col md={1} />
                 </Row>
@@ -417,10 +417,10 @@ class LandingPage extends Component {
                   </Col>
                   <Col md={1} />
                 </Row>
-                <Row>
+                <Row className="marginTop2">
                   <Col md={1}></Col>
                   <Col md={10}>
-                    <Row style={{ marginTop: '15px' }}>
+                    <Row >
                       <h6 className="">Email</h6>
                     </Row>
                     <Row>
@@ -437,7 +437,7 @@ class LandingPage extends Component {
                 <Row>
                   <Col md={1}></Col>
                   <Col md={10}>
-                    <Row style={{ marginTop: '15px' }}>
+                    <Row className="marginTop2">
                       <h6 className="">Password</h6>
                     </Row>
                     <Row>
@@ -454,7 +454,7 @@ class LandingPage extends Component {
                 <Row>
                   <Col md={1} />
                   <Col md={10}>
-                    <Row style={{ marginTop: '20px' }}>
+                    <Row className="marginTop2">
                       <h6 className="">Date of Birth</h6>
                     </Row>
                     <Row>
@@ -473,20 +473,20 @@ class LandingPage extends Component {
                 <Row>
                   <Row>
                     <Col md={2}></Col>
-                    <Col md={8}>
+                    <Col md={8} className="marginLeft">
                       <h6 className="form-label">
-                        By signing up, you agree to the{' '}
-                        <p style={{ color: '#00acee', display: 'inline' }}>Terms of Service</p> and{' '}
-                        <p style={{ color: '#00acee', display: 'inline' }}>Privacy Policy</p>,
-                        including <p style={{ color: '#00acee', display: 'inline' }}>Cookie Use</p>.
-                        Others will be able to find you by email when provided.
+                        By signing up, you agree to the
+                        <p className="colorP"> Terms of Service</p> and
+                        <p className="colorP"> Privacy Policy</p>, including
+                        <p className="colorP"> Cookie Use</p>. Others will be able to find you by
+                        email when provided.
                       </h6>
                     </Col>
                     <Col md={2}></Col>
                   </Row>
                   <Row>
-                    <Col md={8}></Col>
-                    <Col md={4} style={{ marginTop: '10%', width: '100%' }}>
+                    <Col md={7}></Col>
+                    <Col md={5} className="signupMargin">
                       <button className="btn-info-solid-signup" onClick={this.register}>
                         Sign Up
                       </button>
@@ -507,7 +507,7 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   register: data => dispatch(userActions.register(data)),
   login: data => dispatch(userActions.login(data)),
 });
