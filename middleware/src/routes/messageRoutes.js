@@ -10,7 +10,7 @@ messageRouter.get('/messages/:userId', (req, res) => {
     'messageTopic',
     {
       userId,
-      action: 'GET_MESSAGES',
+      action: 'MESSAGE_GET_MESSAGE_THREAD',
     },
     (err, result) => {
       if (err) {
@@ -32,7 +32,7 @@ messageRouter.post('/messages/compose', (req, res) => {
     'messageTopic',
     {
       body: req.body,
-      action: 'COMPOSE_MESSAGE',
+      action: 'MESSAGE_COMPOSE',
     },
     (err, result) => {
       if (err) {
