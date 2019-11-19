@@ -163,7 +163,7 @@ tweetRouter.get('/bookmark/:userId', (req, res) => {
   );
 });
 
-tweetRouter.update('/like', (req, res) => {
+tweetRouter.put('/like', (req, res) => {
   console.log('Inside POST Like Tweet');
   console.log('Request Body: ', req.body);
   kafka.makeRequest(
@@ -185,7 +185,7 @@ tweetRouter.update('/like', (req, res) => {
   );
 });
 
-tweetRouter.update('/unlike', (req, res) => {
+tweetRouter.put('/unlike', (req, res) => {
   console.log('Inside POST Unlike Tweet');
   console.log('Request Body: ', req.body);
   kafka.makeRequest(
@@ -206,4 +206,5 @@ tweetRouter.update('/unlike', (req, res) => {
     }
   );
 });
+
 export default tweetRouter;
