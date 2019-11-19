@@ -18,3 +18,17 @@ export const postTweet = payload => {
     });
   };
 };
+
+export const fetchFeed = payload => {
+  return dispatch => {
+    return axios.get(`${ROOT_URL}/tweet/feed/${payload.userId}`).then(response => {
+      console.log('Status Code : ', response.status);
+      if (response.status === 200) {
+        dispatch({
+          type: actionTypes.TWEET_FEED,
+          payload: response.data,
+        });
+      }
+    });
+  };
+};
