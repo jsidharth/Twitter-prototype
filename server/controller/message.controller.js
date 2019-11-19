@@ -1,9 +1,13 @@
-import getMessageThread from '../services/message.services/getMessageThread';
+import getMessages from '../services/message.services/getMessages';
+import composeMessage from '../services/message.services/composeMessage';
 
 const handleRequest = (payload, callback) => {
   switch (payload.action) {
-    case 'GET_MESSAGE_THREAD':
-      getMessageThread.handleRequest(payload.userId, callback);
+    case 'GET_MESSAGES':
+      getMessages.handleRequest(payload.userId, callback);
+      break;
+    case 'COMPOSE_MESSAGE':
+      composeMessage.handleRequest(payload.userId, callback);
       break;
     default:
       break;
