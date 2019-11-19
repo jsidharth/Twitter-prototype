@@ -147,7 +147,7 @@ tweetRouter.get('/bookmark/:userId', (req, res) => {
   kafka.makeRequest(
     'tweetTopic',
     {
-      body: req.body,
+      body: req.params.userId,
       action: 'TWEET_GET_BOOKMARKS',
     },
     (err, result) => {

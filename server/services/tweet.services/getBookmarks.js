@@ -9,9 +9,10 @@ const handleRequest = async (userId, callback) => {
   if (!user) {
     callback({ message: 'User not found!' }, null);
   } else {
-    const bookmarkmarkedTweets = user.bookmarks;
-    if (bookmarkmarkedTweets && bookmarkmarkedTweets.length) {
-      let tweets = await Promise.map(bookmarkmarkedTweets, async tweet => {
+    const tweetIds = user.bookmarks;
+    if (tweetIds && tweetIds.length) {
+      let tweets = await Promise.map(tweetIds, async tweetId => {
+        const tweet = await Tweets.findById(tweetId);
         const tweetUser = await Users.findOne(
           {
             tweets: tweet._id,
@@ -49,12 +50,12 @@ const handleRequest = async (userId, callback) => {
       });
       updateTweetViewsPromise.then(() => {
         callback(null, {
-          tweets,
+          bookMarkedtweets: tweets,
         });
       });
     } else {
       callback(null, {
-        tweets: [],
+        bookMarkedtweets: [],
       });
     }
   }
