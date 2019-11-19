@@ -6,7 +6,7 @@ import retweet from '../services/tweet.services/retweet';
 import bookmark from '../services/tweet.services/bookmark';
 import getBookmarks from '../services/tweet.services/getBookmarks';
 import likeTweet from '../services/tweet.services/likeTweet';
-import unlikeTweet from '../services/tweet.services/unlikelikeTweet';
+import unlikeTweet from '../services/tweet.services/unlikeTweet';
 
 const handleRequest = (payload, callback) => {
   switch (payload.action) {

@@ -11,7 +11,7 @@ const handleRequest = async (tweetDetails, callback) => {
     );
   } else {
     tweet.likes.pull(tweetDetails.userId);
-    const currentLikes = tweet.likes.length();
+    const currentLikes = tweet.likes.length;
     await tweet.save();
 
     callback(null, {

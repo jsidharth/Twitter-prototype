@@ -10,8 +10,8 @@ const handleRequest = async (tweetDetails, callback) => {
       null
     );
   } else {
-    tweet.likes.push(tweetDetails.userId);
-    const currentLikes = tweet.likes.length();
+    tweet.likes.addtoSet(tweetDetails.userId);
+    const currentLikes = tweet.likes.length;
     await tweet.save();
 
     callback(null, {
