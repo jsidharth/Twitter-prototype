@@ -5,6 +5,8 @@ import deleteTweet from '../services/tweet.services/deleteTweet';
 import retweet from '../services/tweet.services/retweet';
 import bookmark from '../services/tweet.services/bookmark';
 import getBookmarks from '../services/tweet.services/getBookmarks';
+import likeTweet from '../services/tweet.services/likeTweet';
+import unlikeTweet from '../services/tweet.services/unlikelikeTweet';
 
 const handleRequest = (payload, callback) => {
   switch (payload.action) {
@@ -28,6 +30,12 @@ const handleRequest = (payload, callback) => {
       break;
     case 'TWEET_GET_BOOKMARKS':
       getBookmarks.handleRequest(payload.body, callback);
+      break;
+    case 'TWEET_LIKE':
+      likeTweet.handleRequest(payload.body, callback);
+      break;
+    case 'TWEET_UNLIKE':
+      unlikeTweet.handleRequest(payload.body, callback);
       break;
     default:
       break;

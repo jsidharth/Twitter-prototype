@@ -11,7 +11,7 @@ const handleRequest = async (tweetDetails, callback) => {
     callback({ message: 'User not found!' }, null);
   } else {
     user.bookmarks.push(tweetDetails.tweetId);
-    user.save();
+    await user.save();
     callback(null, {
       message: 'Tweet Bookmarked',
     });
