@@ -15,7 +15,7 @@ const handleRequest = async (tweetDetails, callback) => {
         null
       );
     } else {
-      user.bookmarks.push(tweetDetails.tweetId);
+      user.bookmarks.addToSet(tweetDetails.tweetId);
       await user.save();
       callback(null, {
         message: 'Tweet Bookmarked',
