@@ -59,40 +59,71 @@ userRouter.post('/login', passport.authenticate('login'), (req, res) => {
   );
 });
 
+// userRouter.get('/details/(:data)', (req, res) => {
+//   console.log('Inside get user details');
+//   console.log('Request Body: ', req.params.data);
+//   const { data } = req.params;
+//   // Check if user is in redis cache
+//   return client
+//     .getAsync(data)
+//     .then(cacheResult => {
+//       // If found in cache return
+//       if (cacheResult) {
+//         res.status(200).json(JSON.parse(cacheResult));
+//       } else {
+//         // Fetch details from database
+//         kafka.makeRequest(
+//           'userTopic',
+//           {
+//             userId: data,
+//             action: 'USER_GET_DETAILS',
+//           },
+//           (err, result) => {
+//             if (err) {
+//               console.log('Error ', err);
+//               res.status(500).json({
+//                 message: err.message,
+//               });
+//             } else {
+//               // store in cache with a timeout of 3600 sec and respond
+//               return client.setexAsync(data, 3600, JSON.stringify(result)).then(() => {
+//                 res.status(200).json(result);
+//               });
+//             }
+//           }
+//         );
+//       }
+//     })
+//     .catch(err => {
+//       res.status(500).json({
+//         message: err,
+//       });
+//     });
+// });
+
 userRouter.get('/details/(:data)', (req, res) => {
   console.log('Inside get user details');
   console.log('Request Body: ', req.params.data);
   const { data } = req.params;
-  // Check if user is in redis cache
-  return client.getAsync(data).then(cacheResult => {
-    // If found in cache return
-    if (cacheResult) {
-      res.status(200).json(JSON.parse(cacheResult));
-    } else {
-      // Fetch details from database
-      kafka.makeRequest(
-        'userTopic',
-        {
-          userId: data,
-          action: 'USER_GET_DETAILS',
-        },
-        (err, result) => {
-          if (err) {
-            console.log('Error ', err);
-            res.status(500).json({
-              message: err.message,
-            });
-          } else {
-            // store in cache with a timeout of 3600 sec and respond
-            return client.setexAsync(data, 3600, JSON.stringify(result)).then(() => {
-              res.status(200).json(result);
-            });
-          }
-        }
-      );
+  kafka.makeRequest(
+    'userTopic',
+    {
+      userId: data,
+      action: 'USER_GET_DETAILS',
+    },
+    (err, result) => {
+      if (err) {
+        console.log('Error ', err);
+        res.status(500).json({
+          message: err.message,
+        });
+      } else {
+        res.status(200).json(result);
+      }
     }
-  });
+  );
 });
+
 
 userRouter.put('/details', (req, res) => {
   console.log('Inside put user details');
