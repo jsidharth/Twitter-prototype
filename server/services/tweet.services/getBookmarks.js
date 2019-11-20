@@ -5,9 +5,14 @@ import Users from '../../models/user.model';
 import Tweets from '../../models/tweet.model';
 
 const handleRequest = async (userId, callback) => {
-  const user = await Users.findById(userId);
+  const user = await Users.findById(userId).populate('bookmarks');
   if (!user) {
-    callback({ message: 'User not found!' }, null);
+    callback(
+      {
+        message: 'User not found!',
+      },
+      null
+    );
   } else {
     const tweetIds = user.bookmarks;
     if (tweetIds && tweetIds.length) {
@@ -35,8 +40,9 @@ const handleRequest = async (userId, callback) => {
         };
       });
       tweets = tweets.sort((first, second) => moment(second.created_at).diff(first.created_at));
-      let updateTweetViewsPromise = Promise.resolve();
-      updateTweetViewsPromise = Promise.map(tweets, tweet => {
+
+      // Updating tweet views for fetched bookmarks
+      await Promise.map(tweets, tweet => {
         return Tweets.findOneAndUpdate(
           {
             _id: tweet._id,
@@ -48,10 +54,8 @@ const handleRequest = async (userId, callback) => {
           }
         );
       });
-      updateTweetViewsPromise.then(() => {
-        callback(null, {
-          bookMarkedtweets: tweets,
-        });
+      callback(null, {
+        bookMarkedtweets: tweets,
       });
     } else {
       callback(null, {
