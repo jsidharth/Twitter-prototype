@@ -14,10 +14,9 @@ const handleRequest = async (userId, callback) => {
       null
     );
   } else {
-    const tweetIds = user.bookmarks;
-    if (tweetIds && tweetIds.length) {
-      let tweets = await Promise.map(tweetIds, async tweetId => {
-        const tweet = await Tweets.findById(tweetId);
+    const tweets = user.bookmarks;
+    if (tweets && tweets.length) {
+      let updatedTweets = await Promise.map(tweets, async tweet => {
         const tweetUser = await Users.findOne(
           {
             tweets: tweet._id,
@@ -39,10 +38,12 @@ const handleRequest = async (userId, callback) => {
           created_at: tweet.created_at,
         };
       });
-      tweets = tweets.sort((first, second) => moment(second.created_at).diff(first.created_at));
+      updatedTweets = updatedTweets.sort((first, second) =>
+        moment(second.created_at).diff(first.created_at)
+      );
 
       // Updating tweet views for fetched bookmarks
-      await Promise.map(tweets, tweet => {
+      await Promise.map(updatedTweets, tweet => {
         return Tweets.findOneAndUpdate(
           {
             _id: tweet._id,
@@ -55,7 +56,7 @@ const handleRequest = async (userId, callback) => {
         );
       });
       callback(null, {
-        bookMarkedtweets: tweets,
+        bookMarkedtweets: updatedTweets,
       });
     } else {
       callback(null, {
