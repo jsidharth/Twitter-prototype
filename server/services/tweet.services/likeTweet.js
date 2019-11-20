@@ -10,12 +10,12 @@ const handleRequest = async (tweetDetails, callback) => {
       null
     );
   } else {
-    tweet.likes.addtoSet(tweetDetails.userId);
-    const currentLikes = tweet.likes.length;
+    tweet.likes.addToSet(tweetDetails.userId);
+    const likeCount = tweet.likes.length;
     await tweet.save();
 
     callback(null, {
-      message: `likeCount: ${currentLikes}`,
+      message: `likeCount: ${likeCount}`,
     });
   }
 };
