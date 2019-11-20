@@ -207,4 +207,48 @@ tweetRouter.put('/unlike', (req, res) => {
   );
 });
 
+tweetRouter.get('/view/tweets', (req, res) => {
+  console.log('Inside GET View Tweets');
+  console.log('Request Body: ', req.body);
+  kafka.makeRequest(
+    'tweetTopic',
+    {
+      body: req.body,
+      action: 'TWEET_VIEW_TWEETS',
+    },
+    (err, result) => {
+      if (err) {
+        console.log('Error ', err);
+        res.status(500).json({
+          message: err.message,
+        });
+      } else {
+        res.status(200).json(result);
+      }
+    }
+  );
+});
+
+tweetRouter.get('/view/retweets', (req, res) => {
+  console.log('Inside GET View Retweets');
+  console.log('Request Body: ', req.body);
+  kafka.makeRequest(
+    'tweetTopic',
+    {
+      body: req.body,
+      action: 'TWEET_VIEW_RETWEETS',
+    },
+    (err, result) => {
+      if (err) {
+        console.log('Error ', err);
+        res.status(500).json({
+          message: err.message,
+        });
+      } else {
+        res.status(200).json(result);
+      }
+    }
+  );
+});
+
 export default tweetRouter;

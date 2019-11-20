@@ -7,36 +7,55 @@ import bookmark from '../services/tweet.services/bookmark';
 import getBookmarks from '../services/tweet.services/getBookmarks';
 import likeTweet from '../services/tweet.services/likeTweet';
 import unlikeTweet from '../services/tweet.services/unlikeTweet';
+import viewTweets from '../services/tweet.services/viewTweets';
+import viewRetweets from '../services/tweet.services/viewRetweets';
 
 const handleRequest = (payload, callback) => {
   switch (payload.action) {
     case 'TWEET_FEED':
       getTweetFeed.handleRequest(payload.userId, callback);
       break;
+
     case 'TWEET_POST':
       postTweet.handleRequest(payload.body, callback);
       break;
+
     case 'TWEET_DETAIL':
       getTweetDetail.handleRequest(payload.tweetId, callback);
       break;
+
     case 'TWEET_DELETE':
       deleteTweet.handleRequest(payload.tweetId, callback);
       break;
+
     case 'TWEET_RETWEET':
       retweet.handleRequest(payload.body, callback);
       break;
+
     case 'TWEET_BOOKMARK':
       bookmark.handleRequest(payload.body, callback);
       break;
+
     case 'TWEET_GET_BOOKMARKS':
       getBookmarks.handleRequest(payload.body, callback);
       break;
+
     case 'TWEET_LIKE':
       likeTweet.handleRequest(payload.body, callback);
       break;
+
     case 'TWEET_UNLIKE':
       unlikeTweet.handleRequest(payload.body, callback);
       break;
+
+    case 'TWEET_VIEW_TWEETS':
+      viewTweets.handleRequest(payload.body, callback);
+      break;
+
+    case 'TWEET_VIEW_RETWEETS':
+      viewRetweets.handleRequest(payload.body, callback);
+      break;
+
     default:
       break;
   }
