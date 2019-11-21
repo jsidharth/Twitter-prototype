@@ -38,10 +38,10 @@ const handleRequest = async (userId, callback) => {
           created_at: tweet.created_at,
         };
       });
+      
       updatedTweets = updatedTweets.sort((first, second) =>
         moment(second.created_at).diff(first.created_at)
       );
-
       // Updating tweet views for fetched bookmarks
       await Promise.map(updatedTweets, tweet => {
         return Tweets.findOneAndUpdate(

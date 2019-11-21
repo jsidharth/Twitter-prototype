@@ -162,4 +162,49 @@ tweetRouter.get('/bookmark/:userId', (req, res) => {
     }
   );
 });
+
+tweetRouter.put('/like', (req, res) => {
+  console.log('Inside POST Like Tweet');
+  console.log('Request Body: ', req.body);
+  kafka.makeRequest(
+    'tweetTopic',
+    {
+      body: req.body,
+      action: 'TWEET_LIKE',
+    },
+    (err, result) => {
+      if (err) {
+        console.log('Error ', err);
+        res.status(500).json({
+          message: err.message,
+        });
+      } else {
+        res.status(200).json(result);
+      }
+    }
+  );
+});
+
+tweetRouter.put('/unlike', (req, res) => {
+  console.log('Inside POST Unlike Tweet');
+  console.log('Request Body: ', req.body);
+  kafka.makeRequest(
+    'tweetTopic',
+    {
+      body: req.body,
+      action: 'TWEET_UNLIKE',
+    },
+    (err, result) => {
+      if (err) {
+        console.log('Error ', err);
+        res.status(500).json({
+          message: err.message,
+        });
+      } else {
+        res.status(200).json(result);
+      }
+    }
+  );
+});
+
 export default tweetRouter;
