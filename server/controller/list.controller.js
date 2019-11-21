@@ -1,5 +1,6 @@
 import createList from '../services/list.services/createList';
 import getLists from '../services/list.services/getLists';
+import subscribeList from '../services/list.services/subscribeList';
 
 const handleRequest = (payload, callback) => {
   switch (payload.action) {
@@ -9,6 +10,10 @@ const handleRequest = (payload, callback) => {
 
     case 'LIST_GET_LISTS':
       getLists.handleRequest(payload.body, callback);
+      break;
+
+    case 'LIST_SUBSCRIBE':
+      subscribeList.handleRequest(payload.body, callback);
       break;
 
     default:
