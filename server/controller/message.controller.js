@@ -3,11 +3,11 @@ import composeMessage from '../services/message.services/composeMessage';
 
 const handleRequest = (payload, callback) => {
   switch (payload.action) {
-    case 'MESSAGE_GET_MESSAGE_THREAD':
+    case 'MESSAGE_FETCH':
       getMessages.handleRequest(payload.userId, callback);
       break;
     case 'MESSAGE_COMPOSE':
-      composeMessage.handleRequest(payload.userId, callback);
+      composeMessage.handleRequest(payload.body, callback);
       break;
     default:
       break;

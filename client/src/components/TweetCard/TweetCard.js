@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import Image from 'react-bootstrap/Image';
 import { Card, CardContent } from '@material-ui/core';
-import { Card, CardContent } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { FiMessageCircle, FiUpload } from 'react-icons/fi';
 import { FaRegHeart } from 'react-icons/fa';

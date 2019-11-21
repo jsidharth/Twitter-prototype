@@ -4,13 +4,13 @@ const kafka = require('../../kafka/client');
 
 const messageRouter = express.Router();
 
-messageRouter.get('/messages/:userId', (req, res) => {
+messageRouter.get('/:userId', (req, res) => {
   const { userId } = req.params;
   kafka.makeRequest(
     'messageTopic',
     {
       userId,
-      action: 'MESSAGE_GET_MESSAGE_THREAD',
+      action: 'MESSAGE_FETCH',
     },
     (err, result) => {
       if (err) {
@@ -25,7 +25,7 @@ messageRouter.get('/messages/:userId', (req, res) => {
   );
 });
 
-messageRouter.post('/messages/compose', (req, res) => {
+messageRouter.post('/compose', (req, res) => {
   console.log('Inside POST  Messages');
   console.log('Request Body: ', req.body);
   kafka.makeRequest(

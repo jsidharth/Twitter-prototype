@@ -3,9 +3,14 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const messageSchema = new Schema({
-  to: { type: Schema.Types.ObjectId, ref: 'Users' },
-  from: { type: Schema.Types.ObjectId, ref: 'Users' },
-  body: { type: String, required: true },
+  user_1: { type: Schema.Types.ObjectId, ref: 'Users' },
+  user_2: { type: Schema.Types.ObjectId, ref: 'Users' },
+  messages: [{ 
+    _id: false,
+    sender: {type: Schema.Types.ObjectId, ref: 'Users'},
+    body: {type: String},
+    createdAt: {type: Date}
+  }]
 },
 { timestamps: true },
 );
