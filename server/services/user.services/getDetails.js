@@ -6,7 +6,7 @@ const handleRequest = (userId, callback) => {
     .populate('retweets')
     .exec((err, result) => {
       if (err || result == null) {
-        callback(err, null);
+        callback({ message: 'Fetch User Detail Failed!' }, null);
       } else {
         callback(null, result);
       }
