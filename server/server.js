@@ -9,7 +9,11 @@ import mongoDBConnection from './config/mongoose';
 import * as userController from './controller/user.controller';
 import * as tweetController from './controller/tweet.controller';
 import * as searchController from './controller/search.controller';
+<<<<<<< HEAD
 import * as listController from './controller/list.controller';
+=======
+import * as messageController from './controller/message.controller';
+>>>>>>> origin/master
 
 // eslint-disable-next-line no-unused-vars
 function handleTopicRequest(topicName, fname) {
@@ -51,3 +55,4 @@ handleTopicRequest('userTopic', userController);
 handleTopicRequest('tweetTopic', tweetController);
 handleTopicRequest('searchTopic', searchController);
 handleTopicRequest('listTopic', listController);
+handleTopicRequest('messageTopic', messageController);
