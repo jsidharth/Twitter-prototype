@@ -1,0 +1,20 @@
+import createList from '../services/list.services/createList';
+import getLists from '../services/list.services/getLists';
+
+const handleRequest = (payload, callback) => {
+  switch (payload.action) {
+    case 'LIST_CREATE':
+      createList.handleRequest(payload.body, callback);
+      break;
+
+    case 'LIST_GET_LISTS':
+      getLists.handleRequest(payload.body, callback);
+      break;
+
+    default:
+      break;
+  }
+};
+
+// eslint-disable-next-line import/prefer-default-export
+export { handleRequest };
