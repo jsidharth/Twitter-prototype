@@ -32,3 +32,17 @@ export const fetchFeed = payload => {
     });
   };
 };
+
+export const getTweetDetails = payload => {
+  return dispatch => {
+    return axios.get(`${ROOT_URL}/tweet/detail/${payload.tweetID}`).then(response => {
+      console.log('Status Code : ', response.status);
+      if (response.status === 200) {
+        dispatch({
+          type: actionTypes.TWEET_DETAILS,
+          payload: response.data,
+        });
+      }
+    });
+  };
+};

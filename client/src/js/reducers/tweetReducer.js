@@ -3,6 +3,7 @@ import actionTypes from '../constants/index';
 const initialState = {
   tweetPostedFlag: false,
   feed: [],
+  currentTweet: {} 
 };
 
 const imageReducer = (state = initialState, action) => {
@@ -11,6 +12,8 @@ const imageReducer = (state = initialState, action) => {
       return { ...state, tweetPostedFlag: true };
     case actionTypes.TWEET_FEED:
       return { ...state, feed: action.payload };
+    case actionTypes.TWEET_DETAILS:
+      return { ...state, currentTweet: action.payload };
     default:
       break;
   }
