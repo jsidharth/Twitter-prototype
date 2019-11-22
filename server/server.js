@@ -1,7 +1,6 @@
 /* eslint-disable no-shadow */
 /* eslint-disable func-names */
 /* eslint-disable no-console */
-import _ from 'lodash';
 import connection from './kafka/Connection';
 // eslint-disable-next-line no-unused-vars
 import mongoDBConnection from './config/mongoose';
