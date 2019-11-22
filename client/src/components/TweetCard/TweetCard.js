@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -33,7 +34,12 @@ class TweetCard extends Component {
       myDate = myDate.split(' ');
       return (
         // eslint-disable-next-line no-underscore-dangle
-        <Link to={`/home/status/${data._id}`} key={data._id} className="tweetClickCard" style={{textDecoration: "none"}}>
+        <Link
+          to={`/home/status/${data._id}`}
+          key={data._id}
+          className="tweetClickCard"
+          style={{ textDecoration: 'none' }}
+        >
           <div className="cardWidth" key={data._id}>
             <div className="cardContent">
               <div className="flexImageTweet">

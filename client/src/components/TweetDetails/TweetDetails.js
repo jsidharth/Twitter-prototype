@@ -1,14 +1,14 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Sidebar from '../Sidebar/Sidebar';
 import './TweetDetails.css';
-import { tweetActions } from '../../js/actions/index';
 import { FiMessageCircle } from 'react-icons/fi';
 import { MdKeyboardBackspace, MdBookmarkBorder } from 'react-icons/md';
 import { FaRegHeart } from 'react-icons/fa';
 import { AiOutlineRetweet } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import { IconContext } from 'react-icons';
+import { tweetActions } from '../../js/actions/index';
+import Sidebar from '../Sidebar/Sidebar';
 
 class TweetDetails extends Component {
   constructor(props) {
@@ -18,10 +18,11 @@ class TweetDetails extends Component {
 
   componentDidMount() {
     const data = {
-      tweetID: this.props.match.params.tweetID,
+      tweetID: this.props.match.params.tweetID
     };
 
-    this.props.getTweetDetails(data);
+    const { getTweetDetails } = this.props;
+    getTweetDetails(data);
   }
 
   render() {
@@ -38,10 +39,10 @@ class TweetDetails extends Component {
           <div className="cardContainer">
             <div className="cardWidth">
               <div className="paperHeight">
-                  <Link to="/home">
-                <div className="backIcon">
-                  <MdKeyboardBackspace size={30}/>
-                </div>
+                <Link to="/home">
+                  <div className="backIcon">
+                    <MdKeyboardBackspace size={30} />
+                  </div>
                 </Link>
                 Tweet
               </div>

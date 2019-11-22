@@ -3,7 +3,7 @@ import actionTypes from '../constants/index';
 const initialState = {
   tweetPostedFlag: false,
   feed: [],
-  currentTweet: {} 
+  currentTweet: {},
 };
 
 const imageReducer = (state = initialState, action) => {
