@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { FiMessageCircle, FiUpload } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+import { FiMessageCircle } from 'react-icons/fi';
 import { FaRegHeart } from 'react-icons/fa';
 import { AiOutlineRetweet } from 'react-icons/ai';
+import { MdBookmarkBorder } from 'react-icons/md';
 import './TweetCard.css';
 import { tweetActions } from '../../js/actions/index';
 
@@ -31,45 +33,51 @@ class TweetCard extends Component {
       myDate = myDate.split(' ');
       return (
         // eslint-disable-next-line no-underscore-dangle
-        <div className="cardWidth" key={data._id}>
-          <div className="cardContent">
-            <div className="flexImageTweet">
-              <div>
-                {/* Include user profile image if available */}
-                <img src="/images/default_profile_bigger.png" className="profileImage" alt="user" />
-              </div>
-              <div>
-                <div className="flexNameHandle">
-                  <p className="tweetUserName">{data.name}</p>
-                  <p className="tweetUserHandle">@{data.handle}</p>
-                  <p className="tweetUserName">.</p>
-                  <p className="tweetDate">
-                    {myDate[1]} {myDate[2]}, {myDate[3]}
-                  </p>
+        <Link to={`/home/status/${data._id}`} key={data._id} className="tweetClickCard" style={{textDecoration: "none"}}>
+          <div className="cardWidth" key={data._id}>
+            <div className="cardContent">
+              <div className="flexImageTweet">
+                <div>
+                  {/* Include user profile image if available */}
+                  <img
+                    src="/images/default_profile_bigger.png"
+                    className="profileImage"
+                    alt="user"
+                  />
                 </div>
-                <p>{data.body}</p>
-                {data.image ? <img src={data.image} alt="Tweet" className="tweetImage"/> : null}
+                <div>
+                  <div className="flexNameHandle">
+                    <p className="tweetUserName">{data.name}</p>
+                    <p className="tweetUserHandle">@{data.handle}</p>
+                    <p className="tweetUserName">.</p>
+                    <p className="tweetDate">
+                      {myDate[1]} {myDate[2]}, {myDate[3]}
+                    </p>
+                  </div>
+                  <p>{data.body}</p>
+                  {data.image ? <img src={data.image} alt="Tweet" className="tweetImage" /> : null}
+                </div>
               </div>
-            </div>
-            <div className="flexCardBtns">
-              <div className="flexBtnCnt">
-                <FiMessageCircle size={20} />
-                <div>{data.comments_count > 0 ? data.comments_count : null}</div>
-              </div>
-              <div className="flexBtnCnt">
-                <AiOutlineRetweet size={20} />
-                <div>{data.retweet_count > 0 ? data.retweet_count : null}</div>
-              </div>
-              <div className="flexBtnCnt">
-                <FaRegHeart size={20} />
-                <div>{data.likes_count > 0 ? data.likes_count : null}</div>
-              </div>
-              <div className="flexBtnCnt">
-                <FiUpload size={20} />
+              <div className="flexCardBtns">
+                <div className="flexBtnCnt">
+                  <FiMessageCircle size={20} />
+                  <div>{data.comments_count > 0 ? data.comments_count : null}</div>
+                </div>
+                <div className="flexBtnCnt">
+                  <AiOutlineRetweet size={20} />
+                  <div>{data.retweet_count > 0 ? data.retweet_count : null}</div>
+                </div>
+                <div className="flexBtnCnt">
+                  <FaRegHeart size={20} />
+                  <div>{data.likes_count > 0 ? data.likes_count : null}</div>
+                </div>
+                <div className="flexBtnCnt">
+                  <MdBookmarkBorder size={20} />
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </Link>
       );
     });
     return <div>{renderFeed}</div>;
