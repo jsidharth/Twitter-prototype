@@ -15,18 +15,18 @@ class Home extends Component {
   }
 
   render() {
-    // let redirectVar = '';
-    // if (!cookie.get('token')) {
-    //   redirectVar = <Redirect to="/" />;
-    // }
+    let redirectVar = '';
+    if (!cookie.get('token')) {
+      redirectVar = <Redirect to="/" />;
+    }
     return (
       <div>
-        {/* {redirectVar} */}
+        {redirectVar}
         <div className="flexHomeScreen">
           <div className="sideBarWidths">
             <Sidebar />
           </div>
-          <div className="postTweetHeight">
+          <div className="postTweetHeight1">
             <PostTweet />
             <TweetCard />
           </div>

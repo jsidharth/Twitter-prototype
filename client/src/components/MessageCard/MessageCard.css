@@ -20,6 +20,10 @@
     color: #657786;
 }
 
-.cardContent {
+.cardContentHeight {
     max-height: 70px;
+}
+
+.cardWidth-message {
+    max-width: 450px;
 }

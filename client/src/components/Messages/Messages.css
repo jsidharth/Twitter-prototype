@@ -1,11 +1,11 @@
-.flexMessagesIcon {
+  .flexHomeScreen {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-}
+  }
 
-.messageIcon {
+  .messageIcon {
     margin-left: 300px;
+    margin-right: 10px;
     color: #00ACEE;
 }
 
@@ -13,18 +13,6 @@
     color: #008abe;
 }
 
-.postMessageHeight {
-    margin-left: 50px;
-    width: 600px;
-}
-
-.cardWidth {
+.cardWidth1 {
     max-width: 450px;
 }
-
-/* .autoExpandDiv {
-    display: inline-block;
-    min-height: 50px;
-    width: 95%;
-    margin-bottom: 10px;
-  } */

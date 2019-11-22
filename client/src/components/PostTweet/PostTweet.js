@@ -65,7 +65,7 @@ class PostTweet extends Component {
                 <img src="/images/default_profile_bigger.png" className="profileImage" alt="User profile"/>
               </div>
 
-              <div className="autoExpandDiv">
+              <div className="autoExpandDiv1">
                 <textarea
                   className="textArea"
                   onChange={this.tweetTextHandler}
