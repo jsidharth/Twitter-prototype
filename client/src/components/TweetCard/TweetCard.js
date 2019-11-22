@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
-import { Card, CardContent } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { FiMessageCircle, FiUpload } from 'react-icons/fi';
 import { FaRegHeart } from 'react-icons/fa';
@@ -32,8 +31,8 @@ class TweetCard extends Component {
       myDate = myDate.split(' ');
       return (
         // eslint-disable-next-line no-underscore-dangle
-        <Card className="cardWidth" key={data._id}>
-          <CardContent className="cardContent">
+        <div className="cardWidth" key={data._id}>
+          <div className="cardContent">
             <div className="flexImageTweet">
               <div>
                 {/* Include user profile image if available */}
@@ -49,7 +48,7 @@ class TweetCard extends Component {
                   </p>
                 </div>
                 <p>{data.body}</p>
-                {data.image ? <img src={data.image} alt="Tweet" /> : null}
+                {data.image ? <img src={data.image} alt="Tweet" className="tweetImage"/> : null}
               </div>
             </div>
             <div className="flexCardBtns">
@@ -69,8 +68,8 @@ class TweetCard extends Component {
                 <FiUpload size={20} />
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       );
     });
     return <div>{renderFeed}</div>;

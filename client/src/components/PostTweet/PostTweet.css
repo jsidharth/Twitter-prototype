@@ -1,7 +1,10 @@
 .cardContainer {
-  padding-bottom: 10px;
-  background-color: #E6ECF0;
   width: 600px;
+}
+
+.postTweetSeparator{
+  background-color: #E6ECF0;
+  height: 10px;
 }
 
 .inputStyle {
@@ -21,6 +24,9 @@
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu,
     'Helvetica Neue', sans-serif;
   padding-left: 15px;
+  border-style: solid;
+  border-width: 0.5px;
+  border-color: #d0d4d6;
 }
 
 .cardContent {
@@ -39,7 +45,7 @@
 .flexImageTweet {
   display: flex;
   flex-direction: row;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .profileImage {

@@ -5,12 +5,16 @@
 .cardContent {
   font-size: inherit;
   margin-bottom: 0px;
+  border-style: solid;
+  border-width: 0.5px;
+  border-color: #d0d4d6;
+  padding: 20px;
 }
 
 .flexImageTweet {
   display: flex;
   flex-direction: row;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .flexNameHandle {
@@ -48,4 +52,10 @@
 .tweetDate {
   font-size: 17px;
   color: #657786;
+}
+
+.tweetImage {
+  max-width: 500px;
+  max-height: 600px;
+  object-fit: contain;
 }

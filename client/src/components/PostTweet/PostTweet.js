@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './PostTweet.css';
-import { Card, CardContent, Paper, Icon } from '@material-ui/core';
+import { Icon } from '@material-ui/core';
 import { InsertPhoto } from '@material-ui/icons';
 import { connect } from 'react-redux';
 import { imageActions, tweetActions } from '../../js/actions/index';
@@ -53,13 +53,16 @@ class PostTweet extends Component {
 
     return (
       <div className="cardContainer">
-        <Card className="cardWidth">
-          <Paper className="paperHeight">Home</Paper>
-          <CardContent className="cardContent">
+        <div className="cardWidth">
+          <div className="paperHeight">
+            Home
+          </div>
+          {/* <Paper className="paperHeight">Home</Paper> */}
+          <div className="cardContent">
             <div className="flexImageTweet">
               <div>
                 {/* Include user profile image if available */}
-                <img src="/images/default_profile_bigger.png" className="profileImage" />
+                <img src="/images/default_profile_bigger.png" className="profileImage" alt="User profile"/>
               </div>
 
               <div className="autoExpandDiv">
@@ -71,9 +74,8 @@ class PostTweet extends Component {
                 ></textarea>
               </div>
             </div>
-
             {this.props.imageUrl ? (
-              <img src={this.props.imageUrl} className="tweetImage" alt="Tweet Image" />
+              <img src={this.props.imageUrl} className="tweetImage" alt="Tweet" />
             ) : null}
             <div className="flexUploadTweet">
               <div className="flexIconCharsCount">
@@ -100,8 +102,9 @@ class PostTweet extends Component {
                 Tweet
               </button>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
+        <div className="postTweetSeparator"></div>
       </div>
     );
   }
