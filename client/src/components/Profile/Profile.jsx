@@ -3,6 +3,7 @@ import { Card, Paper } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { MdKeyboardBackspace } from 'react-icons/md';
 import Sidebar from '../Sidebar/Sidebar';
+import './Profile.css';
 
 class Profile extends Component {
   constructor(props) {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Paper } from '@material-ui/core';
 import Sidebar from '../Sidebar/Sidebar';
+import './Notifications.css';
 
 class Notifications extends Component {
   constructor(props) {

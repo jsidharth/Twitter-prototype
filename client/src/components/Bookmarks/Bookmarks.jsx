@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Paper } from '@material-ui/core';
 import Sidebar from '../Sidebar/Sidebar';
+import './Bookmarks.css'
 
 class Bookmarks extends Component {
   constructor(props) {

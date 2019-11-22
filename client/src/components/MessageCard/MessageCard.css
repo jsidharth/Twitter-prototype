@@ -19,3 +19,7 @@
     font-size: 17px;
     color: #657786;
 }
+
+.cardContent {
+    max-height: 70px;
+}

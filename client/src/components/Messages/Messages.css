@@ -5,12 +5,12 @@
 }
 
 .messageIcon {
-    margin-left: 400px;
-    color: black;
+    margin-left: 300px;
+    color: #00ACEE;
 }
 
 .messageIcon:hover {
-    color: #00ACEE;
+    color: #008abe;
 }
 
 .postMessageHeight {
@@ -18,9 +18,13 @@
     width: 600px;
 }
 
-.autoExpandDiv {
+.cardWidth {
+    max-width: 450px;
+}
+
+/* .autoExpandDiv {
     display: inline-block;
-    min-height: 70px;
+    min-height: 50px;
     width: 95%;
     margin-bottom: 10px;
-  }
+  } */
