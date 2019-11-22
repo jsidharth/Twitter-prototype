@@ -155,4 +155,27 @@ userRouter.post('/unfollow', (req, res) => {
   );
 });
 
+userRouter.get('/tweetsLiked/(:userId)', (req, res) => {
+  const { userId } = req.params;
+  console.log('Inside get tweets liked by user');
+  console.log('Request Body: ', userId);
+  kafka.makeRequest(
+    'userTopic',
+    {
+      body: userId,
+      action: 'USER_GET_TWEETS_LIKED',
+    },
+    (err, result) => {
+      if (err) {
+        console.log('Error ', err);
+        res.status(500).json({
+          message: err.message,
+        });
+      } else {
+        res.status(200).json(result);
+      }
+    }
+  );
+});
+
 export default userRouter;
