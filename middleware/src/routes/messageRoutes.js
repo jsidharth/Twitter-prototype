@@ -27,4 +27,26 @@ messageRouter.post('/compose', (req, res) => {
   );
 });
 
+messageRouter.get('/get/:userId', (req, res) => {
+  console.log('Inside GET  Messages');
+  console.log('Request Body: ', req.params.userId);
+  kafka.makeRequest(
+    'messageTopic',
+    {
+      body: req.params.userId,
+      action: 'MESSAGE_GET',
+    },
+    (err, result) => {
+      if (err) {
+        console.log('Error ', err);
+        res.status(500).json({
+          message: err.message,
+        });
+      } else {
+        res.status(200).json(result);
+      }
+    }
+  );
+});
+
 export default messageRouter;
