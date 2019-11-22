@@ -63,7 +63,7 @@
   outline: none;
 }
 
-.autoExpandDiv1 {
+.autoExpandDiv {
   display: inline-block;
   min-height: 70px;
   width: 95%;

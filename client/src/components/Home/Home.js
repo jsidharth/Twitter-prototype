@@ -26,7 +26,7 @@ class Home extends Component {
           <div className="sideBarWidths">
             <Sidebar />
           </div>
-          <div className="postTweetHeight1">
+          <div className="postTweetHeight">
             <PostTweet />
             <TweetCard />
           </div>
