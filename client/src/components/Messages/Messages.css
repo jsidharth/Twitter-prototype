@@ -1,0 +1,26 @@
+.flexMessagesIcon {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.messageIcon {
+    margin-left: 400px;
+    color: black;
+}
+
+.messageIcon:hover {
+    color: #00ACEE;
+}
+
+.postMessageHeight {
+    margin-left: 50px;
+    width: 600px;
+}
+
+.autoExpandDiv {
+    display: inline-block;
+    min-height: 70px;
+    width: 95%;
+    margin-bottom: 10px;
+  }

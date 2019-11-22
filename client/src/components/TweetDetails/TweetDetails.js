@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -18,7 +19,7 @@ class TweetDetails extends Component {
 
   componentDidMount() {
     const data = {
-      tweetID: this.props.match.params.tweetID
+      tweetID: this.props.match.params.tweetID,
     };
 
     const { getTweetDetails } = this.props;

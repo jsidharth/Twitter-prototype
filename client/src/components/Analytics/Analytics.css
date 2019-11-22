@@ -1,0 +1,4 @@
+.flexHomeScreen {
+    display: flex;
+    flex-direction: row;
+  }
