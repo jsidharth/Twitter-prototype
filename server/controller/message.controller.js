@@ -7,7 +7,7 @@ const handleRequest = (payload, callback) => {
       composeMessage.handleRequest(payload.body, callback);
       break;
     case 'MESSAGE_GET':
-      getMessages.handleRequest(payload.body, callback);
+      getMessages.handleRequest(payload.userId, callback);
       break;
     default:
       break;

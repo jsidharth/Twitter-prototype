@@ -130,4 +130,5 @@ div[data-placeholder]:empty:not(:focus):not([data-div-placeholder-content]):befo
   font-weight: 400;
   color: #b3b3b3;
   margin-left: 5px;
+  margin-top: 7px;
 }

@@ -2,6 +2,15 @@
   width: 600px;
 }
 
+.tweetClickCard {
+  color: black;
+}
+
+.tweetClickCard:hover {
+  color: black;
+  text-decoration: none;
+}
+
 .cardContent {
   font-size: inherit;
   margin-bottom: 0px;

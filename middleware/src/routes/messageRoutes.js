@@ -28,12 +28,12 @@ messageRouter.post('/compose', (req, res) => {
 });
 
 messageRouter.get('/get/:userId', (req, res) => {
-  console.log('Inside GET  Messages');
+  console.log('Inside GET Message details');
   console.log('Request Body: ', req.params.userId);
   kafka.makeRequest(
     'messageTopic',
     {
-      body: req.params.userId,
+      userId: req.params.userId,
       action: 'MESSAGE_GET',
     },
     (err, result) => {
