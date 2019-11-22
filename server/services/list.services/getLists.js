@@ -6,7 +6,12 @@ const handleRequest = async (userId, callback) => {
     .populate('ownedLists')
     .populate('subscribedLists');
   if (!user) {
-    callback({ message: 'User not found!' }, null);
+    callback(
+      {
+        message: 'User not found!',
+      },
+      null
+    );
   } else {
     callback(null, {
       ownedList: user.ownedLists,

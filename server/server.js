@@ -1,10 +1,10 @@
 /* eslint-disable no-shadow */
 /* eslint-disable func-names */
 /* eslint-disable no-console */
+import _ from 'lodash';
 import connection from './kafka/Connection';
 // eslint-disable-next-line no-unused-vars
 import mongoDBConnection from './config/mongoose';
-
 // topics files
 import * as userController from './controller/user.controller';
 import * as tweetController from './controller/tweet.controller';
