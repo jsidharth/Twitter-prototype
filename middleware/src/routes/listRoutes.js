@@ -30,11 +30,11 @@ listRouter.post('/create', (req, res) => {
 
 listRouter.get('/getLists/:userId', (req, res) => {
   console.log('Inside GET Lists');
-  console.log('Request Body: ', req.params.body);
+  console.log('Request Body: ', req.params.userId);
   kafka.makeRequest(
     'listTopic',
     {
-      body: req.params.body,
+      body: req.params.userId,
       action: 'LIST_GET_LISTS',
     },
     (err, result) => {

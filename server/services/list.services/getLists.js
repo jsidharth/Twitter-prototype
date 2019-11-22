@@ -1,6 +1,5 @@
 /* eslint-disable no-underscore-dangle */
 import Users from '../../models/user.model';
-import Lists from '../../models/list.model';
 
 const handleRequest = async (userId, callback) => {
   const user = await Users.findById(userId)

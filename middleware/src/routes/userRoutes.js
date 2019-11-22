@@ -95,7 +95,7 @@ userRouter.put('/details', (req, res) => {
 
 userRouter.put('/deactivate/(:data)', (req, res) => {
   console.log('Inside put user deactivate');
-  console.log('Request Body: ', req.body);
+  console.log('Request Body: ', req.params.data);
   kafka.makeRequest(
     'userTopic',
     {
