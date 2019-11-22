@@ -1,0 +1,29 @@
+.flexNameHandle {
+    display: flex;
+    flex-direction: row;
+}
+
+.messageUserName {
+    margin-right: 10px;
+    font-weight:bold;
+    font-size: 17px;
+}
+
+.messageUserHandle {
+    font-size: 17px;
+    color: #657786;
+    margin-right: 10px;
+}
+
+.messageDate {
+    font-size: 17px;
+    color: #657786;
+}
+
+.cardContentHeight {
+    max-height: 70px;
+}
+
+.cardWidth-message {
+    max-width: 450px;
+}

@@ -34,66 +34,66 @@ class Sidebar extends Component {
               </ListGroup.Item>
 
               <ListGroup.Item>
-                <div className="flexSidebars">
-                  <GoHome size={40} />
-                  <Link to="/home">
+                <Link to="/home">
+                  <div className="flexSidebars">
+                    <GoHome size={40} />
                     <p className="sidebarTopics">Home</p>
-                  </Link>
-                </div>
+                  </div>
+                </Link>
               </ListGroup.Item>
 
               <ListGroup.Item>
-                <div className="flexSidebars">
-                  <IoMdNotificationsOutline size={40} />
-                  <Link to="/notifications">
+                <Link to="/notifications">
+                  <div className="flexSidebars">
+                    <IoMdNotificationsOutline size={40} />
                     <p className="sidebarTopics">Notifications</p>
-                  </Link>
-                </div>
+                  </div>
+                </Link>
               </ListGroup.Item>
 
               <ListGroup.Item>
-                <div className="flexSidebars">
-                  <GoMail size={40} />
-                  <Link to="/messages">
+                <Link to="/messages">
+                  <div className="flexSidebars">
+                    <GoMail size={40} />
                     <p className="sidebarTopics">Messages</p>
-                  </Link>
-                </div>
+                  </div>
+                </Link>
               </ListGroup.Item>
 
               <ListGroup.Item>
-                <div className="flexSidebars">
-                  <FiBookmark size={40} />
-                  <Link to="/bookmarks">
+                <Link to="/bookmarks">
+                  <div className="flexSidebars">
+                    <FiBookmark size={40} />
                     <p className="sidebarTopics">Bookmarks</p>
-                  </Link>
-                </div>
+                  </div>
+                </Link>
               </ListGroup.Item>
 
               <ListGroup.Item>
-                <div className="flexSidebars">
-                  <GoNote size={40} />
-                  <Link to="/lists">
+                <Link to="/lists">
+                  <div className="flexSidebars">
+                    <GoNote size={40} />
                     <p className="sidebarTopics">Lists</p>
-                  </Link>
-                </div>
+                  </div>
+                </Link>
               </ListGroup.Item>
 
               <ListGroup.Item>
-                <div className="flexSidebars">
-                  <FaRegUserCircle size={40} />
-                  <Link to="/profile">
+                <Link to="/profile">
+                  <div className="flexSidebars">
+                    <FaRegUserCircle size={40} />
                     <p className="sidebarTopics">Profile</p>
-                  </Link>
-                </div>
+                  </div>
+                </Link>
               </ListGroup.Item>
 
               <ListGroup.Item>
-                <div className="flexSidebars">
-                  <GoGraph size={40} />
-                  <Link to="/analytics">
+                <Link to="/analytics">
+                  <div className="flexSidebars">
+                    <GoGraph size={40} />
                     <p className="sidebarTopics">Analytics</p>
-                  </Link>
-                </div>
+                  </div>
+                </Link>
               </ListGroup.Item>
 
               <button className="tweetBtn" type="button">
