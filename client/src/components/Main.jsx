@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Home from './Home/Home';
 import LandingPage from './LandingPage/LandingPage';
+import TweetDetails from './TweetDetails/TweetDetails';
 
 class Main extends Component {
   constructor(props) {
@@ -13,7 +14,10 @@ class Main extends Component {
     return (
       <div>
         <Route exact path="/" component={LandingPage} />
-        <Route path="/home" component={Home} />
+        <Switch>
+          <Route path="/home/status/:tweetID" component={TweetDetails} />
+          <Route path="/home" component={Home} />
+        </Switch>
       </div>
     );
   }
