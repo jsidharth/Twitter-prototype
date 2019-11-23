@@ -4,11 +4,11 @@
 import connection from './kafka/Connection';
 // eslint-disable-next-line no-unused-vars
 import mongoDBConnection from './config/mongoose';
-
 // topics files
 import * as userController from './controller/user.controller';
 import * as tweetController from './controller/tweet.controller';
 import * as searchController from './controller/search.controller';
+import * as listController from './controller/list.controller';
 import * as messageController from './controller/message.controller';
 
 // eslint-disable-next-line no-unused-vars
@@ -50,4 +50,5 @@ function handleTopicRequest(topicName, fname) {
 handleTopicRequest('userTopic', userController);
 handleTopicRequest('tweetTopic', tweetController);
 handleTopicRequest('searchTopic', searchController);
+handleTopicRequest('listTopic', listController);
 handleTopicRequest('messageTopic', messageController);
