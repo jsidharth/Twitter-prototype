@@ -1,9 +1,7 @@
-import jwt from 'jsonwebtoken';
 import moment from 'moment';
 import random from 'random';
 
 import Users from '../../models/user.model';
-import jwtSecret from '../../config/jwtConfig';
 
 const handleRequest = async (userDetails, callback) => {
   let randomNumber;
@@ -33,13 +31,6 @@ const handleRequest = async (userDetails, callback) => {
       null
     );
   } else {
-    const token = jwt.sign(
-      {
-        // eslint-disable-next-line no-underscore-dangle
-        _id: newUser._id,
-      },
-      jwtSecret.secret
-    );
     callback(null, {
       // eslint-disable-next-line no-underscore-dangle
       _id: newUser._id,
@@ -47,7 +38,6 @@ const handleRequest = async (userDetails, callback) => {
       email: newUser.email,
       dob: moment(newUser.dob).format('MM-DD-YYYY'),
       handle: newUser.handle,
-      token,
     });
   }
 };
