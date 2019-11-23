@@ -48,4 +48,20 @@ const login = payload => {
       });
   };
 };
+
+export const getUserProfile = payload => {
+  return dispatch => {
+    return axios.get(`${ROOT_URL}/user/details/${payload.userId}`).then(response => {
+      console.log('Status Code : ', response.status);
+      console.log(response.data);
+      if (response.status === 200) {
+        dispatch({
+          type: actionTypes.GET_USER_PROFILE,
+          payload: response.data,
+        });
+      }
+    });
+  };
+};
+
 export const userActions = { register, login };
