@@ -1,6 +1,6 @@
 import mostLikes from '../services/analytics.services/getMostLikes';
 import mostViews from '../services/analytics.services/getMostViews';
-import mostRetweets from '../services/analytics.services/getMostRetweet';
+import mostRetweets from '../services/analytics.services/getMostRetweets';
 
 const handleRequest = (payload, callback) => {
   switch (payload.action) {
