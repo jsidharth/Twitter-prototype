@@ -2,7 +2,10 @@ import moment from 'moment';
 import Users from '../../models/user.model';
 
 const handleRequest = (userId, callback) => {
-  Users.findOne({ _id: userId })
+  Users.findOne(
+    { _id: userId },
+    { bookmarks: 0, ownedLists: 0, subscribedLists: 0, __v: 0, updatedAt: 0 }
+  )
     .populate('tweets')
     .populate('retweets')
     .exec((err, result) => {
