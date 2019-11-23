@@ -1,11 +1,15 @@
+/* eslint-disable no-param-reassign */
 import express from 'express';
 import passport from 'passport';
+import jwt from 'jsonwebtoken';
+import { Users } from '../../config/sequelize';
+import jwtSecret from '../../config/jwtConfig';
 
 const kafka = require('../../kafka/client');
 
 const userRouter = express.Router();
 
-userRouter.post('/register', passport.authenticate('register'), (req, res) => {
+userRouter.post('/register', passport.authenticate('register'), async (req, res) => {
   console.log('Inside POST user register');
   console.log('Request Body: ', req.body);
   kafka.makeRequest(
@@ -14,20 +18,27 @@ userRouter.post('/register', passport.authenticate('register'), (req, res) => {
       body: req.body,
       action: 'USER_REGISTER',
     },
-    (err, result) => {
+    async (err, result) => {
       if (err) {
         console.log('Error ', err);
         res.status(500).json({
           message: err.message,
         });
       } else {
+        const user = await Users.findOne({
+          where: {
+            email: result.email,
+          },
+        });
+        const token = jwt.sign({ id: user.id }, jwtSecret.secret);
+        result.token = token;
         res.status(200).json(result);
       }
     }
   );
 });
 
-userRouter.post('/login', passport.authenticate('login'), (req, res) => {
+userRouter.post('/login', passport.authenticate('login'), async (req, res) => {
   console.log('Inside POST user Login');
   console.log('Request Body: ', req.body);
   kafka.makeRequest(
@@ -36,26 +47,33 @@ userRouter.post('/login', passport.authenticate('login'), (req, res) => {
       body: req.body,
       action: 'USER_LOGIN',
     },
-    (err, result) => {
+    async (err, result) => {
       if (err) {
         console.log('Error ', err);
         res.status(500).json({
           message: err.message,
         });
       } else {
+        const user = await Users.findOne({
+          where: {
+            email: result.email,
+          },
+        });
+        const token = jwt.sign({ id: user.id }, jwtSecret.secret);
+        result.token = token;
         res.status(200).json(result);
       }
     }
   );
 });
 
-userRouter.get('/details/(:data)', (req, res) => {
+userRouter.get('/details/:userId', (req, res) => {
   console.log('Inside get user details');
   console.log('Request Body: ', req.params.data);
   kafka.makeRequest(
     'userTopic',
     {
-      userId: req.params.data,
+      userId: req.params.userId,
       action: 'USER_GET_DETAILS',
     },
     (err, result) => {
@@ -93,13 +111,13 @@ userRouter.put('/details', (req, res) => {
   );
 });
 
-userRouter.put('/deactivate/(:data)', (req, res) => {
+userRouter.put('/deactivate/(:userId)', (req, res) => {
   console.log('Inside put user deactivate');
-  console.log('Request Body: ', req.body);
+  console.log('Request Body: ', req.params.userId);
   kafka.makeRequest(
     'userTopic',
     {
-      body: req.params.data,
+      body: req.params.userId,
       action: 'USER_DEACTIVATE',
     },
     (err, result) => {
@@ -141,6 +159,29 @@ userRouter.post('/unfollow', (req, res) => {
     {
       body: req.body,
       action: 'USER_UNFOLLOW',
+    },
+    (err, result) => {
+      if (err) {
+        console.log('Error ', err);
+        res.status(500).json({
+          message: err.message,
+        });
+      } else {
+        res.status(200).json(result);
+      }
+    }
+  );
+});
+
+userRouter.get('/like/(:userId)', (req, res) => {
+  const { userId } = req.params;
+  console.log('Inside get tweets liked by user');
+  console.log('Request Body: ', userId);
+  kafka.makeRequest(
+    'userTopic',
+    {
+      body: userId,
+      action: 'USER_GET_TWEETS_LIKED',
     },
     (err, result) => {
       if (err) {

@@ -5,6 +5,7 @@ import putDetails from '../services/user.services/putDetails';
 import deactivate from '../services/user.services/deactivate';
 import followUser from '../services/user.services/followUser';
 import unfollowUser from '../services/user.services/unfollowUser';
+import getTweetsLiked from '../services/user.services/getTweetsLiked';
 
 const handleRequest = (payload, callback) => {
   switch (payload.action) {
@@ -28,6 +29,9 @@ const handleRequest = (payload, callback) => {
       break;
     case 'USER_UNFOLLOW':
       unfollowUser.handleRequest(payload.body, callback);
+      break;
+    case 'USER_GET_TWEETS_LIKED':
+      getTweetsLiked.handleRequest(payload.body, callback);
       break;
     default:
       break;
