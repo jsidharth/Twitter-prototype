@@ -4,7 +4,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Image from 'react-bootstrap/Image';
-import { Card, CardContent } from '@material-ui/core';
 import './MessageCard.css';
 import { messageActions } from '../../js/actions/index';
 
@@ -34,12 +33,9 @@ class MessageCard extends Component {
       const messageThreadUser = convo.user_1._id === userId ? convo.user_2 : convo.user_1;
       console.log('Message thread user: ', messageThreadUser);
 
-      // let myDate = new Date(data.created_at);
-      // myDate = myDate.toString();
-      // myDate = myDate.split(' ');
       return (
-        <Card className="cardWidth-message" key={convo._id}>
-          <CardContent className="cardContentHeight">
+        <div className="cardWidth-message" key={convo._id}>
+          <div className="cardContentHeight">
             <div className="flexImageTweet">
               <div>
                 {/* Include user profile image if available */}
@@ -53,15 +49,10 @@ class MessageCard extends Component {
               <div className="flexNameHandle">
                 <p className="messageUserName">{messageThreadUser.name}</p>
                 <p className="messageUserHandle">@{messageThreadUser.handle}</p>
-                {/* <p className="messageDate">
-                  {myDate[1]} {myDate[2]}
-                </p> */}
               </div>
             </div>
-
-            {/* <p>{data.message}</p> */}
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       );
     });
 

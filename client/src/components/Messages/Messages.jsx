@@ -1,7 +1,6 @@
 import { GoMail } from 'react-icons/go';
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
-import { Card, Paper } from '@material-ui/core';
 import MessageCard from '../MessageCard/MessageCard';
 import Sidebar from '../Sidebar/Sidebar';
 import './Messages.css';
@@ -18,19 +17,19 @@ class Messages extends Component {
         <div className="sideBarWidths">
           <Sidebar />
         </div>
-        <Card className="cardWidth1">
-          <Paper className="paperHeight">
+        <div className="cardWidth1">
+          <div className="paperHeight">
             Messages
             <Link to="/home">
               <div className="messageIcon">
                 <GoMail size={25} />
               </div>
             </Link>
-          </Paper>
+          </div>
           <div className="messageCardStyling">
             <MessageCard />
           </div>
-        </Card>
+        </div>
       </div>
     );
   }
