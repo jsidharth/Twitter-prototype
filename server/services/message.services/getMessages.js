@@ -6,7 +6,7 @@ const handleRequest = async (userId, callback) => {
     .populate({ path: 'user_1', select: 'name handle profilePic ' })
     .populate({ path: 'user_2', select: 'name handle profilePic ' });
   if (results && results.length) {
-    results = results.sort((second, first) => moment(second.created_at).diff(first.created_at));
+    results = results.sort((first, second) => moment(second.created_at).diff(first.created_at));
   }
   callback(null, results);
 };

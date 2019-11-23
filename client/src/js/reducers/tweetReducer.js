@@ -6,7 +6,7 @@ const initialState = {
   currentTweet: {},
 };
 
-const imageReducer = (state = initialState, action) => {
+const tweetReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.POST_TWEET:
       return { ...state, tweetPostedFlag: true };
@@ -20,4 +20,4 @@ const imageReducer = (state = initialState, action) => {
   return state;
 };
 
-export default imageReducer;
+export default tweetReducer;
