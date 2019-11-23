@@ -12,7 +12,7 @@ class Lists extends Component {
   render() {
     return (
       <div className="flexHomeScreen">
-        <div className="sideBarWidths">
+        <div>
           <Sidebar />
         </div>
         <Card className="cardWidth">
