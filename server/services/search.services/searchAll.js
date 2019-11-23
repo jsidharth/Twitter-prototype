@@ -63,7 +63,7 @@ const handleRequest = async (searchTerm, callback) => {
     updateTweetViewsPromise = Promise.map(updatedTweets, tweet => {
       return Tweets.findOneAndUpdate(
         {
-          _id: tweet._id,
+          _id: tweet._id, 
         },
         {
           $inc: {

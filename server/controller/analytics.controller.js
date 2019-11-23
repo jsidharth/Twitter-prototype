@@ -5,13 +5,13 @@ import mostRetweets from '../services/analytic.services/getMostRetweet';
 
 const handleRequest = (payload, callback) => {
   switch (payload.action) {
-    case 'ANALYTICS_RETWEET':
-      mostRetweets.handleRequest(payload.body, callback);
+    case 'ANALYTIC_TWEET_RETWEET':
+      mostRetweets.handleRequest(payload.userId, callback);
       break;
-    case 'ANALYTICS_LIKES':
-      mostLikes.handleRequest(payload.body, callback);
+    case 'ANALYTICS_TWEET_LIKE':
+      mostLikes.handleRequest(payload.userId, callback);
       break;
-    case 'ANALYTICS_VIEWS':
+    case 'ANALYTICS_TWEET_VIEW':
       mostViews.handleRequest(payload.userId, callback);
       break;
     default:

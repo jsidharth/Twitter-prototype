@@ -10,6 +10,7 @@ import * as userController from './controller/user.controller';
 import * as tweetController from './controller/tweet.controller';
 import * as searchController from './controller/search.controller';
 import * as messageController from './controller/message.controller';
+import * as analyticsController from './controller/analytics.controller';
 
 // eslint-disable-next-line no-unused-vars
 function handleTopicRequest(topicName, fname) {
@@ -51,3 +52,4 @@ handleTopicRequest('userTopic', userController);
 handleTopicRequest('tweetTopic', tweetController);
 handleTopicRequest('searchTopic', searchController);
 handleTopicRequest('messageTopic', messageController);
+handleTopicRequest('analyticTopic', analyticsController);

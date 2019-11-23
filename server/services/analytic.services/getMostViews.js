@@ -1,14 +1,22 @@
 import Users from '../../models/user.model';
+import tweets from '../../models/tweet.model';
 
 const handleRequest = (userId, callback) => {
-  Users.findOne({ _id: userId })
-    .populate('tweets')
-    .populate('retweets')
+  let mostViewsArray = [];
+  Users.find({ _id: userId })
+    .populate('tweets', 'views')
     .exec((err, result) => {
-      if (err || result == null) {
-        callback({ message: 'Fetch User Detail Failed!' }, null);
+      if (err) {
+        callback({ message: 'Fetch Most Viewed Tweets Failed!' }, null);
       } else {
-        callback(null, result);
+        result[0].tweets.forEach(element => {
+          const eachObject = { tweetId: element._id, viewsCount: element.views };
+          mostViewsArray.push(eachObject);
+        });
+        mostViewsArray = mostViewsArray.sort((first, second) => {
+          return second.viewsCount - first.viewsCount;
+        });
+        callback(null, mostViewsArray.slice(0, 10));
       }
     });
 };
