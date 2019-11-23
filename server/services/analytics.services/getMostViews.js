@@ -3,19 +3,19 @@ import Tweets from '../../models/tweet.model';
 
 const handleRequest = (userId, callback) => {
   let mostViewsArray = [];
-  Users.find({ _id: userId })
+  Users.findOne({ _id: userId })
     .populate('tweets', 'views')
     .exec((err, result) => {
-      if (err) {
+      if (err || !result) {
         callback({ message: 'Fetch Most Viewed Tweets Failed!' }, null);
       } else {
-        result[0].tweets.forEach(element => {
+        result.tweets.forEach(element => {
           const eachObject = { tweetId: element._id, viewsCount: element.views };
           mostViewsArray.push(eachObject);
         });
-        mostViewsArray = mostViewsArray.sort((first, second) => {
-          return second.viewsCount - first.viewsCount;
-        });
+        mostViewsArray = mostViewsArray.sort(
+          (first, second) => second.viewsCount - first.viewsCount
+        );
         callback(null, mostViewsArray.slice(0, 10));
       }
     });

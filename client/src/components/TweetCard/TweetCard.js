@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FiMessageCircle } from 'react-icons/fi';
-import { FaRegHeart } from 'react-icons/fa';
+import { FaRegHeart, FaHeart } from 'react-icons/fa';
 import { AiOutlineRetweet } from 'react-icons/ai';
 import { MdBookmarkBorder } from 'react-icons/md';
 import './TweetCard.css';
@@ -17,7 +17,7 @@ class TweetCard extends Component {
   }
 
   componentDidMount() {
-    const data = {
+    let data = {
       // userId: this.props.userId
       userId: '5dcb31841c9d440000b0d332',
     };
@@ -32,6 +32,11 @@ class TweetCard extends Component {
       let myDate = new Date(data.created_at);
       myDate = myDate.toString();
       myDate = myDate.split(' ');
+      let likesButton = <FaRegHeart size={20} />;
+      //this.props.userId
+      if (data.likes.includes('5dcb32641c9d440000b0d334')) {
+        likesButton = <FaHeart size={20} style={{ color: 'red' }} />;
+      }
       return (
         // eslint-disable-next-line no-underscore-dangle
         <Link
@@ -74,7 +79,7 @@ class TweetCard extends Component {
                   <div>{data.retweet_count > 0 ? data.retweet_count : null}</div>
                 </div>
                 <div className="flexBtnCnt">
-                  <FaRegHeart size={20} />
+                  {likesButton}
                   <div>{data.likes_count > 0 ? data.likes_count : null}</div>
                 </div>
                 <div className="flexBtnCnt">

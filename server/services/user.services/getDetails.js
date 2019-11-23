@@ -30,7 +30,7 @@ const handleRequest = (userId, callback) => {
           {
             new: true,
           }
-        ).exec((err, result1) => {});
+        ).exec((err, result) => {});
         callback(null, result);
       }
     });
