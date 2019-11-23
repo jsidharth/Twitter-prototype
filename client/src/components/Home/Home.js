@@ -16,9 +16,9 @@ class Home extends Component {
 
   render() {
     let redirectVar = '';
-   /* if (!cookie.get('token')) {
+    if (!cookie.get('token')) {
       redirectVar = <Redirect to="/" />;
-    }*/
+    }
     return (
       <div>
         {redirectVar}
