@@ -1,17 +1,16 @@
-import mostLikes from '../services/analytic.services/getMostLikes';
-import mostViews from '../services/analytic.services/getMostViews';
-import mostRetweets from '../services/analytic.services/getMostRetweet';
-
+import mostLikes from '../services/analytics.services/getMostLikes';
+import mostViews from '../services/analytics.services/getMostViews';
+import mostRetweets from '../services/analytics.services/getMostRetweet';
 
 const handleRequest = (payload, callback) => {
   switch (payload.action) {
-    case 'ANALYTIC_TWEET_RETWEET':
+    case 'ANALYTICS_TWEET_RETWEETS':
       mostRetweets.handleRequest(payload.userId, callback);
       break;
-    case 'ANALYTICS_TWEET_LIKE':
+    case 'ANALYTICS_TWEET_LIKES':
       mostLikes.handleRequest(payload.userId, callback);
       break;
-    case 'ANALYTICS_TWEET_VIEW':
+    case 'ANALYTICS_TWEET_VIEWS':
       mostViews.handleRequest(payload.userId, callback);
       break;
     default:

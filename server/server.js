@@ -52,4 +52,4 @@ handleTopicRequest('userTopic', userController);
 handleTopicRequest('tweetTopic', tweetController);
 handleTopicRequest('searchTopic', searchController);
 handleTopicRequest('messageTopic', messageController);
-handleTopicRequest('analyticTopic', analyticsController);
+handleTopicRequest('analyticsTopic', analyticsController);

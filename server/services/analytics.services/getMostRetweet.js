@@ -1,5 +1,5 @@
 import Users from '../../models/user.model';
-import tweets from '../../models/tweet.model';
+import Tweets from '../../models/tweet.model';
 
 const handleRequest = (userId, callback) => {
   let mostRetweetArray = [];
@@ -9,7 +9,6 @@ const handleRequest = (userId, callback) => {
       if (err) {
         callback({ message: 'Fetch Most Retweeted Tweets Failed!' }, null);
       } else {
-        console.log(result)
         result[0].tweets.forEach(element => {
           const eachObject = { tweetId: element._id, retweetCount: element.retweets.length };
           mostRetweetArray.push(eachObject);

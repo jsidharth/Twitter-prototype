@@ -1,5 +1,5 @@
 import Users from '../../models/user.model';
-import tweets from '../../models/tweet.model';
+import Tweets from '../../models/tweet.model';
 
 const handleRequest = (userId, callback) => {
   let mostLikesArray = [];
