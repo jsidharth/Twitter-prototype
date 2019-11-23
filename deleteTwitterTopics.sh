@@ -12,6 +12,14 @@ bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic tweetTopic
 #
 bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic searchTopic
 
+#List Topic
+bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic listTopic
+
+#Message Topic
+bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic messageTopic
+
+#Analytics Topic
+bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic analyticTopic
 
 #Delete Log files
 echo 'Deleting log files...'
