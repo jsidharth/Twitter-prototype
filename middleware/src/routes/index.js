@@ -5,6 +5,7 @@ import tweetRoutes from './tweetRoutes';
 import searchRoutes from './searchRoutes';
 import listRoutes from './listRoutes';
 import messageRoutes from './messageRoutes';
+import analyticsRoutes from './analyticsRoutes';
 
 const routes = express.Router();
 
@@ -15,5 +16,5 @@ routes.use('/tweet', tweetRoutes);
 routes.use('/search', searchRoutes);
 routes.use('/list', listRoutes);
 routes.use('/message', messageRoutes);
-
+routes.use('/analytics', analyticsRoutes);
 export default routes;
