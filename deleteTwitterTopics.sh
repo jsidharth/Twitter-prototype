@@ -9,7 +9,7 @@ bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic userTopic
 #Tweet Topic
 bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic tweetTopic
 
-#
+#Search Topic
 bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic searchTopic
 
 #List Topic

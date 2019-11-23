@@ -1,0 +1,18 @@
+  .flexHomeScreen {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .messageIcon {
+    margin-left: 300px;
+    margin-right: 10px;
+    color: #00ACEE;
+}
+
+.messageIcon:hover {
+    color: #008abe;
+}
+
+.cardWidth1 {
+    max-width: 450px;
+}
