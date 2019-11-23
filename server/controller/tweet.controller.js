@@ -7,6 +7,7 @@ import bookmark from '../services/tweet.services/bookmark';
 import getBookmarks from '../services/tweet.services/getBookmarks';
 import likeTweet from '../services/tweet.services/likeTweet';
 import unlikeTweet from '../services/tweet.services/unlikeTweet';
+import replyTweet from '../services/tweet.services/replyTweet';
 
 const handleRequest = (payload, callback) => {
   switch (payload.action) {
@@ -36,6 +37,9 @@ const handleRequest = (payload, callback) => {
       break;
     case 'TWEET_UNLIKE':
       unlikeTweet.handleRequest(payload.body, callback);
+      break;
+    case 'TWEET_REPLY':
+      replyTweet.handleRequest(payload.body, callback);
       break;
     default:
       break;
