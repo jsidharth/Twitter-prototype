@@ -155,7 +155,7 @@ userRouter.post('/unfollow', (req, res) => {
   );
 });
 
-userRouter.get('/tweetsLiked/(:userId)', (req, res) => {
+userRouter.get('/like/(:userId)', (req, res) => {
   const { userId } = req.params;
   console.log('Inside get tweets liked by user');
   console.log('Request Body: ', userId);
