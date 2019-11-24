@@ -35,6 +35,11 @@ class Profile extends Component {
     joinedDate = joinedDate.toString();
     joinedDate = joinedDate.split(' ');
 
+    let numTweets = 0
+    if (profile && profile.tweets) {
+      numTweets = profile.tweets.length;
+    }
+
     return (
       <div className="flexHomeScreen">
         <div>
@@ -48,20 +53,34 @@ class Profile extends Component {
                   <MdKeyboardBackspace size={30} />
                 </div>
               </Link>
-              Profile
+              <div className="profileNumTweets">
+                Profile
+                <div className="numTweets">
+                {numTweets} Tweets
+                </div>
+              </div>
             </div>
             <div className="cardContent">
               <img src="/images/default_profile.png" className="profileImage" alt="User profile" />
-              <p className="userName">
-                {profile.name}
-              </p>
-              <p className="userHandle">
-                @{profile.handle}
-              </p>
+              <div className="flexEditBtn">
+                <div>
+                  <p className="userName">
+                    {profile.name}
+                  </p>
+                  <p className="userHandle">
+                    @{profile.handle}
+                  </p>
+                </div>
+                <div>
+                  <button className="editProfileBtn">
+                    Edit Profile
+                </button>
+                </div>
+              </div>
               <div className="personalDetails">
                 <div className="flexIconDetails">
                   <div className="iconColor">
-                    <TiLocationOutline size={25} />
+                    <TiLocationOutline size={20} />
                   </div>
                   <p className="tweetDate">
                     {profile.location}
@@ -69,7 +88,7 @@ class Profile extends Component {
                 </div>
                 <div className="flexIconDetails">
                   <div className="iconColor">
-                    <GiBalloons size={25} />
+                    <GiBalloons size={20} />
                   </div>
                   <p className="tweetDate">
                     Born {birthDate[1]} {birthDate[2]}, {birthDate[3]}
@@ -77,7 +96,7 @@ class Profile extends Component {
                 </div>
                 <div className="flexIconDetails">
                   <div className="iconColor">
-                    <GoCalendar size={25} />
+                    <GoCalendar size={20} />
                   </div>
                   <p className="tweetDate">
                     Joined {joinedDate[1]} {joinedDate[2]}, {joinedDate[3]}

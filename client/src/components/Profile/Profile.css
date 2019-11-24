@@ -29,7 +29,6 @@
 
 .paperHeight {
   height: 50px;
-  line-height: 50px;
   font-weight: 800;
   font-size: 19px;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu,
@@ -81,6 +80,7 @@
 }
 
 .tweetDate {
+  margin-top: 5px;
   font-size: 15px;
   color: #657786;
 }
@@ -104,4 +104,39 @@
   margin-top: 0px;
   margin-left: 0px;
   margin-right: 5px;
+}
+
+.editProfileBtn {
+  border-color: #1da1f2;
+  color: white;
+  text-align: center;
+  font-weight: 700;
+  float: right;
+  margin-top: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border-radius: 20px;
+  font-size: 15px;
+  color: #1da1f2;
+}
+
+.flexEditBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.profileNumTweets {
+  display: flex;
+  flex-direction: column;
+}
+
+.numTweets {
+  display: flex;
+  flex-direction: row;
+  font-size: 13px;
+  color: #657786;
+  font-weight: 500;
 }
