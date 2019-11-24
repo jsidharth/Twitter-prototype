@@ -2,6 +2,7 @@ import { GoMail } from 'react-icons/go';
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import MessageCard from '../MessageCard/MessageCard';
+import MessageThread from '../MessageThread/MessageThread';
 import Sidebar from '../Sidebar/Sidebar';
 import './Messages.css';
 
@@ -29,6 +30,9 @@ class Messages extends Component {
           <div className="messageCardStyling">
             <MessageCard />
           </div>
+        </div>
+        <div className="messageThreadStyling">
+          <MessageThread />
         </div>
       </div>
     );
