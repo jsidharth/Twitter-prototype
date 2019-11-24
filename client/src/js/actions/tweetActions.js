@@ -46,3 +46,17 @@ export const getTweetDetails = payload => {
     });
   };
 };
+
+export const getBookmarks = payload => {
+  return dispatch => {
+    return axios.get(`${ROOT_URL}/tweet/bookmark/${payload.userId}`).then(response => {
+      console.log('Status Code: ', response.status);
+      if (response.status === 200) {
+        dispatch({
+          type: actionTypes.GET_BOOKMARKS,
+          payload: response.data,
+        });
+      }
+    });
+  };
+};

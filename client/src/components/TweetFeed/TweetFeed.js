@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { tweetActions } from '../../js/actions/index';
 import TweetCard from '../TweetCard/TweetCard';
-import { Link } from 'react-router-dom';
 
 class TweetFeed extends Component {
   constructor(props) {
@@ -22,12 +23,10 @@ class TweetFeed extends Component {
   render() {
     let renderFeed = null;
     if (this.props.feed) {
-        renderFeed = this.props.feed;
+      renderFeed = this.props.feed;
     }
 
-    return (
-        <TweetCard tweet={renderFeed}/>
-    )
+    return <TweetCard tweets={renderFeed} />;
   }
 }
 
