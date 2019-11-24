@@ -36,7 +36,7 @@ class TweetCard extends Component {
                   {/* Include user profile image if available */}
                   <img
                     src="/images/default_profile_bigger.png"
-                    className="profileImage"
+                    className="profileImageTweet"
                     alt="user"
                   />
                 </div>

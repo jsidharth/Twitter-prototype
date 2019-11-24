@@ -62,7 +62,9 @@ class PostTweet extends Component {
             <div className="flexImageTweet">
               <div>
                 {/* Include user profile image if available */}
-                <img src="/images/default_profile_bigger.png" className="profileImage" alt="User profile"/>
+                < img src = "/images/default_profile_bigger.png"
+                className = "profileImageTweet"
+                alt = "User profile" />
               </div>
 
               <div className="autoExpandDiv">
@@ -96,7 +98,7 @@ class PostTweet extends Component {
                     </Icon>
                   </label>
                 </div>
-                <div className="countStyle">{`${count} characters remaining`}</div>
+                <div className="countMessageStyle">{`${count} characters remaining`}</div>
               </div>
               <button className="postTweetBtn" onClick={this.postTweet}>
                 Tweet
