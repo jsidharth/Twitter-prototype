@@ -29,7 +29,7 @@ class Bookmarks extends Component {
     }
     return (
       <div className="flexHomeScreen">
-        <div>
+        <div className="sideBarWidths">
           <Sidebar />
         </div>
         <div className="cardWidth">
