@@ -56,11 +56,11 @@ const handleRequest = async (userId, callback) => {
         );
       });
       callback(null, {
-        bookMarkedtweets: updatedTweets,
+        bookmarkedTweets: updatedTweets,
       });
     } else {
       callback(null, {
-        bookMarkedtweets: [],
+        bookmarkedTweets: [],
       });
     }
   }

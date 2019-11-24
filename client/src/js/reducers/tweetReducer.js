@@ -16,7 +16,7 @@ const tweetReducer = (state = initialState, action) => {
     case actionTypes.TWEET_DETAILS:
       return { ...state, currentTweet: action.payload };
     case actionTypes.GET_BOOKMARKS:
-      return { ...state, bookmarkedTweets: action.payload };
+      return { ...state, bookmarkedTweets: action.payload.bookmarkedTweets };
     default:
       break;
   }

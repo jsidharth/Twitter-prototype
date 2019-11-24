@@ -7,8 +7,6 @@ import { FaRegHeart } from 'react-icons/fa';
 import { AiOutlineRetweet } from 'react-icons/ai';
 import { MdBookmarkBorder } from 'react-icons/md';
 import './TweetCard.css';
-import PropTypes from 'prop-types';
-
 
 class TweetCard extends Component {
   constructor(props) {
@@ -17,10 +15,9 @@ class TweetCard extends Component {
   }
 
   render() {
+    const { tweets } = this.props;
 
-    const { tweet } = this.props;
-
-    const renderFeed = tweet.map(tweet => {
+    const renderFeed = tweets.map(tweet => {
       let myDate = new Date(tweet.created_at);
       myDate = myDate.toString();
       myDate = myDate.split(' ');
@@ -53,7 +50,9 @@ class TweetCard extends Component {
                     </p>
                   </div>
                   <p>{tweet.body}</p>
-                  {tweet.image ? <img src={tweet.image} alt="Tweet" className="tweetImage" /> : null}
+                  {tweet.image ? (
+                    <img src={tweet.image} alt="Tweet" className="tweetImage" />
+                  ) : null}
                 </div>
               </div>
               <div className="flexCardBtns">
@@ -83,7 +82,3 @@ class TweetCard extends Component {
 }
 
 export default TweetCard;
-
-TweetCard.propTypes = {
-  tweet: PropTypes.array,
-};

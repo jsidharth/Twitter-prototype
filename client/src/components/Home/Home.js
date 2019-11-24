@@ -6,7 +6,7 @@ import Sidebar from '../Sidebar/Sidebar';
 // eslint-disable-next-line import/no-named-as-default
 import PostTweet from '../PostTweet/PostTweet';
 import './Home.css';
-import TweetCard from '../TweetCard/TweetCard';
+import TweetFeed from '../TweetFeed/TweetFeed';
 
 class Home extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class Home extends Component {
           </div>
           <div className="postTweetHeight">
             <PostTweet />
-            <TweetCard />
+            <TweetFeed />
           </div>
         </div>
       </div>
