@@ -6,7 +6,6 @@ import Home from './Home/Home';
 import LandingPage from './LandingPage/LandingPage';
 import Messages from './Messages/Messages';
 import Lists from './Lists/Lists';
-import Notifications from './Notifications/Notifications';
 import TweetDetails from './TweetDetails/TweetDetails';
 import Bookmarks from './Bookmarks/Bookmarks';
 import Profile from './Profile/Profile';
@@ -28,7 +27,6 @@ class Main extends Component {
           <Route path="/bookmarks" component={Bookmarks} />
           <Route path="/messages" component={Messages} />
           <Route path="/lists" component={Lists} />
-          <Route path="/notifications" component={Notifications} />
           <Route path="/profile" component={Profile} />
           <Route path="/analytics" component={Analytics} />
         </Switch>

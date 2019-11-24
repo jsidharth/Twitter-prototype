@@ -2,7 +2,6 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Card, Paper } from '@material-ui/core';
 import Sidebar from '../Sidebar/Sidebar';
 import './Bookmarks.css';
 import { tweetActions } from '../../js/actions/index';
@@ -30,13 +29,11 @@ class Bookmarks extends Component {
     }
     return (
       <div className="flexHomeScreen">
-        <div className="sideBarWidths">
+        <div>
           <Sidebar />
         </div>
-        <Card className="cardWidth">
-          <Paper className="paperHeight">Bookmarks</Paper>
-        </Card>
-        <div className="postTweetHeight">
+        <div className="cardWidth">
+          <div className="paperHeight">Bookmarks</div>
           <TweetCard tweets={renderBookmarks} />
         </div>
       </div>

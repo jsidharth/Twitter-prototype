@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Card, Paper } from '@material-ui/core';
 import Sidebar from '../Sidebar/Sidebar';
 import './Lists.css';
 
@@ -15,9 +14,9 @@ class Lists extends Component {
         <div>
           <Sidebar />
         </div>
-        <Card className="cardWidth">
-          <Paper className="paperHeight">Lists</Paper>
-        </Card>
+        <div className="cardWidth">
+          <div className="paperHeight">Lists</div>
+        </div>
       </div>
     );
   }
