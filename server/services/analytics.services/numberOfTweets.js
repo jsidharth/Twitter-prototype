@@ -42,14 +42,13 @@ const handleRequest = (userId, callback) => {
           }
         });
         // number of tweets in the previous hour
-        // Review this part
         let previousHourCount = 0;
         const startTime = moment().subtract({ hours: 1 });
         const endTime = moment();
         result.tweets.forEach(tweetElement => {
           if (
-            startTime >= moment(tweetElement.createdAt) &&
-            endTime <= moment(tweetElement.createdAt)
+            startTime <= moment(tweetElement.createdAt) &&
+            endTime >= moment(tweetElement.createdAt)
           ) {
             previousHourCount += 1;
           }
