@@ -15,7 +15,7 @@ class Messages extends Component {
   render() {
     return (
       <div className="flexHomeScreen">
-        <div className="sideBarWidths">
+        <div>
           <Sidebar />
         </div>
         <div className="cardWidth1">

@@ -1,4 +1,142 @@
 .flexHomeScreen {
-    display: flex;
-    flex-direction: row;
-  }
+  display: flex;
+  flex-direction: row;
+}
+
+.profileImage {
+  margin: 0 auto;
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 50%;
+}
+
+.cardContainer {
+  width: 600px;
+}
+
+.cardWidth {
+  width: 600px;
+}
+
+.cardContent {
+  font-size: inherit;
+  margin-bottom: 0px;
+  border-style: solid;
+  border-width: 0.5px;
+  border-color: #d0d4d6;
+  padding: 20px;
+}
+
+.paperHeight {
+  height: 50px;
+  font-weight: 800;
+  font-size: 19px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu,
+    'Helvetica Neue', sans-serif;
+  padding-left: 15px;
+  border-style: solid;
+  border-width: 0.5px;
+  border-color: #d0d4d6;
+  display: flex;
+  flex-direction: row;
+}
+
+.backIcon {
+  margin-right: 20px;
+  color: #00acee;
+}
+
+.userName {
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 0px;
+  font-weight: 900;
+  font-size: 20px;
+}
+
+.userHandle {
+  font-size: 17px;
+  color: #657786;
+  margin-left: 10px;
+}
+
+.personalDetails {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-left: 5px;
+}
+
+.flexIconDetails {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 15px;
+}
+
+.iconColor {
+  margin-right: 5px;
+  color: #657786;
+}
+
+.tweetDate {
+  margin-top: 5px;
+  font-size: 15px;
+  color: #657786;
+}
+
+.followersFollowing {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+}
+
+.follow {
+  margin-right: 15px;
+  color: #657786;
+  display: flex;
+  flex-direction: row;
+}
+
+.countStyle {
+  color: black;
+  font-weight: bold;
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 5px;
+}
+
+.editProfileBtn {
+  border-color: #1da1f2;
+  color: white;
+  text-align: center;
+  font-weight: 700;
+  float: right;
+  margin-top: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border-radius: 20px;
+  font-size: 15px;
+  color: #1da1f2;
+}
+
+.flexEditBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.profileNumTweets {
+  display: flex;
+  flex-direction: column;
+}
+
+.numTweets {
+  display: flex;
+  flex-direction: row;
+  font-size: 13px;
+  color: #657786;
+  font-weight: 500;
+}

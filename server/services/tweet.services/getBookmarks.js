@@ -38,7 +38,7 @@ const handleRequest = async (userId, callback) => {
           created_at: tweet.created_at,
         };
       });
-      
+
       updatedTweets = updatedTweets.sort((first, second) =>
         moment(second.created_at).diff(first.created_at)
       );
@@ -56,11 +56,11 @@ const handleRequest = async (userId, callback) => {
         );
       });
       callback(null, {
-        bookMarkedtweets: updatedTweets,
+        bookmarkedTweets: updatedTweets,
       });
     } else {
       callback(null, {
-        bookMarkedtweets: [],
+        bookmarkedTweets: [],
       });
     }
   }

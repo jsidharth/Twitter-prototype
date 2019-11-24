@@ -38,6 +38,7 @@ const handleRequest = (userId, callback) => {
           body: tweet.body,
           image: tweet.image,
           created_at: tweet.created_at,
+          likes: tweet.likes,
         }));
       }
       results.push(userTweets);
@@ -56,6 +57,7 @@ const handleRequest = (userId, callback) => {
                 body: tweet.body,
                 image: tweet.image,
                 created_at: tweet.created_at,
+                likes: tweet.likes,
               }));
             }
             return [];

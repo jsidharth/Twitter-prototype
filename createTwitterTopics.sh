@@ -18,5 +18,8 @@ bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 -
 #List Topic
 bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic listTopic
 
+#Analytics Topic
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic analyticsTopic
+
 #End of Script
 echo 'Create Topics Script Execution Completed'
