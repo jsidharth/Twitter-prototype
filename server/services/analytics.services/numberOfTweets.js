@@ -47,6 +47,8 @@ const handleRequest = (userId, callback) => {
         const startTime = moment().subtract({ hours: 1 });
         const endTime = moment();
         result.tweets.forEach(tweetElement => {
+          console.log(tweetElement.createdAt)
+          console.log(moment(tweetElement.createdAt).tz('America/Los_Angeles'))
           if (
             startTime >= moment(tweetElement.createdAt) &&
             endTime <= moment(tweetElement.createdAt)
