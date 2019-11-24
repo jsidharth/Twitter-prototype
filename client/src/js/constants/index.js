@@ -6,6 +6,7 @@ const actionTypes = {
   USER_LOGIN: 'USER_LOGIN',
   TWEET_DETAILS: 'TWEET_DETAILS',
   GET_BOOKMARKS: 'GET_BOOKMARKS',
+  GET_USER_PROFILE: 'GET_USER_PROFILE',
 };
 
 export default actionTypes;
