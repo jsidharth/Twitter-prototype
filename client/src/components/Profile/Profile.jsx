@@ -47,7 +47,7 @@ class Profile extends Component {
         </div>
         <div className="cardContainer">
           <div className="cardWidth">
-            <div className="paperHeight">
+            <div className="paperHeightForProfile">
               <Link to="/home">
                 <div className="backIcon">
                   <MdKeyboardBackspace size={30} />
