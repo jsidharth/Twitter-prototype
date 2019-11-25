@@ -21,6 +21,7 @@ export const postTweet = payload => {
 
 export const fetchFeed = payload => {
   return dispatch => {
+    console.log("in fetch feed")
     return axios.get(`${ROOT_URL}/tweet/feed/${payload.userId}`).then(response => {
       console.log('Status Code : ', response.status);
       if (response.status === 200) {
@@ -35,9 +36,11 @@ export const fetchFeed = payload => {
 
 export const getTweetDetails = payload => {
   return dispatch => {
-    return axios.get(`${ROOT_URL}/tweet/detail/${payload.tweetID}`).then(response => {
+     console.log(`${ROOT_URL}/tweet/detail/${payload.tweetId}`)
+    return axios.get(`${ROOT_URL}/tweet/detail/${payload.tweetId}`).then(response => {
       console.log('Status Code : ', response.status);
       if (response.status === 200) {
+        console.log(response.data)
         dispatch({
           type: actionTypes.TWEET_DETAILS,
           payload: response.data,
@@ -60,3 +63,34 @@ export const getBookmarks = payload => {
     });
   };
 };
+
+export const likeTweet = payload => {
+  return dispatch => {
+    return axios.put(`${ROOT_URL}/tweet/like`, payload).then(response => {
+      console.log('Status Code : ', response.status);
+      if (response.status === 200) {
+        dispatch({
+          type: actionTypes.TWEET_DETAILS,
+          payload: response.data,
+        });
+      }
+      return Promise.resolve();
+    });
+  };
+};
+
+export const unlikeTweet = payload => {
+  return dispatch => {
+    return axios.put(`${ROOT_URL}/tweet/unlike`, payload).then(response => {
+      console.log('Status Code : ', response.status);
+      if (response.status === 200) {
+        dispatch({
+          type: actionTypes.TWEET_DETAILS,
+          payload: response.data,
+        });
+      }
+      return Promise.resolve();
+    });
+  };
+};
+

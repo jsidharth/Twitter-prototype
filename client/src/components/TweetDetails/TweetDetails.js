@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import './TweetDetails.css';
 import { FiMessageCircle } from 'react-icons/fi';
 import { MdKeyboardBackspace, MdBookmarkBorder } from 'react-icons/md';
-import { FaRegHeart } from 'react-icons/fa';
+import { FaRegHeart, FaHeart } from 'react-icons/fa';
 import { AiOutlineRetweet } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { tweetActions } from '../../js/actions/index';
@@ -14,24 +14,47 @@ import Sidebar from '../Sidebar/Sidebar';
 class TweetDetails extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      userId: '5dcb31841c9d440000b0d332'
+    };
   }
 
   componentDidMount() {
     const data = {
-      tweetID: this.props.match.params.tweetID,
+      tweetId: this.props.match.params.tweetID,
     };
 
     const { getTweetDetails } = this.props;
     getTweetDetails(data);
   }
-
+  likeTweet = param =>(e) => {
+    let data ={tweetId:param,userId:this.state.userId}
+    this.props.likeTweet(data).then(()=>{
+      this.props.getTweetDetails(data);
+    })
+  }
+  
+  unlikeTweet = param=>(e) => {
+    let data ={tweetId:param,userId:this.state.userId}
+    this.props.unlikeTweet(data).then(()=>{
+      this.props.getTweetDetails(data);
+    })
+  }
+  
   render() {
     const { tweet } = this.props;
-
     let myDate = new Date(tweet.created_at);
     myDate = myDate.toString();
     myDate = myDate.split(' ');
+    let likeButton;
+    console.log(tweet)
+    if (tweet.body) {
+      likeButton = <FaRegHeart size={20} onClick={this.likeTweet(tweet._id)} />;
+      if (tweet.likes.includes(this.state.userId)) {
+        likeButton = <FaHeart size={20} style={{ color: 'red' }} onClick={this.unlikeTweet(tweet._id)} />;
+      }
+    }
+
 
     return (
       <div className="flexTweetDetails">
@@ -78,7 +101,7 @@ class TweetDetails extends Component {
                 <div>{tweet.retweet_count > 0 ? tweet.retweet_count : null}</div>
               </div>
               <div className="flexBtnCnt">
-                <FaRegHeart size={20} />
+                <div>{likeButton}</div>
                 <div>{tweet.likes_count > 0 ? tweet.likes_count : null}</div>
               </div>
               <div className="flexBtnCnt">
@@ -100,6 +123,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   getTweetDetails: data => dispatch(tweetActions.getTweetDetails(data)),
+  likeTweet: data => dispatch(tweetActions.likeTweet(data)),
+  unlikeTweet: data => dispatch(tweetActions.unlikeTweet(data)),
 });
 
 export default connect(
