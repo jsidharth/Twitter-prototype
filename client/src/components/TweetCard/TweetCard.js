@@ -44,7 +44,7 @@ class TweetCard extends Component {
       const rendeLikeButton = tweet.likes.includes(this.state.userId) ? unlikeButton : likeButton;
       return (
         <div className="cardWidth" key={tweet._id}>
-          <div className="cardContent">
+          <div className="cardContentTweet">
             {tweet.retweet ? (
               <div className="flexRetweet">
                 <p className="retweetIcon">
