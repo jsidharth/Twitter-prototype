@@ -3,10 +3,6 @@
   flex-direction: row;
 }
 
-.tweetDetailsContainer {
-  margin-left: 50px;
-}
-
 .cardContainer {
   width: 600px;
 }
@@ -16,6 +12,7 @@
 }
 
 .paperHeight {
+  padding-top: 10px;
   height: 50px;
   font-weight: 800;
   font-size: 19px;
@@ -29,7 +26,18 @@
   flex-direction: row;
 }
 
-.backIcon {
+.backIconTweetDetails {
     margin-right: 20px;
     color: #00acee;
+}
+
+.profileImageTweetDetails {
+  margin: 0 auto;
+  max-width: 80px;
+  max-height: 80px;
+  border-radius: 50%;
+}
+
+.tweetBody {
+  margin-left: 10px;
 }

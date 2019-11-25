@@ -3,7 +3,7 @@
 }
 
 .postTweetSeparator {
-  background-color: #e6ecf0;
+  background-color: #E6ECF0;
   height: 10px;
 }
 
@@ -17,6 +17,7 @@
 }
 
 .paperHeight {
+  padding-top: 10px;
   height: 50px;
   font-weight: 800;
   font-size: 19px;
@@ -47,7 +48,7 @@
   justify-content: flex-start;
 }
 
-.profileImage {
+.profileImageTweet {
   margin: 0 auto;
   max-width: 50px;
   max-height: 50px;
@@ -124,7 +125,7 @@ div[data-placeholder]:empty:not(:focus):not([data-div-placeholder-content]):befo
   justify-content: flex-start;
 }
 
-.countStyle {
+.countMessageStyle {
   font-size: 17px;
   font-weight: 400;
   color: #b3b3b3;

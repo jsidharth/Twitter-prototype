@@ -87,3 +87,14 @@
   font-size: 13px;
   color: #657786;
 }
+
+.profileImageTweet {
+  margin: 0 auto;
+  max-width: 80px;
+  max-height: 80px;
+  border-radius: 50%;
+}
+
+.tweetBody {
+  margin-left: 10px;
+}

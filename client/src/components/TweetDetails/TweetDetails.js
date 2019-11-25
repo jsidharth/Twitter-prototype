@@ -33,15 +33,17 @@ class TweetDetails extends Component {
     myDate = myDate.toString();
     myDate = myDate.split(' ');
 
+    const imgSrc = tweet.profilePic ? tweet.profilePic : '/images/default_profile_bigger.png';
+
     return (
       <div className="flexTweetDetails">
         <Sidebar />
-        <div className="tweetDetailsContainer">
+        <div>
           <div className="cardContainer">
             <div className="cardWidth">
               <div className="paperHeight">
                 <Link to="/home">
-                  <div className="backIcon">
+                  <div className="backIconTweetDetails">
                     <MdKeyboardBackspace size={30} />
                   </div>
                 </Link>
@@ -53,7 +55,7 @@ class TweetDetails extends Component {
             <div className="flexImageTweet">
               <div>
                 {/* Include user profile image if available */}
-                <img src="/images/default_profile_bigger.png" className="profileImage" alt="user" />
+                <img src={imgSrc} className="profileImageTweetDetails" alt="user" />
               </div>
               <div>
                 <div className="flexNameHandle">
@@ -64,7 +66,7 @@ class TweetDetails extends Component {
                     {myDate[1]} {myDate[2]}, {myDate[3]}
                   </p>
                 </div>
-                <p>{tweet.body}</p>
+                <p className="tweetBody">{tweet.body}</p>
                 {tweet.image ? <img src={tweet.image} alt="Tweet" className="tweetImage" /> : null}
               </div>
             </div>
