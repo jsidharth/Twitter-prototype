@@ -3,10 +3,6 @@
   flex-direction: row;
 }
 
-.tweetDetailsContainer {
-  margin-left: 50px;
-}
-
 .cardContainer {
   width: 600px;
 }

@@ -22,7 +22,7 @@ class TweetCard extends Component {
       myDate = myDate.toString();
       myDate = myDate.split(' ');
 
-      let imgSrc = tweet.profilePic ? tweet.profilePic : "/images/default_profile_bigger.png";
+      const imgSrc = tweet.profilePic ? tweet.profilePic : '/images/default_profile_bigger.png';
 
       return (
         // eslint-disable-next-line no-underscore-dangle
@@ -37,11 +37,7 @@ class TweetCard extends Component {
               <div className="flexImageTweet">
                 <div>
                   {/* Include user profile image if available */}
-                  <img
-                    src={imgSrc}
-                    className="profileImageTweet"
-                    alt="user"
-                  />
+                  <img src={imgSrc} className="profileImageTweet" alt="user" />
                 </div>
                 <div>
                   <div className="flexNameHandle">

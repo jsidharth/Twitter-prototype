@@ -33,13 +33,12 @@ class TweetDetails extends Component {
     myDate = myDate.toString();
     myDate = myDate.split(' ');
 
-    let imgSrc = tweet.profilePic ? tweet.profilePic : "/images/default_profile_bigger.png";
-
+    const imgSrc = tweet.profilePic ? tweet.profilePic : '/images/default_profile_bigger.png';
 
     return (
       <div className="flexTweetDetails">
         <Sidebar />
-        <div className="tweetDetailsContainer">
+        <div>
           <div className="cardContainer">
             <div className="cardWidth">
               <div className="paperHeight">
