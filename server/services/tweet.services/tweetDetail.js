@@ -27,6 +27,7 @@ const handleRequest = (tweetId, callback) => {
           {
             name: 1,
             handle: 1,
+            profilePic: 1,
           }
         ).then(user => {
           const tweetDetails = {
@@ -39,6 +40,7 @@ const handleRequest = (tweetId, callback) => {
             body: tweet.body,
             image: tweet.image,
             created_at: tweet.created_at,
+            profilePic: user.profilePic,
           };
           let tweetCommentPromise = Promise.resolve();
           if (tweet.comments && tweet.comments.length) {
@@ -50,6 +52,7 @@ const handleRequest = (tweetId, callback) => {
                 {
                   name: 1,
                   handle: 1,
+                  profilePic: 1,
                 }
               ).then(commentUser => {
                 return {
@@ -62,6 +65,7 @@ const handleRequest = (tweetId, callback) => {
                   body: comment.body,
                   image: comment.image,
                   created_at: comment.created_at,
+                  profilePic: commentUser.profilePic,
                 };
               });
             });
