@@ -4,7 +4,6 @@ import './Sidebar.css';
 import { Link } from 'react-router-dom';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { GoHome, GoMail, GoNote, GoGraph } from 'react-icons/go';
-import { IoMdNotificationsOutline } from 'react-icons/io';
 import { FiBookmark } from 'react-icons/fi';
 
 class Sidebar extends Component {
@@ -38,15 +37,6 @@ class Sidebar extends Component {
                   <div className="flexSidebars">
                     <GoHome size={40} />
                     <p className="sidebarTopics">Home</p>
-                  </div>
-                </Link>
-              </ListGroup.Item>
-
-              <ListGroup.Item>
-                <Link to="/notifications">
-                  <div className="flexSidebars">
-                    <IoMdNotificationsOutline size={40} />
-                    <p className="sidebarTopics">Notifications</p>
                   </div>
                 </Link>
               </ListGroup.Item>

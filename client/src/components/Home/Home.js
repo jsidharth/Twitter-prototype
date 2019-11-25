@@ -23,7 +23,7 @@ class Home extends Component {
       <div>
         {redirectVar}
         <div className="flexHomeScreen">
-          <div className="sideBarWidths">
+          <div>
             <Sidebar />
           </div>
           <div className="postTweetHeight">
