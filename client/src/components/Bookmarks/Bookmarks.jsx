@@ -10,7 +10,8 @@ import TweetCard from '../TweetCard/TweetCard';
 class Bookmarks extends Component {
   constructor(props) {
     super(props);
-    this.state = {userId: '5dcb32641c9d440000b0d334'};
+          // userId: this.props.userId
+    this.state = { userId: '5dcb31841c9d440000b0d332' };
   }
 
   componentDidMount() {
@@ -21,20 +22,19 @@ class Bookmarks extends Component {
     const { getBookmarks } = this.props;
     getBookmarks(data);
   }
-  likeTweet = param => (e) => {
-    let data = { tweetId: param, userId: this.state.userId };
-      this.props.likeTweet(data).then(()=>{
-        this.props.getBookmarks(data);
-      });
-  }
+  likeTweet = e => {
+    let data = { tweetId: e.target.id, userId: this.state.userId };
+    this.props.likeTweet(data).then(() => {
+      this.props.getBookmarks(data);
+    });
+  };
 
-  unlikeTweet = param => (e) => {
-    let data = { tweetId: param, userId: this.state.userId }
-      this.props.unlikeTweet(data).then(()=>{
-        this.props.getBookmarks(data);
-      });
-
-  }
+  unlikeTweet = e => {
+    let data = { tweetId: e.target.id, userId: this.state.userId };
+    this.props.unlikeTweet(data).then(() => {
+      this.props.getBookmarks(data);
+    });
+  };
   render() {
     let renderBookmarks = null;
     if (this.props.bookmarkedTweets) {
@@ -47,7 +47,11 @@ class Bookmarks extends Component {
         </div>
         <div className="cardWidth">
           <div className="paperHeight">Bookmarks</div>
-          <TweetCard tweets={renderBookmarks} likeTweet={this.likeTweet} unlikeTweet={this.unlikeTweet} />
+          <TweetCard
+            tweets={renderBookmarks}
+            likeTweet={this.likeTweet}
+            unlikeTweet={this.unlikeTweet}
+          />
         </div>
       </div>
     );

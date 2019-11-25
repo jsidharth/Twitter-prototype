@@ -8,7 +8,12 @@ import TweetCard from '../TweetCard/TweetCard';
 class TweetFeed extends Component {
   constructor(props) {
     super(props);
+    // userId: this.props.userId
     this.state = {userId:'5dcb31841c9d440000b0d332'};
+
+    this.likeTweet = this.likeTweet.bind(this);
+    this.unlikeTweet = this.unlikeTweet.bind(this);
+
   }
 
   componentDidMount() {
@@ -19,15 +24,16 @@ class TweetFeed extends Component {
     const { fetchFeed } = this.props;
     fetchFeed(data);
   }
-  likeTweet = param => (e) => {
-    let data = { tweetId: param, userId: this.state.userId };
+
+  likeTweet = (e) => {
+    let data = { tweetId: e.target.id, userId: this.state.userId };
       this.props.likeTweet(data).then(()=>{
         this.props.fetchFeed(data);
       });
   }
 
-  unlikeTweet = param => (e) => {
-    let data = { tweetId: param, userId: this.state.userId }
+  unlikeTweet = (e) => {
+    let data = { tweetId: e.target.id, userId: this.state.userId }
       this.props.unlikeTweet(data).then(()=>{
         this.props.fetchFeed(data);
       });

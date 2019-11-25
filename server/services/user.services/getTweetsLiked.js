@@ -33,6 +33,7 @@ const handleRequest = (userId, callback) => {
             image: tweet.image,
             profilePic: user.profilePic,
             created_at: tweet.created_at,
+            likes: tweet.likes,
           };
         });
       }).then(likedTweets => {

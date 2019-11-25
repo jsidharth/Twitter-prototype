@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import './TweetDetails.css';
 import { FiMessageCircle } from 'react-icons/fi';
 import { MdKeyboardBackspace, MdBookmarkBorder } from 'react-icons/md';
-import { FaRegHeart, FaHeart } from 'react-icons/fa';
+import { FaRegHeart } from 'react-icons/fa';
 import { AiOutlineRetweet } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { tweetActions } from '../../js/actions/index';
@@ -14,8 +14,10 @@ import Sidebar from '../Sidebar/Sidebar';
 class TweetDetails extends Component {
   constructor(props) {
     super(props);
+    // userId: this.props.userId
+
     this.state = {
-      userId: '5dcb31841c9d440000b0d332'
+      userId: '5dcb31841c9d440000b0d332',
     };
   }
 
@@ -27,44 +29,57 @@ class TweetDetails extends Component {
     const { getTweetDetails } = this.props;
     getTweetDetails(data);
   }
-  likeTweet = param =>(e) => {
-    let data ={tweetId:param,userId:this.state.userId}
-    this.props.likeTweet(data).then(()=>{
+  likeTweet = e => {
+    let data = { tweetId: e.target.id, userId: this.state.userId };
+    this.props.likeTweet(data).then(() => {
       this.props.getTweetDetails(data);
-    })
-  }
-  
-  unlikeTweet = param=>(e) => {
-    let data ={tweetId:param,userId:this.state.userId}
+    });
+  };
+
+  unlikeTweet = e => {
+    let data ={tweetId:e.target.id,userId:this.state.userId};
     this.props.unlikeTweet(data).then(()=>{
       this.props.getTweetDetails(data);
     })
-  }
-  
+  };
+
   render() {
     const { tweet } = this.props;
     let myDate = new Date(tweet.created_at);
     myDate = myDate.toString();
     myDate = myDate.split(' ');
-    let likeButton;
-    console.log(tweet)
+    let likeButton, unlikeButton,renderLikeButton;
     if (tweet.body) {
-      likeButton = <FaRegHeart size={20} onClick={this.likeTweet(tweet._id)} />;
-      if (tweet.likes.includes(this.state.userId)) {
-        likeButton = <FaHeart size={20} style={{ color: 'red' }} onClick={this.unlikeTweet(tweet._id)} />;
-      }
-    }
+      likeButton = <FaRegHeart size={20} id={tweet._id} onClick={this.likeTweet} />;
+        unlikeButton = (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="red"
+          >
+            <path
+              id={tweet._id}
+              onClick={this.unlikeTweet}
+              d="M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z"
+            />
+          </svg>
+        );
+        renderLikeButton=tweet.likes.includes(this.state.userId) ? unlikeButton : likeButton;
 
+    }
+    const imgSrc = tweet.profilePic ? tweet.profilePic : '/images/default_profile_bigger.png';
 
     return (
       <div className="flexTweetDetails">
         <Sidebar />
-        <div className="tweetDetailsContainer">
+        <div>
           <div className="cardContainer">
             <div className="cardWidth">
               <div className="paperHeight">
                 <Link to="/home">
-                  <div className="backIcon">
+                  <div className="backIconTweetDetails">
                     <MdKeyboardBackspace size={30} />
                   </div>
                 </Link>
@@ -76,7 +91,7 @@ class TweetDetails extends Component {
             <div className="flexImageTweet">
               <div>
                 {/* Include user profile image if available */}
-                <img src="/images/default_profile_bigger.png" className="profileImage" alt="user" />
+                <img src={imgSrc} className="profileImageTweetDetails" alt="user" />
               </div>
               <div>
                 <div className="flexNameHandle">
@@ -87,7 +102,7 @@ class TweetDetails extends Component {
                     {myDate[1]} {myDate[2]}, {myDate[3]}
                   </p>
                 </div>
-                <p>{tweet.body}</p>
+                <p className="tweetBody">{tweet.body}</p>
                 {tweet.image ? <img src={tweet.image} alt="Tweet" className="tweetImage" /> : null}
               </div>
             </div>
@@ -101,7 +116,7 @@ class TweetDetails extends Component {
                 <div>{tweet.retweet_count > 0 ? tweet.retweet_count : null}</div>
               </div>
               <div className="flexBtnCnt">
-                <div>{likeButton}</div>
+                <div>{renderLikeButton}</div>
                 <div>{tweet.likes_count > 0 ? tweet.likes_count : null}</div>
               </div>
               <div className="flexBtnCnt">

@@ -1,12 +1,11 @@
 import axios from 'axios';
 import actionTypes from '../constants/index';
+import { ROOT_URL } from '../../constant/constant';
 
-const ROOT_URL = 'http://localhost:3001';
 
 // eslint-disable-next-line import/prefer-default-export
 export const postTweet = payload => {
   return dispatch => {
-    console.log(payload);
     return axios.post(`${ROOT_URL}/tweet/post`, payload).then(response => {
       console.log('Status Code : ', response.status);
       if (response.status === 200) {
@@ -21,7 +20,6 @@ export const postTweet = payload => {
 
 export const fetchFeed = payload => {
   return dispatch => {
-    console.log("in fetch feed")
     return axios.get(`${ROOT_URL}/tweet/feed/${payload.userId}`).then(response => {
       console.log('Status Code : ', response.status);
       if (response.status === 200) {
@@ -36,11 +34,10 @@ export const fetchFeed = payload => {
 
 export const getTweetDetails = payload => {
   return dispatch => {
-     console.log(`${ROOT_URL}/tweet/detail/${payload.tweetId}`)
     return axios.get(`${ROOT_URL}/tweet/detail/${payload.tweetId}`).then(response => {
       console.log('Status Code : ', response.status);
       if (response.status === 200) {
-        console.log(response.data)
+        console.log(response.data);
         dispatch({
           type: actionTypes.TWEET_DETAILS,
           payload: response.data,
@@ -68,9 +65,9 @@ export const likeTweet = payload => {
   return dispatch => {
     return axios.put(`${ROOT_URL}/tweet/like`, payload).then(response => {
       console.log('Status Code : ', response.status);
-      if (response.status === 200) {
+      if (response.status === 200){
         dispatch({
-          type: actionTypes.TWEET_DETAILS,
+          type: actionTypes.SUCCESS,
           payload: response.data,
         });
       }
@@ -85,7 +82,7 @@ export const unlikeTweet = payload => {
       console.log('Status Code : ', response.status);
       if (response.status === 200) {
         dispatch({
-          type: actionTypes.TWEET_DETAILS,
+          type: actionTypes.SUCCESS,
           payload: response.data,
         });
       }
@@ -93,4 +90,3 @@ export const unlikeTweet = payload => {
     });
   };
 };
-
