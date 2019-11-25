@@ -31,6 +31,15 @@ class TweetCard extends Component {
         >
           <div className="cardWidth" key={tweet._id}>
             <div className="cardContent">
+              {tweet.retweet ? (
+                <div className="flexRetweet">
+                  <p className="retweetIcon">
+                    <AiOutlineRetweet />
+                  </p>
+                  <p className="retweetName">{tweet.name}</p>
+                  <p className="retweetName">retweeted</p>
+                </div>
+              ) : null}
               <div className="flexImageTweet">
                 <div>
                   {/* Include user profile image if available */}

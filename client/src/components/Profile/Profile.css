@@ -140,3 +140,37 @@
   color: #657786;
   font-weight: 500;
 }
+
+.nav {
+  border: 0 !important;
+  background-color: #fff !important;
+}
+
+.nav-item {
+  border: 0 !important;
+  background-color: #fff !important;
+}
+
+.nav-link {
+  color: #495057 !important;
+}
+
+.nav-link.active {
+  color: #00acee !important;
+  border-bottom: #00acee !important;
+
+}
+
+.profileTabs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.tabMargin {
+  margin-top: 15px;
+}
+
+.profileTweets {
+  margin-top: 3px;
+}
