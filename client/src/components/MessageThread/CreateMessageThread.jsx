@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './MessageThread.css';
+import './CreateMessageThread.css';
 
 class MessageThread extends Component {
   constructor(props) {
