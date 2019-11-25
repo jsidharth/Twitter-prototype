@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -35,7 +36,7 @@ class Profile extends Component {
     joinedDate = joinedDate.toString();
     joinedDate = joinedDate.split(' ');
 
-    let numTweets = 0
+    let numTweets = 0;
     if (profile && profile.tweets) {
       numTweets = profile.tweets.length;
     }
@@ -55,26 +56,20 @@ class Profile extends Component {
               </Link>
               <div className="profileNumTweets">
                 Profile
-                <div className="numTweets">
-                {numTweets} Tweets
-                </div>
+                <div className="numTweets">{numTweets} Tweets</div>
               </div>
             </div>
             <div className="cardContent">
               <img src="/images/default_profile.png" className="profileImage" alt="User profile" />
               <div className="flexEditBtn">
                 <div>
-                  <p className="userName">
-                    {profile.name}
-                  </p>
-                  <p className="userHandle">
-                    @{profile.handle}
-                  </p>
+                  <p className="userName">{profile.name}</p>
+                  <p className="userHandle">@{profile.handle}</p>
                 </div>
                 <div>
-                  <button className="editProfileBtn">
+                  <button type="button" className="editProfileBtn">
                     Edit Profile
-                </button>
+                  </button>
                 </div>
               </div>
               <div className="personalDetails">
@@ -82,9 +77,7 @@ class Profile extends Component {
                   <div className="iconColor">
                     <TiLocationOutline size={20} />
                   </div>
-                  <p className="tweetDate">
-                    {profile.location}
-                  </p>
+                  <p className="tweetDate">{profile.location}</p>
                 </div>
                 <div className="flexIconDetails">
                   <div className="iconColor">
@@ -115,12 +108,12 @@ class Profile extends Component {
                     {profile.followers && profile.followers.length ? profile.followers.length : 0}
                   </div>
                   Followers
-                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div >
+      </div>
     );
   }
 }
