@@ -39,6 +39,7 @@ const handleRequest = (userId, callback) => {
           image: tweet.image,
           created_at: tweet.created_at,
           likes: tweet.likes,
+          profilePic: user.profilePic,
         }));
       }
       results.push(userTweets);
@@ -58,6 +59,7 @@ const handleRequest = (userId, callback) => {
                 image: tweet.image,
                 created_at: tweet.created_at,
                 likes: tweet.likes,
+                profilePic: followingUser.profilePic,
               }));
             }
             return [];

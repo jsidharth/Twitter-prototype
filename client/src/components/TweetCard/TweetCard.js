@@ -21,6 +21,9 @@ class TweetCard extends Component {
       let myDate = new Date(tweet.created_at);
       myDate = myDate.toString();
       myDate = myDate.split(' ');
+
+      let imgSrc = tweet.profilePic ? tweet.profilePic : "/images/default_profile_bigger.png";
+
       return (
         // eslint-disable-next-line no-underscore-dangle
         <Link
@@ -35,7 +38,7 @@ class TweetCard extends Component {
                 <div>
                   {/* Include user profile image if available */}
                   <img
-                    src="/images/default_profile_bigger.png"
+                    src={imgSrc}
                     className="profileImageTweet"
                     alt="user"
                   />
@@ -49,7 +52,7 @@ class TweetCard extends Component {
                       {myDate[1]} {myDate[2]}, {myDate[3]}
                     </p>
                   </div>
-                  <p>{tweet.body}</p>
+                  <p className="tweetBody">{tweet.body}</p>
                   {tweet.image ? (
                     <img src={tweet.image} alt="Tweet" className="tweetImage" />
                   ) : null}
