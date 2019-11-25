@@ -8,6 +8,7 @@ const actionTypes = {
   MESSAGE_GET: 'MESSAGE_GET',
   GET_BOOKMARKS: 'GET_BOOKMARKS',
   GET_USER_PROFILE: 'GET_USER_PROFILE',
+  GET_LIKED_TWEETS: 'GET_LIKED_TWEETS',
 };
 
 export default actionTypes;

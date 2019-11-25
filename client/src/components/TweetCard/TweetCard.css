@@ -69,6 +69,25 @@
   object-fit: contain;
 }
 
+.flexRetweet {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-bottom: -5px;
+}
+
+.retweetIcon {
+  margin-right: 5px;
+  margin-left: 54px;
+  font-size: 13px;
+}
+.retweetName {
+  margin-right: 3px;
+  margin-left: 10px;
+  font-size: 13px;
+  color: #657786;
+}
+
 .profileImageTweet {
   margin: 0 auto;
   max-width: 80px;
