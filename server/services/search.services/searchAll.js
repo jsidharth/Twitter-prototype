@@ -42,6 +42,7 @@ const handleRequest = async (searchTerm, callback) => {
         {
           name: 1,
           handle: 1,
+          profilePic: 1,
         }
       );
       return {

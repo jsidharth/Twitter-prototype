@@ -8,7 +8,6 @@ searchRouter.get('/:searchTerm', (req, res) => {
   console.log('Inside GET Search');
   console.log('Request Body: ', req.params);
   const { searchTerm } = req.params;
-  console.log('HERE:', searchTerm);
   switch (searchTerm.split('')[0]) {
     case '@':
       kafka.makeRequest(

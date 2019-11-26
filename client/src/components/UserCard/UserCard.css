@@ -1,0 +1,60 @@
+.userCardWidth {
+    width: 350px;
+
+}
+
+.userClickCard {
+    color: black;
+}
+
+.userClickCard:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.userCardContent {
+    font-size: inherit;
+    margin-bottom: 0px;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #d0d4d6;
+    padding: 6px;
+
+}
+
+.flexImageUser {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top: 9px;
+}
+
+.flexNameHandleUserCard {
+    display: flex;
+    flex-direction: row;
+}
+
+.userCardUserName {
+    margin-right: 10px;
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 17px;
+    margin-top: 3px;
+}
+
+.userCardUserHandle {
+    font-size: 17px;
+    color: #657786;
+    margin-right: 10px;
+    margin-top: 3px;
+
+}
+
+
+.userProfileImageCard {
+    margin: 0 auto;
+    max-width: 35px;
+    max-height: 35px;
+    border-radius: 50%;
+}
