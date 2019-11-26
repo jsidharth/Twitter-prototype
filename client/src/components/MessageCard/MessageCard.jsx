@@ -18,7 +18,7 @@ class MessageCard extends Component {
   componentDidMount() {
     const data = {
       // userId: this.props.userId
-      userId: '5dcb31841c9d440000b0d332',
+      userId: '5dd2317e8f8a12706dfd7357',
     };
 
     const { getMessageDetails } = this.props;
@@ -34,7 +34,7 @@ class MessageCard extends Component {
 
     const { conversations } = this.props;
     const conversationThread = [];
-    const userId = '5dcb31841c9d440000b0d332';
+    const userId = '5dd2317e8f8a12706dfd7357';
     const threads = conversations.map(convo => {
       const messageThreadUser = convo.user_1._id === userId ? convo.user_2 : convo.user_1;
       console.log('Message thread user: ', messageThreadUser);

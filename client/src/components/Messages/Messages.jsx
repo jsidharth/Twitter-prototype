@@ -1,3 +1,6 @@
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/no-named-as-default-member */
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 import { GoMail } from 'react-icons/go';
@@ -36,7 +39,7 @@ class Messages extends Component {
     //   // path = <GetConversationThread />;
     //   path = <div>hello people</div>;
     // }
-    console.log('Active', this.state.activeMessage);
+    // console.log('Active', this.state.activeMessage);
     return (
       <div className="flexHomeScreen">
         <div>
@@ -64,9 +67,6 @@ class Messages extends Component {
             <GetConversationThread activeConv={this.state.activeMessage} />
           </div>
         )}
-
-        {/*  */}
-        {/* <div className="messageThreadStyling">{path}</div> */}
       </div>
     );
   }
