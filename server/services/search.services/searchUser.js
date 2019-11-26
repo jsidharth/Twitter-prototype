@@ -15,12 +15,11 @@ const handleRequest = async (searchTerm, callback) => {
         name: 1,
         bio: 1,
         handle: 1,
+        profilePic: 1,
       },
     },
   ]);
-  callback(null, {
-    users,
-  });
+  callback(null, users);
 };
 
 export default {
