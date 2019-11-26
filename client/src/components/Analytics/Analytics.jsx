@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Card, Paper } from '@material-ui/core';
 import Sidebar from '../Sidebar/Sidebar';
+import ProfileViews from './ProfileViews';
+import NumberOfTweets from './NumberOfTweets'
 
 class Analytics extends Component {
   constructor(props) {
@@ -16,6 +18,8 @@ class Analytics extends Component {
         </div>
         <Card className="cardWidth">
           <Paper className="paperHeight">Analytics</Paper>
+          <ProfileViews />
+          <NumberOfTweets />
         </Card>
       </div>
     );
