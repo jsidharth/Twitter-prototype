@@ -139,9 +139,9 @@ class Profile extends Component {
                 ) : null}
               </Tab>
               <Tab eventKey="retweets" title="Retweets">
-                {profile.tweets && profile.tweets.length ? (
+                {profile.retweets && profile.retweets.length ? (
                   <div className="profileTweets">
-                    <TweetCard tweets={profile.tweets} />
+                    <TweetCard tweets={profile.retweets} />
                   </div>
                 ) : null}
               </Tab>

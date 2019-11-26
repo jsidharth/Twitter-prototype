@@ -77,6 +77,6 @@ export const getLikedTweets = payload => {
       }
     });
   };
-}
+};
 
 export const userActions = { register, login };
