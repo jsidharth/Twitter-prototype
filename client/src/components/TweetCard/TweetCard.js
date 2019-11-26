@@ -50,7 +50,7 @@ class TweetCard extends Component {
                 <p className="retweetIcon">
                   <AiOutlineRetweet />
                 </p>
-                <p className="retweetName">{tweet.name}</p>
+                <p className="retweetName">{tweet.retweet.name}</p>
                 <p className="retweetName">retweeted</p>
               </div>
             ) : null}
