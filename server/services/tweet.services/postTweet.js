@@ -24,7 +24,7 @@ const handleRequest = async (tweetDetails, callback) => {
     user.tweets.push(tweet._id);
     await user.save();
     callback(null, {
-      message: 'Tweet Posted',
+      message: 'Tweet Posted!',
     });
   }
 };
