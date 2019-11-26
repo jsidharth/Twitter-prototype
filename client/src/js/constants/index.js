@@ -8,6 +8,7 @@ const actionTypes = {
   GET_BOOKMARKS: 'GET_BOOKMARKS',
   GET_USER_PROFILE: 'GET_USER_PROFILE',
   GET_LIKED_TWEETS: 'GET_LIKED_TWEETS',
+  SUCCESS: 'SUCCESS',
 };
 
 export default actionTypes;
