@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
@@ -15,33 +16,27 @@ class GetConversationThread extends Component {
   }
 
   render() {
-    console.log('Get conversation: ', this.props.location.state.messages);
-    console.log('dnfjknf   ', this.props.location);
+    // console.log('Get conversation: ', this.props.location.state.messages);
+    // console.log('dnfjknf   ', this.props.location);
+    const { activeConv } = this.props;
+    const userId = '5dcb31841c9d440000b0d332';
+    const messageThreadUser =
+      activeConv.user_1._id === userId ? activeConv.user_2 : activeConv.user_1;
+    console.log(activeConv);
     return (
       <div className="flexConversationScreen">
-        <div>
-          <Sidebar />
-        </div>
-        <div className="cardWidth1">
-          <div className="paperHeight">
-            Messages
-            <Link to="/home">
-              <div className="messageIcon">
-                <GoMail size={25} />
-              </div>
-            </Link>
-          </div>
-          <div className="messageCardStyling">
-            <MessageCard />
-          </div>
-        </div>
         <div className="cardWidth">
           <div className="conversationHeight">
-            <div className="convoUserName">Name</div>
-            <div className="convoUserHandle">@Handle</div>
+            <div className="convoUserName">{messageThreadUser.name}</div>
+            <div className="convoUserHandle">@{messageThreadUser.handle}</div>
           </div>
         </div>
-        
+
+        {activeConv.messages && activeConv.messages.length
+          ? activeConv.messages.map(eachMessage => {
+              return <div>{eachMessage.body}</div>;
+            })
+          : null}
 
         <div className="conversationCardWidth">
           <div className="conversationHeight">

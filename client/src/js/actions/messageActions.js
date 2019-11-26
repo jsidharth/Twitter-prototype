@@ -18,3 +18,12 @@ export const getMessageDetails = payload => {
     });
   };
 };
+
+export const setActiveMessage = payload => {
+  return dispatch => {
+    dispatch({
+      type: actionTypes.ACTIVE_MESSAGE,
+      payload,
+    });
+  };
+};

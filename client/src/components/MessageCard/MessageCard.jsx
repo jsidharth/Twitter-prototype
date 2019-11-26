@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Image from 'react-bootstrap/Image';
+import _ from 'lodash';
 import './MessageCard.css';
 import { messageActions } from '../../js/actions/index';
 
@@ -12,7 +13,6 @@ class MessageCard extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-
   }
 
   componentDidMount() {
@@ -24,56 +24,48 @@ class MessageCard extends Component {
     const { getMessageDetails } = this.props;
     getMessageDetails(data);
   }
-
+  handleActiveMessage = (e) => {
+   console.log('here', e.target.id);
+    const activeMessage = _.find(this.props.conversations, conv => conv._id === e.target.id);
+    this.props.setActiveMessage(activeMessage);
+  }
   render() {
-
     console.log(this.props.conversations);
 
     const { conversations } = this.props;
-    let conversationThread=[]
+    const conversationThread = [];
     const userId = '5dcb31841c9d440000b0d332';
     const threads = conversations.map(convo => {
       const messageThreadUser = convo.user_1._id === userId ? convo.user_2 : convo.user_1;
       console.log('Message thread user: ', messageThreadUser);
       console.log('Finding messages: ', convo.messages);
-
       return (
-        <Link
-          to={{
-            pathname: `/messages/${userId}-${messageThreadUser._id}`,
-            state: { messages: convo.messages },
-          }}
-          key={convo._id}
-          className="messageClickCard"
-          style={{ textDecoration: 'none' }}
-        >
-          <div className="cardWidth-message" key={convo._id}>
-            <div className="cardContentHeight">
-              <div className="flexImageTweet">
-                <div>
-                  {/* Include user profile image if available */}
-                  <Image
-                    src="/images/default_profile_bigger.png"
-                    roundedCircle
-                    className="profileImage"
-                    width="60%"
-                  />
-                </div>
-                <div className="flexNameHandle">
-                  <p className="messageUserName">{messageThreadUser.name}</p>
-                  <p className="messageUserHandle">@{messageThreadUser.handle}</p>
-                </div>
-                {convo.messages && convo.messages.length
-                  ? convo.messages.forEach(eachMessage => {
-                      console.log(eachMessage.body);
-                      // conversationThread.push(eachMessage.body);
-                    })
-                  : null}
-                {/* {console.log('Conversation Thread: ', conversationThread)} */}
+        <div className="cardWidth-message" key={convo._id} id={convo._id} onClick= {e => this.handleActiveMessage(e)}>
+          <div className="cardContentHeight" id={convo._id}>
+            <div className="flexImageTweet" id={convo._id}>
+              <div id={convo._id}>
+                {/* Include user profile image if available */}
+                <Image
+                  src="/images/default_profile_bigger.png"
+                  roundedCircle
+                  className="profileImage"
+                  width="60%"
+                />
               </div>
+              <div className="flexNameHandle" id={convo._id}>
+                <p className="messageUserName" id={convo._id}>{messageThreadUser.name}</p>
+                <p className="messageUserHandle" id={convo._id}>@{messageThreadUser.handle}</p>
+              </div>
+              {/* {convo.messages && convo.messages.length
+                ? convo.messages.forEach(eachMessage => {
+                    console.log(' Here' ,eachMessage.body);
+                    // conversationThread.push(eachMessage.body);
+                  })
+                : null} */}
+              {/* {console.log('Conversation Thread: ', conversationThread)} */}
             </div>
           </div>
-        </Link>
+        </div>
       );
     });
 
@@ -89,6 +81,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   getMessageDetails: data => dispatch(messageActions.getMessageDetails(data)),
+  setActiveMessage: data => dispatch(messageActions.setActiveMessage(data)),
 });
 
 export default connect(
