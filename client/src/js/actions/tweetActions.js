@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import actionTypes from '../constants/index';
 import { ROOT_URL } from '../../constant/constant';
 
@@ -11,6 +12,14 @@ export const postTweet = payload => {
         dispatch({
           type: actionTypes.POST_TWEET,
           payload: response.data,
+        });
+        toast.info(response.data.message, {
+          position: 'bottom-center',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
         });
       }
     });
