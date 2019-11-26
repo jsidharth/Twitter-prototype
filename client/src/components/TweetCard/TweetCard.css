@@ -11,7 +11,7 @@
   text-decoration: none;
 }
 
-.cardContent {
+.cardContentTweet {
   font-size: inherit;
   margin-bottom: 0px;
   border-style: solid;
@@ -19,7 +19,9 @@
   border-color: #d0d4d6;
   padding: 20px;
 }
-
+.cardContentTweet:hover{
+  background-color: #f5f8fa;
+}
 .flexImageTweet {
   display: flex;
   flex-direction: row;
@@ -67,6 +69,25 @@
   max-width: 500px;
   max-height: 600px;
   object-fit: contain;
+}
+
+.flexRetweet {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-bottom: -5px;
+}
+
+.retweetIcon {
+  margin-right: 5px;
+  margin-left: 54px;
+  font-size: 13px;
+}
+.retweetName {
+  margin-right: 3px;
+  margin-left: 10px;
+  font-size: 13px;
+  color: #657786;
 }
 
 .profileImageTweet {

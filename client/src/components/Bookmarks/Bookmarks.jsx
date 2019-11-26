@@ -10,7 +10,8 @@ import TweetCard from '../TweetCard/TweetCard';
 class Bookmarks extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+          // userId: this.props.userId
+    this.state = { userId: '5dcb31841c9d440000b0d332' };
   }
 
   componentDidMount() {
@@ -21,7 +22,19 @@ class Bookmarks extends Component {
     const { getBookmarks } = this.props;
     getBookmarks(data);
   }
+  likeTweet = e => {
+    let data = { tweetId: e.target.id, userId: this.state.userId };
+    this.props.likeTweet(data).then(() => {
+      this.props.getBookmarks(data);
+    });
+  };
 
+  unlikeTweet = e => {
+    let data = { tweetId: e.target.id, userId: this.state.userId };
+    this.props.unlikeTweet(data).then(() => {
+      this.props.getBookmarks(data);
+    });
+  };
   render() {
     let renderBookmarks = null;
     if (this.props.bookmarkedTweets) {
@@ -34,7 +47,11 @@ class Bookmarks extends Component {
         </div>
         <div className="cardWidth">
           <div className="paperHeight">Bookmarks</div>
-          <TweetCard tweets={renderBookmarks} />
+          <TweetCard
+            tweets={renderBookmarks}
+            likeTweet={this.likeTweet}
+            unlikeTweet={this.unlikeTweet}
+          />
         </div>
       </div>
     );
@@ -48,6 +65,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   getBookmarks: data => dispatch(tweetActions.getBookmarks(data)),
+  likeTweet: data => dispatch(tweetActions.likeTweet(data)),
+  unlikeTweet: data => dispatch(tweetActions.unlikeTweet(data)),
 });
 
 export default connect(
