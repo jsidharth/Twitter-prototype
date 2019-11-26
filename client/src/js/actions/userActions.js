@@ -81,19 +81,4 @@ export const getLikedTweets = payload => {
   };
 };
 
-export const getLikedTweets = payload => {
-  return dispatch => {
-    return axios.get(`${ROOT_URL}/user/like/${payload.userId}`).then(response => {
-      console.log('Status Code : ', response.status);
-      console.log(response.data);
-      if (response.status === 200) {
-        dispatch({
-          type: actionTypes.GET_LIKED_TWEETS,
-          payload: response.data,
-        });
-      }
-    });
-  };
-};
-
 export const userActions = { register, login };
