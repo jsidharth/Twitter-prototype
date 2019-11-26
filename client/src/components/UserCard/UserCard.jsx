@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './UserCard.css';
 
-class TweetCard extends Component {
+class UserCard extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -44,4 +44,4 @@ class TweetCard extends Component {
   }
 }
 
-export default TweetCard;
+export default UserCard;
