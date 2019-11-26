@@ -1,0 +1,32 @@
+.searchContainer {
+    margin-left: 35px;
+    margin-top: 10px;
+    width: 25%;
+}
+
+.searchFlex {
+    background-color: #e6ecf0;
+    height: 40px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.searchIcon {
+    margin-left: 12px;
+    padding-top: 8px;
+    color: #657786;
+}
+
+.searchBar {
+    margin-left: 10px;
+    background-color: #e6ecf0;
+    outline: none;
+    border: none;
+    width: 84%;
+}
+
+.searchSuggestion{
+    margin-top: 2px;
+}

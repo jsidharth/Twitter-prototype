@@ -2,7 +2,6 @@ import axios from 'axios';
 import actionTypes from '../constants/index';
 import { ROOT_URL } from '../../constant/constant';
 
-
 // eslint-disable-next-line import/prefer-default-export
 export const postTweet = payload => {
   return dispatch => {
@@ -65,12 +64,6 @@ export const likeTweet = payload => {
   return dispatch => {
     return axios.put(`${ROOT_URL}/tweet/like`, payload).then(response => {
       console.log('Status Code : ', response.status);
-      if (response.status === 200){
-        dispatch({
-          type: actionTypes.SUCCESS,
-          payload: response.data,
-        });
-      }
       return Promise.resolve();
     });
   };
@@ -80,12 +73,6 @@ export const unlikeTweet = payload => {
   return dispatch => {
     return axios.put(`${ROOT_URL}/tweet/unlike`, payload).then(response => {
       console.log('Status Code : ', response.status);
-      if (response.status === 200) {
-        dispatch({
-          type: actionTypes.SUCCESS,
-          payload: response.data,
-        });
-      }
       return Promise.resolve();
     });
   };

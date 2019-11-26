@@ -22,8 +22,8 @@ class Sidebar extends Component {
                 <Navbar.Brand href="/home">
                   <img
                     src="https://upload.wikimedia.org/wikipedia/fr/thumb/c/c8/Twitter_Bird.svg/944px-Twitter_Bird.svg.png"
-                    width="55px"
-                    height="55px"
+                    width="45px"
+                    height="35px"
                     className="d-inline-block align-top"
                     alt="Main logo link to home"
                   />
@@ -35,7 +35,7 @@ class Sidebar extends Component {
               <ListGroup.Item>
                 <Link to="/home">
                   <div className="flexSidebars">
-                    <GoHome size={40} />
+                    <GoHome size={30} />
                     <p className="sidebarTopics">Home</p>
                   </div>
                 </Link>
@@ -44,7 +44,7 @@ class Sidebar extends Component {
               <ListGroup.Item>
                 <Link to="/messages">
                   <div className="flexSidebars">
-                    <GoMail size={40} />
+                    <GoMail size={30} />
                     <p className="sidebarTopics">Messages</p>
                   </div>
                 </Link>
@@ -53,7 +53,7 @@ class Sidebar extends Component {
               <ListGroup.Item>
                 <Link to="/bookmarks">
                   <div className="flexSidebars">
-                    <FiBookmark size={40} />
+                    <FiBookmark size={30} />
                     <p className="sidebarTopics">Bookmarks</p>
                   </div>
                 </Link>
@@ -62,7 +62,7 @@ class Sidebar extends Component {
               <ListGroup.Item>
                 <Link to="/lists">
                   <div className="flexSidebars">
-                    <GoNote size={40} />
+                    <GoNote size={30} />
                     <p className="sidebarTopics">Lists</p>
                   </div>
                 </Link>
@@ -71,7 +71,7 @@ class Sidebar extends Component {
               <ListGroup.Item>
                 <Link to="/profile">
                   <div className="flexSidebars">
-                    <FaRegUserCircle size={40} />
+                    <FaRegUserCircle size={30} />
                     <p className="sidebarTopics">Profile</p>
                   </div>
                 </Link>
@@ -80,7 +80,7 @@ class Sidebar extends Component {
               <ListGroup.Item>
                 <Link to="/analytics">
                   <div className="flexSidebars">
-                    <GoGraph size={40} />
+                    <GoGraph size={30} />
                     <p className="sidebarTopics">Analytics</p>
                   </div>
                 </Link>
