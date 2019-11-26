@@ -32,12 +32,19 @@
   .sendIcon {
     margin-left: 530px;
     margin-right: 10px;
-    margin-top: -5%;
+    margin-top: -10%;
     color: #00ACEE;
 }
 
 .sendIcon:hover {
   color: #008abe;
+}
+
+.autoExpandDiv1 {
+  display: inline-block;
+  min-height: 70px;
+  width: 95%;
+  margin-bottom: 10px;
 }
 
   

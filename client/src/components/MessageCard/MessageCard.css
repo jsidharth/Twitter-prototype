@@ -33,3 +33,11 @@
 .cardWidth-message {
     max-width: 450px;
 }
+
+.messageClickCard {
+    color: black;
+  }
+
+  .messageClickCard:hover {
+    color: #657786;
+  }
