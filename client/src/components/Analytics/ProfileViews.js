@@ -56,6 +56,39 @@ class ProfileViews extends Component {
             },
           ],
         },
+        lineChartOptions: {
+          responsive: true,
+          scales: {
+            xAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Date',
+                  fontSize: 20,
+                },
+                gridLines: {
+                  display: false,
+                  color: 'rgba(0, 0, 0, 0.1)',
+                }
+              },
+            ],
+            yAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Number of Views',
+                  fontSize: 20,
+                }, gridLines: {
+                  display: false,
+                  color: 'rgba(0, 0, 0, 0.1)',
+                }
+              },
+            ],
+          },
+          legend: {
+            display: false,
+          },
+        },
       });
     });
   }
@@ -63,8 +96,8 @@ class ProfileViews extends Component {
   render() {
     return (
       <MDBContainer>
-        <h3 className="mt-5">Profile views for the last month</h3>
-        <Line data={this.state.dataLine} options={{ responsive: true }} />
+        <div className="fontChanges">Profile views for the last month</div>
+        <Line data={this.state.dataLine} options={this.state.lineChartOptions} />
       </MDBContainer>
     );
   }

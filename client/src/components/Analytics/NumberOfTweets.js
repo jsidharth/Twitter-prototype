@@ -1,7 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
-import { Doughnut } from 'react-chartjs-2';
+import { Polar } from 'react-chartjs-2';
 import { MDBContainer } from 'mdbreact';
 import { connect } from 'react-redux';
 import { analyticsActions } from '../../js/actions/index';
@@ -10,7 +10,7 @@ class NumberOfTweets extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataDoughnut: {
+      dataPie: {
         labels: [],
         datasets: [{}],
       },
@@ -21,24 +21,34 @@ class NumberOfTweets extends Component {
     const data = {
       userId: '5dcb31841c9d440000b0d332',
     };
-    const { fetchProfileViewsPerDay } = this.props;
-    fetchProfileViewsPerDay(data).then(() => {
-      const xAxis = this.props.viewsPerDayData.map(element => {
-        return element.date;
+    const { fetchNumberOfTweets } = this.props;
+    fetchNumberOfTweets(data).then(() => {
+      const xAxis = this.props.numberOfTweetsData.map(element => {
+        return element.timeFrame;
       });
-      const yAxis = this.props.viewsPerDayData.map(element => {
-        return element.profileViewCount;
+
+      const yAxis = this.props.numberOfTweetsData.map(element => {
+        return element.tweetCount;
       });
+
       this.setState({
-        dataDoughnut: {
-          labels: ['Red', 'Green', 'Yellow', 'Grey', 'Dark Grey'],
+        dataPie: {
+          labels: xAxis,
           datasets: [
             {
-              data: [300, 50, 100, 40, 120],
-              backgroundColor: ['#F7464A', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'],
-              hoverBackgroundColor: ['#FF5A5E', '#5AD3D1', '#FFC870', '#A8B3C5', '#616774'],
+              data: yAxis,
+              backgroundColor: [
+                'rgba(218, 236, 255,1)',
+                'rgba(144, 199, 255,1)',
+                'rgba(70, 162, 255,1)',
+              ],
             },
           ],
+        },
+        polarOption: {
+          responsive: true,
+          scale: {
+            display: true,          },
         },
       });
     });
@@ -47,20 +57,20 @@ class NumberOfTweets extends Component {
   render() {
     return (
       <MDBContainer>
-        <h3 className="mt-5">Most Viewed Tweets</h3>
-        <Doughnut data={this.state.dataDoughnut} options={{ responsive: true }} />
+        <div className="fontChanges">Number of Tweets(Hour/Day/Month)</div>
+        <Polar data={this.state.dataPie} options={this.state.polarOption} width={400} />
       </MDBContainer>
     );
   }
 }
 const mapStateToProps = state => {
   return {
-    viewsPerDayData: state.analytics.viewsPerDayData,
+    numberOfTweetsData: state.analytics.numberOfTweetsData,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchProfileViewsPerDay: data => dispatch(analyticsActions.getAnalyticsProfileViewsPerDay(data)),
+  fetchNumberOfTweets: data => dispatch(analyticsActions.getNumberOfTweets(data)),
 });
 
 export default connect(
