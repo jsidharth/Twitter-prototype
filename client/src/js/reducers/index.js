@@ -4,6 +4,7 @@ import tweet from './tweetReducer';
 import user from './userReducer';
 import search from './searchReducer';
 import analytics from './analyticsReducer';
+import list from './listReducer';
 
 const rootReducer = combineReducers({
   image,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   user,
   search,
   analytics,
+  list,
 });
 
 export default rootReducer;

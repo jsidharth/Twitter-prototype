@@ -2,12 +2,8 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 import actionTypes from '../constants/index';
-import {
-  ROOT_URL
-} from '../../constant/constant';
-import {
-  history
-} from '../helper/history';
+import { ROOT_URL } from '../../constant/constant';
+import { history } from '../helper/history';
 
 export const getSearchSuggestions = payload => {
   return dispatch => {
