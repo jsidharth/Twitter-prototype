@@ -6,7 +6,6 @@ import { Bar } from 'react-chartjs-2';
 import { MDBContainer } from 'mdbreact';
 import { connect } from 'react-redux';
 import { analyticsActions } from '../../js/actions/index';
-import '../Analytics/Analytics.css';
 
 class MostLikedTweets extends Component {
   constructor(props) {
