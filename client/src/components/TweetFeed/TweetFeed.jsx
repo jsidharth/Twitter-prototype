@@ -13,6 +13,7 @@ class TweetFeed extends Component {
 
     this.likeTweet = this.likeTweet.bind(this);
     this.unlikeTweet = this.unlikeTweet.bind(this);
+    this.deleteTweet = this.deleteTweet.bind(this);
 
   }
 
@@ -37,15 +38,25 @@ class TweetFeed extends Component {
       this.props.unlikeTweet(data).then(()=>{
         this.props.fetchFeed(data);
       });
-
   }
+
+  deleteTweet = (e) => {
+    const data = {
+      tweetId: e.target.id,
+      userId: '5dcb31841c9d440000b0d332'
+    }
+    this.props.deleteTweet(data).then(() => {
+      this.props.fetchFeed(data)
+    })
+  }
+
   render() {
     let renderFeed = null;
     if (this.props.feed) {
       renderFeed = this.props.feed;
     }
 
-    return <TweetCard tweets={renderFeed} likeTweet={this.likeTweet} unlikeTweet={this.unlikeTweet} />;
+    return <TweetCard tweets={renderFeed} likeTweet={this.likeTweet} unlikeTweet={this.unlikeTweet} deleteTweet={this.deleteTweet}/>;
   }
 }
 
@@ -59,6 +70,7 @@ const mapDispatchToProps = dispatch => ({
   fetchFeed: data => dispatch(tweetActions.fetchFeed(data)),
   likeTweet: data => dispatch(tweetActions.likeTweet(data)),
   unlikeTweet: data => dispatch(tweetActions.unlikeTweet(data)),
+  deleteTweet: data => dispatch(tweetActions.deleteTweet(data)),
 });
 
 export default connect(

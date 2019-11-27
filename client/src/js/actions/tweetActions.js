@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import actionTypes from '../constants/index';
 import { ROOT_URL } from '../../constant/constant';
 
@@ -11,6 +12,14 @@ export const postTweet = payload => {
         dispatch({
           type: actionTypes.POST_TWEET,
           payload: response.data,
+        });
+        toast.info(response.data.message, {
+          position: 'bottom-center',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
         });
       }
     });
@@ -74,6 +83,29 @@ export const unlikeTweet = payload => {
     return axios.put(`${ROOT_URL}/tweet/unlike`, payload).then(response => {
       console.log('Status Code : ', response.status);
       return Promise.resolve();
+    });
+  };
+};
+
+export const deleteTweet = payload => {
+  return dispatch => {
+    return axios.delete(`${ROOT_URL}/tweet/delete/${payload.tweetId}`, payload).then(response => {
+      console.log('Status Code : ', response.status);
+      if (response.status === 200) {
+        dispatch({
+          type: actionTypes.DELETE_TWEET,
+          payload: response.data,
+        });
+        toast.info(response.data.message, {
+          position: 'bottom-center',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+        return Promise.resolve();
+      }
     });
   };
 };
