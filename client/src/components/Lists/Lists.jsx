@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
+import SearchBar from '../Search/SearchBar';
 import './Lists.css';
 
 class Lists extends Component {
@@ -17,6 +18,7 @@ class Lists extends Component {
         <div className="cardWidth">
           <div className="paperHeight">Lists</div>
         </div>
+        <SearchBar />
       </div>
     );
   }

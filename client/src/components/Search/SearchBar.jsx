@@ -10,10 +10,12 @@ class SearchBar extends Component {
     super(props);
     this.state = {
       suggestions: [],
+      search: '',
     };
   }
 
   handleOnInputChange = event => {
+    this.setState({ search: event.target.value });
     const userHandle = event.target.value;
     if (userHandle[0] === '@' && userHandle.length > 1) {
       this.props.getSearchSuggestions(userHandle);
@@ -22,6 +24,11 @@ class SearchBar extends Component {
         suggestions: [],
       });
     }
+  };
+
+  handleSearch = e => {
+    e.preventDefault();
+    this.props.getSearchResults(this.state.search);
   };
 
   componentWillReceiveProps(nextProps) {
@@ -37,14 +44,16 @@ class SearchBar extends Component {
           <div className="searchIcon">
             <FiSearch size={20} />
           </div>
-          <input
-            type="search"
-            className="searchBar"
-            id="searchBar"
-            placeholder="Search Twitter"
-            autoComplete="off"
-            onChange={this.handleOnInputChange}
-          />
+          <form className="searchForm" onSubmit={e => this.handleSearch(e)}>
+            <input
+              type="search"
+              id="searchBar"
+              className="searchBar"
+              placeholder="Search Twitter"
+              autoComplete="off"
+              onChange={this.handleOnInputChange}
+            />
+          </form>
         </div>
         <div className="searchSuggestion">
           {this.state.suggestions && this.state.suggestions.length
@@ -70,6 +79,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   getSearchSuggestions: data => dispatch(searchActions.getSearchSuggestions(data)),
+  getSearchResults: data => dispatch(searchActions.getSearchResults(data)),
 });
 
 export default connect(

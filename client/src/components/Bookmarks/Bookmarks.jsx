@@ -6,6 +6,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import './Bookmarks.css';
 import { tweetActions } from '../../js/actions/index';
 import TweetCard from '../TweetCard/TweetCard';
+import SearchBar from '../Search/SearchBar';
 
 class Bookmarks extends Component {
   constructor(props) {
@@ -53,6 +54,7 @@ class Bookmarks extends Component {
             unlikeTweet={this.unlikeTweet}
           />
         </div>
+        <SearchBar />
       </div>
     );
   }

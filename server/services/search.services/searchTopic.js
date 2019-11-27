@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import Promise from 'bluebird';
 import moment from 'moment';
 import Users from '../../models/user.model';
@@ -22,16 +23,17 @@ const handleRequest = async (searchTerm, callback) => {
         }
       ).then(user => {
         return {
-          // eslint-disable-next-line no-underscore-dangle
           _id: tweet._id,
           name: user.name,
           handle: user.handle,
+          profilePic: user.profilePic,
           likes_count: tweet.likes.length || 0,
           comments_count: tweet.comments.length || 0,
           retweet_count: tweet.retweets.length || 0,
           body: tweet.body,
           image: tweet.image,
           created_at: tweet.created_at,
+          likes: tweet.likes,
         };
       });
     });
@@ -53,7 +55,7 @@ const handleRequest = async (searchTerm, callback) => {
       );
     });
     updateTweetViewsPromise.then(() => {
-      callback(null, { tweet: updatedTweets });
+      callback(null, { tweets: updatedTweets });
     });
   } else {
     callback(null, {

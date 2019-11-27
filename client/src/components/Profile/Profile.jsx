@@ -9,6 +9,7 @@ import { GiBalloons } from 'react-icons/gi';
 import { Tabs, Tab } from 'react-bootstrap';
 import TweetCard from '../TweetCard/TweetCard';
 import Sidebar from '../Sidebar/Sidebar';
+import SearchBar from '../Search/SearchBar';
 import './Profile.css';
 import { userActions } from '../../js/actions/index';
 import { tweetActions } from '../../js/actions/index';
@@ -173,6 +174,7 @@ class Profile extends Component {
             </Tabs>
           </div>
         </div>
+        <SearchBar />
       </div>
     );
   }
