@@ -32,6 +32,7 @@ class Follower extends Component {
               </div>
             </Link>
             <div className="flexFollowTopPane">
+              {/* Change the values to Current user */}
               <div className="usernameFollowTab">Madhu</div>
               <div className="handleFollowTab">@Madhu</div>
             </div>
