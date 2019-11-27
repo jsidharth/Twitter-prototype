@@ -47,12 +47,13 @@ class MessageCard extends Component {
             <div className="flexImageTweet" id={convo._id}>
               <div id={convo._id}>
                 {/* Include user profile image if available */}
-                <Image
+                {/* <Image
                   src={messageThreadUser.profilePic ? messageThreadUser.profilePic : "/images/default_profile_bigger.png"}
                   roundedCircle
                   className="profileImage"
                   width="60%"
-                />
+                /> */}
+                 <img src={messageThreadUser.profilePic ? messageThreadUser.profilePic : "/images/default_profile_reasonably_small.png"} className="profileImageMessage" alt="user" />
               </div>
               <div className="flexNameHandle" id={convo._id}>
                 <p className="messageUserName" id={convo._id}>{messageThreadUser.name}</p>
