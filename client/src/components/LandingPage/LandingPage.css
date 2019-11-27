@@ -275,5 +275,8 @@ input[type='email'] {
 }
 .marginLeft{
   padding-left: 0% !important;
+}
 
+*:focus {
+  outline: 0 !important;
 }
