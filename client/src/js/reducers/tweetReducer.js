@@ -6,7 +6,8 @@ const initialState = {
   currentTweet: {},
   bookmarkedTweets: [],
   tweetDeletedFlag: false,
-};
+  bookmarkSuccess: false,
+}
 
 const tweetReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -20,6 +21,8 @@ const tweetReducer = (state = initialState, action) => {
       return { ...state, bookmarkedTweets: action.payload.bookmarkedTweets };
     case actionTypes.DELETE_TWEET:
       return { ...state, tweetDeletedFlag: true };
+    case actionTypes.BOOKMARK_TWEET:
+      return { ...state, bookmarkSuccess: true};
     default:
       break;
   }
