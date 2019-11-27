@@ -10,6 +10,7 @@ import TweetDetails from './TweetDetails/TweetDetails';
 import Bookmarks from './Bookmarks/Bookmarks';
 import Profile from './Profile/Profile';
 import Analytics from './Analytics/Analytics';
+import Follow from './FollowTab/FollowTab';
 
 class Main extends Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class Main extends Component {
           <Route path="/lists" component={Lists} />
           <Route path="/profile" component={Profile} />
           <Route path="/analytics" component={Analytics} />
+          <Route path="/follow" component={Follow} />
         </Switch>
       </div>
     );

@@ -11,10 +11,10 @@ class UserCard extends Component {
   }
 
   render() {
-    const { user } = this.props;
-
+    const { user, long } = this.props;
+    const styleCardContent = long ? 'followCardContent' : 'userCardContent';
+    const styleCardWidth = long ? 'followCardWidth' : 'userCardWidth';
     const imgSrc = user.profilePic ? user.profilePic : '/images/default_profile_bigger.png';
-
     return (
       // eslint-disable-next-line no-underscore-dangle
       <Link
@@ -23,8 +23,8 @@ class UserCard extends Component {
         className="userClickCard"
         style={{ textDecoration: 'none' }}
       >
-        <div className="userCardWidth" key={user._id}>
-          <div className="userCardContent">
+        <div className={styleCardWidth} key={user._id}>
+          <div className={styleCardContent}>
             <div className="flexImageUser">
               <div>
                 {/* Include user profile image if available */}

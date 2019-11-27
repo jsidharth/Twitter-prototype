@@ -1,6 +1,5 @@
 .userCardWidth {
     width: 350px;
-
 }
 
 .userClickCard {
@@ -54,4 +53,19 @@
     max-width: 35px;
     max-height: 35px;
     border-radius: 50%;
+}
+
+.followCardContent {
+    font-size: inherit;
+    margin-bottom: 0px;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: #d0d4d6;
+    padding: 6px;
+    border-left: none;
+    border-right: none;
+}
+
+.followCardWidth {
+    width: 600px;
 }

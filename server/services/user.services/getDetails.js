@@ -13,6 +13,8 @@ const handleRequest = (userId, callback) => {
   )
     .populate('tweets')
     .populate('retweets')
+    .populate('following')
+    .populate('followers')
     .lean()
     .exec((err, result) => {
       if (err || result == null) {

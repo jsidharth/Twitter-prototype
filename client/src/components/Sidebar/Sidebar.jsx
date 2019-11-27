@@ -19,17 +19,19 @@ class Sidebar extends Component {
           <nav className="sidebar">
             <ListGroup variant="flush">
               <ListGroup.Item>
-                <Navbar.Brand href="/home">
-                  <img
-                    src="https://upload.wikimedia.org/wikipedia/fr/thumb/c/c8/Twitter_Bird.svg/944px-Twitter_Bird.svg.png"
-                    width="45px"
-                    height="35px"
-                    className="d-inline-block align-top"
-                    alt="Main logo link to home"
-                  />
-                  <br />
-                  <br />
-                </Navbar.Brand>
+                <Link to="/home">
+                  <Navbar.Brand>
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/fr/thumb/c/c8/Twitter_Bird.svg/944px-Twitter_Bird.svg.png"
+                      width="45px"
+                      height="35px"
+                      className="d-inline-block align-top"
+                      alt="Main logo link to home"
+                    />
+                    <br />
+                    <br />
+                  </Navbar.Brand>
+                </Link>
               </ListGroup.Item>
 
               <ListGroup.Item>

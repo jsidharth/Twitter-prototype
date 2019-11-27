@@ -51,7 +51,7 @@ class SearchBar extends Component {
             ? this.state.suggestions.map(user => {
                 return (
                   <div>
-                    <UserCard user={user}></UserCard>
+                    <UserCard user={user} long={false}></UserCard>
                   </div>
                 );
               })
