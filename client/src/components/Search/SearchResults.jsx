@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
+import {withRouter} from 'react-router';
 import { connect } from 'react-redux';
 import { Tabs, Tab } from 'react-bootstrap';
 import Sidebar from '../Sidebar/Sidebar';
@@ -16,19 +17,19 @@ class SearchResults extends Component {
   }
 
   likeTweet = e => {
+    const { searchTerm } = this.props.location.state;
     let data = { tweetId: e.target.id, userId: this.state.userId };
     this.props.likeTweet(data).then(() => {
-      this.props.getUserProfile(data).then(() => {
-        this.props.getLikedTweets(data);
-      });
+      this.props.getSearchResults(searchTerm);
     });
   };
 
   unlikeTweet = e => {
+    const { searchTerm } = this.props.location.state;
     let data = { tweetId: e.target.id, userId: this.state.userId };
     this.props.unlikeTweet(data).then(() => {
       this.props.getUserProfile(data).then(() => {
-        this.props.getLikedTweets(data);
+        this.props.getSearchResults(searchTerm);
       });
     });
   };
@@ -100,7 +101,9 @@ const mapDispatchToProps = dispatch => ({
   unlikeTweet: data => dispatch(tweetActions.unlikeTweet(data)),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(SearchResults);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(SearchResults),
+);
