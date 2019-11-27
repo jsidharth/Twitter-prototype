@@ -13,6 +13,8 @@ const handleRequest = (userId, callback) => {
   )
     .populate('tweets')
     .populate('retweets')
+    .populate('following')
+    .populate('followers')
     .lean()
     .exec((err, result) => {
       if (err || result == null) {
@@ -35,6 +37,7 @@ const handleRequest = (userId, callback) => {
         }
         if (result.tweets && result.tweets.length) {
           result.tweets = result.tweets.map(tweet => ({
+            userId: result._id,
             _id: tweet._id,
             name: result.name,
             handle: result.handle,
@@ -66,6 +69,7 @@ const handleRequest = (userId, callback) => {
                 ],
               }).then(user => {
                 return {
+                  userId: user._id,
                   _id: eachRetweet._id,
                   name: user.name,
                   handle: user.handle,
