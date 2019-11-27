@@ -41,8 +41,7 @@ class GetConversationThread extends Component {
    }
 
   render() {
-    const { activeConv } = this.props;
-    const userId = '5dd1e01ca41f61bc78f2c6f1';
+    const { activeConv, userId } = this.props;
     const messageThreadUser =
       activeConv.user_1._id === userId ? activeConv.user_2 : activeConv.user_1;
     return (
@@ -111,7 +110,7 @@ class GetConversationThread extends Component {
 }
 const mapStateToProps = state => ({
   activeConv: state.message.activeMessage,
-  userId: '5dd1e01ca41f61bc78f2c6f1',
+  userId: state.user.currentUser._id,
 });
 
 const mapDispatchToProps = dispatch => ({

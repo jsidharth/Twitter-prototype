@@ -3,8 +3,7 @@
 import axios from 'axios';
 import _ from 'lodash';
 import actionTypes from '../constants/index';
-
-const ROOT_URL = 'http://localhost:3001';
+import { ROOT_URL } from '../../constant/constant';
 
 export const getMessageDetails = payload => {
   return dispatch => {

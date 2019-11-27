@@ -34,14 +34,13 @@ class NewMessageModal extends Component {
   };
 
   composeMessage = (e) => {
-    console.log(e.target.id);
     const payload = {
-      "user_1": '5dd1e01ca41f61bc78f2c6f1',
+      "user_1": this.props.userId,
       "user_2": e.target.id,
     };
 
     const data = {
-      userId: '5dd1e01ca41f61bc78f2c6f1',
+      userId: this.props.userId,
     };
     this.props.composeMessage(payload).then(() => {
       this.props.getMessageDetails(data).then(() => {
@@ -64,7 +63,6 @@ class NewMessageModal extends Component {
         show={this.props.showMessageModalState}
         onHide={this.props.showMessageModal}
         centered
-      // size="lg"
       >
         <Modal.Header closeButton>
           <Modal.Title>New message</Modal.Title>
@@ -74,7 +72,6 @@ class NewMessageModal extends Component {
             <div className="searchIcon">
               <FiSearch size={20} />
             </div>
-            {/* <form className="searchForm" onSubmit={e => this.handleSearch(e)}> */}
             <input
               type="search"
               id="searchBar"
@@ -83,14 +80,14 @@ class NewMessageModal extends Component {
               autoComplete="off"
               onChange={this.handleOnInputChange}
             />
-            {/* </form> */}
+           
           </div>
           <div className="searchSuggestion">
             {this.state.suggestions && this.state.suggestions.length
               ? this.state.suggestions.map(user => {
                 return (
                   <div id={user._id} onClick= {e => this.composeMessage(e)}>
-                    {/* <UserCard user={user} long></UserCard> */}
+                    
                     <div id={user._id} key={user._id}>
                       <div id={user._id}>
                         <div id={user._id} className="flexImageUser">
@@ -121,6 +118,7 @@ class NewMessageModal extends Component {
 const mapStateToProps = state => {
   return {
     searchSuggestions: state.search.searchSuggestions.users,
+    userId: state.user.currentUser._id,
   };
 };
 
