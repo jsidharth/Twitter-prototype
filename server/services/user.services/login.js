@@ -22,6 +22,7 @@ const handleRequest = async (userDetails, callback) => {
       email: user.email,
       dob: moment(user.dob).format('MM-DD-YYYY'),
       active: user.active,
+      bookmarks: user.bookmarks,
     });
   }
 };

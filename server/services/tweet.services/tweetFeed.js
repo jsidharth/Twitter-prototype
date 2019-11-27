@@ -62,6 +62,7 @@ const handleRequest = (userId, callback) => {
                 created_at: tweet.createdAt,
                 likes: tweet.likes,
                 profilePic: followingUser.profilePic,
+                bookmarks: followingUser.bookmarks,
               }));
             }
             return [];

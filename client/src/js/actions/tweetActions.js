@@ -109,3 +109,25 @@ export const deleteTweet = payload => {
     });
   };
 };
+
+export const bookmarkTweet = payload => {
+  return dispatch => {
+    return axios.post(`${ROOT_URL}/tweet/bookmark`, payload).then(response => {
+      console.log('Status Code : ', response.status);
+      if (response.status === 200) {
+        dispatch({
+          type: actionTypes.BOOKMARK_TWEET,
+          payload: response.data,
+        });
+        toast.info(response.data.message, {
+          position: 'bottom-center',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      }
+    });
+  };
+};

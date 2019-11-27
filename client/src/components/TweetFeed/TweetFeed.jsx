@@ -13,6 +13,7 @@ class TweetFeed extends Component {
     this.likeTweet = this.likeTweet.bind(this);
     this.unlikeTweet = this.unlikeTweet.bind(this);
     this.deleteTweet = this.deleteTweet.bind(this);
+    this.bookmarkTweet = this.bookmarkTweet.bind(this);
   }
 
   componentDidMount() {
@@ -37,6 +38,13 @@ class TweetFeed extends Component {
     });
   };
 
+  bookmarkTweet = e => {
+    let data = { tweetId: e.target.id, userId: this.props.userId };
+    this.props.bookmarkTweet(data).then(() => {
+      this.props.fetchFeed(data);
+    });
+  };
+
   deleteTweet = e => {
     const data = {
       tweetId: e.target.id,
@@ -52,12 +60,20 @@ class TweetFeed extends Component {
     if (this.props.feed) {
       renderFeed = this.props.feed;
     }
+
+    let renderBookmarks = null;
+    if (this.props.bookmarkedTweets) {
+      renderBookmarks = this.props.bookmarkedTweets;
+    }
+
     return (
       <TweetCard
         tweets={renderFeed}
         likeTweet={this.likeTweet}
         unlikeTweet={this.unlikeTweet}
         deleteTweet={this.deleteTweet}
+        bookmarkTweet={this.bookmarkTweet}
+        bookmarks={renderBookmarks}
       />
     );
   }
@@ -66,6 +82,7 @@ class TweetFeed extends Component {
 const mapStateToProps = state => ({
   feed: state.tweet.feed,
   userId: state.user.currentUser._id,
+  bookmarkedTweets: state.user.currentUser.bookmarks,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -73,6 +90,7 @@ const mapDispatchToProps = dispatch => ({
   likeTweet: data => dispatch(tweetActions.likeTweet(data)),
   unlikeTweet: data => dispatch(tweetActions.unlikeTweet(data)),
   deleteTweet: data => dispatch(tweetActions.deleteTweet(data)),
+  bookmarkTweet: data => dispatch(tweetActions.bookmarkTweet(data)),
 });
 
 export default connect(

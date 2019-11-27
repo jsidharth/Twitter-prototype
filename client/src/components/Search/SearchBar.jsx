@@ -59,7 +59,7 @@ class SearchBar extends Component {
           {this.state.suggestions && this.state.suggestions.length
             ? this.state.suggestions.map(user => {
                 return (
-                  <div>
+                  <div key={user._id}>
                     <UserCard user={user} long={false}></UserCard>
                   </div>
                 );

@@ -21,11 +21,12 @@ class Profile extends Component {
     this.likeTweet = this.likeTweet.bind(this);
     this.unlikeTweet = this.unlikeTweet.bind(this);
     this.deleteTweet = this.deleteTweet.bind(this);
+    this.bookmarkTweet = this.bookmarkTweet.bind(this);
   }
 
   componentDidMount() {
     const data = {
-      userId: this.props.userId,
+      userId: this.props.match.params.userId,
     };
     const { getUserProfile, getLikedTweets } = this.props;
     getUserProfile(data);
@@ -33,19 +34,29 @@ class Profile extends Component {
   }
 
   likeTweet = e => {
-    let data = { tweetId: e.target.id, userId: this.props.userId };
-    this.props.likeTweet(data).then(() => {
-      this.props.getUserProfile(data).then(() => {
-        this.props.getLikedTweets(data);
+    // Pass the current logged in user to check if he has liked the specific tweets
+    const likePayload = { tweetId: e.target.id, userId: this.props.userId };
+    // Fetch the current feed based on the userId in the params
+    const getFeedPayload = {
+      userId: this.props.match.params.userId,
+    }
+    this.props.likeTweet(likePayload).then(() => {
+      this.props.getUserProfile(getFeedPayload).then(() => {
+        this.props.getLikedTweets(getFeedPayload);
       });
     });
   };
 
   unlikeTweet = e => {
-    let data = { tweetId: e.target.id, userId: this.props.userId };
-    this.props.unlikeTweet(data).then(() => {
-      this.props.getUserProfile(data).then(() => {
-        this.props.getLikedTweets(data);
+    // Pass the current logged in user to check if he has liked the specific tweets
+    let unlikePayload = { tweetId: e.target.id, userId: this.props.userId };
+    // Fetch the current feed based on the userId in the params
+    const getFeedPayload = {
+      userId: this.props.match.params.userId,
+    }
+    this.props.unlikeTweet(unlikePayload).then(() => {
+      this.props.getUserProfile(getFeedPayload).then(() => {
+        this.props.getLikedTweets(getFeedPayload);
       });
     });
   };
@@ -53,9 +64,16 @@ class Profile extends Component {
   deleteTweet = e => {
     const data = {
       tweetId: e.target.id,
-      userId: this.props.userId,
+      userId: this.props.match.params.userId,
     };
     this.props.deleteTweet(data).then(() => {
+      this.props.getUserProfile(data);
+    });
+  };
+
+  bookmarkTweet = e => {
+    let data = { tweetId: e.target.id, userId: this.props.userId };
+    this.props.bookmarkTweet(data).then(() => {
       this.props.getUserProfile(data);
     });
   };
@@ -73,6 +91,11 @@ class Profile extends Component {
 
     const numTweets = profile && profile.tweets ? profile.tweets.length : 0;
 
+    let bookmarkedTweets = null;
+    if (this.props.bookmarkedTweets) {
+      bookmarkedTweets = this.props.bookmarkedTweets;
+    }
+    
     return (
       <div className="flexHomeScreen">
         <div>
@@ -166,6 +189,8 @@ class Profile extends Component {
                       likeTweet={this.likeTweet}
                       unlikeTweet={this.unlikeTweet}
                       deleteTweet={this.deleteTweet}
+                      bookmarkTweet={this.bookmarkTweet}
+                      bookmarks={bookmarkedTweets}
                     />
                   </div>
                 ) : null}
@@ -178,6 +203,8 @@ class Profile extends Component {
                       likeTweet={this.likeTweet}
                       unlikeTweet={this.unlikeTweet}
                       deleteTweet={this.deleteTweet}
+                      bookmarkTweet={this.bookmarkTweet}
+                      bookmarks={bookmarkedTweets}
                     />
                   </div>
                 ) : null}
@@ -189,6 +216,8 @@ class Profile extends Component {
                       tweets={profile.retweets}
                       likeTweet={this.likeTweet}
                       unlikeTweet={this.unlikeTweet}
+                      bookmarkTweet={this.bookmarkTweet}
+                      bookmarks={bookmarkedTweets}
                     />
                   </div>
                 ) : null}
@@ -200,6 +229,8 @@ class Profile extends Component {
                       tweets={likedTweets}
                       likeTweet={this.likeTweet}
                       unlikeTweet={this.unlikeTweet}
+                      bookmarkTweet={this.bookmarkTweet}
+                      bookmarks={bookmarkedTweets}
                     />
                   </div>
                 ) : null}
@@ -217,6 +248,8 @@ const mapStateToProps = state => ({
   profile: state.user.profile,
   likedTweets: state.user.likedTweets,
   userId: state.user.currentUser._id,
+  bookmarkedTweets: state.user.currentUser.bookmarks,
+
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -225,6 +258,7 @@ const mapDispatchToProps = dispatch => ({
   likeTweet: data => dispatch(tweetActions.likeTweet(data)),
   unlikeTweet: data => dispatch(tweetActions.unlikeTweet(data)),
   deleteTweet: data => dispatch(tweetActions.deleteTweet(data)),
+  bookmarkTweet: data => dispatch(tweetActions.bookmarkTweet(data)),
 });
 
 export default connect(

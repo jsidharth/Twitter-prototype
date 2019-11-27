@@ -43,8 +43,12 @@ class Bookmarks extends Component {
   };
   render() {
     let renderBookmarks = null;
+    let bookmarkedTweets = null;
     if (this.props.bookmarkedTweets) {
+      // Contains all the id of bookmarked tweets
       renderBookmarks = this.props.bookmarkedTweets;
+      // Contains all the tweets with details which are bookmarked by the user
+      bookmarkedTweets = this.props.tweets;
     }
     return (
       <div className="flexHomeScreen">
@@ -54,9 +58,10 @@ class Bookmarks extends Component {
         <div className="cardWidth">
           <div className="paperHeight">Bookmarks</div>
           <TweetCard
-            tweets={renderBookmarks}
+            tweets={bookmarkedTweets}
             likeTweet={this.likeTweet}
             unlikeTweet={this.unlikeTweet}
+            bookmarks={renderBookmarks}
           />
         </div>
         <SearchBar />
@@ -65,7 +70,8 @@ class Bookmarks extends Component {
   }
 }
 const mapStateToProps = state => ({
-  bookmarkedTweets: state.tweet.bookmarkedTweets,
+  bookmarkedTweets: state.user.currentUser.bookmarks,
+  tweets: state.tweet.bookmarkedTweets,
   userId: state.user.currentUser._id,
 });
 
