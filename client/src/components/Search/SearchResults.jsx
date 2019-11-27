@@ -28,9 +28,7 @@ class SearchResults extends Component {
     const { searchTerm } = this.props.location.state;
     let data = { tweetId: e.target.id, userId: this.state.userId };
     this.props.unlikeTweet(data).then(() => {
-      this.props.getUserProfile(data).then(() => {
         this.props.getSearchResults(searchTerm);
-      });
     });
   };
   render() {
