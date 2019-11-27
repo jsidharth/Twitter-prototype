@@ -17,7 +17,6 @@ class MessageCard extends Component {
 
   componentDidMount() {
     const data = {
-      // userId: this.props.userId
       userId: '5dd1e01ca41f61bc78f2c6f1',
     };
 
@@ -32,27 +31,16 @@ class MessageCard extends Component {
     this.props.setActiveMessage(payload);
   }
   render() {
-    console.log(this.props.conversations);
-
     const { conversations } = this.props;
     const conversationThread = [];
     const userId = '5dd1e01ca41f61bc78f2c6f1';
     const threads = conversations.map(convo => {
       const messageThreadUser = convo.user_1._id === userId ? convo.user_2 : convo.user_1;
-      console.log('Message thread user: ', messageThreadUser);
-      console.log('Finding messages: ', convo.messages);
       return (
         <div className="cardWidth-message" key={convo._id} id={convo._id} onClick= {e => this.handleActiveMessage(e)}>
           <div className="cardContentHeight" id={convo._id}>
             <div className="flexImageTweet" id={convo._id}>
               <div id={convo._id}>
-                {/* Include user profile image if available */}
-                {/* <Image
-                  src={messageThreadUser.profilePic ? messageThreadUser.profilePic : "/images/default_profile_bigger.png"}
-                  roundedCircle
-                  className="profileImage"
-                  width="60%"
-                /> */}
                  <img src={messageThreadUser.profilePic ? messageThreadUser.profilePic : "/images/default_profile_reasonably_small.png"} className="profileImageMessage" alt="user" />
               </div>
               <div className="flexNameHandle" id={convo._id}>

@@ -42,7 +42,6 @@ class GetConversationThread extends Component {
    }
 
   render() {
-    // console.log('Get conversation: ', this.props.location.state.messages);
     const { activeConv } = this.props;
     const userId = '5dd1e01ca41f61bc78f2c6f1';
     const messageThreadUser =
@@ -59,15 +58,9 @@ class GetConversationThread extends Component {
         <div className="messageThreadBody">
         {activeConv.messages && activeConv.messages.length
           ? activeConv.messages.map(eachMessage => {
-              console.log('Each message: ', eachMessage);
-              console.log('Sender: ', eachMessage.sender);
               let myDate = new Date(eachMessage.createdAt);
               myDate = myDate.toString().split(' ');
               const timeValue = myDate[4].split(':');
-              console.log(eachMessage);
-              if(!eachMessage.body){
-                console.log('no body');
-              }
               return (
                 <div>
                   {eachMessage.sender === userId ? (
@@ -77,7 +70,6 @@ class GetConversationThread extends Component {
                       <div>
                       <div className="messageInfoLoggedInUser">
                         <div className="messageBoxLoggedInUser">
-                          {/* <div className="messageContent">{eachMessage.body}</div> */}
                           <div className="messageContent">{eachMessage.body}</div>
                         </div>
                       </div>
@@ -88,13 +80,11 @@ class GetConversationThread extends Component {
                   ) : (
                     
                     <div>
-                      {/* {!eachMessage.body ? null :  */}
                       <div className="messageInfoSenderUser">
                         <div className="messageBoxSenderUser">
                           <div className="messageContent">{!eachMessage.body ? null : eachMessage.body}</div>
                         </div>
                       </div>
-                      {/* } */}
                       <div className="messageTimeStampSenderUser">
                         {myDate[0]}, {timeValue[0]}:{timeValue[1]}
                       </div>

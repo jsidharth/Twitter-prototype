@@ -10,7 +10,6 @@ import TweetDetails from './TweetDetails/TweetDetails';
 import Bookmarks from './Bookmarks/Bookmarks';
 import Profile from './Profile/Profile';
 import Analytics from './Analytics/Analytics';
-import GetConversationThread from './MessageThread/GetConversationThread';
 import SearchResults from './Search/SearchResults';
 import Follow from './FollowTab/FollowTab';
 
@@ -28,7 +27,6 @@ class Main extends Component {
           <Route path="/home/status/:tweetID" component={TweetDetails} />
           <Route path="/home" component={Home} />
           <Route path="/bookmarks" component={Bookmarks} />
-          <Route path="/messages/:userId_1-:userId_2" component={GetConversationThread} />
           <Route path="/messages" component={Messages} />
           <Route path="/lists" component={Lists} />
           <Route path="/profile" component={Profile} />

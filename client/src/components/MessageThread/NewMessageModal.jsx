@@ -38,11 +38,9 @@ class NewMessageModal extends Component {
     const payload = {
       "user_1": '5dd1e01ca41f61bc78f2c6f1',
       "user_2": e.target.id,
-      // "sender": '5dd1e01ca41f61bc78f2c6f1',
     };
 
     const data = {
-      // userId: this.props.userId
       userId: '5dd1e01ca41f61bc78f2c6f1',
     };
     this.props.composeMessage(payload).then(() => {

@@ -28,7 +28,6 @@ export const setActiveMessage = payload => {
       console.log(response.data);
       if (response.status === 200) {
         const activeMessage = _.find(response.data, conv => conv._id === payload.convId);
-        console.log('here active in action', activeMessage);
         dispatch({
           type: actionTypes.ACTIVE_MESSAGE,
           payload: activeMessage,
