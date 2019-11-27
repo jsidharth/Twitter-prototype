@@ -6,8 +6,6 @@ const kafka = require('../../kafka/client');
 const messageRouter = express.Router();
 
 messageRouter.post('/compose', (req, res) => {
-  console.log('Inside POST  Messages');
-  console.log('Request Body: ', req.body);
   kafka.makeRequest(
     'messageTopic',
     {
@@ -16,7 +14,6 @@ messageRouter.post('/compose', (req, res) => {
     },
     (err, result) => {
       if (err) {
-        console.log('Error ', err);
         res.status(500).json({
           message: err.message,
         });

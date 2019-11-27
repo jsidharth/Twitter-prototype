@@ -1,0 +1,42 @@
+.flexHomeScreen {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .cardContainerForMessages {
+    width: 600px;
+    margin-top: 45%;
+  }
+
+  .messageAlignButton {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .messageBtn {
+    background-color: #1DA1F2;
+    color: white;
+    text-align: center;
+    font-weight: 700;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border-radius: 20px;
+    width: 30%;
+    height: 40px;
+    font-size: 12px;
+    outline: none;
+}
+
+.firstNote {
+  font-size: large;
+  font-weight: 800;
+  text-align: center;
+}
+
+.secondNote {
+  font-weight: 400;
+  color: #657786;
+  text-align: center;
+}

@@ -1,7 +1,8 @@
 import * as imageActions from './imageActions';
-import * as tweetActions from './tweetActions';
 import * as userActions from './userActions';
-import * as analyticsActions from './analyticsActions';
+import * as tweetActions from './tweetActions';
+import * as messageActions from './messageActions';
 import * as searchActions from './searchActions';
+import * as analyticsActions from './analyticsActions';
 
-export { imageActions, tweetActions, userActions, searchActions, analyticsActions };
+export { imageActions, tweetActions, messageActions, userActions, searchActions, analyticsActions };
