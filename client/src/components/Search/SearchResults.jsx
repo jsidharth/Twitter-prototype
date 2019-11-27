@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
-import {withRouter} from 'react-router';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { Tabs, Tab } from 'react-bootstrap';
 import Sidebar from '../Sidebar/Sidebar';
@@ -28,12 +28,12 @@ class SearchResults extends Component {
     const { searchTerm } = this.props.location.state;
     let data = { tweetId: e.target.id, userId: this.props.userId };
     this.props.unlikeTweet(data).then(() => {
-        this.props.getSearchResults(searchTerm);
+      this.props.getSearchResults(searchTerm);
     });
   };
   render() {
     const { searchResults } = this.props;
-    const activeTab = (searchResults.tweets && searchResults.tweets.length)? "tweets":"users";
+    const activeTab = searchResults.tweets && searchResults.tweets.length ? 'tweets' : 'users';
     return (
       <div className="flexHomeScreen">
         <div className="sideBarWidths">
@@ -87,7 +87,7 @@ class SearchResults extends Component {
 const mapStateToProps = state => ({
   searchResults: state.search.searchResults,
   likedTweets: state.user.likedTweets,
-  userId: state.user.currentUser._id
+  userId: state.user.currentUser._id,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -16,9 +16,9 @@ class Bookmarks extends Component {
 
   componentDidMount() {
     const data = {
-      userId: this.props.userId
+      userId: this.props.userId,
     };
-    console.log("here", this.props.userId)
+    console.log('here', this.props.userId);
     const { getBookmarks } = this.props;
     getBookmarks(data);
   }
@@ -26,16 +26,16 @@ class Bookmarks extends Component {
     const { userId } = this.props;
     let data = { tweetId: e.target.id, userId };
     this.props.likeTweet(data).then(() => {
-      data = {  userId };
+      data = { userId };
       this.props.getBookmarks(data);
     });
   };
 
   unlikeTweet = e => {
     const { userId } = this.props;
-    let data = { tweetId: e.target.id, userId};
+    let data = { tweetId: e.target.id, userId };
     this.props.unlikeTweet(data).then(() => {
-       data = {  userId };
+      data = { userId };
       this.props.getBookmarks(data);
     });
   };
@@ -63,8 +63,8 @@ class Bookmarks extends Component {
   }
 }
 const mapStateToProps = state => ({
-    bookmarkedTweets: state.tweet.bookmarkedTweets,
-    userId: state.user.currentUser._id,
+  bookmarkedTweets: state.tweet.bookmarkedTweets,
+  userId: state.user.currentUser._id,
 });
 
 const mapDispatchToProps = dispatch => ({

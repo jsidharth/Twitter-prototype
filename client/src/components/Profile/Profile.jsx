@@ -21,7 +21,6 @@ class Profile extends Component {
     this.likeTweet = this.likeTweet.bind(this);
     this.unlikeTweet = this.unlikeTweet.bind(this);
     this.deleteTweet = this.deleteTweet.bind(this);
-
   }
 
   componentDidMount() {
@@ -33,7 +32,7 @@ class Profile extends Component {
     getLikedTweets(data);
   }
 
-  likeTweet = (e) => {
+  likeTweet = e => {
     let data = { tweetId: e.target.id, userId: this.props.userId };
     this.props.likeTweet(data).then(() => {
       this.props.getUserProfile(data).then(() => {
@@ -48,18 +47,18 @@ class Profile extends Component {
       this.props.getUserProfile(data).then(() => {
         this.props.getLikedTweets(data);
       });
-  })
-}
+    });
+  };
 
-  deleteTweet = (e) => {
+  deleteTweet = e => {
     const data = {
       tweetId: e.target.id,
-      userId: this.props.userId
-    }
+      userId: this.props.userId,
+    };
     this.props.deleteTweet(data).then(() => {
-      this.props.getUserProfile(data)
-    })
-  }
+      this.props.getUserProfile(data);
+    });
+  };
 
   render() {
     const { profile, likedTweets } = this.props;
@@ -162,14 +161,24 @@ class Profile extends Component {
               <Tab eventKey="tweets" title="Tweets">
                 {profile.tweets && profile.tweets.length ? (
                   <div className="profileTweets">
-                    <TweetCard tweets={profile.tweets} likeTweet={this.likeTweet} unlikeTweet={this.unlikeTweet} deleteTweet={this.deleteTweet}/>
+                    <TweetCard
+                      tweets={profile.tweets}
+                      likeTweet={this.likeTweet}
+                      unlikeTweet={this.unlikeTweet}
+                      deleteTweet={this.deleteTweet}
+                    />
                   </div>
                 ) : null}
               </Tab>
               <Tab eventKey="tweets&replies" title="Tweets & replies">
                 {profile.tweets && profile.tweets.length ? (
                   <div className="profileTweets">
-                    <TweetCard tweets={profile.tweets} likeTweet={this.likeTweet} unlikeTweet={this.unlikeTweet} deleteTweet={this.deleteTweet}/>
+                    <TweetCard
+                      tweets={profile.tweets}
+                      likeTweet={this.likeTweet}
+                      unlikeTweet={this.unlikeTweet}
+                      deleteTweet={this.deleteTweet}
+                    />
                   </div>
                 ) : null}
               </Tab>
@@ -205,9 +214,9 @@ class Profile extends Component {
 }
 
 const mapStateToProps = state => ({
-    profile: state.user.profile,
-    likedTweets: state.user.likedTweets,
-    userId: state.user.currentUser._id
+  profile: state.user.profile,
+  likedTweets: state.user.likedTweets,
+  userId: state.user.currentUser._id,
 });
 
 const mapDispatchToProps = dispatch => ({
