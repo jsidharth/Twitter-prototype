@@ -25,9 +25,11 @@ class MessageCard extends Component {
     getMessageDetails(data);
   }
   handleActiveMessage = (e) => {
-   console.log('here', e.target.id);
-    const activeMessage = _.find(this.props.conversations, conv => conv._id === e.target.id);
-    this.props.setActiveMessage(activeMessage);
+    const payload = {
+      userId: this.props.userId,
+      convId: e.target.id
+    };
+    this.props.setActiveMessage(payload);
   }
   render() {
     console.log(this.props.conversations);
@@ -56,13 +58,6 @@ class MessageCard extends Component {
                 <p className="messageUserName" id={convo._id}>{messageThreadUser.name}</p>
                 <p className="messageUserHandle" id={convo._id}>@{messageThreadUser.handle}</p>
               </div>
-              {/* {convo.messages && convo.messages.length
-                ? convo.messages.forEach(eachMessage => {
-                    console.log(' Here' ,eachMessage.body);
-                    // conversationThread.push(eachMessage.body);
-                  })
-                : null} */}
-              {/* {console.log('Conversation Thread: ', conversationThread)} */}
             </div>
           </div>
         </div>
@@ -76,6 +71,7 @@ class MessageCard extends Component {
 const mapStateToProps = state => {
   return {
     conversations: state.message.conversations,
+    userId: '5dd1e01ca41f61bc78f2c6f1'
   };
 };
 

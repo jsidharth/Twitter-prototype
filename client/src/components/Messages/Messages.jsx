@@ -40,6 +40,7 @@ class Messages extends Component {
   };
 
   render() {
+    console.log(this.state.activeMessage)
     return (
       <div className="flexHomeScreen">
         <div>

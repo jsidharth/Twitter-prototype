@@ -36,11 +36,9 @@ class NewMessageModal extends Component {
   composeMessage = (e) => {
     console.log(e.target.id);
     const payload = {
-      "actionType":"COMPOSE",
       "user_1": '5dd1e01ca41f61bc78f2c6f1',
       "user_2": e.target.id,
-      "sender": '5dd1e01ca41f61bc78f2c6f1',
-      // "body": this.state.new_message
+      // "sender": '5dd1e01ca41f61bc78f2c6f1',
     };
 
     const data = {

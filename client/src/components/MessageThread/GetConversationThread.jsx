@@ -19,9 +19,11 @@ class GetConversationThread extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
   handleActiveMessage = (e) => {
-    console.log('here', e.target.id);
-     const activeMessage = _.find(this.props.conversations, conv => conv._id === e.target.id);
-     this.props.setActiveMessage(activeMessage);
+     const payload = {
+       userId: this.props.userId,
+       convId: e.target.id
+     };
+     this.props.setActiveMessage(payload);
    }
    handleChange = (e) => {
     this.setState({
@@ -31,7 +33,6 @@ class GetConversationThread extends Component {
 
    sendMessage = (e) => {
     const payload = {
-      "actionType":"UPDATE",
       "user_1": this.props.activeConv.user_1._id,
       "user_2": this.props.activeConv.user_2._id,
       "sender": this.props.userId,
@@ -55,7 +56,7 @@ class GetConversationThread extends Component {
             <div className="convoUserHandle">@{messageThreadUser.handle}</div>
           </div>
         </div>
-
+        <div className="messageThreadBody">
         {activeConv.messages && activeConv.messages.length
           ? activeConv.messages.map(eachMessage => {
               console.log('Each message: ', eachMessage);
@@ -63,26 +64,37 @@ class GetConversationThread extends Component {
               let myDate = new Date(eachMessage.createdAt);
               myDate = myDate.toString().split(' ');
               const timeValue = myDate[4].split(':');
+              console.log(eachMessage);
+              if(!eachMessage.body){
+                console.log('no body');
+              }
               return (
                 <div>
                   {eachMessage.sender === userId ? (
+                     
                     <div>
+                      {!eachMessage.body ? null :
+                      <div>
                       <div className="messageInfoLoggedInUser">
                         <div className="messageBoxLoggedInUser">
+                          {/* <div className="messageContent">{eachMessage.body}</div> */}
                           <div className="messageContent">{eachMessage.body}</div>
                         </div>
                       </div>
                       <div className="messageTimeStampLoggedInUser">
                         {myDate[0]}, {timeValue[0]}:{timeValue[1]}
-                      </div>
+                      </div></div>}
                     </div>
                   ) : (
+                    
                     <div>
+                      {/* {!eachMessage.body ? null :  */}
                       <div className="messageInfoSenderUser">
                         <div className="messageBoxSenderUser">
-                          <div className="messageContent">{eachMessage.body}</div>
+                          <div className="messageContent">{!eachMessage.body ? null : eachMessage.body}</div>
                         </div>
                       </div>
+                      {/* } */}
                       <div className="messageTimeStampSenderUser">
                         {myDate[0]}, {timeValue[0]}:{timeValue[1]}
                       </div>
@@ -92,11 +104,12 @@ class GetConversationThread extends Component {
               );
             })
           : null}
+          </div>
 </div>
         <div className="conversationCardWidth">
           <div className="conversationHeight">
             <div className="autoExpandDiv1">
-              <textarea className="textArea" placeholder="Start a new message" id = "new_message"onChange={this.handleChange}/>
+              <textarea className="textArea1" placeholder="Start a new message" id = "new_message"onChange={this.handleChange}/>
               <div className="sendIcon" onClick={e => this.sendMessage(e)}>
                 <MdSend size={25} />
               </div>
