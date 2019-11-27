@@ -40,3 +40,7 @@
   color: #657786;
   text-align: center;
 }
+
+*:focus {
+  outline: 0 !important;
+}
