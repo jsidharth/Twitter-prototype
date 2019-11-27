@@ -10,12 +10,13 @@ const handleRequest = async (tweetDetails, callback) => {
       null
     );
   } else {
-    tweet.likes.pull(tweetDetails.userId);
-    const likeCount = tweet.likes.length;
-    await tweet.save();
-
+    const updatedTweet = await Tweets.findByIdAndUpdate(tweetDetails.tweetId, {
+      $pull: {
+        likes: tweetDetails.userId,
+      },
+    });
     callback(null, {
-      message: `likeCount: ${likeCount}`,
+      message: `likeCount: ${updatedTweet.likes.length}`,
     });
   }
 };

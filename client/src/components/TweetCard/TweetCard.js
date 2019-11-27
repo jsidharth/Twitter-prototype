@@ -119,5 +119,4 @@ class TweetCard extends Component {
 const mapStateToProps = state => ({
   userId: state.user.currentUser._id,
 });
-
 export default connect(mapStateToProps)(TweetCard);
