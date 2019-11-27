@@ -1,10 +1,12 @@
+/* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import { Navbar, ListGroup } from 'react-bootstrap';
-import './Sidebar.css';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { GoHome, GoMail, GoNote, GoGraph } from 'react-icons/go';
 import { FiBookmark } from 'react-icons/fi';
+import './Sidebar.css';
 
 class Sidebar extends Component {
   constructor(props) {
@@ -13,6 +15,7 @@ class Sidebar extends Component {
   }
 
   render() {
+    const { userId } = this.props;
     return (
       <div>
         <div>
@@ -71,7 +74,7 @@ class Sidebar extends Component {
               </ListGroup.Item>
 
               <ListGroup.Item>
-                <Link to="/profile">
+                <Link to={`/profile/${userId}`}>
                   <div className="flexSidebars">
                     <FaRegUserCircle size={30} />
                     <p className="sidebarTopics">Profile</p>
@@ -99,4 +102,8 @@ class Sidebar extends Component {
   }
 }
 
-export default Sidebar;
+const mapStateToProps = state => ({
+  userId: state.user.currentUser._id,
+});
+
+export default connect(mapStateToProps)(Sidebar);

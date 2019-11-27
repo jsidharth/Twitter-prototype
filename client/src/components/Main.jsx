@@ -29,9 +29,9 @@ class Main extends Component {
           <Route path="/bookmarks" component={Bookmarks} />
           <Route path="/messages" component={Messages} />
           <Route path="/lists" component={Lists} />
-          <Route path="/profile" component={Profile} />
+          <Route path="/profile/:userId" component={Profile} />
           <Route path="/analytics" component={Analytics} />
-          <Route path="/search" component={SearchResults}/>
+          <Route path="/search" component={SearchResults} />
           <Route path="/follow" component={Follow} />
         </Switch>
       </div>

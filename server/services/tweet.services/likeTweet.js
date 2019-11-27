@@ -1,22 +1,28 @@
 import Tweets from '../../models/tweet.model';
 
 const handleRequest = async (tweetDetails, callback) => {
-  const tweet = await Tweets.findById(tweetDetails.tweetId);
-  if (!tweet) {
-    callback(
-      {
-        message: 'Tweet not found!',
-      },
-      null
-    );
-  } else {
-    tweet.likes.addToSet(tweetDetails.userId);
-    const likeCount = tweet.likes.length;
-    await tweet.save();
+  try {
+    const tweet = await Tweets.findById(tweetDetails.tweetId);
+    if (!tweet) {
+      callback(
+        {
+          message: 'Tweet not found!',
+        },
+        null
+      );
+    } else {
+      const updatedTweet = await Tweets.findByIdAndUpdate(tweetDetails.tweetId, {
+        $addToSet: {
+          likes: tweetDetails.userId,
+        },
+      });
 
-    callback(null, {
-      message: `likeCount: ${likeCount}`,
-    });
+      callback(null, {
+        message: `likeCount: ${updatedTweet.likes.length}`,
+      });
+    }
+  } catch (err) {
+    console.log(err);
   }
 };
 

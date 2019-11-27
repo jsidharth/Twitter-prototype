@@ -25,7 +25,7 @@ class Profile extends Component {
 
   componentDidMount() {
     const data = {
-      userId: this.props.userId,
+      userId: this.props.match.params.userId,
     };
     const { getUserProfile, getLikedTweets } = this.props;
     getUserProfile(data);
@@ -33,19 +33,29 @@ class Profile extends Component {
   }
 
   likeTweet = e => {
-    let data = { tweetId: e.target.id, userId: this.props.userId };
-    this.props.likeTweet(data).then(() => {
-      this.props.getUserProfile(data).then(() => {
-        this.props.getLikedTweets(data);
+    // Pass the current logged in user to check if he has liked the specific tweets
+    const likePayload = { tweetId: e.target.id, userId: this.props.userId };
+    // Fetch the current feed based on the userId in the params
+    const getFeedPayload = {
+      userId: this.props.match.params.userId,
+    }
+    this.props.likeTweet(likePayload).then(() => {
+      this.props.getUserProfile(getFeedPayload).then(() => {
+        this.props.getLikedTweets(getFeedPayload);
       });
     });
   };
 
   unlikeTweet = e => {
-    let data = { tweetId: e.target.id, userId: this.props.userId };
-    this.props.unlikeTweet(data).then(() => {
-      this.props.getUserProfile(data).then(() => {
-        this.props.getLikedTweets(data);
+    // Pass the current logged in user to check if he has liked the specific tweets
+    let unlikePayload = { tweetId: e.target.id, userId: this.props.userId };
+    // Fetch the current feed based on the userId in the params
+    const getFeedPayload = {
+      userId: this.props.match.params.userId,
+    }
+    this.props.unlikeTweet(unlikePayload).then(() => {
+      this.props.getUserProfile(getFeedPayload).then(() => {
+        this.props.getLikedTweets(getFeedPayload);
       });
     });
   };
@@ -53,7 +63,7 @@ class Profile extends Component {
   deleteTweet = e => {
     const data = {
       tweetId: e.target.id,
-      userId: this.props.userId,
+      userId: this.props.match.params.userId,
     };
     this.props.deleteTweet(data).then(() => {
       this.props.getUserProfile(data);
@@ -216,7 +226,7 @@ class Profile extends Component {
 const mapStateToProps = state => ({
   profile: state.user.profile,
   likedTweets: state.user.likedTweets,
-  userId: state.user.currentUser._id,
+  userId: state.user.currentUser._id
 });
 
 const mapDispatchToProps = dispatch => ({
