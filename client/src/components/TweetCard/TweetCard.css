@@ -11,7 +11,7 @@
   text-decoration: none;
 }
 
-.cardContent {
+.cardContentTweet {
   font-size: inherit;
   margin-bottom: 0px;
   border-style: solid;
@@ -19,7 +19,9 @@
   border-color: #d0d4d6;
   padding: 20px;
 }
-
+.cardContentTweet:hover{
+  background-color: #f5f8fa;
+}
 .flexImageTweet {
   display: flex;
   flex-direction: row;

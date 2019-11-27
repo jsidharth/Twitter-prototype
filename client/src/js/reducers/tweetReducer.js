@@ -5,6 +5,7 @@ const initialState = {
   feed: [],
   currentTweet: {},
   bookmarkedTweets: [],
+  tweetDeletedFlag: false,
 };
 
 const tweetReducer = (state = initialState, action) => {
@@ -17,6 +18,8 @@ const tweetReducer = (state = initialState, action) => {
       return { ...state, currentTweet: action.payload };
     case actionTypes.GET_BOOKMARKS:
       return { ...state, bookmarkedTweets: action.payload.bookmarkedTweets };
+    case actionTypes.DELETE_TWEET:
+      return { ...state, tweetDeletedFlag: true };
     default:
       break;
   }

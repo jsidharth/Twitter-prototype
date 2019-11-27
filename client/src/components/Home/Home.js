@@ -7,6 +7,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import PostTweet from '../PostTweet/PostTweet';
 import './Home.css';
 import TweetFeed from '../TweetFeed/TweetFeed';
+import SearchBar from '../Search/SearchBar';
 
 class Home extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class Home extends Component {
   }
 
   render() {
-    let redirectVar = '';
+    const redirectVar = '';
     // if (!cookie.get('token')) {
     //   redirectVar = <Redirect to="/" />;
     // }
@@ -30,6 +31,7 @@ class Home extends Component {
             <PostTweet />
             <TweetFeed />
           </div>
+          <SearchBar />
         </div>
       </div>
     );

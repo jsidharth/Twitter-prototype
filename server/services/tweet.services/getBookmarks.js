@@ -36,6 +36,7 @@ const handleRequest = async (userId, callback) => {
           body: tweet.body,
           image: tweet.image,
           created_at: tweet.created_at,
+          likes: tweet.likes,
         };
       });
 

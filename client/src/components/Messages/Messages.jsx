@@ -11,6 +11,7 @@ import _ from 'lodash';
 import MessageCard from '../MessageCard/MessageCard';
 import CreateMessageThread from '../MessageThread/CreateMessageThread';
 import GetConversationThread from '../MessageThread/GetConversationThread';
+import NewMessageModal from '../MessageThread/NewMessageModal';
 import Sidebar from '../Sidebar/Sidebar';
 import './Messages.css';
 
@@ -19,7 +20,9 @@ class Messages extends Component {
     super(props);
     this.state = {
       activeMessage: {},
+      showMessageModal: false,
     };
+    this.showMessageModal = this.showMessageModal.bind(this);
   }
 
   // eslint-disable-next-line react/no-deprecated
@@ -30,6 +33,12 @@ class Messages extends Component {
     });
   }
 
+  showMessageModal = () => {
+    this.setState({ 
+      showMessageModal: !this.state.showMessageModal
+     });
+  };
+
   render() {
     return (
       <div className="flexHomeScreen">
@@ -39,11 +48,15 @@ class Messages extends Component {
         <div className="cardWidth1">
           <div className="paperHeight">
             Messages
-            <Link to="/home">
-              <div className="messageIcon">
+          <div className="messageIcon" onClick={this.showMessageModal}>
                 <GoMail size={25} />
               </div>
-            </Link>
+            {this.showMessageModal ? (
+              <NewMessageModal
+                showMessageModal={this.showMessageModal}
+                showMessageModalState={this.state.showMessageModal}
+              />
+            ) : null}
           </div>
           <div className="messageCardStyling">
             <MessageCard />

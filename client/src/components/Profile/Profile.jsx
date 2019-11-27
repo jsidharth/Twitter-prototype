@@ -9,13 +9,19 @@ import { GiBalloons } from 'react-icons/gi';
 import { Tabs, Tab } from 'react-bootstrap';
 import TweetCard from '../TweetCard/TweetCard';
 import Sidebar from '../Sidebar/Sidebar';
+import SearchBar from '../Search/SearchBar';
 import './Profile.css';
-import { userActions } from '../../js/actions/index';
+import { userActions, tweetActions } from '../../js/actions/index';
 
 class Profile extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {userId: '5dcb31841c9d440000b0d332'};
+
+    this.likeTweet = this.likeTweet.bind(this);
+    this.unlikeTweet = this.unlikeTweet.bind(this);
+    this.deleteTweet = this.deleteTweet.bind(this);
+
   }
 
   componentDidMount() {
@@ -26,6 +32,34 @@ class Profile extends Component {
     const { getUserProfile, getLikedTweets } = this.props;
     getUserProfile(data);
     getLikedTweets(data);
+  }
+
+  likeTweet = (e) => {
+    let data = { tweetId: e.target.id, userId: this.state.userId };
+    this.props.likeTweet(data).then(() => {
+      this.props.getUserProfile(data).then(() => {
+        this.props.getLikedTweets(data);
+      });
+    });
+  };
+
+  unlikeTweet = e => {
+    let data = { tweetId: e.target.id, userId: this.state.userId };
+    this.props.unlikeTweet(data).then(() => {
+      this.props.getUserProfile(data).then(() => {
+        this.props.getLikedTweets(data);
+      });
+  })
+}
+
+  deleteTweet = (e) => {
+    const data = {
+      tweetId: e.target.id,
+      userId: '5dcb31841c9d440000b0d332'
+    }
+    this.props.deleteTweet(data).then(() => {
+      this.props.getUserProfile(data)
+    })
   }
 
   render() {
@@ -100,20 +134,22 @@ class Profile extends Component {
                   </p>
                 </div>
               </div>
-              <div className="followersFollowing">
-                <div className="follow">
-                  <div className="countStyle">
-                    {profile.following && profile.following.length ? profile.following.length : 0}
+              <Link to="/follow">
+                <div className="followersFollowing">
+                  <div className="follow">
+                    <div className="countStyle">
+                      {profile.following && profile.following.length ? profile.following.length : 0}
+                    </div>
+                    Following
                   </div>
-                  Following
-                </div>
-                <div className="follow">
-                  <div className="countStyle">
-                    {profile.followers && profile.followers.length ? profile.followers.length : 0}
+                  <div className="follow">
+                    <div className="countStyle">
+                      {profile.followers && profile.followers.length ? profile.followers.length : 0}
+                    </div>
+                    Followers
                   </div>
-                  Followers
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
           <div className="tabMargin">
@@ -123,38 +159,47 @@ class Profile extends Component {
               id="profile-tab"
               className="profileTabs"
             >
-            {/* Change the API for correct data */}
+              {/* Change the API for correct data */}
               <Tab eventKey="tweets" title="Tweets">
                 {profile.tweets && profile.tweets.length ? (
                   <div className="profileTweets">
-                    <TweetCard tweets={profile.tweets} />
+                    <TweetCard tweets={profile.tweets} likeTweet={this.likeTweet} unlikeTweet={this.unlikeTweet} deleteTweet={this.deleteTweet}/>
                   </div>
                 ) : null}
               </Tab>
               <Tab eventKey="tweets&replies" title="Tweets & replies">
                 {profile.tweets && profile.tweets.length ? (
                   <div className="profileTweets">
-                    <TweetCard tweets={profile.tweets} />
+                    <TweetCard tweets={profile.tweets} likeTweet={this.likeTweet} unlikeTweet={this.unlikeTweet} deleteTweet={this.deleteTweet}/>
                   </div>
                 ) : null}
               </Tab>
               <Tab eventKey="retweets" title="Retweets">
-                {profile.tweets && profile.tweets.length ? (
+                {profile.retweets && profile.retweets.length ? (
                   <div className="profileTweets">
-                    <TweetCard tweets={profile.tweets} />
+                    <TweetCard
+                      tweets={profile.retweets}
+                      likeTweet={this.likeTweet}
+                      unlikeTweet={this.unlikeTweet}
+                    />
                   </div>
                 ) : null}
               </Tab>
               <Tab eventKey="likes" title="Likes">
                 {likedTweets && likedTweets.length ? (
                   <div className="profileTweets">
-                    <TweetCard tweets={likedTweets} />
+                    <TweetCard
+                      tweets={likedTweets}
+                      likeTweet={this.likeTweet}
+                      unlikeTweet={this.unlikeTweet}
+                    />
                   </div>
                 ) : null}
               </Tab>
             </Tabs>
           </div>
         </div>
+        <SearchBar />
       </div>
     );
   }
@@ -170,6 +215,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   getUserProfile: data => dispatch(userActions.getUserProfile(data)),
   getLikedTweets: data => dispatch(userActions.getLikedTweets(data)),
+  likeTweet: data => dispatch(tweetActions.likeTweet(data)),
+  unlikeTweet: data => dispatch(tweetActions.unlikeTweet(data)),
+  deleteTweet: data => dispatch(tweetActions.deleteTweet(data)),
 });
 
 export default connect(

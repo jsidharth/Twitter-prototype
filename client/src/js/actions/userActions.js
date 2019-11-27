@@ -60,6 +60,7 @@ export const getUserProfile = payload => {
           payload: response.data,
         });
       }
+      return Promise.resolve();
     });
   };
 };
@@ -75,8 +76,9 @@ export const getLikedTweets = payload => {
           payload: response.data,
         });
       }
+      return Promise.resolve();
     });
   };
-}
+};
 
 export const userActions = { register, login };
