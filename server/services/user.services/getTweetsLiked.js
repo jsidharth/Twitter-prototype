@@ -32,7 +32,7 @@ const handleRequest = (userId, callback) => {
             body: tweet.body,
             image: tweet.image,
             profilePic: user.profilePic,
-            created_at: tweet.created_at,
+            created_at: tweet.createdAt,
             likes: tweet.likes,
           };
         });

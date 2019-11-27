@@ -3,5 +3,6 @@ import * as userActions from './userActions';
 import * as tweetActions from './tweetActions';
 import * as messageActions from './messageActions';
 import * as searchActions from './searchActions';
+import * as analyticsActions from './analyticsActions';
 
-export { imageActions, tweetActions, userActions, searchActions, messageActions };
+export { imageActions, tweetActions, messageActions, userActions, searchActions, analyticsActions };

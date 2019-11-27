@@ -3,20 +3,21 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { FiMessageCircle } from 'react-icons/fi';
 import { FaRegHeart } from 'react-icons/fa';
 import { AiOutlineRetweet, AiOutlineDelete } from 'react-icons/ai';
-import { MdBookmarkBorder } from 'react-icons/md';
+import { MdBookmarkBorder, MdBookmark } from 'react-icons/md';
 import './TweetCard.css';
 
 class TweetCard extends Component {
   constructor(props) {
     super(props);
-    this.state = { userId: '5dcb31841c9d440000b0d332' };
+    this.state = {};
   }
 
   render() {
-    const { tweets } = this.props;
+    const { tweets, userId, bookmarks} = this.props;
     const renderFeed = tweets.map(tweet => {
       let myDate = new Date(tweet.created_at);
       myDate = myDate.toString();
@@ -41,7 +42,15 @@ class TweetCard extends Component {
         </svg>
       );
 
-      const renderLikeButton = tweet.likes.includes(this.state.userId) ? unlikeButton : likeButton;
+      const renderLikeButton = tweet.likes.includes(userId) ? unlikeButton : likeButton;
+
+      // const bookmarkButton = <MdBookmarkBorder size={25} id={tweet._id} onClick={this.props.bookmarkTweet}/>;
+      // const bookmarkedAlreadyButton = <MdBookmark size={25} color="#1da1f2" />;
+
+      // const renderBookmarkButton = bookmarks.includes(tweet._id) ? bookmarkedAlreadyButton : bookmarkButton;
+      console.log('bookmarks..',this.props.bookmarks);
+      console.log(this.props.tweets);
+
       return (
         <div className="cardWidth" key={tweet._id}>
           <div className="cardContentTweet">
@@ -95,11 +104,19 @@ class TweetCard extends Component {
                 <div>{tweet.likes_count > 0 ? tweet.likes_count : null}</div>
               </div>
               <div className="flexBtnCnt">
-                <MdBookmarkBorder size={20} />
+                <MdBookmarkBorder size={20} id={tweet._id} onClick={this.props.bookmarkTweet}/>
+                {/* {renderBookmarkButton} */}
               </div>
-              {tweet.userId === '5dcb31841c9d440000b0d332' ? <div className="flexBtnCnt">
-                <AiOutlineDelete size={20} color="red" id={tweet._id} onClick={this.props.deleteTweet}/>
-              </div> : null}
+              {tweet.userId === userId ? (
+                <div className="flexBtnCnt">
+                  <AiOutlineDelete
+                    size={20}
+                    color="red"
+                    id={tweet._id}
+                    onClick={this.props.deleteTweet}
+                  />
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
@@ -108,5 +125,8 @@ class TweetCard extends Component {
     return <div>{renderFeed}</div>;
   }
 }
-
-export default TweetCard;
+const mapStateToProps = state => ({
+  userId: state.user.currentUser._id,
+  // bookmarkedTweets: state.tweet.bookmarkedTweets,
+});
+export default connect(mapStateToProps)(TweetCard);

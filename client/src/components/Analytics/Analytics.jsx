@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
-import { Card, Paper } from '@material-ui/core';
+import { MDBContainer } from 'mdbreact';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Sidebar from '../Sidebar/Sidebar';
+import ProfileViews from './ProfileViews';
+import MostViewedTweets from './MostViewedTweets';
+import NumberOfTweets from './NumberOfTweets';
+import MostLikedTweets from './MostLikedTweets';
+import MostRetweetedTweets from './MostRetweetedTweets';
 
 class Analytics extends Component {
   constructor(props) {
@@ -10,14 +17,23 @@ class Analytics extends Component {
 
   render() {
     return (
-      <div className="flexHomeScreen">
-        <div>
+      <Row>
+        <Col md={3}>
           <Sidebar />
-        </div>
-        <Card className="cardWidth">
-          <Paper className="paperHeight">Analytics</Paper>
-        </Card>
-      </div>
+        </Col>
+        <Col md={7}>
+          <Row>
+            <MDBContainer className="paperHeight">Analytics</MDBContainer>
+          </Row>
+          <Row className="border">
+            <ProfileViews />
+            <MostViewedTweets />
+            <NumberOfTweets />
+            <MostLikedTweets />
+            <MostRetweetedTweets />
+          </Row>
+        </Col>
+      </Row>
     );
   }
 }

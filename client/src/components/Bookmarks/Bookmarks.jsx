@@ -11,37 +11,44 @@ import SearchBar from '../Search/SearchBar';
 class Bookmarks extends Component {
   constructor(props) {
     super(props);
-          // userId: this.props.userId
-    this.state = { userId: '5dcb31841c9d440000b0d332' };
+    this.state = {};
+    this.likeTweet = this.likeTweet.bind(this);
+    this.unlikeTweet = this.unlikeTweet.bind(this);
   }
 
   componentDidMount() {
     const data = {
-      // userId: this.props.userId
-      userId: '5dcb32641c9d440000b0d334',
+      userId: this.props.userId,
     };
+    console.log('here', this.props.userId);
     const { getBookmarks } = this.props;
     getBookmarks(data);
   }
   likeTweet = e => {
-    let data = { tweetId: e.target.id, userId: '5dcb31841c9d440000b0d332' };
+    const { userId } = this.props;
+    let data = { tweetId: e.target.id, userId };
     this.props.likeTweet(data).then(() => {
-      data = {  userId: '5dcb32641c9d440000b0d334' };
+      data = { userId };
       this.props.getBookmarks(data);
     });
   };
 
   unlikeTweet = e => {
-    let data = { tweetId: e.target.id, userId: '5dcb31841c9d440000b0d332' };
+    const { userId } = this.props;
+    let data = { tweetId: e.target.id, userId };
     this.props.unlikeTweet(data).then(() => {
-       data = {  userId: '5dcb32641c9d440000b0d334' };
+      data = { userId };
       this.props.getBookmarks(data);
     });
   };
   render() {
     let renderBookmarks = null;
+    let bookmarkedTweets = null;
     if (this.props.bookmarkedTweets) {
+      // Contains all the id of bookmarked tweets
       renderBookmarks = this.props.bookmarkedTweets;
+      // Contains all the tweets with details which are bookmarked by the user
+      bookmarkedTweets = this.props.tweets;
     }
     return (
       <div className="flexHomeScreen">
@@ -51,9 +58,10 @@ class Bookmarks extends Component {
         <div className="cardWidth">
           <div className="paperHeight">Bookmarks</div>
           <TweetCard
-            tweets={renderBookmarks}
+            tweets={bookmarkedTweets}
             likeTweet={this.likeTweet}
             unlikeTweet={this.unlikeTweet}
+            bookmarks={renderBookmarks}
           />
         </div>
         <SearchBar />
@@ -61,11 +69,11 @@ class Bookmarks extends Component {
     );
   }
 }
-const mapStateToProps = state => {
-  return {
-    bookmarkedTweets: state.tweet.bookmarkedTweets,
-  };
-};
+const mapStateToProps = state => ({
+  bookmarkedTweets: state.user.currentUser.bookmarks,
+  tweets: state.tweet.bookmarkedTweets,
+  userId: state.user.currentUser._id,
+});
 
 const mapDispatchToProps = dispatch => ({
   getBookmarks: data => dispatch(tweetActions.getBookmarks(data)),

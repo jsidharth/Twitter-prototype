@@ -39,7 +39,7 @@ const handleRequest = (tweetId, callback) => {
             retweet_count: tweet.retweets.length || 0,
             body: tweet.body,
             image: tweet.image,
-            created_at: tweet.created_at,
+            created_at: tweet.createdAt,
             likes: tweet.likes,
             profilePic: user.profilePic,
           };
@@ -65,7 +65,7 @@ const handleRequest = (tweetId, callback) => {
                   retweet_count: comment.retweets.length || 0,
                   body: comment.body,
                   image: comment.image,
-                  created_at: comment.created_at,
+                  created_at: comment.createdAt,
                   likes: tweet.likes,
                   profilePic: commentUser.profilePic,
                 };
