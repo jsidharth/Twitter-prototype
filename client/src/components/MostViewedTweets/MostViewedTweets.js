@@ -13,7 +13,7 @@ class MostViewedTweets extends Component {
     this.state = {
       dataDoughnut: {
         labels: [],
-        datasets: [{}],
+        datasets: [],
       },
     };
   }

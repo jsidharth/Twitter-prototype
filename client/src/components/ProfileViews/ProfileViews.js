@@ -13,7 +13,7 @@ class ProfileViews extends Component {
     this.state = {
       dataLine: {
         labels: [],
-        datasets: [{}],
+        datasets: [],
       },
     };
   }

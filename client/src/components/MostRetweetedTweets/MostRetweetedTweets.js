@@ -13,7 +13,7 @@ class MostViewedTweets extends Component {
     this.state = {
       dataPie: {
         labels: [],
-        datasets: [{}],
+        datasets: [],
       },
     };
   }

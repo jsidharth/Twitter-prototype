@@ -13,7 +13,7 @@ class NumberOfTweets extends Component {
     this.state = {
       dataPie: {
         labels: [],
-        datasets: [{}],
+        datasets: [],
       },
     };
   }

@@ -14,7 +14,7 @@ class MostLikedTweets extends Component {
     this.state = {
       dataBar: {
         labels: [],
-        datasets: [{}],
+        datasets: [],
       },
     };
   }
