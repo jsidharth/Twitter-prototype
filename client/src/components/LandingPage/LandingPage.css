@@ -273,9 +273,6 @@ input[type='email'] {
   text-align: justify;
   margin-top: 0%;
 }
-.marginLeft{
-  padding-left: 0% !important;
-}
 
 *:focus {
   outline: 0 !important;
