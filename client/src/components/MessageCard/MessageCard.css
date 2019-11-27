@@ -38,6 +38,13 @@
     color: black;
   }
 
-  .messageClickCard:hover {
+.messageClickCard:hover {
     color: #657786;
-  }
+}
+
+.profileImage {
+    margin: 0 auto;
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 50%;
+}

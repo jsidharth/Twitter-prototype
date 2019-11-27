@@ -33,11 +33,6 @@ class MessageThread extends Component {
           <div className="secondNote">
             Choose one from your existing messages, or start a new one.
           </div>
-          {/* <div className="messageAlignButton">
-            <button className="messageBtn" type="button">
-              New Message
-            </button>
-          </div> */}
           <div className="messageAlignButton">
           <button type="button" className="messageBtn" onClick={this.showMessageModal}>
             New Message

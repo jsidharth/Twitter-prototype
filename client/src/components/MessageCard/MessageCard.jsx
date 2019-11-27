@@ -46,7 +46,7 @@ class MessageCard extends Component {
               <div id={convo._id}>
                 {/* Include user profile image if available */}
                 <Image
-                  src="/images/default_profile_bigger.png"
+                  src={messageThreadUser.profilePic ? messageThreadUser.profilePic : "/images/default_profile_bigger.png"}
                   roundedCircle
                   className="profileImage"
                   width="60%"

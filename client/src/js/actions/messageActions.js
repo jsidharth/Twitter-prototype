@@ -42,3 +42,12 @@ export const sendMessage = payload => {
     });
   };
 };
+
+export const composeMessage = payload => {
+  return dispatch => {
+    console.log(payload);
+    return axios.post(`${ROOT_URL}/message/compose`, payload).then(response => {
+      console.log('Status Code : ', response.status);
+    });
+  };
+};
