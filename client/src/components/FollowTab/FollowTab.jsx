@@ -18,7 +18,7 @@ class Follower extends Component {
   }
 
   render() {
-    const { followers, following, userId } = this.props;
+    const { userProfile } = this.props;
     return (
       <div className="flexHomeScreen">
         <div>
@@ -26,15 +26,15 @@ class Follower extends Component {
         </div>
         <div className="cardWidth">
           <div className="paperHeightForFollowers">
-            <Link to={`/profile/${userId}`}>
+            <Link to={`/profile/${userProfile._id}`}>
               <div className="backIcon">
                 <MdKeyboardBackspace size={30} />
               </div>
             </Link>
             <div className="flexFollowTopPane">
               {/* Change the values to Current user */}
-              <div className="usernameFollowTab">Madhu</div>
-              <div className="handleFollowTab">@Madhu</div>
+              <div className="usernameFollowTab">{userProfile.name}</div>
+              <div className="handleFollowTab">@{userProfile.handle}</div>
             </div>
           </div>
           <div className="tabMargin">
@@ -46,8 +46,8 @@ class Follower extends Component {
             >
               <Tab eventKey="followers" title="Followers">
                 <div className="followerTab">
-                  {followers && followers.length
-                    ? followers.map(follower => {
+                  {userProfile.followers && userProfile.followers.length
+                    ? userProfile.followers.map(follower => {
                         return (
                           <div>
                             <UserCard user={follower} long />
@@ -59,8 +59,8 @@ class Follower extends Component {
               </Tab>
               <Tab eventKey="following" title="Following">
                 <div className="followingTab">
-                  {following && following.length
-                    ? following.map(follower => {
+                  {userProfile.following && userProfile.following.length
+                    ? userProfile.following.map(follower => {
                         return (
                           <div>
                             <UserCard user={follower} long />
@@ -80,9 +80,7 @@ class Follower extends Component {
 }
 
 const mapStateToProps = state => ({
-  followers: state.user.profile.followers,
-  following: state.user.profile.following,
-  userId: state.user.profile._id,
+  userProfile: state.user.profile,
 });
 
 export default connect(mapStateToProps)(Follower);
