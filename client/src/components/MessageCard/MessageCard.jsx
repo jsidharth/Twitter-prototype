@@ -17,7 +17,7 @@ class MessageCard extends Component {
 
   componentDidMount() {
     const data = {
-      userId: '5dd1e01ca41f61bc78f2c6f1',
+      userId: this.props.userId,
     };
 
     const { getMessageDetails } = this.props;
@@ -31,9 +31,8 @@ class MessageCard extends Component {
     this.props.setActiveMessage(payload);
   }
   render() {
-    const { conversations } = this.props;
+    const { conversations, userId } = this.props;
     const conversationThread = [];
-    const userId = '5dd1e01ca41f61bc78f2c6f1';
     const threads = conversations.map(convo => {
       const messageThreadUser = convo.user_1._id === userId ? convo.user_2 : convo.user_1;
       return (
@@ -60,7 +59,7 @@ class MessageCard extends Component {
 const mapStateToProps = state => {
   return {
     conversations: state.message.conversations,
-    userId: '5dd1e01ca41f61bc78f2c6f1'
+    userId: state.user.currentUser._id,
   };
 };
 
