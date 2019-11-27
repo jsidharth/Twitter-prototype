@@ -129,5 +129,4 @@ const mapStateToProps = state => ({
   userId: state.user.currentUser._id,
   // bookmarkedTweets: state.tweet.bookmarkedTweets,
 });
-
 export default connect(mapStateToProps)(TweetCard);
