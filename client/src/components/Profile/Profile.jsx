@@ -10,13 +10,17 @@ import { Tabs, Tab } from 'react-bootstrap';
 import TweetCard from '../TweetCard/TweetCard';
 import Sidebar from '../Sidebar/Sidebar';
 import './Profile.css';
-import { userActions } from '../../js/actions/index';
-import { tweetActions } from '../../js/actions/index';
+import { userActions, tweetActions } from '../../js/actions/index';
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {userId: '5dcb31841c9d440000b0d332'};
+
+    this.likeTweet = this.likeTweet.bind(this);
+    this.unlikeTweet = this.unlikeTweet.bind(this);
+    this.deleteTweet = this.deleteTweet.bind(this);
+
   }
 
   componentDidMount() {
@@ -28,6 +32,7 @@ class Profile extends Component {
     getUserProfile(data);
     getLikedTweets(data);
   }
+
   likeTweet = (e) => {
     let data = { tweetId: e.target.id, userId: this.state.userId };
       this.props.likeTweet(data).then(()=>{
@@ -44,8 +49,18 @@ class Profile extends Component {
           this.props.getLikedTweets(data);
         })
       });
-
   }
+
+  deleteTweet = (e) => {
+    const data = {
+      tweetId: e.target.id,
+      userId: '5dcb31841c9d440000b0d332'
+    }
+    this.props.deleteTweet(data).then(() => {
+      this.props.getUserProfile(data)
+    })
+  }
+
   render() {
     const { profile, likedTweets } = this.props;
 
@@ -145,14 +160,14 @@ class Profile extends Component {
               <Tab eventKey="tweets" title="Tweets">
                 {profile.tweets && profile.tweets.length ? (
                   <div className="profileTweets">
-                    <TweetCard tweets={profile.tweets} likeTweet={this.likeTweet} unlikeTweet={this.unlikeTweet} />
+                    <TweetCard tweets={profile.tweets} likeTweet={this.likeTweet} unlikeTweet={this.unlikeTweet} deleteTweet={this.deleteTweet}/>
                   </div>
                 ) : null}
               </Tab>
               <Tab eventKey="tweets&replies" title="Tweets & replies">
                 {profile.tweets && profile.tweets.length ? (
                   <div className="profileTweets">
-                    <TweetCard tweets={profile.tweets} likeTweet={this.likeTweet} unlikeTweet={this.unlikeTweet} />
+                    <TweetCard tweets={profile.tweets} likeTweet={this.likeTweet} unlikeTweet={this.unlikeTweet} deleteTweet={this.deleteTweet}/>
                   </div>
                 ) : null}
               </Tab>
@@ -190,6 +205,7 @@ const mapDispatchToProps = dispatch => ({
   getLikedTweets: data => dispatch(userActions.getLikedTweets(data)),
   likeTweet: data => dispatch(tweetActions.likeTweet(data)),
   unlikeTweet: data => dispatch(tweetActions.unlikeTweet(data)),
+  deleteTweet: data => dispatch(tweetActions.deleteTweet(data)),
 });
 
 export default connect(

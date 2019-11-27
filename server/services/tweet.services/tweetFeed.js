@@ -29,6 +29,7 @@ const handleRequest = (userId, callback) => {
       let followingTweets = [];
       if (user.tweets && user.tweets.length) {
         userTweets = _.map(user.tweets, tweet => ({
+          userId: user._id,
           _id: tweet._id,
           name: user.name,
           handle: user.handle,
@@ -49,6 +50,7 @@ const handleRequest = (userId, callback) => {
           .map(followingUser => {
             if (followingUser.tweets && followingUser.tweets.length) {
               return _.map(followingUser.tweets, tweet => ({
+                userId: followingUser._id,
                 _id: tweet._id,
                 name: followingUser.name,
                 handle: followingUser.handle,
