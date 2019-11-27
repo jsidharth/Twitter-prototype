@@ -3,20 +3,21 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { FiMessageCircle } from 'react-icons/fi';
 import { FaRegHeart } from 'react-icons/fa';
-import { AiOutlineRetweet } from 'react-icons/ai';
+import { AiOutlineRetweet, AiOutlineDelete } from 'react-icons/ai';
 import { MdBookmarkBorder } from 'react-icons/md';
 import './TweetCard.css';
 
 class TweetCard extends Component {
   constructor(props) {
     super(props);
-    this.state = { userId: '5dcb31841c9d440000b0d332' };
+    this.state = {};
   }
 
   render() {
-    const { tweets } = this.props;
+    const { tweets, userId } = this.props;
     const renderFeed = tweets.map(tweet => {
       let myDate = new Date(tweet.created_at);
       myDate = myDate.toString();
@@ -41,7 +42,7 @@ class TweetCard extends Component {
         </svg>
       );
 
-      const rendeLikeButton = tweet.likes.includes(this.state.userId) ? unlikeButton : likeButton;
+      const renderLikeButton = tweet.likes.includes(userId) ? unlikeButton : likeButton;
       return (
         <div className="cardWidth" key={tweet._id}>
           <div className="cardContentTweet">
@@ -91,12 +92,22 @@ class TweetCard extends Component {
                 <div>{tweet.retweet_count > 0 ? tweet.retweet_count : null}</div>
               </div>
               <div className="flexBtnCnt">
-                <div>{rendeLikeButton}</div>
+                <div>{renderLikeButton}</div>
                 <div>{tweet.likes_count > 0 ? tweet.likes_count : null}</div>
               </div>
               <div className="flexBtnCnt">
                 <MdBookmarkBorder size={20} />
               </div>
+              {tweet.userId === userId ? (
+                <div className="flexBtnCnt">
+                  <AiOutlineDelete
+                    size={20}
+                    color="red"
+                    id={tweet._id}
+                    onClick={this.props.deleteTweet}
+                  />
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
@@ -105,5 +116,8 @@ class TweetCard extends Component {
     return <div>{renderFeed}</div>;
   }
 }
+const mapStateToProps = state => ({
+  userId: state.user.currentUser._id,
+});
 
-export default TweetCard;
+export default connect(mapStateToProps)(TweetCard);

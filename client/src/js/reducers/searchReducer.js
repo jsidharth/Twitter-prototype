@@ -2,7 +2,7 @@ import actionTypes from '../constants/index';
 
 const initialState = {
   searchResults: {},
-  searchSuggestions: [],
+  searchSuggestions: {},
 };
 
 const searchReducer = (state = initialState, action) => {

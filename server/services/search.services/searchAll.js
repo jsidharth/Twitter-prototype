@@ -19,6 +19,7 @@ const handleRequest = async (searchTerm, callback) => {
         name: 1,
         bio: 1,
         handle: 1,
+        profilePic: 1,
       },
     },
   ]);
@@ -49,12 +50,14 @@ const handleRequest = async (searchTerm, callback) => {
         _id: tweet._id,
         name: user.name,
         handle: user.handle,
+        profilePic: user.profilePic,
         likes_count: tweet.likes.length || 0,
         comments_count: tweet.comments.length || 0,
         retweet_count: tweet.retweets.length || 0,
         body: tweet.body,
         image: tweet.image,
         created_at: tweet.created_at,
+        likes: tweet.likes,
       };
     });
     updatedTweets = updatedTweets.sort((first, second) =>
@@ -64,7 +67,7 @@ const handleRequest = async (searchTerm, callback) => {
     updateTweetViewsPromise = Promise.map(updatedTweets, tweet => {
       return Tweets.findOneAndUpdate(
         {
-          _id: tweet._id, 
+          _id: tweet._id,
         },
         {
           $inc: {

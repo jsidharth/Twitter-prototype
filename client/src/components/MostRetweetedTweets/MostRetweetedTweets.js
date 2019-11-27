@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
@@ -19,7 +20,7 @@ class MostViewedTweets extends Component {
 
   componentDidMount() {
     const data = {
-      userId: '5dcb31841c9d440000b0d332',
+      userId: this.props.userId,
     };
     const { fetchMostRetweetedTweet } = this.props;
     fetchMostRetweetedTweet(data).then(() => {
@@ -62,6 +63,7 @@ class MostViewedTweets extends Component {
 const mapStateToProps = state => {
   return {
     mostRetweetedTweetData: state.analytics.mostRetweetedTweetData,
+    userId: state.user.currentUser._id,
   };
 };
 

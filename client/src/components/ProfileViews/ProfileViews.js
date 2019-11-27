@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
@@ -19,7 +20,7 @@ class ProfileViews extends Component {
 
   componentDidMount() {
     const data = {
-      userId: '5dcb31841c9d440000b0d332',
+      userId: this.props.userId,
     };
     const { fetchProfileViewsPerDay } = this.props;
     fetchProfileViewsPerDay(data).then(() => {
@@ -69,7 +70,7 @@ class ProfileViews extends Component {
                 gridLines: {
                   display: false,
                   color: 'rgba(0, 0, 0, 0.1)',
-                }
+                },
               },
             ],
             yAxes: [
@@ -78,10 +79,11 @@ class ProfileViews extends Component {
                   display: true,
                   labelString: 'Number of Views',
                   fontSize: 20,
-                }, gridLines: {
+                },
+                gridLines: {
                   display: false,
                   color: 'rgba(0, 0, 0, 0.1)',
-                }
+                },
               },
             ],
           },
@@ -105,6 +107,7 @@ class ProfileViews extends Component {
 const mapStateToProps = state => {
   return {
     viewsPerDayData: state.analytics.viewsPerDayData,
+    userId: state.user.currentUser._id,
   };
 };
 

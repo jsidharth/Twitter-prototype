@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
@@ -19,7 +20,7 @@ class NumberOfTweets extends Component {
 
   componentDidMount() {
     const data = {
-      userId: '5dcb31841c9d440000b0d332',
+      userId: this.props.userId,
     };
     const { fetchNumberOfTweets } = this.props;
     fetchNumberOfTweets(data).then(() => {
@@ -48,7 +49,8 @@ class NumberOfTweets extends Component {
         polarOption: {
           responsive: true,
           scale: {
-            display: true,          },
+            display: true,
+          },
         },
       });
     });
@@ -66,6 +68,7 @@ class NumberOfTweets extends Component {
 const mapStateToProps = state => {
   return {
     numberOfTweetsData: state.analytics.numberOfTweetsData,
+    userId: state.user.currentUser._id,
   };
 };
 

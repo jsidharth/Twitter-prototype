@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
@@ -5,7 +6,7 @@ import { Bar } from 'react-chartjs-2';
 import { MDBContainer } from 'mdbreact';
 import { connect } from 'react-redux';
 import { analyticsActions } from '../../js/actions/index';
-import './Analytics.css';
+import '../Analytics/Analytics.css';
 
 class MostLikedTweets extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ class MostLikedTweets extends Component {
 
   componentDidMount() {
     const data = {
-      userId: '5dcb31841c9d440000b0d332',
+      userId: this.props.userId,
     };
     const { fetchMostLikedTweet } = this.props;
     fetchMostLikedTweet(data).then(() => {
@@ -37,7 +38,7 @@ class MostLikedTweets extends Component {
           labels: xAxis,
           datasets: [
             {
-              label:'Number of Likes',
+              label: 'Number of Likes',
               data: yAxis,
               backgroundColor: [
                 'rgba(70, 162, 255,1)',
@@ -57,7 +58,7 @@ class MostLikedTweets extends Component {
         },
         barChartOptions: {
           responsive: false,
-          maintainAspectRatio: false,
+          maintainAspectRatio: true,
           legend: {
             display: false,
           },
@@ -71,7 +72,7 @@ class MostLikedTweets extends Component {
                 scaleLabel: {
                   display: true,
                   labelString: 'Tweets',
-                  fontSize: 20
+                  fontSize: 20,
                 },
               },
             ],
@@ -84,11 +85,11 @@ class MostLikedTweets extends Component {
                 scaleLabel: {
                   display: true,
                   labelString: 'Number of Likes',
-                  fontSize:20
+                  fontSize: 20,
                 },
                 ticks: {
                   beginAtZero: true,
-                  precision:0,
+                  precision: 0,
                 },
               },
             ],
@@ -102,7 +103,7 @@ class MostLikedTweets extends Component {
     return (
       <MDBContainer>
         <div className="fontChanges">Most Liked Tweets</div>
-        <Bar data={this.state.dataBar} options={this.state.barChartOptions} />
+        <Bar data={this.state.dataBar} options={this.state.barChartOptions} height={150} />
       </MDBContainer>
     );
   }
@@ -110,6 +111,7 @@ class MostLikedTweets extends Component {
 const mapStateToProps = state => {
   return {
     mostLikedTweetData: state.analytics.mostLikedTweetData,
+    userId: state.user.currentUser._id,
   };
 };
 

@@ -3,11 +3,11 @@ import { MDBContainer } from 'mdbreact';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Sidebar from '../Sidebar/Sidebar';
-import ProfileViews from './ProfileViews';
-import MostViewedTweets from './MostViewedTweets';
-import NumberOfTweets from './NumberOfTweets';
-import MostLikedTweets from './MostLikedTweets';
-import MostRetweetedTweets from './MostRetweetedTweets';
+import ProfileViews from '../ProfileViews/ProfileViews';
+import MostViewedTweets from '../MostViewedTweets/MostViewedTweets';
+import NumberOfTweets from '../NumberOfTweets/NumberOfTweets';
+import MostLikedTweets from '../MostLikedTweets/MostLikedTweets';
+import MostRetweetedTweets from '../MostRetweetedTweets/MostRetweetedTweets';
 
 class Analytics extends Component {
   constructor(props) {

@@ -39,7 +39,7 @@ class PostTweet extends Component {
       console.log('max length exceeded');
     } else {
       const data = {
-        userId: '5dcb31841c9d440000b0d332',
+        userId: this.props.userId,
         tweetText: this.state.tweetText,
         imageUrl: this.props.imageUrl,
       };
@@ -54,17 +54,17 @@ class PostTweet extends Component {
     return (
       <div className="cardContainer">
         <div className="cardWidth">
-          <div className="paperHeight">
-            Home
-          </div>
+          <div className="paperHeight">Home</div>
           {/* <Paper className="paperHeight">Home</Paper> */}
           <div className="cardContent">
             <div className="flexImageTweet">
               <div>
                 {/* Include user profile image if available */}
-                < img src = "/images/default_profile_bigger.png"
-                className = "profileImageTweet"
-                alt = "User profile" />
+                <img
+                  src="/images/default_profile_bigger.png"
+                  className="profileImageTweet"
+                  alt="User profile"
+                />
               </div>
 
               <div className="autoExpandDiv">
@@ -112,12 +112,11 @@ class PostTweet extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    imageUrl: state.image.imageUrl,
-    tweetPostedFlag: state.tweet.tweetPostedFlag,
-  };
-};
+const mapStateToProps = state => ({
+  imageUrl: state.image.imageUrl,
+  tweetPostedFlag: state.tweet.tweetPostedFlag,
+  userId: state.user.currentUser._id,
+});
 
 const mapDispatchToProps = dispatch => ({
   upload: data => dispatch(imageActions.upload(data)),

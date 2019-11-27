@@ -146,12 +146,18 @@
 .nav {
   border: 0 !important;
   background-color: #fff !important;
+  width: 598px !important;
 }
 
 .nav-item {
   border: 0 !important;
   background-color: #fff !important;
 }
+
+.nav-item:hover {
+  border: 0 !important;
+  background-color: #ebebeb !important;
+} 
 
 .nav-link {
   color: #495057 !important;
@@ -160,7 +166,6 @@
 .nav-link.active {
   color: #00acee !important;
   border-bottom: #00acee !important;
-
 }
 
 .profileTabs {
