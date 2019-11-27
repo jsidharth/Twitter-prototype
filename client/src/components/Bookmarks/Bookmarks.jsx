@@ -6,6 +6,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import './Bookmarks.css';
 import { tweetActions } from '../../js/actions/index';
 import TweetCard from '../TweetCard/TweetCard';
+import SearchBar from '../Search/SearchBar';
 
 class Bookmarks extends Component {
   constructor(props) {
@@ -23,15 +24,17 @@ class Bookmarks extends Component {
     getBookmarks(data);
   }
   likeTweet = e => {
-    let data = { tweetId: e.target.id, userId: this.state.userId };
+    let data = { tweetId: e.target.id, userId: '5dcb31841c9d440000b0d332' };
     this.props.likeTweet(data).then(() => {
+      data = {  userId: '5dcb32641c9d440000b0d334' };
       this.props.getBookmarks(data);
     });
   };
 
   unlikeTweet = e => {
-    let data = { tweetId: e.target.id, userId: this.state.userId };
+    let data = { tweetId: e.target.id, userId: '5dcb31841c9d440000b0d332' };
     this.props.unlikeTweet(data).then(() => {
+       data = {  userId: '5dcb32641c9d440000b0d334' };
       this.props.getBookmarks(data);
     });
   };
@@ -53,6 +56,7 @@ class Bookmarks extends Component {
             unlikeTweet={this.unlikeTweet}
           />
         </div>
+        <SearchBar />
       </div>
     );
   }

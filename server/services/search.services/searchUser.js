@@ -19,7 +19,7 @@ const handleRequest = async (searchTerm, callback) => {
       },
     },
   ]);
-  callback(null, users);
+  callback(null, { users });
 };
 
 export default {
