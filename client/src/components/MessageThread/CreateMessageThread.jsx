@@ -1,11 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import './CreateMessageThread.css';
-import { Button } from 'react-bootstrap';
-import Modal from 'react-bootstrap/Modal';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import NewMessageModal from './NewMessageModal';
 
 

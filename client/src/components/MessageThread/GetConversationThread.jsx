@@ -5,7 +5,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import './GetConversationThread.css';
 import { MdSend } from 'react-icons/md';
 import { messageActions } from '../../js/actions/index';
@@ -95,7 +94,7 @@ class GetConversationThread extends Component {
             })
           : null}
           </div>
-</div>
+        </div>
         <div className="conversationCardWidth">
           <div className="conversationHeight">
             <div className="autoExpandDiv1">
