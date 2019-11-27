@@ -15,6 +15,8 @@ class TweetDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.likeTweet = this.likeTweet.bind(this);
+    this.unlikeTweet = this.unlikeTweet.bind(this);
   }
 
   componentDidMount() {
