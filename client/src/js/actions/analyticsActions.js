@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 import axios from 'axios';
 import actionTypes from '../constants/index';
 import { ROOT_URL } from '../../constant/constant';
