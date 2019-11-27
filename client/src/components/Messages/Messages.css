@@ -19,3 +19,7 @@
     border-width: 0.5px;
     border-color: #d0d4d6;
 }
+
+.messageThreadStyling {
+  height: 100%;
+}

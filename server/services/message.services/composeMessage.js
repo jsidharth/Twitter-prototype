@@ -36,7 +36,7 @@ const handleRequest = async (messageDetails, callback) => {
         createdAt: new Date(),
       });
       messageThread.save();
-      callback(null, { message: 'Message sent' });
+      callback(null, messageThread);
     }
   }
 };

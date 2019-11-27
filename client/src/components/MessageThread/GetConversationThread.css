@@ -1,5 +1,5 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400);
 .flexConversationScreen {
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     border-style: solid;
@@ -9,19 +9,15 @@
 
   .cardWidth {
     width: 600px;
-    
   }
   
   .conversationHeight {
-    height: 50px;
-    
+    min-height: 25px;
     padding-left: 15px;
-    border-style: solid;
-    border-width: 0.5px;
-    border-color: #d0d4d6;
   }
+
   .conversationCardWidth {
-    margin-top: 100%;
+    /* margin-top: 100%; */
   }
 
   .convoUserName {
@@ -37,10 +33,9 @@
   }
 
   .sendIcon {
-    margin-left: 530px;
-    margin-right: 10px;
-    margin-top: -10%;
-    color: #00ACEE;
+    margin-left: 510px;
+    margin-top: -11%;
+    color: #00ACEE; 
 }
 
 .sendIcon:hover {
@@ -51,13 +46,10 @@
   display: inline-block;
   min-height: 70px;
   width: 95%;
-  margin-bottom: 10px;
+  margin-bottom: 120px;
 }
 
 .messageInfoLoggedInUser {
-  /* position: relative; */
-    /* margin-bottom: 10px;
-    margin-left: calc(100% - 240px); */
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -94,12 +86,12 @@
   border-radius: 15px;
   color: black;
   margin-left: 10px;
+  margin-top: 10px;
 }
 
 .messageContent {
   padding: 0;
   margin: 0;
-  
   font-size: 13px;
     font-family: Helvetica Neue;
     font-weight: 500;
@@ -121,6 +113,15 @@
   right: 5px;
   margin-left: 20px;
   text-align: left;
+}
+
+.textArea {
+  border: solid 1px #d8d8d8;
+  border-radius: 15px;
+  text-align: left;
+  padding-top: 20px;
+  padding-left: 10px;
+  font-size: 15px;
 }
 
 

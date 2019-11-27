@@ -31,15 +31,6 @@ class Messages extends Component {
   }
 
   render() {
-    // const whichPath = this.props.location.pathname;
-    // let path = <CreateMessageThread />;
-
-    // console.log(whichPath);
-    // if (whichPath !== '/messages') {
-    //   // path = <GetConversationThread />;
-    //   path = <div>hello people</div>;
-    // }
-    // console.log('Active', this.state.activeMessage);
     return (
       <div className="flexHomeScreen">
         <div>
@@ -64,7 +55,7 @@ class Messages extends Component {
           </div>
         ) : (
           <div className="messageThreadStyling">
-            <GetConversationThread activeConv={this.state.activeMessage} />
+            <GetConversationThread />
           </div>
         )}
       </div>

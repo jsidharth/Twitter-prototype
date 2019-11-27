@@ -2,25 +2,52 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
+import _ from 'lodash';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './GetConversationThread.css';
 import { MdSend } from 'react-icons/md';
+import { messageActions } from '../../js/actions/index';
 
 class GetConversationThread extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      new_message: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
   }
+  handleActiveMessage = (e) => {
+    console.log('here', e.target.id);
+     const activeMessage = _.find(this.props.conversations, conv => conv._id === e.target.id);
+     this.props.setActiveMessage(activeMessage);
+   }
+   handleChange = (e) => {
+    this.setState({
+      [e.target.id]: e.target.value
+    });
+   }
+
+   sendMessage = (e) => {
+    const payload = {
+      "actionType":"UPDATE",
+      "user_1": this.props.activeConv.user_1._id,
+      "user_2": this.props.activeConv.user_2._id,
+      "sender": this.props.userId,
+      "body": this.state.new_message
+    };
+    this.props.sendMessage(payload)
+   }
 
   render() {
     // console.log('Get conversation: ', this.props.location.state.messages);
-    // console.log('dnfjknf   ', this.props.location);
     const { activeConv } = this.props;
-    const userId = '5dd2317e8f8a12706dfd7357';
+    const userId = '5dd1e01ca41f61bc78f2c6f1';
     const messageThreadUser =
       activeConv.user_1._id === userId ? activeConv.user_2 : activeConv.user_1;
     return (
+      <div>
       <div className="flexConversationScreen">
         <div className="cardWidth">
           <div className="conversationHeight">
@@ -51,12 +78,12 @@ class GetConversationThread extends Component {
                     </div>
                   ) : (
                     <div>
-                    <div className="messageInfoSenderUser">
-                      <div className="messageBoxSenderUser">
-                        <div className="messageContent">{eachMessage.body}</div>
+                      <div className="messageInfoSenderUser">
+                        <div className="messageBoxSenderUser">
+                          <div className="messageContent">{eachMessage.body}</div>
+                        </div>
                       </div>
-                    </div>
-                    <div className="messageTimeStampSenderUser">
+                      <div className="messageTimeStampSenderUser">
                         {myDate[0]}, {timeValue[0]}:{timeValue[1]}
                       </div>
                     </div>
@@ -65,16 +92,14 @@ class GetConversationThread extends Component {
               );
             })
           : null}
-
+</div>
         <div className="conversationCardWidth">
           <div className="conversationHeight">
             <div className="autoExpandDiv1">
-              <textarea className="textArea" placeholder="Start a new message" />
-              <Link to="/home">
-                <div className="sendIcon">
-                  <MdSend size={25} />
-                </div>
-              </Link>
+              <textarea className="textArea" placeholder="Start a new message" id = "new_message"onChange={this.handleChange}/>
+              <div className="sendIcon" onClick={e => this.sendMessage(e)}>
+                <MdSend size={25} />
+              </div>
             </div>
           </div>
         </div>
@@ -82,5 +107,12 @@ class GetConversationThread extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  activeConv: state.message.activeMessage,
+  userId: '5dd1e01ca41f61bc78f2c6f1',
+});
 
-export default GetConversationThread;
+const mapDispatchToProps = dispatch => ({
+  sendMessage: data => dispatch(messageActions.sendMessage(data)),
+})
+export default connect(mapStateToProps, mapDispatchToProps)(GetConversationThread);

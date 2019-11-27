@@ -10,6 +10,7 @@ const actionTypes = {
   GET_USER_PROFILE: 'GET_USER_PROFILE',
   GET_LIKED_TWEETS: 'GET_LIKED_TWEETS',
   ACTIVE_MESSAGE: 'ACTIVE_MESSAGE',
+  MESSAGE_SEND: 'MESSAGE_SEND',
 };
 
 export default actionTypes;

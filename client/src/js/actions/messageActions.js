@@ -27,3 +27,18 @@ export const setActiveMessage = payload => {
     });
   };
 };
+
+export const sendMessage = payload => {
+  return dispatch => {
+    console.log(payload);
+    return axios.post(`${ROOT_URL}/message/compose`, payload).then(response => {
+      console.log('Status Code : ', response.status);
+      if (response.status === 200) {
+        dispatch({
+          type: actionTypes.ACTIVE_MESSAGE,
+          payload: response.data,
+        });
+      }
+    });
+  };
+};
