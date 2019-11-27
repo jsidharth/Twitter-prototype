@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { FiMessageCircle } from 'react-icons/fi';
 import { FaRegHeart } from 'react-icons/fa';
 import { AiOutlineRetweet, AiOutlineDelete } from 'react-icons/ai';
-import { MdBookmarkBorder } from 'react-icons/md';
+import { MdBookmarkBorder, MdBookmark } from 'react-icons/md';
 import './TweetCard.css';
 
 class TweetCard extends Component {
@@ -17,7 +17,7 @@ class TweetCard extends Component {
   }
 
   render() {
-    const { tweets, userId } = this.props;
+    const { tweets, userId, bookmarks} = this.props;
     const renderFeed = tweets.map(tweet => {
       let myDate = new Date(tweet.created_at);
       myDate = myDate.toString();
@@ -43,6 +43,14 @@ class TweetCard extends Component {
       );
 
       const renderLikeButton = tweet.likes.includes(userId) ? unlikeButton : likeButton;
+
+      // const bookmarkButton = <MdBookmarkBorder size={25} id={tweet._id} onClick={this.props.bookmarkTweet}/>;
+      // const bookmarkedAlreadyButton = <MdBookmark size={25} color="#1da1f2" />;
+
+      // const renderBookmarkButton = bookmarks.includes(tweet._id) ? bookmarkedAlreadyButton : bookmarkButton;
+      console.log('bookmarks..',this.props.bookmarks);
+      console.log(this.props.tweets);
+
       return (
         <div className="cardWidth" key={tweet._id}>
           <div className="cardContentTweet">
@@ -96,7 +104,8 @@ class TweetCard extends Component {
                 <div>{tweet.likes_count > 0 ? tweet.likes_count : null}</div>
               </div>
               <div className="flexBtnCnt">
-                <MdBookmarkBorder size={20} />
+                <MdBookmarkBorder size={20} id={tweet._id} onClick={this.props.bookmarkTweet}/>
+                {/* {renderBookmarkButton} */}
               </div>
               {tweet.userId === userId ? (
                 <div className="flexBtnCnt">
@@ -118,6 +127,7 @@ class TweetCard extends Component {
 }
 const mapStateToProps = state => ({
   userId: state.user.currentUser._id,
+  // bookmarkedTweets: state.tweet.bookmarkedTweets,
 });
 
 export default connect(mapStateToProps)(TweetCard);

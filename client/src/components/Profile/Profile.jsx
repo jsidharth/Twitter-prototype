@@ -21,6 +21,7 @@ class Profile extends Component {
     this.likeTweet = this.likeTweet.bind(this);
     this.unlikeTweet = this.unlikeTweet.bind(this);
     this.deleteTweet = this.deleteTweet.bind(this);
+    this.bookmarkTweet = this.bookmarkTweet.bind(this);
   }
 
   componentDidMount() {
@@ -60,6 +61,13 @@ class Profile extends Component {
     });
   };
 
+  bookmarkTweet = e => {
+    let data = { tweetId: e.target.id, userId: this.props.userId };
+    this.props.bookmarkTweet(data).then(() => {
+      this.props.getUserProfile(data);
+    });
+  };
+
   render() {
     const { profile, likedTweets } = this.props;
 
@@ -73,6 +81,11 @@ class Profile extends Component {
 
     const numTweets = profile && profile.tweets ? profile.tweets.length : 0;
 
+    let bookmarkedTweets = null;
+    if (this.props.bookmarkedTweets) {
+      bookmarkedTweets = this.props.bookmarkedTweets;
+    }
+    
     return (
       <div className="flexHomeScreen">
         <div>
@@ -166,6 +179,8 @@ class Profile extends Component {
                       likeTweet={this.likeTweet}
                       unlikeTweet={this.unlikeTweet}
                       deleteTweet={this.deleteTweet}
+                      bookmarkTweet={this.bookmarkTweet}
+                      bookmarks={bookmarkedTweets}
                     />
                   </div>
                 ) : null}
@@ -178,6 +193,8 @@ class Profile extends Component {
                       likeTweet={this.likeTweet}
                       unlikeTweet={this.unlikeTweet}
                       deleteTweet={this.deleteTweet}
+                      bookmarkTweet={this.bookmarkTweet}
+                      bookmarks={bookmarkedTweets}
                     />
                   </div>
                 ) : null}
@@ -189,6 +206,8 @@ class Profile extends Component {
                       tweets={profile.retweets}
                       likeTweet={this.likeTweet}
                       unlikeTweet={this.unlikeTweet}
+                      bookmarkTweet={this.bookmarkTweet}
+                      bookmarks={bookmarkedTweets}
                     />
                   </div>
                 ) : null}
@@ -200,6 +219,8 @@ class Profile extends Component {
                       tweets={likedTweets}
                       likeTweet={this.likeTweet}
                       unlikeTweet={this.unlikeTweet}
+                      bookmarkTweet={this.bookmarkTweet}
+                      bookmarks={bookmarkedTweets}
                     />
                   </div>
                 ) : null}
@@ -217,6 +238,7 @@ const mapStateToProps = state => ({
   profile: state.user.profile,
   likedTweets: state.user.likedTweets,
   userId: state.user.currentUser._id,
+  bookmarkedTweets: state.user.currentUser.bookmarks,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -225,6 +247,7 @@ const mapDispatchToProps = dispatch => ({
   likeTweet: data => dispatch(tweetActions.likeTweet(data)),
   unlikeTweet: data => dispatch(tweetActions.unlikeTweet(data)),
   deleteTweet: data => dispatch(tweetActions.deleteTweet(data)),
+  bookmarkTweet: data => dispatch(tweetActions.bookmarkTweet(data)),
 });
 
 export default connect(

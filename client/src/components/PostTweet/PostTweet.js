@@ -44,7 +44,9 @@ class PostTweet extends Component {
         imageUrl: this.props.imageUrl,
       };
       console.log(data);
-      this.props.postTweet(data);
+      this.props.postTweet(data).then(() => {
+        this.props.fetchFeed(data);
+      });
     }
   };
 
@@ -121,6 +123,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   upload: data => dispatch(imageActions.upload(data)),
   postTweet: data => dispatch(tweetActions.postTweet(data)),
+  fetchFeed: data => dispatch(tweetActions.fetchFeed(data)),
 });
 
 export default connect(
