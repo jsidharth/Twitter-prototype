@@ -7,6 +7,7 @@ import SearchBar from './SearchBar';
 import TweetCard from '../TweetCard/TweetCard';
 import { searchActions, tweetActions, userActions } from '../../js/actions';
 import UserCard from '../UserCard/UserCard';
+import './SearchResults.css';
 
 class SearchResults extends Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class SearchResults extends Component {
   };
   render() {
     const { searchResults } = this.props;
-    console.log('Here', searchResults);
+    const activeTab = (searchResults.tweets && searchResults.tweets.length)? "tweets":"users";
     return (
       <div className="flexHomeScreen">
         <div className="sideBarWidths">
@@ -43,33 +44,37 @@ class SearchResults extends Component {
           <div className="paperHeight">Search Results</div>
           <div className="tabMargin">
             <Tabs
-              defaultActiveKey="users"
+              defaultActiveKey={activeTab}
               transition={false}
               id="profile-tab"
               className="profileTabs"
             >
               {/* Change the API for correct data */}
               <Tab eventKey="tweets" title="Tweets & Hashtags">
-                {searchResults.tweets && searchResults.tweets.length ? (
-                  <div className="profileTweets">
-                    <TweetCard
-                      tweets={searchResults.tweets}
-                      likeTweet={this.likeTweet}
-                      unlikeTweet={this.unlikeTweet}
-                    />
-                  </div>
-                ) : null}
+                <div className="resultsTab">
+                  {searchResults.tweets && searchResults.tweets.length ? (
+                    <div className="profileTweets">
+                      <TweetCard
+                        tweets={searchResults.tweets}
+                        likeTweet={this.likeTweet}
+                        unlikeTweet={this.unlikeTweet}
+                      />
+                    </div>
+                  ) : null}
+                </div>
               </Tab>
               <Tab eventKey="users" title="Users">
-                {searchResults.users && searchResults.users.length
-                  ? searchResults.users.map(user => {
-                      return (
-                        <div>
-                          <UserCard user={user}></UserCard>
-                        </div>
-                      );
-                    })
-                  : null}
+                <div className="resultsTab">
+                  {searchResults.users && searchResults.users.length
+                    ? searchResults.users.map(user => {
+                        return (
+                          <div>
+                            <UserCard user={user} long></UserCard>
+                          </div>
+                        );
+                      })
+                    : null}
+                </div>
               </Tab>
             </Tabs>
           </div>

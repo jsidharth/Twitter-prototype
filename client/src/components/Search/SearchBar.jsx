@@ -9,7 +9,7 @@ class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      suggestions: [],
+      suggestions: {},
       search: '',
     };
   }
@@ -73,7 +73,7 @@ class SearchBar extends Component {
 
 const mapStateToProps = state => {
   return {
-    searchSuggestions: state.search.searchSuggestions,
+    searchSuggestions: state.search.searchSuggestions.users,
   };
 };
 
