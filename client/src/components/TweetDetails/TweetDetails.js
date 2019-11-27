@@ -14,11 +14,7 @@ import Sidebar from '../Sidebar/Sidebar';
 class TweetDetails extends Component {
   constructor(props) {
     super(props);
-    // userId: this.props.userId
-
-    this.state = {
-      userId: '5dcb31841c9d440000b0d332',
-    };
+    this.state = {};
   }
 
   componentDidMount() {
@@ -30,17 +26,17 @@ class TweetDetails extends Component {
     getTweetDetails(data);
   }
   likeTweet = e => {
-    let data = { tweetId: e.target.id, userId: this.state.userId };
+    let data = { tweetId: e.target.id, userId: this.props.userId };
     this.props.likeTweet(data).then(() => {
       this.props.getTweetDetails(data);
     });
   };
 
   unlikeTweet = e => {
-    let data ={tweetId:e.target.id,userId:this.state.userId};
-    this.props.unlikeTweet(data).then(()=>{
+    let data = { tweetId: e.target.id, userId: this.props.userId };
+    this.props.unlikeTweet(data).then(() => {
       this.props.getTweetDetails(data);
-    })
+    });
   };
 
   render() {
@@ -48,26 +44,25 @@ class TweetDetails extends Component {
     let myDate = new Date(tweet.created_at);
     myDate = myDate.toString();
     myDate = myDate.split(' ');
-    let likeButton, unlikeButton,renderLikeButton;
+    let likeButton, unlikeButton, renderLikeButton;
     if (tweet.body) {
       likeButton = <FaRegHeart size={20} id={tweet._id} onClick={this.likeTweet} />;
-        unlikeButton = (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="red"
-          >
-            <path
-              id={tweet._id}
-              onClick={this.unlikeTweet}
-              d="M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z"
-            />
-          </svg>
-        );
-        renderLikeButton=tweet.likes.includes(this.state.userId) ? unlikeButton : likeButton;
-
+      unlikeButton = (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="red"
+        >
+          <path
+            id={tweet._id}
+            onClick={this.unlikeTweet}
+            d="M12 4.435c-1.989-5.399-12-4.597-12 3.568 0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-8.118-10-8.999-12-3.568z"
+          />
+        </svg>
+      );
+      renderLikeButton = tweet.likes.includes(this.props.userId) ? unlikeButton : likeButton;
     }
     const imgSrc = tweet.profilePic ? tweet.profilePic : '/images/default_profile_bigger.png';
 
@@ -130,11 +125,10 @@ class TweetDetails extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    tweet: state.tweet.currentTweet,
-  };
-};
+const mapStateToProps = state => ({
+  tweet: state.tweet.currentTweet,
+  userId: state.user.currentUser._id,
+});
 
 const mapDispatchToProps = dispatch => ({
   getTweetDetails: data => dispatch(tweetActions.getTweetDetails(data)),

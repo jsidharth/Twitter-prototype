@@ -3,6 +3,7 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { FiMessageCircle } from 'react-icons/fi';
 import { FaRegHeart } from 'react-icons/fa';
 import { AiOutlineRetweet, AiOutlineDelete } from 'react-icons/ai';
@@ -12,11 +13,11 @@ import './TweetCard.css';
 class TweetCard extends Component {
   constructor(props) {
     super(props);
-    this.state = { userId: '5dcb31841c9d440000b0d332' };
+    this.state = {};
   }
 
   render() {
-    const { tweets } = this.props;
+    const { tweets, userId } = this.props;
     const renderFeed = tweets.map(tweet => {
       let myDate = new Date(tweet.created_at);
       myDate = myDate.toString();
@@ -41,7 +42,7 @@ class TweetCard extends Component {
         </svg>
       );
 
-      const renderLikeButton = tweet.likes.includes(this.state.userId) ? unlikeButton : likeButton;
+      const renderLikeButton = tweet.likes.includes(userId) ? unlikeButton : likeButton;
       return (
         <div className="cardWidth" key={tweet._id}>
           <div className="cardContentTweet">
@@ -97,9 +98,16 @@ class TweetCard extends Component {
               <div className="flexBtnCnt">
                 <MdBookmarkBorder size={20} />
               </div>
-              {tweet.userId === '5dcb31841c9d440000b0d332' ? <div className="flexBtnCnt">
-                <AiOutlineDelete size={20} color="red" id={tweet._id} onClick={this.props.deleteTweet}/>
-              </div> : null}
+              {tweet.userId === userId ? (
+                <div className="flexBtnCnt">
+                  <AiOutlineDelete
+                    size={20}
+                    color="red"
+                    id={tweet._id}
+                    onClick={this.props.deleteTweet}
+                  />
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
@@ -108,5 +116,8 @@ class TweetCard extends Component {
     return <div>{renderFeed}</div>;
   }
 }
+const mapStateToProps = state => ({
+  userId: state.user.currentUser._id,
+});
 
-export default TweetCard;
+export default connect(mapStateToProps)(TweetCard);

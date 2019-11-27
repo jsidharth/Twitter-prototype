@@ -13,12 +13,12 @@ import './SearchResults.css';
 class SearchResults extends Component {
   constructor(props) {
     super(props);
-    this.state = { userId: '5dcb31841c9d440000b0d332' };
+    this.state = {};
   }
 
   likeTweet = e => {
     const { searchTerm } = this.props.location.state;
-    let data = { tweetId: e.target.id, userId: this.state.userId };
+    let data = { tweetId: e.target.id, userId: this.props.userId };
     this.props.likeTweet(data).then(() => {
       this.props.getSearchResults(searchTerm);
     });
@@ -26,7 +26,7 @@ class SearchResults extends Component {
 
   unlikeTweet = e => {
     const { searchTerm } = this.props.location.state;
-    let data = { tweetId: e.target.id, userId: this.state.userId };
+    let data = { tweetId: e.target.id, userId: this.props.userId };
     this.props.unlikeTweet(data).then(() => {
         this.props.getSearchResults(searchTerm);
     });
@@ -84,12 +84,11 @@ class SearchResults extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    searchResults: state.search.searchResults,
-    likedTweets: state.user.likedTweets,
-  };
-};
+const mapStateToProps = state => ({
+  searchResults: state.search.searchResults,
+  likedTweets: state.user.likedTweets,
+  userId: state.user.currentUser._id
+});
 
 const mapDispatchToProps = dispatch => ({
   getSearchResults: data => dispatch(searchActions.getSearchResults(data)),

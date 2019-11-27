@@ -39,7 +39,7 @@ class PostTweet extends Component {
       console.log('max length exceeded');
     } else {
       const data = {
-        userId: '5dcb31841c9d440000b0d332',
+        userId: this.props.userId,
         tweetText: this.state.tweetText,
         imageUrl: this.props.imageUrl,
       };
@@ -112,12 +112,11 @@ class PostTweet extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    imageUrl: state.image.imageUrl,
-    tweetPostedFlag: state.tweet.tweetPostedFlag,
-  };
-};
+const mapStateToProps = state => ({
+  imageUrl: state.image.imageUrl,
+  tweetPostedFlag: state.tweet.tweetPostedFlag,
+  userId: state.user.currentUser._id
+});
 
 const mapDispatchToProps = dispatch => ({
   upload: data => dispatch(imageActions.upload(data)),

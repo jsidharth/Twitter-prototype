@@ -16,7 +16,7 @@ import { userActions, tweetActions } from '../../js/actions/index';
 class Profile extends Component {
   constructor(props) {
     super(props);
-    this.state = {userId: '5dcb31841c9d440000b0d332'};
+    this.state = {};
 
     this.likeTweet = this.likeTweet.bind(this);
     this.unlikeTweet = this.unlikeTweet.bind(this);
@@ -26,8 +26,7 @@ class Profile extends Component {
 
   componentDidMount() {
     const data = {
-      // userId: this.props.userId
-      userId: '5dcb31841c9d440000b0d332',
+      userId: this.props.userId,
     };
     const { getUserProfile, getLikedTweets } = this.props;
     getUserProfile(data);
@@ -35,7 +34,7 @@ class Profile extends Component {
   }
 
   likeTweet = (e) => {
-    let data = { tweetId: e.target.id, userId: this.state.userId };
+    let data = { tweetId: e.target.id, userId: this.props.userId };
     this.props.likeTweet(data).then(() => {
       this.props.getUserProfile(data).then(() => {
         this.props.getLikedTweets(data);
@@ -44,7 +43,7 @@ class Profile extends Component {
   };
 
   unlikeTweet = e => {
-    let data = { tweetId: e.target.id, userId: this.state.userId };
+    let data = { tweetId: e.target.id, userId: this.props.userId };
     this.props.unlikeTweet(data).then(() => {
       this.props.getUserProfile(data).then(() => {
         this.props.getLikedTweets(data);
@@ -55,7 +54,7 @@ class Profile extends Component {
   deleteTweet = (e) => {
     const data = {
       tweetId: e.target.id,
-      userId: '5dcb31841c9d440000b0d332'
+      userId: this.props.userId
     }
     this.props.deleteTweet(data).then(() => {
       this.props.getUserProfile(data)
@@ -205,12 +204,11 @@ class Profile extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
+const mapStateToProps = state => ({
     profile: state.user.profile,
     likedTweets: state.user.likedTweets,
-  };
-};
+    userId: state.user.currentUser._id
+});
 
 const mapDispatchToProps = dispatch => ({
   getUserProfile: data => dispatch(userActions.getUserProfile(data)),
