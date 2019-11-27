@@ -36,21 +36,21 @@ class Profile extends Component {
 
   likeTweet = (e) => {
     let data = { tweetId: e.target.id, userId: this.state.userId };
-      this.props.likeTweet(data).then(()=>{
-        this.props.getUserProfile(data).then(()=>{
-          this.props.getLikedTweets(data);
-        })
+    this.props.likeTweet(data).then(() => {
+      this.props.getUserProfile(data).then(() => {
+        this.props.getLikedTweets(data);
       });
-  }
+    });
+  };
 
-  unlikeTweet = (e) => {
-    let data = { tweetId: e.target.id, userId: this.state.userId }
-      this.props.unlikeTweet(data).then(()=>{
-        this.props.getUserProfile(data).then(()=>{
-          this.props.getLikedTweets(data);
-        })
+  unlikeTweet = e => {
+    let data = { tweetId: e.target.id, userId: this.state.userId };
+    this.props.unlikeTweet(data).then(() => {
+      this.props.getUserProfile(data).then(() => {
+        this.props.getLikedTweets(data);
       });
-  }
+  })
+}
 
   deleteTweet = (e) => {
     const data = {
@@ -134,20 +134,22 @@ class Profile extends Component {
                   </p>
                 </div>
               </div>
-              <div className="followersFollowing">
-                <div className="follow">
-                  <div className="countStyle">
-                    {profile.following && profile.following.length ? profile.following.length : 0}
+              <Link to="/follow">
+                <div className="followersFollowing">
+                  <div className="follow">
+                    <div className="countStyle">
+                      {profile.following && profile.following.length ? profile.following.length : 0}
+                    </div>
+                    Following
                   </div>
-                  Following
-                </div>
-                <div className="follow">
-                  <div className="countStyle">
-                    {profile.followers && profile.followers.length ? profile.followers.length : 0}
+                  <div className="follow">
+                    <div className="countStyle">
+                      {profile.followers && profile.followers.length ? profile.followers.length : 0}
+                    </div>
+                    Followers
                   </div>
-                  Followers
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
           <div className="tabMargin">
@@ -157,7 +159,7 @@ class Profile extends Component {
               id="profile-tab"
               className="profileTabs"
             >
-            {/* Change the API for correct data */}
+              {/* Change the API for correct data */}
               <Tab eventKey="tweets" title="Tweets">
                 {profile.tweets && profile.tweets.length ? (
                   <div className="profileTweets">
@@ -175,14 +177,22 @@ class Profile extends Component {
               <Tab eventKey="retweets" title="Retweets">
                 {profile.retweets && profile.retweets.length ? (
                   <div className="profileTweets">
-                    <TweetCard tweets={profile.retweets} likeTweet={this.likeTweet} unlikeTweet={this.unlikeTweet}/>
+                    <TweetCard
+                      tweets={profile.retweets}
+                      likeTweet={this.likeTweet}
+                      unlikeTweet={this.unlikeTweet}
+                    />
                   </div>
                 ) : null}
               </Tab>
               <Tab eventKey="likes" title="Likes">
                 {likedTweets && likedTweets.length ? (
                   <div className="profileTweets">
-                    <TweetCard tweets={likedTweets} likeTweet={this.likeTweet} unlikeTweet={this.unlikeTweet}  />
+                    <TweetCard
+                      tweets={likedTweets}
+                      likeTweet={this.likeTweet}
+                      unlikeTweet={this.unlikeTweet}
+                    />
                   </div>
                 ) : null}
               </Tab>

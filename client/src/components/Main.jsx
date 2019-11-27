@@ -11,6 +11,7 @@ import Bookmarks from './Bookmarks/Bookmarks';
 import Profile from './Profile/Profile';
 import Analytics from './Analytics/Analytics';
 import SearchResults from './Search/SearchResults';
+import Follow from './FollowTab/FollowTab';
 
 class Main extends Component {
   constructor(props) {
@@ -31,6 +32,7 @@ class Main extends Component {
           <Route path="/profile" component={Profile} />
           <Route path="/analytics" component={Analytics} />
           <Route path="/search" component={SearchResults}/>
+          <Route path="/follow" component={Follow} />
         </Switch>
       </div>
     );
