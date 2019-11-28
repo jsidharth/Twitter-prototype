@@ -12,11 +12,12 @@ import Sidebar from '../Sidebar/Sidebar';
 import SearchBar from '../Search/SearchBar';
 import './Profile.css';
 import { userActions, tweetActions } from '../../js/actions/index';
+import UpdateProfile from './UpdateProfile'
 
 class Profile extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { showModal:false };
 
     this.likeTweet = this.likeTweet.bind(this);
     this.unlikeTweet = this.unlikeTweet.bind(this);
@@ -25,7 +26,7 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    const data = {
+        const data = {
       userId: this.props.match.params.userId,
     };
     const { getUserProfile, getLikedTweets } = this.props;
@@ -60,7 +61,10 @@ class Profile extends Component {
       });
     });
   };
-
+ show =()=>{
+   this.setState({showModal:true});
+   console.log("hi")
+ }
   deleteTweet = e => {
     const data = {
       tweetId: e.target.id,
@@ -101,6 +105,7 @@ class Profile extends Component {
         <div>
           <Sidebar />
         </div>
+      <UpdateProfile show={this.state.showModal}/>
         <div className="cardContainer">
           <div className="cardWidth">
             <div className="paperHeightForProfile">
@@ -126,7 +131,7 @@ class Profile extends Component {
                   <p className="userHandle">@{profile.handle}</p>
                 </div>
                 <div>
-                  <button type="button" className="editProfileBtn">
+                  <button type="button" className="editProfileBtn" onClick={this.show}>
                     Edit Profile
                   </button>
                 </div>
@@ -238,6 +243,7 @@ class Profile extends Component {
             </Tabs>
           </div>
         </div>
+
         <SearchBar />
       </div>
     );

@@ -8,7 +8,7 @@ import MostViewedTweets from './MostViewedTweets';
 import NumberOfTweets from './NumberOfTweets';
 import MostLikedTweets from './MostLikedTweets';
 import MostRetweetedTweets from './MostRetweetedTweets';
-
+import './Analytics.css';
 class Analytics extends Component {
   constructor(props) {
     super(props);

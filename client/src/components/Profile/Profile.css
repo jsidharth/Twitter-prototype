@@ -185,3 +185,7 @@
 *:focus {
   outline: 0 !important;
 }
+.save {
+  margin-bottom: 10%;
+  margin-top: 5%;
+}
