@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
@@ -9,6 +10,7 @@ import SearchBar from '../Search/SearchBar';
 
 import './Lists.css';
 import { listActions } from '../../js/actions';
+import ListCard from './ListCard';
 
 class Lists extends Component {
   constructor(props) {
@@ -40,28 +42,31 @@ class Lists extends Component {
               {/* Change the API for correct data */}
               <Tab eventKey="owned" title="Owned">
                 <div className="resultsTab">
-                  {/* {lists.ownedLists && lists.ownedLists.length ? (
-                    <div className="profileTweets">
-                      <TweetCard
-                        tweets={searchResults.tweets}
-                        likeTweet={this.likeTweet}
-                        unlikeTweet={this.unlikeTweet}
-                      />
-                    </div>
-                  ) : null} */}
+                  {lists.ownedLists && lists.ownedLists.length
+                    ? lists.ownedLists.map(list => {
+                        list.userPic = this.props.profile.profilePic;
+                        list.userName = this.props.profile.name;
+                        list.userHandle = this.props.profile.handle;
+                        return (
+                          <div>
+                            <ListCard list={list} />
+                          </div>
+                        );
+                      })
+                    : null}
                 </div>
               </Tab>
               <Tab eventKey="subscribed" title="Subscribed">
                 <div className="resultsTab">
-                  {/* {searchResults.users && searchResults.users.length
-                    ? searchResults.users.map(user => {
+                  {lists.subscribedLists && lists.subscribedLists.length
+                    ? lists.subscribedLists.map(list => {
                         return (
-                          <div>
-                            <UserCard user={user} long></UserCard>
+                          <div className="profileTweets">
+                            <ListCard list={list} />
                           </div>
                         );
                       })
-                    : null} */}
+                    : null}
                 </div>
               </Tab>
             </Tabs>
@@ -76,6 +81,7 @@ class Lists extends Component {
 const mapStateToProps = state => ({
   lists: state.list.lists,
   userId: state.user.currentUser._id,
+  profile: state.user.profile,
 });
 
 const mapDispatchToProps = dispatch => ({

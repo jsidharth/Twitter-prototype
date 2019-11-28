@@ -43,6 +43,7 @@ const handleRequest = async (userId, callback) => {
             members: list.members,
             userName: listUser.name,
             userHandle: listUser.handle,
+            userPic: listUser.profilePic,
           };
         }
       });
