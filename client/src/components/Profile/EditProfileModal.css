@@ -1,0 +1,47 @@
+.saveBtn {
+    background-color: #1DA1F2;
+    color: white;
+    text-align: center;
+    font-weight: 800;
+    border-radius: 20px;
+    width: 15%;
+    height: 30px;
+    font-size: 14px;
+    outline: none;
+    border: 0;
+    margin-left: 10px;
+}
+
+.inputTitle {
+    margin-left: 10px;
+}
+
+.inputDetails {
+    margin-left: 10px;
+}
+
+.profileImage {
+    margin-left: 10px;
+    max-width: 60px;
+    max-height: 60px;
+    border-radius: 50%;
+}
+
+.modal-header {
+    flex-direction: row-reverse;
+}
+
+.modal-header .close {
+    margin: none;
+    padding: none;
+    color: #1DA1F2;
+}
+
+.modal-header .close:hover {
+    color: #008abe;
+}
+
+.modalTitle {
+    margin-right: 200px;
+    margin-left: 10px;
+}

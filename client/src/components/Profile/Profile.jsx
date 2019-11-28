@@ -12,7 +12,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import SearchBar from '../Search/SearchBar';
 import './Profile.css';
 import { userActions, tweetActions } from '../../js/actions/index';
-import NewProfileModal from './NewProfileModal';
+import EditProfileModal from './EditProfileModal';
 
 class Profile extends Component {
   constructor(props) {
@@ -94,6 +94,7 @@ class Profile extends Component {
     let birthDate = new Date(profile.dob);
     birthDate = birthDate.toString();
     birthDate = birthDate.split(' ');
+    console.log(profile.dob);
 
     let joinedDate = new Date(profile.createdAt);
     joinedDate = joinedDate.toString();
@@ -140,7 +141,7 @@ class Profile extends Component {
                     Edit Profile
                   </button>
                   {this.showProfileModal ? (
-                    <NewProfileModal
+                    <EditProfileModal
                     showProfileModal={this.showProfileModal}
                       showProfileModalState={this.state.showProfileModal}
                     />

@@ -16,9 +16,7 @@ class NewMessageModal extends Component {
       suggestions: {},
       search: '',
     };
-
     this.composeMessage = this.composeMessage.bind(this);
-
   }
 
   handleOnInputChange = event => {
