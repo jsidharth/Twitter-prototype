@@ -1,7 +1,13 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Image from 'react-bootstrap/Image';
-import { Card, CardContent } from '@material-ui/core';
+import _ from 'lodash';
 import './MessageCard.css';
+import { messageActions } from '../../js/actions/index';
 
 class MessageCard extends Component {
   constructor(props) {
@@ -9,59 +15,60 @@ class MessageCard extends Component {
     this.state = {};
   }
 
-  render() {
-    const mockData = [
-      {
-        _id: '5dcb33ef1c9d440000b0d338',
-        name: 'Savyasachi J',
-        handle: 'savy',
-        image: '',
-        created_at: '2019-11-11T08:00:00.000Z',
-      },
-      {
-        _id: '5dcb33ef1c9d440000b0d338',
-        name: 'xyz',
-        handle: 'xyz',
-        image: '',
-        created_at: '2019-11-13T08:00:00.000Z',
-      },
-    ];
+  componentDidMount() {
+    const data = {
+      userId: this.props.userId,
+    };
 
-    const feed = mockData.map(data => {
-      let myDate = new Date(data.created_at);
-      myDate = myDate.toString();
-      myDate = myDate.split(' ');
+    const { getMessageDetails } = this.props;
+    getMessageDetails(data);
+  }
+  handleActiveMessage = (e) => {
+    const payload = {
+      userId: this.props.userId,
+      convId: e.target.id
+    };
+    this.props.setActiveMessage(payload);
+  }
+  render() {
+    const { conversations, userId } = this.props;
+    const conversationThread = [];
+    const threads = conversations.map(convo => {
+      const messageThreadUser = convo.user_1._id === userId ? convo.user_2 : convo.user_1;
       return (
-        <Card className="cardWidth-message">
-          <CardContent className="cardContentHeight">
-            <div className="flexImageTweet">
-              <div>
-                {/* Include user profile image if available */}
-                <Image
-                  src="/images/default_profile_bigger.png"
-                  roundedCircle
-                  className="profileImage"
-                  width="60%"
-                />
+        <div className="cardWidth-message" key={convo._id} id={convo._id} onClick= {e => this.handleActiveMessage(e)}>
+          <div className="cardContentHeight" id={convo._id}>
+            <div className="flexImageTweet" id={convo._id}>
+              <div id={convo._id}>
+                 <img src={messageThreadUser.profilePic ? messageThreadUser.profilePic : "/images/default_profile_reasonably_small.png"} className="profileImageMessage" alt="user" />
               </div>
-              <div className="flexNameHandle">
-                <p className="messageUserName">{data.name}</p>
-                <p className="messageUserHandle">@{data.handle}</p>
-                <p className="messageUserName">.</p>
-                <p className="messageDate">
-                  {myDate[1]} {myDate[2]}
-                </p>
+              <div className="flexNameHandle" id={convo._id}>
+                <p className="messageUserName" id={convo._id}>{messageThreadUser.name}</p>
+                <p className="messageUserHandle" id={convo._id}>@{messageThreadUser.handle}</p>
               </div>
             </div>
-
-            <p>{data.message}</p>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       );
     });
 
-    return <div>{feed}</div>;
+    return <div>{threads}</div>;
   }
 }
 
-export default MessageCard;
+const mapStateToProps = state => {
+  return {
+    conversations: state.message.conversations,
+    userId: state.user.currentUser._id,
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  getMessageDetails: data => dispatch(messageActions.getMessageDetails(data)),
+  setActiveMessage: data => dispatch(messageActions.setActiveMessage(data)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(MessageCard);

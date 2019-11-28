@@ -38,7 +38,7 @@ const handleRequest = (userId, callback) => {
           retweet_count: tweet.retweets.length || 0,
           body: tweet.body,
           image: tweet.image,
-          created_at: tweet.created_at,
+          created_at: tweet.createdAt,
           likes: tweet.likes,
           profilePic: user.profilePic,
         }));
@@ -59,9 +59,10 @@ const handleRequest = (userId, callback) => {
                 retweet_count: tweet.retweets.length || 0,
                 body: tweet.body,
                 image: tweet.image,
-                created_at: tweet.created_at,
+                created_at: tweet.createdAt,
                 likes: tweet.likes,
                 profilePic: followingUser.profilePic,
+                bookmarks: followingUser.bookmarks,
               }));
             }
             return [];

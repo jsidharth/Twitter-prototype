@@ -181,3 +181,7 @@
 .profileTweets {
   margin-top: 3px;
 }
+
+*:focus {
+  outline: 0 !important;
+}

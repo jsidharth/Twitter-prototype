@@ -17,6 +17,7 @@ class TweetDetails extends Component {
     this.state = {};
     this.likeTweet = this.likeTweet.bind(this);
     this.unlikeTweet = this.unlikeTweet.bind(this);
+    this.bookmarkTweet = this.bookmarkTweet.bind(this);
   }
 
   componentDidMount() {
@@ -27,6 +28,7 @@ class TweetDetails extends Component {
     const { getTweetDetails } = this.props;
     getTweetDetails(data);
   }
+
   likeTweet = e => {
     let data = { tweetId: e.target.id, userId: this.props.userId };
     this.props.likeTweet(data).then(() => {
@@ -37,6 +39,13 @@ class TweetDetails extends Component {
   unlikeTweet = e => {
     let data = { tweetId: e.target.id, userId: this.props.userId };
     this.props.unlikeTweet(data).then(() => {
+      this.props.getTweetDetails(data);
+    });
+  };
+
+  bookmarkTweet = e => {
+    let data = { tweetId: e.target.id, userId: this.props.userId };
+    this.props.bookmarkTweet(data).then(() => {
       this.props.getTweetDetails(data);
     });
   };
@@ -117,7 +126,7 @@ class TweetDetails extends Component {
                 <div>{tweet.likes_count > 0 ? tweet.likes_count : null}</div>
               </div>
               <div className="flexBtnCnt">
-                <MdBookmarkBorder size={20} />
+                <MdBookmarkBorder size={20} id={tweet._id} onClick={this.bookmarkTweet}/>
               </div>
             </div>
           </div>
@@ -136,6 +145,7 @@ const mapDispatchToProps = dispatch => ({
   getTweetDetails: data => dispatch(tweetActions.getTweetDetails(data)),
   likeTweet: data => dispatch(tweetActions.likeTweet(data)),
   unlikeTweet: data => dispatch(tweetActions.unlikeTweet(data)),
+  bookmarkTweet: data => dispatch(tweetActions.bookmarkTweet(data)),
 });
 
 export default connect(

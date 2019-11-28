@@ -132,3 +132,7 @@ div[data-placeholder]:empty:not(:focus):not([data-div-placeholder-content]):befo
   margin-left: 5px;
   margin-top: 7px;
 }
+
+*:focus {
+  outline: 0 !important;
+}
