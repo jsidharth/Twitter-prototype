@@ -12,16 +12,20 @@ import Sidebar from '../Sidebar/Sidebar';
 import SearchBar from '../Search/SearchBar';
 import './Profile.css';
 import { userActions, tweetActions } from '../../js/actions/index';
+import NewProfileModal from './NewProfileModal';
 
 class Profile extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      showProfileModal: false,
+    };
 
     this.likeTweet = this.likeTweet.bind(this);
     this.unlikeTweet = this.unlikeTweet.bind(this);
     this.deleteTweet = this.deleteTweet.bind(this);
     this.bookmarkTweet = this.bookmarkTweet.bind(this);
+    this.showProfileModal = this.showProfileModal.bind(this);
   }
 
   componentDidMount() {
@@ -78,6 +82,12 @@ class Profile extends Component {
     });
   };
 
+  showProfileModal = () => {
+    this.setState({ 
+      showProfileModal: !this.state.showProfileModal
+     });
+  };
+
   render() {
     const { profile, likedTweets } = this.props;
 
@@ -126,9 +136,15 @@ class Profile extends Component {
                   <p className="userHandle">@{profile.handle}</p>
                 </div>
                 <div>
-                  <button type="button" className="editProfileBtn">
+                  <button type="button" className="editProfileBtn" onClick={this.showProfileModal}>
                     Edit Profile
                   </button>
+                  {this.showProfileModal ? (
+                    <NewProfileModal
+                    showProfileModal={this.showProfileModal}
+                      showProfileModalState={this.state.showProfileModal}
+                    />
+                  ) : null}
                 </div>
               </div>
               <div className="personalDetails">

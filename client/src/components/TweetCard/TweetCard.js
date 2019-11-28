@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { FiMessageCircle } from 'react-icons/fi';
 import { FaRegHeart } from 'react-icons/fa';
 import { AiOutlineRetweet, AiOutlineDelete } from 'react-icons/ai';
-import { MdBookmarkBorder, MdBookmark } from 'react-icons/md';
+import { MdBookmarkBorder } from 'react-icons/md';
 import './TweetCard.css';
 
 class TweetCard extends Component {
