@@ -17,7 +17,7 @@ class TweetCard extends Component {
   }
 
   render() {
-    const { tweets, userId, bookmarks} = this.props;
+    const { tweets, userId, bookmarks } = this.props;
     const renderFeed = tweets.map(tweet => {
       let myDate = new Date(tweet.created_at);
       myDate = myDate.toString();
@@ -48,8 +48,8 @@ class TweetCard extends Component {
       // const bookmarkedAlreadyButton = <MdBookmark size={25} color="#1da1f2" />;
 
       // const renderBookmarkButton = bookmarks.includes(tweet._id) ? bookmarkedAlreadyButton : bookmarkButton;
-      console.log('bookmarks..', this.props.bookmarks);
-      console.log(this.props.tweets);
+      // console.log('bookmarks..', this.props.bookmarks);
+      // console.log(this.props.tweets);
 
       return (
         <div className="cardWidth" key={tweet._id}>
@@ -96,7 +96,7 @@ class TweetCard extends Component {
                 <div>{tweet.comments_count > 0 ? tweet.comments_count : null}</div>
               </div>
               <div className="flexBtnCnt">
-                <AiOutlineRetweet size={20} />
+                <AiOutlineRetweet size={20} id={tweet._id} onClick={this.props.retweet} />
                 <div>{tweet.retweet_count > 0 ? tweet.retweet_count : null}</div>
               </div>
               <div className="flexBtnCnt">
@@ -104,7 +104,7 @@ class TweetCard extends Component {
                 <div>{tweet.likes_count > 0 ? tweet.likes_count : null}</div>
               </div>
               <div className="flexBtnCnt">
-                <MdBookmarkBorder size={20} id={tweet._id} onClick={this.props.bookmarkTweet}/>
+                <MdBookmarkBorder size={20} id={tweet._id} onClick={this.props.bookmarkTweet} />
                 {/* {renderBookmarkButton} */}
               </div>
               {tweet.userId === userId ? (

@@ -22,6 +22,7 @@ class Profile extends Component {
     this.unlikeTweet = this.unlikeTweet.bind(this);
     this.deleteTweet = this.deleteTweet.bind(this);
     this.bookmarkTweet = this.bookmarkTweet.bind(this);
+    this.retweet = this.retweet.bind(this);
   }
 
   componentDidMount() {
@@ -72,9 +73,28 @@ class Profile extends Component {
   };
 
   bookmarkTweet = e => {
-    let data = { tweetId: e.target.id, userId: this.props.userId };
-    this.props.bookmarkTweet(data).then(() => {
-      this.props.getUserProfile(data);
+    const bookmarkPayload = {
+      tweetId: e.target.id,
+      userId: this.props.userId
+    };
+    const getFeedPayload = {
+      userId: this.props.match.params.userId,
+    }
+    this.props.bookmarkTweet(bookmarkPayload).then(() => {
+      this.props.getUserProfile(getFeedPayload);
+    });
+  };
+
+  retweet = e => {
+    const retweetPayload = {
+      tweetId: e.target.id,
+      userId: this.props.userId
+    };
+    const getFeedPayload = {
+      userId: this.props.match.params.userId,
+    }
+    this.props.retweet(retweetPayload).then(() => {
+      this.props.getUserProfile(getFeedPayload);
     });
   };
 
@@ -191,6 +211,7 @@ class Profile extends Component {
                       deleteTweet={this.deleteTweet}
                       bookmarkTweet={this.bookmarkTweet}
                       bookmarks={bookmarkedTweets}
+                      retweet={this.retweet}
                     />
                   </div>
                 ) : null}
@@ -205,6 +226,7 @@ class Profile extends Component {
                       deleteTweet={this.deleteTweet}
                       bookmarkTweet={this.bookmarkTweet}
                       bookmarks={bookmarkedTweets}
+                      retweet={this.retweet}
                     />
                   </div>
                 ) : null}
@@ -218,6 +240,7 @@ class Profile extends Component {
                       unlikeTweet={this.unlikeTweet}
                       bookmarkTweet={this.bookmarkTweet}
                       bookmarks={bookmarkedTweets}
+                      retweet={this.retweet}
                     />
                   </div>
                 ) : null}
@@ -231,6 +254,7 @@ class Profile extends Component {
                       unlikeTweet={this.unlikeTweet}
                       bookmarkTweet={this.bookmarkTweet}
                       bookmarks={bookmarkedTweets}
+                      retweet={this.retweet}
                     />
                   </div>
                 ) : null}
@@ -249,7 +273,6 @@ const mapStateToProps = state => ({
   likedTweets: state.user.likedTweets,
   userId: state.user.currentUser._id,
   bookmarkedTweets: state.user.currentUser.bookmarks,
-
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -259,6 +282,7 @@ const mapDispatchToProps = dispatch => ({
   unlikeTweet: data => dispatch(tweetActions.unlikeTweet(data)),
   deleteTweet: data => dispatch(tweetActions.deleteTweet(data)),
   bookmarkTweet: data => dispatch(tweetActions.bookmarkTweet(data)),
+  retweet: data => dispatch(tweetActions.retweet(data)),
 });
 
 export default connect(
