@@ -63,8 +63,10 @@ class Profile extends Component {
   };
  show =()=>{
    this.setState({showModal:true});
-   console.log("hi")
  }
+ hide =()=>{
+  this.setState({showModal:false});
+}
   deleteTweet = e => {
     const data = {
       tweetId: e.target.id,
@@ -105,7 +107,7 @@ class Profile extends Component {
         <div>
           <Sidebar />
         </div>
-      <UpdateProfile show={this.state.showModal}/>
+      <UpdateProfile show={this.state.showModal} hide ={this.hide}/>
         <div className="cardContainer">
           <div className="cardWidth">
             <div className="paperHeightForProfile">
