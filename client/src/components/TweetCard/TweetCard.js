@@ -48,7 +48,7 @@ class TweetCard extends Component {
       // const bookmarkedAlreadyButton = <MdBookmark size={25} color="#1da1f2" />;
 
       // const renderBookmarkButton = bookmarks.includes(tweet._id) ? bookmarkedAlreadyButton : bookmarkButton;
-      console.log('bookmarks..',this.props.bookmarks);
+      console.log('bookmarks..', this.props.bookmarks);
       console.log(this.props.tweets);
 
       return (
