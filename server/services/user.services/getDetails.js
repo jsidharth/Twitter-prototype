@@ -36,20 +36,22 @@ const handleRequest = (userId, callback) => {
           viewsArray.push({ date: todaysDate, count_views: 1 });
         }
         if (result.tweets && result.tweets.length) {
-          result.tweets = result.tweets.map(tweet => ({
-            userId: result._id,
-            _id: tweet._id,
-            name: result.name,
-            handle: result.handle,
-            likes_count: tweet.likes.length || 0,
-            comments_count: tweet.comments.length || 0,
-            retweet_count: tweet.retweets.length || 0,
-            body: tweet.body,
-            image: tweet.image,
-            created_at: tweet.createdAt,
-            likes: tweet.likes,
-            profilePic: result.profilePic,
-          }));
+          result.tweets = result.tweets
+            .map(tweet => ({
+              userId: result._id,
+              _id: tweet._id,
+              name: result.name,
+              handle: result.handle,
+              likes_count: tweet.likes.length || 0,
+              comments_count: tweet.comments.length || 0,
+              retweet_count: tweet.retweets.length || 0,
+              body: tweet.body,
+              image: tweet.image,
+              created_at: tweet.createdAt,
+              likes: tweet.likes,
+              profilePic: result.profilePic,
+            }))
+            .sort((first, second) => moment(second.created_at).diff(first.created_at));
         }
         // Populate retweets with parent tweet detail
         let reTweetsPromise = Promise.resolve();
@@ -91,6 +93,10 @@ const handleRequest = (userId, callback) => {
           });
         }
         reTweetsPromise.then(retweets => {
+          retweets =
+            retweets && retweets.length
+              ? retweets.sort((first, second) => moment(second.created_at).diff(first.created_at))
+              : retweets;
           result.retweets = retweets;
           // Update profile views for each date
           Users.findOneAndUpdate(
