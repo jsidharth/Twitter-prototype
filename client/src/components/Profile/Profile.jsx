@@ -25,6 +25,11 @@ class Profile extends Component {
     this.unlikeTweet = this.unlikeTweet.bind(this);
     this.deleteTweet = this.deleteTweet.bind(this);
     this.bookmarkTweet = this.bookmarkTweet.bind(this);
+    this.retweet = this.retweet.bind(this);
+    this.follow = this.follow.bind(this);
+    this.unfollow = this.unfollow.bind(this);
+    this.mouseIn = this.mouseIn.bind(this);
+    this.mouseOut = this.mouseOut.bind(this);
   }
 
   componentDidMount() {
@@ -75,9 +80,28 @@ class Profile extends Component {
   };
 
   bookmarkTweet = e => {
-    let data = { tweetId: e.target.id, userId: this.props.userId };
-    this.props.bookmarkTweet(data).then(() => {
-      this.props.getUserProfile(data);
+    const bookmarkPayload = {
+      tweetId: e.target.id,
+      userId: this.props.userId,
+    };
+    const getFeedPayload = {
+      userId: this.props.match.params.userId,
+    };
+    this.props.bookmarkTweet(bookmarkPayload).then(() => {
+      this.props.getUserProfile(getFeedPayload);
+    });
+  };
+
+  retweet = e => {
+    const retweetPayload = {
+      tweetId: e.target.id,
+      userId: this.props.userId,
+    };
+    const getFeedPayload = {
+      userId: this.props.match.params.userId,
+    };
+    this.props.retweet(retweetPayload).then(() => {
+      this.props.getUserProfile(getFeedPayload);
     });
   };
   follow = e => {
@@ -125,7 +149,26 @@ class Profile extends Component {
           isFollower = true;
         }
       });
-    renderButton = this.props.userId == profile._id?(<button type="button" className="editProfileBtn">Edit Profile</button>) : (isFollower ?(<button onMouseEnter={this.mouseIn} onMouseLeave={this.mouseOut} className={this.state.mouseHoverClassName} onClick={this.unfollow}> {this.state.mouseHoverButtonText}</button>): <button className="followBtn" onClick={this.follow}>Follow</button>);
+    renderButton =
+      this.props.userId == profile._id ? (
+        <button type="button" className="editProfileBtn">
+          Edit Profile
+        </button>
+      ) : isFollower ? (
+        <button
+          onMouseEnter={this.mouseIn}
+          onMouseLeave={this.mouseOut}
+          className={this.state.mouseHoverClassName}
+          onClick={this.unfollow}
+        >
+          {' '}
+          {this.state.mouseHoverButtonText}
+        </button>
+      ) : (
+        <button className="followBtn" onClick={this.follow}>
+          Follow
+        </button>
+      );
     return (
       <div className="flexHomeScreen">
         <div>
@@ -217,6 +260,7 @@ class Profile extends Component {
                       deleteTweet={this.deleteTweet}
                       bookmarkTweet={this.bookmarkTweet}
                       bookmarks={bookmarkedTweets}
+                      retweet={this.retweet}
                     />
                   </div>
                 ) : null}
@@ -231,6 +275,7 @@ class Profile extends Component {
                       deleteTweet={this.deleteTweet}
                       bookmarkTweet={this.bookmarkTweet}
                       bookmarks={bookmarkedTweets}
+                      retweet={this.retweet}
                     />
                   </div>
                 ) : null}
@@ -244,6 +289,7 @@ class Profile extends Component {
                       unlikeTweet={this.unlikeTweet}
                       bookmarkTweet={this.bookmarkTweet}
                       bookmarks={bookmarkedTweets}
+                      retweet={this.retweet}
                     />
                   </div>
                 ) : null}
@@ -257,6 +303,7 @@ class Profile extends Component {
                       unlikeTweet={this.unlikeTweet}
                       bookmarkTweet={this.bookmarkTweet}
                       bookmarks={bookmarkedTweets}
+                      retweet={this.retweet}
                     />
                   </div>
                 ) : null}
@@ -284,6 +331,7 @@ const mapDispatchToProps = dispatch => ({
   unlikeTweet: data => dispatch(tweetActions.unlikeTweet(data)),
   deleteTweet: data => dispatch(tweetActions.deleteTweet(data)),
   bookmarkTweet: data => dispatch(tweetActions.bookmarkTweet(data)),
+  retweet: data => dispatch(tweetActions.retweet(data)),
   follow: data => dispatch(userActions.follow(data)),
   unfollow: data => dispatch(userActions.unfollow(data)),
 });
