@@ -123,6 +123,51 @@
   color: #1da1f2;
 }
 
+.followingBtn {
+  border-color: #1da1f2;
+  color: white;
+  text-align: center;
+  font-weight: 700;
+  float: right;
+  margin-top: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border-radius: 20px;
+  font-size: 17px;
+  background-color: #1da1f2 ;
+
+}
+.followingBtnRed {
+  border-color: red;
+  color: white;
+  text-align: center;
+  font-weight: 700;
+  float: right;
+  margin-top: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border-radius: 20px;
+  font-size: 17px;
+  background-color: red ;
+}
+.followBtn {
+  border-color: #1da1f2 ;
+  color: #1da1f2 ;
+  text-align: center ;
+  font-weight: 700 ;
+  float: right ;
+  margin-top: 5px ;
+  padding-left: 15px ;
+  padding-right: 15px ;
+  padding-top: 7px ;
+  padding-bottom: 7px ;
+  border-radius: 20px ;
+  font-size: 17px ;
+}
 .flexEditBtn {
   display: flex;
   flex-direction: row;
@@ -157,7 +202,7 @@
 .nav-item:hover {
   border: 0 !important;
   background-color: #ebebeb !important;
-} 
+}
 
 .nav-link {
   color: #495057 !important;
