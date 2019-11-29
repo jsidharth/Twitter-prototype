@@ -4,7 +4,7 @@ import actionTypes from '../constants/index';
 import { ROOT_URL } from '../../constant/constant';
 import { history } from '../helper/history';
 
-const register = payload => {
+export const register = payload => {
   return dispatch => {
     console.log(`${ROOT_URL}/user/register`);
     return axios
@@ -26,7 +26,7 @@ const register = payload => {
       });
   };
 };
-const login = payload => {
+export const login = payload => {
   return dispatch => {
     console.log(`${ROOT_URL}/user/login`);
     return axios
@@ -80,5 +80,3 @@ export const getLikedTweets = payload => {
     });
   };
 };
-
-export const userActions = { register, login };
