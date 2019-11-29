@@ -161,7 +161,6 @@ class Profile extends Component {
           className={this.state.mouseHoverClassName}
           onClick={this.unfollow}
         >
-          {' '}
           {this.state.mouseHoverButtonText}
         </button>
       ) : (
