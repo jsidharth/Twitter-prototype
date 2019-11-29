@@ -14,6 +14,7 @@ class TweetFeed extends Component {
     this.unlikeTweet = this.unlikeTweet.bind(this);
     this.deleteTweet = this.deleteTweet.bind(this);
     this.bookmarkTweet = this.bookmarkTweet.bind(this);
+    this.retweet = this.retweet.bind(this);
   }
 
   componentDidMount() {
@@ -41,6 +42,13 @@ class TweetFeed extends Component {
   bookmarkTweet = e => {
     let data = { tweetId: e.target.id, userId: this.props.userId };
     this.props.bookmarkTweet(data).then(() => {
+      this.props.fetchFeed(data);
+    });
+  };
+
+  retweet = e => {
+    let data = { tweetId: e.target.id, userId: this.props.userId };
+    this.props.retweet(data).then(() => {
       this.props.fetchFeed(data);
     });
   };
@@ -73,6 +81,7 @@ class TweetFeed extends Component {
         unlikeTweet={this.unlikeTweet}
         deleteTweet={this.deleteTweet}
         bookmarkTweet={this.bookmarkTweet}
+        retweet={this.retweet}
         bookmarks={renderBookmarks}
       />
     );
@@ -91,6 +100,7 @@ const mapDispatchToProps = dispatch => ({
   unlikeTweet: data => dispatch(tweetActions.unlikeTweet(data)),
   deleteTweet: data => dispatch(tweetActions.deleteTweet(data)),
   bookmarkTweet: data => dispatch(tweetActions.bookmarkTweet(data)),
+  retweet: data => dispatch(tweetActions.retweet(data)),
 });
 
 export default connect(

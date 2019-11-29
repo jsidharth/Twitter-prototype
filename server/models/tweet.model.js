@@ -16,6 +16,7 @@ const tweetSchema = new Schema(
     comments: [{ type: Schema.Types.ObjectId, ref: 'Tweets' }],
     hashtags: [{ type: String }],
     views: { type: Number },
+    retweetUsers: [{ type: Schema.Types.ObjectId, ref: 'Users' }],
   },
   { timestamps: true }
 );

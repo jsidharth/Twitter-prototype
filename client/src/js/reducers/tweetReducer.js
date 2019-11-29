@@ -22,7 +22,7 @@ const tweetReducer = (state = initialState, action) => {
     case actionTypes.DELETE_TWEET:
       return { ...state, tweetDeletedFlag: true };
     case actionTypes.BOOKMARK_TWEET:
-      return { ...state, bookmarkSuccess: true};
+      return { ...state, bookmarkSuccess: true };
     default:
       break;
   }

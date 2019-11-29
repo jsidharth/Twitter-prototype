@@ -131,3 +131,21 @@ export const bookmarkTweet = payload => {
     });
   };
 };
+
+export const retweet = payload => {
+  return dispatch => {
+    return axios.post(`${ROOT_URL}/tweet/retweet`, payload).then(response => {
+      console.log('Status Code : ', response.status);
+      if (response.status === 200) {
+        toast.info(response.data.message, {
+          position: 'bottom-center',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      }
+    });
+  };
+};

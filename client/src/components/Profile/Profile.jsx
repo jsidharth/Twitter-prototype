@@ -19,6 +19,8 @@ class Profile extends Component {
     super(props);
     this.state = {
       showProfileModal: false,
+      mouseHoverClassName: 'followingBtn',
+      mouseHoverButtonText: 'Following',
     };
 
     this.likeTweet = this.likeTweet.bind(this);
@@ -26,6 +28,11 @@ class Profile extends Component {
     this.deleteTweet = this.deleteTweet.bind(this);
     this.bookmarkTweet = this.bookmarkTweet.bind(this);
     this.showProfileModal = this.showProfileModal.bind(this);
+    this.retweet = this.retweet.bind(this);
+    this.follow = this.follow.bind(this);
+    this.unfollow = this.unfollow.bind(this);
+    this.mouseIn = this.mouseIn.bind(this);
+    this.mouseOut = this.mouseOut.bind(this);
   }
 
   componentDidMount() {
@@ -43,7 +50,7 @@ class Profile extends Component {
     // Fetch the current feed based on the userId in the params
     const getFeedPayload = {
       userId: this.props.match.params.userId,
-    }
+    };
     this.props.likeTweet(likePayload).then(() => {
       this.props.getUserProfile(getFeedPayload).then(() => {
         this.props.getLikedTweets(getFeedPayload);
@@ -57,7 +64,7 @@ class Profile extends Component {
     // Fetch the current feed based on the userId in the params
     const getFeedPayload = {
       userId: this.props.match.params.userId,
-    }
+    };
     this.props.unlikeTweet(unlikePayload).then(() => {
       this.props.getUserProfile(getFeedPayload).then(() => {
         this.props.getLikedTweets(getFeedPayload);
@@ -76,9 +83,15 @@ class Profile extends Component {
   };
 
   bookmarkTweet = e => {
-    let data = { tweetId: e.target.id, userId: this.props.userId };
-    this.props.bookmarkTweet(data).then(() => {
-      this.props.getUserProfile(data);
+    const bookmarkPayload = {
+      tweetId: e.target.id,
+      userId: this.props.userId,
+    };
+    const getFeedPayload = {
+      userId: this.props.match.params.userId,
+    };
+    this.props.bookmarkTweet(bookmarkPayload).then(() => {
+      this.props.getUserProfile(getFeedPayload);
     });
   };
 
@@ -88,6 +101,38 @@ class Profile extends Component {
      });
   };
 
+  retweet = e => {
+    const retweetPayload = {
+      tweetId: e.target.id,
+      userId: this.props.userId,
+    };
+    const getFeedPayload = {
+      userId: this.props.match.params.userId,
+    };
+    this.props.retweet(retweetPayload).then(() => {
+      this.props.getUserProfile(getFeedPayload);
+    });
+  };
+  follow = e => {
+    let data = { followerId: this.props.profile._id, userId: this.props.userId };
+    this.props.follow(data).then(() => {
+      let data = { userId: this.props.profile._id };
+      this.props.getUserProfile(data);
+    });
+  };
+  unfollow = e => {
+    let data = { followerId: this.props.profile._id, userId: this.props.userId };
+    this.props.unfollow(data).then(() => {
+      let data = { userId: this.props.profile._id };
+      this.props.getUserProfile(data);
+    });
+  };
+  mouseIn = () => {
+    this.setState({ mouseHoverClassName: 'followingBtnRed', mouseHoverButtonText: 'Unfollow' });
+  };
+  mouseOut = () => {
+    this.setState({ mouseHoverClassName: 'followingBtn', mouseHoverButtonText: 'Following' });
+  };
   render() {
     const { profile, likedTweets } = this.props;
 
@@ -106,7 +151,33 @@ class Profile extends Component {
     if (this.props.bookmarkedTweets) {
       bookmarkedTweets = this.props.bookmarkedTweets;
     }
-    
+    let renderButton = '';
+    let isFollower = false;
+    profile.followers &&
+      profile.followers.forEach(element => {
+        if (element._id === this.props.userId) {
+          isFollower = true;
+        }
+      });
+    renderButton =
+      this.props.userId == profile._id ? (
+        <button type="button" className="editProfileBtn">
+          Edit Profile
+        </button>
+      ) : isFollower ? (
+        <button
+          onMouseEnter={this.mouseIn}
+          onMouseLeave={this.mouseOut}
+          className={this.state.mouseHoverClassName}
+          onClick={this.unfollow}
+        >
+          {this.state.mouseHoverButtonText}
+        </button>
+      ) : (
+        <button className="followBtn" onClick={this.follow}>
+          Follow
+        </button>
+      );
     return (
       <div className="flexHomeScreen">
         <div>
@@ -136,17 +207,7 @@ class Profile extends Component {
                   <p className="userName">{profile.name}</p>
                   <p className="userHandle">@{profile.handle}</p>
                 </div>
-                <div>
-                  <button type="button" className="editProfileBtn" onClick={this.showProfileModal}>
-                    Edit Profile
-                  </button>
-                  {this.showProfileModal ? (
-                    <EditProfileModal
-                    showProfileModal={this.showProfileModal}
-                      showProfileModalState={this.state.showProfileModal}
-                    />
-                  ) : null}
-                </div>
+                <div>{renderButton}</div>
               </div>
               <div className="personalDetails">
                 <div className="flexIconDetails">
@@ -208,6 +269,7 @@ class Profile extends Component {
                       deleteTweet={this.deleteTweet}
                       bookmarkTweet={this.bookmarkTweet}
                       bookmarks={bookmarkedTweets}
+                      retweet={this.retweet}
                     />
                   </div>
                 ) : null}
@@ -222,6 +284,7 @@ class Profile extends Component {
                       deleteTweet={this.deleteTweet}
                       bookmarkTweet={this.bookmarkTweet}
                       bookmarks={bookmarkedTweets}
+                      retweet={this.retweet}
                     />
                   </div>
                 ) : null}
@@ -235,6 +298,7 @@ class Profile extends Component {
                       unlikeTweet={this.unlikeTweet}
                       bookmarkTweet={this.bookmarkTweet}
                       bookmarks={bookmarkedTweets}
+                      retweet={this.retweet}
                     />
                   </div>
                 ) : null}
@@ -248,6 +312,7 @@ class Profile extends Component {
                       unlikeTweet={this.unlikeTweet}
                       bookmarkTweet={this.bookmarkTweet}
                       bookmarks={bookmarkedTweets}
+                      retweet={this.retweet}
                     />
                   </div>
                 ) : null}
@@ -266,7 +331,6 @@ const mapStateToProps = state => ({
   likedTweets: state.user.likedTweets,
   userId: state.user.currentUser._id,
   bookmarkedTweets: state.user.currentUser.bookmarks,
-
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -276,6 +340,9 @@ const mapDispatchToProps = dispatch => ({
   unlikeTweet: data => dispatch(tweetActions.unlikeTweet(data)),
   deleteTweet: data => dispatch(tweetActions.deleteTweet(data)),
   bookmarkTweet: data => dispatch(tweetActions.bookmarkTweet(data)),
+  retweet: data => dispatch(tweetActions.retweet(data)),
+  follow: data => dispatch(userActions.follow(data)),
+  unfollow: data => dispatch(userActions.unfollow(data)),
 });
 
 export default connect(
