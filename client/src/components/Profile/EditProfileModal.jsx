@@ -19,7 +19,7 @@ class EditProfileModal extends Component {
         dob: '',
     };
     this.handleOnChange = this.handleOnChange.bind(this);
-    this.handleSave = this.handleSave.bind(this);
+    //this.handleSave = this.handleSave.bind(this);
   }
 
   componentDidMount() {
@@ -42,10 +42,10 @@ class EditProfileModal extends Component {
     })
   };
 
-  handleSave(event) {
-    alert("This Save");
-    event.preventDefault();
-  }
+  // handleEditProfile(event) {
+  //   alert("This Save");
+  //   event.preventDefault();
+  // }
 
   componentWillReceiveProps(newProps) {
     const { profile } = newProps;
@@ -59,6 +59,7 @@ class EditProfileModal extends Component {
   }
 
   render() {
+    // const { userId } = this.props;
     return (
       <div>
         <Modal
@@ -68,7 +69,7 @@ class EditProfileModal extends Component {
           centered
         >
           <Modal.Header closeButton>
-            <button className="saveBtn" type="button" onClick={this.handleSave}>
+            <button className="saveBtn" type="button" onClick={this.props.editUserProfile}>
                 Save
               </button>
             <Modal.Title className="modalTitle">Edit Profile</Modal.Title>

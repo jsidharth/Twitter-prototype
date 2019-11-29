@@ -65,6 +65,15 @@ export const getUserProfile = payload => {
   };
 };
 
+export const editUserProfile = payload => {
+  return dispatch => {
+    return axios.put(`${ROOT_URL}/user/details/`, payload).then(response => {
+      console.log('Status Code : ', response.status);
+      return Promise.resolve();
+    });
+  };
+};
+
 export const getLikedTweets = payload => {
   return dispatch => {
     return axios.get(`${ROOT_URL}/user/like/${payload.userId}`).then(response => {

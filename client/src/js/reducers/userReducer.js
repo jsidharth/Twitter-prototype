@@ -15,6 +15,8 @@ const userReducer = (state = initialState, action) => {
       return { ...state, currentUser: action.payload };
     case actionTypes.GET_USER_PROFILE:
       return { ...state, profile: action.payload };
+    // case actionTypes.PUT_USER_PROFILE:
+    //   return { ...state, profile: action.payload };
     case actionTypes.GET_LIKED_TWEETS:
       return { ...state, likedTweets: action.payload };
     default:

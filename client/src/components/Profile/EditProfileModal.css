@@ -43,5 +43,9 @@
 
 .modalTitle {
     margin-right: 200px;
-    margin-left: 10px;
+    margin-left: 50px;
+}
+
+.button.close {
+    padding: 0;
 }
