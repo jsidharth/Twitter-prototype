@@ -23,6 +23,8 @@ const handleRequest = async (userDetails, callback) => {
       dob: moment(user.dob).format('MM-DD-YYYY'),
       active: user.active,
       bookmarks: user.bookmarks,
+      profilePic: user.profilePic,
+      handle: user.handle,
     });
   }
 };

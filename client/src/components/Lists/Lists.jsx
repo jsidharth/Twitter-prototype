@@ -7,8 +7,6 @@ import { Tabs, Tab } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Sidebar from '../Sidebar/Sidebar';
 import SearchBar from '../Search/SearchBar';
-
-import './Lists.css';
 import { listActions } from '../../js/actions';
 import ListCard from './ListCard';
 
@@ -20,11 +18,11 @@ class Lists extends Component {
 
   componentDidMount() {
     const { getLists } = this.props;
-    getLists(this.props.userId);
+    getLists(this.props.currentUser._id);
   }
 
   render() {
-    const { lists } = this.props;
+    const { lists, currentUser } = this.props;
     return (
       <div className="flexHomeScreen">
         <div>
@@ -44,9 +42,9 @@ class Lists extends Component {
                 <div className="resultsTab">
                   {lists.ownedLists && lists.ownedLists.length
                     ? lists.ownedLists.map(list => {
-                        list.userPic = this.props.profile.profilePic;
-                        list.userName = this.props.profile.name;
-                        list.userHandle = this.props.profile.handle;
+                        list.userPic = currentUser.profilePic;
+                        list.userName = currentUser.name;
+                        list.userHandle = currentUser.handle;
                         return (
                           <div>
                             <ListCard list={list} />
@@ -80,8 +78,7 @@ class Lists extends Component {
 
 const mapStateToProps = state => ({
   lists: state.list.lists,
-  userId: state.user.currentUser._id,
-  profile: state.user.profile,
+  currentUser: state.user.currentUser,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -17,25 +17,30 @@ class ListCard extends Component {
     const imgSrcSubscribed = list.userPic ? list.userPic : '/images/default_profile_bigger.png';
     return (
       // eslint-disable-next-line no-underscore-dangle
-      <div className="listCardWidth" key={list._id}>
-        <div className="listCardContent">
-          <div className="flexImageUser">
-            <div>
-              {/* Include user profile image if available */}
-              <img src={imgSrcSubscribed} className="listUserCard" alt="user" />
-            </div>
-            <div>
-              <div className="flexNameHandleUserCard">
-                <p className="listUserName">{list.userName}</p>
-                <p className="listUserHandle">@{list.userHandle}</p>
+      <Link
+        to={`/list/view/${list._id}`}
+        className="tweetClickCard"
+        style={{ textDecoration: 'none' }}
+      >
+        <div className="listCardWidth" key={list._id}>
+          <div className="listCardContent">
+            <div className="flexImageUser">
+              <div>
+                <img src={imgSrcSubscribed} className="listUserCard" alt="user" />
               </div>
-              <p className="listTitle">{list.name}</p>
-              <p className="listDescription">{list.description}</p>
-              <p className="listMemberCount">{list.members.length} Members</p>
+              <div>
+                <div className="flexNameHandleUserCard">
+                  <p className="listUserName">{list.userName}</p>
+                  <p className="listUserHandle">@{list.userHandle}</p>
+                </div>
+                <p className="listTitle">{list.name}</p>
+                <p className="listDescription">{list.description}</p>
+                <p className="listMemberCount">{list.members.length} Members</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </Link>
     );
   }
 }

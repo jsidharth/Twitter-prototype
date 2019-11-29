@@ -17,3 +17,18 @@ export const getLists = payload => {
     });
   };
 };
+
+export const getListDetails = payload => {
+  return dispatch => {
+    console.log(payload);
+    return axios.get(`${ROOT_URL}/list/getListDetails/${payload}`).then(response => {
+      console.log('Status Code : ', response.status);
+      if (response.status === 200) {
+        dispatch({
+          type: actionTypes.GET_LIST_DETAILS,
+          payload: response.data,
+        });
+      }
+    });
+  };
+};
