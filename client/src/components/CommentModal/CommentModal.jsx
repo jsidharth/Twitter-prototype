@@ -45,9 +45,7 @@ class CommentModal extends Component {
                 imageUrl: this.props.imageUrl,
             };
             console.log(data);
-            this.props.replyTweet(data).then(() => {
-                this.props.getTweetDetails(this.props.tweetId);
-            });
+            this.props.replyTweet(data);
             this.props.showCommentModal();
         }
     }

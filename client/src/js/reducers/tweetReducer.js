@@ -7,7 +7,6 @@ const initialState = {
   bookmarkedTweets: [],
   tweetDeletedFlag: false,
   bookmarkSuccess: false,
-  tweetRepliedFlag: false,
 };
 
 const tweetReducer = (state = initialState, action) => {

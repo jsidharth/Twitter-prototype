@@ -26,7 +26,7 @@ const handleRequest = async (tweetDetails, callback) => {
     user.tweets.push(tweet._id);
     await user.save();
     // Add tweeet to parent tweets comment array
-    const parentTweet = await Tweets.findById(tweetDetails.parentTweetID).populate('comments');
+    const parentTweet = await Tweets.findById(tweetDetails.parentTweetID);
     if (!parentTweet) {
       callback(
         {
@@ -36,7 +36,7 @@ const handleRequest = async (tweetDetails, callback) => {
       );
     } else {
       parentTweet.comments.push(tweet._id);
-      parentTweet.save();
+      await parentTweet.save();
       getTweetDetail.handleRequest(parentTweet._id, callback);
     }
   }
