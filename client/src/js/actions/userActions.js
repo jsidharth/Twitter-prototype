@@ -4,7 +4,7 @@ import actionTypes from '../constants/index';
 import { ROOT_URL } from '../../constant/constant';
 import { history } from '../helper/history';
 
-const register = payload => {
+export const register = payload => {
   return dispatch => {
     return axios
       .post(`${ROOT_URL}/user/register`, payload)
@@ -25,7 +25,8 @@ const register = payload => {
       });
   };
 };
-const login = payload => {
+
+export const login = payload => {
   return dispatch => {
     return axios
       .post(`${ROOT_URL}/user/login`, payload)
@@ -111,4 +112,3 @@ export const unfollow = payload => {
       });
   };
 };
-export const userActions = { register, login };

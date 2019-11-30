@@ -50,11 +50,21 @@ const handleRequest = async (userId, callback) => {
       callback(null, {
         ownedLists: user.ownedLists,
         subscribedLists: updatedsubscribedLists,
+        listOwner: {
+          name: user.name,
+          handle: user.handle,
+          profilePic: user.profilePic,
+        },
       });
     } else {
       callback(null, {
         ownedLists: user.ownedLists,
         subscribedLists: user.subscribedLists,
+        listOwner: {
+          name: user.name,
+          handle: user.handle,
+          profilePic: user.profilePic,
+        },
       });
     }
   }

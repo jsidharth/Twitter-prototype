@@ -18,11 +18,11 @@ class Lists extends Component {
 
   componentDidMount() {
     const { getLists } = this.props;
-    getLists(this.props.currentUser._id);
+    getLists(this.props.match.params.userId);
   }
 
   render() {
-    const { lists, currentUser } = this.props;
+    const { ownedLists, subscribedLists, listOwner } = this.props.lists;
     return (
       <div className="flexHomeScreen">
         <div>
@@ -40,11 +40,11 @@ class Lists extends Component {
               {/* Change the API for correct data */}
               <Tab eventKey="owned" title="Owned">
                 <div className="resultsTab">
-                  {lists.ownedLists && lists.ownedLists.length
-                    ? lists.ownedLists.map(list => {
-                        list.userPic = currentUser.profilePic;
-                        list.userName = currentUser.name;
-                        list.userHandle = currentUser.handle;
+                  {ownedLists && ownedLists.length
+                    ? ownedLists.map(list => {
+                        list.userPic = listOwner.profilePic;
+                        list.userName = listOwner.name;
+                        list.userHandle = listOwner.handle;
                         return (
                           <div>
                             <ListCard list={list} />
@@ -56,8 +56,8 @@ class Lists extends Component {
               </Tab>
               <Tab eventKey="subscribed" title="Subscribed">
                 <div className="resultsTab">
-                  {lists.subscribedLists && lists.subscribedLists.length
-                    ? lists.subscribedLists.map(list => {
+                  {subscribedLists && subscribedLists.length
+                    ? subscribedLists.map(list => {
                         return (
                           <div className="profileTweets">
                             <ListCard list={list} />
@@ -78,7 +78,6 @@ class Lists extends Component {
 
 const mapStateToProps = state => ({
   lists: state.list.lists,
-  currentUser: state.user.currentUser,
 });
 
 const mapDispatchToProps = dispatch => ({

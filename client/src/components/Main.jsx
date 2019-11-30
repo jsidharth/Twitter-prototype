@@ -29,7 +29,7 @@ class Main extends Component {
           <Route path="/home" component={Home} />
           <Route path="/bookmarks" component={Bookmarks} />
           <Route path="/messages" component={Messages} />
-          <Route path="/lists" component={Lists} />
+          <Route path="/lists/:userId" component={Lists} />
           <Route path="/list/view/:listId" component={ListView} />
           <Route path="/profile/:userId" component={Profile} />
           <Route path="/analytics" component={Analytics} />

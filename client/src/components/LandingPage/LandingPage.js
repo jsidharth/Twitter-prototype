@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import DatePicker from 'react-date-picker';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import { userActions } from '../../js/actions/userActions';
+import { userActions } from '../../js/actions';
 import { Redirect } from 'react-router';
 import cookie from 'js-cookie';
 

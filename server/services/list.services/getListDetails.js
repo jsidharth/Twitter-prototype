@@ -60,6 +60,7 @@ const handleRequest = async (listId, callback) => {
         let tweets = _.chain(members)
           .map(member => {
             return _.map(member.tweets, tweet => ({
+              userId: member._id,
               _id: tweet._id,
               name: member.name,
               handle: member.handle,
@@ -69,6 +70,9 @@ const handleRequest = async (listId, callback) => {
               body: tweet.body,
               image: tweet.image,
               created_at: tweet.created_at,
+              likes: tweet.likes,
+              profilePic: member.profilePic,
+              bookmarks: member.bookmarks,
             }));
           })
           .flatten()
@@ -104,6 +108,10 @@ const handleRequest = async (listId, callback) => {
           members,
           subscribers,
           listOwner: listUser,
+          listDetail: {
+            name: list.name,
+            description: list.description,
+          },
         });
       }
     }
