@@ -18,6 +18,7 @@ class EditProfileModal extends Component {
       bio: '',
       location: '',
       website: '',
+      // dob: '',
       profilePic: '',
     };
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -35,18 +36,6 @@ class EditProfileModal extends Component {
       website,
       // dob,
       profilePic,
-    });
-  }
-
-  componentWillReceiveProps(newProps) {
-    const { profile } = newProps;
-    this.setState({
-      name: profile.name,
-      bio: profile.bio,
-      location: profile.location,
-      website: profile.website,
-      // dob: profile.dob,
-      profilePic: profile.profilePic,
     });
   }
 
@@ -114,7 +103,7 @@ class EditProfileModal extends Component {
             />
             <div className="flexUploadImage">
               <div className="flexIconCharsCount">
-                <div className="iconUpload">
+                <div className="iconUploadForProfile">
                   <input
                     className="inputStyle"
                     accept="image/*"

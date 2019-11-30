@@ -9,6 +9,7 @@ import { MdKeyboardBackspace } from 'react-icons/md';
 import { TiLocationOutline } from 'react-icons/ti';
 import { GoCalendar, GoNote } from 'react-icons/go';
 import { GiBalloons } from 'react-icons/gi';
+import { IoIosLink } from 'react-icons/io';
 import { Tabs, Tab } from 'react-bootstrap';
 import TweetCard from '../TweetCard/TweetCard';
 import Sidebar from '../Sidebar/Sidebar';
@@ -164,6 +165,14 @@ class Profile extends Component {
     joinedDate = joinedDate.toString();
     joinedDate = joinedDate.split(' ');
 
+    let websiteDetails;
+    let websiteDisplay;
+    if (profile.website) {
+      websiteDetails = profile.website;
+      websiteDisplay = websiteDetails.split('www.');
+      console.log('Website Display: ', websiteDisplay[1]);
+    }
+
     const numTweets = profile && profile.tweets ? profile.tweets.length : 0;
 
     let bookmarkedTweets = null;
@@ -236,12 +245,25 @@ class Profile extends Component {
                 </div>
                 <div>{renderButton}</div>
               </div>
+              <div className="userBio">
+                <p className="userBioProfile">{profile.bio}</p>
+              </div>
               <div className="personalDetails">
                 <div className="flexIconDetails">
                   <div className="iconColor">
                     <TiLocationOutline size={20} />
                   </div>
                   <p className="tweetDate">{profile.location}</p>
+                </div>
+                <div className="flexIconDetails">
+                  <div className="iconColor">
+                    <IoIosLink size={20} />
+                  </div>
+                  <p className="tweetDate">
+                    {websiteDisplay && websiteDisplay[1] ? (
+                      <a href={profile.website}>{websiteDisplay[1]}</a>
+                    ) : null}
+                  </p>
                 </div>
                 <div className="flexIconDetails">
                   <div className="iconColor">
