@@ -1,0 +1,138 @@
+.cardContainer {
+    width: 600px;
+  }
+  
+  .postTweetSeparator {
+    background-color: #E6ECF0;
+    height: 10px;
+  }
+  
+  .inputStyle {
+    display: none;
+    float: right;
+  }
+  
+  .cardWidth {
+    width: 600px;
+  }
+  
+  .paperHeight {
+    padding-top: 10px;
+    height: 50px;
+    font-weight: 800;
+    font-size: 19px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu,
+      'Helvetica Neue', sans-serif;
+    padding-left: 15px;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: #d0d4d6;
+  }
+  
+  .cardContent {
+    font-size: inherit;
+    margin-bottom: 0px;
+  }
+  
+  .tweetImagePost {
+    object-fit: cover;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 250px;
+  }
+  
+  .flexImageTweet {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  
+  .profileImageTweet {
+    margin: 0 auto;
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 50%;
+  }
+  
+  .tweetText {
+    margin-left: 20px;
+    margin-top: 0px;
+    width: 95%;
+    height: 50px;
+    outline: none;
+  }
+  
+  .postTweetModalTextArea {
+    display: inline-block;
+    min-height: 150px;
+    width: 95%;
+    margin-bottom: 10px;
+  }
+  
+  .textArea {
+    margin-left: 20px;
+    margin-top: 0px;
+    width: 97%;
+    height: 100%;
+    outline: none;
+    margin-top: 0px;
+    overflow: auto;
+    resize: none;
+    border: none;
+    font-size: 19px;
+    font-weight: 400;
+    overflow-wrap: break-word;
+  }
+  
+  div[data-placeholder]:empty:not(:focus):not([data-div-placeholder-content]):before {
+    content: attr(data-placeholder);
+    float: left;
+    margin-left: 2px;
+    color: #b3b3b3;
+  }
+  
+  .iconUpload {
+    margin-left: 80px;
+    display: 'none';
+  }
+  
+  .postTweetBtn {
+    background-color: #1da1f2;
+    color: white;
+    text-align: center;
+    font-weight: 700;
+    float: right;
+    margin-top: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border-radius: 20px;
+    font-size: 15px;
+    outline: none;
+  }
+  
+  .flexUploadTweet {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .flexIconCharsCount {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  
+  .countMessageStyle {
+    font-size: 17px;
+    font-weight: 400;
+    color: #b3b3b3;
+    margin-left: 5px;
+    margin-top: 1px;
+  }
+  
+  *:focus {
+    outline: 0 !important;
+  }

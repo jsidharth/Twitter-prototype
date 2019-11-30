@@ -1,0 +1,75 @@
+.listCardWidth {
+    width: 600px;
+}
+
+.listCardContent {
+    font-size: inherit;
+    margin-bottom: 0px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #d0d4d6;
+    padding: 6px;
+}
+
+.listUserCard {
+    margin: 0 auto;
+    max-width: 25px;
+    max-height: 25px;
+    border-radius: 50%;
+}
+
+.flexListName {
+    display: flex;
+    flex-direction: column;
+}
+
+.listUserName {
+    margin-right: 10px;
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 17px;
+    margin-bottom: 0px;
+}
+
+.listUserHandle {
+    font-size: 17px;
+    color: #657786;
+    margin-right: 10px;
+    margin-bottom: 0px;
+
+}
+
+.listTitle {
+    font-weight: 700;
+    font-size: 19px;
+    font-family: system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        'Segoe UI',
+        Roboto,
+        Ubuntu,
+        'Helvetica Neue',
+        sans-serif;
+    margin-bottom: 0px;
+    margin-left: 10px;
+}
+
+.listDescription {
+    font-size: 16px;
+    font-family: system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        'Segoe UI',
+        Roboto,
+        Ubuntu,
+        'Helvetica Neue',
+        sans-serif;
+    margin-bottom: 0px;
+    margin-left: 10px;
+}
+
+.listMemberCount {
+    color: #657786;
+    margin-bottom: 0px;
+    margin-left: 10px;
+}

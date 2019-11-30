@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import './PostTweet.css';
+import Modal from 'react-bootstrap/Modal';
 import { connect } from 'react-redux';
 import { AiOutlinePicture } from 'react-icons/ai';
 import { imageActions, tweetActions } from '../../js/actions/index';
+import './PostTweetModal.css';
 
-class PostTweet extends Component {
+class PostTweetModal extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -15,6 +17,7 @@ class PostTweet extends Component {
     this.tweetTextHandler = this.tweetTextHandler.bind(this);
     this.uploadImage = this.uploadImage.bind(this);
     this.postTweet = this.postTweet.bind(this);
+
   }
 
   tweetTextHandler = e => {
@@ -41,74 +44,77 @@ class PostTweet extends Component {
         tweetText: this.state.tweetText,
         imageUrl: this.props.imageUrl,
       };
-      console.log(data);
       this.props.postTweet(data).then(() => {
+        this.props.showPostTweetModal();
         this.props.fetchFeed(data);
       });
     }
   };
 
   render() {
+
     var count = 280 - this.state.tweetText.length;
     const { user } = this.props;
 
     return (
-      <div className="cardContainer">
-        <div className="cardWidth">
-          <div className="paperHeight">Home</div>
-          {/* <Paper className="paperHeight">Home</Paper> */}
-          <div className="cardContent">
-            <div className="flexImageTweet">
-              <div>
-                {/* Include user profile image if available */}
-                <img
+      <Modal
+        dialogClassName="commentModal"
+        show={this.props.showPostTweetModalState}
+        onHide={this.props.showPostTweetModal}
+        centered
+      >
+        <Modal.Header closeButton>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="flexImageTweet">
+            <div>
+              <img
                 src={user.profilePic ? user.profilePic : "/images/default_profile_bigger.png"}
                 className="profileImageTweet"
-                  alt="User profile"
-                />
-              </div>
-
-              <div className="autoExpandDiv">
-                <textarea
-                  className="textArea"
-                  onChange={this.tweetTextHandler}
-                  placeholder="What's happening?"
-                  maxLength="280"
-                ></textarea>
-              </div>
+                alt="User profile"
+              />
             </div>
-            {this.props.imageUrl ? (
-              <img src={this.props.imageUrl} className="tweetImagePost" alt="Tweet" />
-            ) : null}
-            <div className="flexUploadTweet">
-              <div className="flexIconCharsCount">
-                <div className="iconUpload">
-                  <input
-                    className="inputStyle"
-                    accept="image/*"
-                    id="icon-button-file"
-                    type="file"
-                    onChange={this.uploadImage}
-                    ref={ref => {
-                      this.upladTweetImage = ref;
-                    }}
-                  />
-                  <label htmlFor="icon-button-file">
-                    <AiOutlinePicture color="#1da1f2" size={20} />
-                  </label>
-                </div>
-                <div className="countMessageStyle">{`${count} characters remaining`}</div>
-              </div>
-              <button className="postTweetBtn" onClick={this.postTweet}>
-                Tweet
-              </button>
+
+            <div className="postTweetModalTextArea">
+              <textarea
+                className="textArea"
+                onChange={this.tweetTextHandler}
+                placeholder="What's happening?"
+                maxLength="280"
+              ></textarea>
             </div>
           </div>
-        </div>
-        <div className="postTweetSeparator"></div>
-      </div>
+          {this.props.imageUrl ? (
+            <img src={this.props.imageUrl} className="tweetImagePost" alt="Tweet" />
+          ) : null}
+          <div className="flexUploadTweet">
+            <div className="flexIconCharsCount">
+              <div className="iconUpload">
+                <input
+                  className="inputStyle"
+                  accept="image/*"
+                  id="icon-button-file"
+                  type="file"
+                  onChange={this.uploadImage}
+                  ref={ref => {
+                    this.upladTweetImage = ref;
+                  }}
+                />
+                <label htmlFor="icon-button-file">
+                  <AiOutlinePicture color="#1da1f2" size={20} />
+                </label>
+              </div>
+              <div className="countMessageStyle">{`${count} characters remaining`}</div>
+            </div>
+            <button className="postTweetBtn" onClick={this.postTweet}>
+              Tweet
+            </button>
+          </div>
+        </Modal.Body>
+      </Modal>
     );
   }
+
 }
 
 const mapStateToProps = state => ({
@@ -127,4 +133,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(PostTweet);
+)(PostTweetModal);

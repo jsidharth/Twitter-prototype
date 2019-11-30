@@ -45,3 +45,38 @@
 *:focus {
   outline: 0 !important;
 }
+
+.flexNameHandle {
+  display: flex;
+  flex-direction: row;
+}
+
+.tweetUserName {
+  margin-right: 10px;
+  margin-left: 10px;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.tweetUserHandle {
+  font-size: 17px;
+  color: #657786;
+  margin-right: 10px;
+}
+
+.tweetDateDetails {
+  font-size: 17px;
+  color: #657786;
+}
+
+.tweetTimeDetails {
+  font-size: 17px;
+  color: #657786;
+  margin-right: 10px;
+}
+
+.flexDateTime {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+}

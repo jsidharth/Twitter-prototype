@@ -7,7 +7,7 @@ const initialState = {
   bookmarkedTweets: [],
   tweetDeletedFlag: false,
   bookmarkSuccess: false,
-}
+};
 
 const tweetReducer = (state = initialState, action) => {
   switch (action.type) {

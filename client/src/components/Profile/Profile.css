@@ -136,9 +136,10 @@
   padding-bottom: 7px;
   border-radius: 20px;
   font-size: 17px;
-  background-color: #1da1f2 ;
+  background-color: #1da1f2;
 
 }
+
 .followingBtnRed {
   border-color: red;
   color: white;
@@ -152,22 +153,24 @@
   padding-bottom: 7px;
   border-radius: 20px;
   font-size: 17px;
-  background-color: red ;
+  background-color: red;
 }
+
 .followBtn {
-  border-color: #1da1f2 ;
-  color: #1da1f2 ;
-  text-align: center ;
-  font-weight: 700 ;
-  float: right ;
-  margin-top: 5px ;
-  padding-left: 15px ;
-  padding-right: 15px ;
-  padding-top: 7px ;
-  padding-bottom: 7px ;
-  border-radius: 20px ;
-  font-size: 17px ;
+  border-color: #1da1f2;
+  color: #1da1f2;
+  text-align: center;
+  font-weight: 700;
+  float: right;
+  margin-top: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border-radius: 20px;
+  font-size: 17px;
 }
+
 .flexEditBtn {
   display: flex;
   flex-direction: row;
@@ -229,4 +232,15 @@
 
 *:focus {
   outline: 0 !important;
+}
+
+.flexListIcon {
+  display: flex;
+  flex-direction: row;
+  color: #657786;
+}
+
+.listIcon {
+  margin-top: 5px;
+  margin-left: 8px;
 }

@@ -1,15 +1,20 @@
+/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { MdKeyboardBackspace } from 'react-icons/md';
 import { TiLocationOutline } from 'react-icons/ti';
-import { GoCalendar } from 'react-icons/go';
+import { GoCalendar ,GoNote} from 'react-icons/go';
 import { GiBalloons } from 'react-icons/gi';
 import { Tabs, Tab } from 'react-bootstrap';
 import TweetCard from '../TweetCard/TweetCard';
 import Sidebar from '../Sidebar/Sidebar';
 import SearchBar from '../Search/SearchBar';
+
+
 import './Profile.css';
 import { userActions, tweetActions } from '../../js/actions/index';
 import EditProfileModal from './EditProfileModal';
@@ -44,6 +49,17 @@ class Profile extends Component {
     getLikedTweets(data);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.userId !== prevProps.match.params.userId) {
+      const { getUserProfile, getLikedTweets } = this.props;
+      const data = {
+        userId: this.props.match.params.userId,
+      };
+      getUserProfile(data);
+      getLikedTweets(data);
+    }
+  }
+
   likeTweet = e => {
     // Pass the current logged in user to check if he has liked the specific tweets
     const likePayload = { tweetId: e.target.id, userId: this.props.userId };
@@ -60,7 +76,7 @@ class Profile extends Component {
 
   unlikeTweet = e => {
     // Pass the current logged in user to check if he has liked the specific tweets
-    let unlikePayload = { tweetId: e.target.id, userId: this.props.userId };
+    const unlikePayload = { tweetId: e.target.id, userId: this.props.userId };
     // Fetch the current feed based on the userId in the params
     const getFeedPayload = {
       userId: this.props.match.params.userId,
@@ -107,31 +123,35 @@ class Profile extends Component {
       this.props.getUserProfile(getFeedPayload);
     });
   };
+
   follow = e => {
-    let data = { followerId: this.props.profile._id, userId: this.props.userId };
+    const data = { followerId: this.props.profile._id, userId: this.props.userId };
     this.props.follow(data).then(() => {
-      let data = { userId: this.props.profile._id };
+      const data = { userId: this.props.profile._id };
       this.props.getUserProfile(data);
     });
   };
+
   unfollow = e => {
-    let data = { followerId: this.props.profile._id, userId: this.props.userId };
+    const data = { followerId: this.props.profile._id, userId: this.props.userId };
     this.props.unfollow(data).then(() => {
-      let data = { userId: this.props.profile._id };
+      const data = { userId: this.props.profile._id };
       this.props.getUserProfile(data);
     });
   };
+
   mouseIn = () => {
     this.setState({ mouseHoverClassName: 'followingBtnRed', mouseHoverButtonText: 'Unfollow' });
   };
+
   mouseOut = () => {
     this.setState({ mouseHoverClassName: 'followingBtn', mouseHoverButtonText: 'Following' });
   };
 
   showProfileModal = () => {
-    this.setState({ 
-      showProfileModal: !this.state.showProfileModal
-     });
+    this.setState({
+      showProfileModal: !this.state.showProfileModal,
+    });
   };
 
   render() {
@@ -163,14 +183,14 @@ class Profile extends Component {
       this.props.userId == profile._id ? (
         <div>
           <button type="button" className="editProfileBtn" onClick={this.showProfileModal}>
-                    Edit Profile
+            Edit Profile
           </button>
-            {this.showProfileModal ? (
-              <EditProfileModal
-                showProfileModal={this.showProfileModal}
-                showProfileModalState={this.state.showProfileModal}
-              />
-            ) : null}
+          {this.showProfileModal ? (
+            <EditProfileModal
+              showProfileModal={this.showProfileModal}
+              showProfileModalState={this.state.showProfileModal}
+            />
+          ) : null}
         </div>
       ) : isFollower ? (
         <button
@@ -255,6 +275,14 @@ class Profile extends Component {
                     </div>
                     Followers
                   </div>
+                </div>
+              </Link>
+              <Link to={`/lists/${this.props.match.params.userId}`}>
+                <div className="flexListIcon">
+                  <div className="listIcon">
+                    <GoNote size={20} />
+                  </div>
+                  <p className="sidebarTopics">Lists</p>
                 </div>
               </Link>
             </div>

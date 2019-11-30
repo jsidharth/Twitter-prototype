@@ -19,9 +19,11 @@
   border-color: #d0d4d6;
   padding: 20px;
 }
+
 .cardContentTweet:hover{
   background-color: #f5f8fa;
 }
+
 .flexImageTweet {
   display: flex;
   flex-direction: row;
@@ -60,14 +62,14 @@
   margin-right: 10px;
 }
 
-.tweetDate {
+.tweetDate1 {
   font-size: 17px;
   color: #657786;
 }
 
 .tweetImage {
-  max-width: 500px;
-  max-height: 600px;
+  max-width: 450px;
+  max-height: 500px;
   object-fit: contain;
 }
 

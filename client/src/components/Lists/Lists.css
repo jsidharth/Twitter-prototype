@@ -1,11 +1,10 @@
-.flexHomeScreen {
-    display: flex;
-    flex-direction: row;
-  }
 
-.cardWidth {
-  width: 600px;
-  border-style: solid;
-  border-width: 0.5px;
-  border-color: #d0d4d6;
+.newListIcon {
+    margin-left: 500px;
+    margin-right: 10px;
+    color: #00ACEE;
+}
+
+.newListIcon:hover {
+    color: #008abe;
 }

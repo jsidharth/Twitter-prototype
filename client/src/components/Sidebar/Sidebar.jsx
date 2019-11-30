@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import { Navbar, ListGroup } from 'react-bootstrap';
@@ -5,14 +7,34 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { GoHome, GoMail, GoNote, GoGraph } from 'react-icons/go';
-import { FiBookmark } from 'react-icons/fi';
+import { FiBookmark, FiLogOut } from 'react-icons/fi';
+import cookie from 'js-cookie';
 import './Sidebar.css';
+import PostTweetModal from '../PostTweetModal/PostTweetModal';
 
 class Sidebar extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      showPostTweetModal: false
+    };
+
+    this.showPostTweetModal = this.showPostTweetModal.bind(this);
+
   }
+
+  handleSignout = e => {
+    e.preventDefault();
+    cookie.remove('token');
+    localStorage.clear();
+    window.location.href = '/';
+  };
+  
+  showPostTweetModal = () => {
+    this.setState({
+      showPostTweetModal: !this.state.showPostTweetModal,
+    });
+  };
 
   render() {
     const { userId } = this.props;
@@ -65,7 +87,7 @@ class Sidebar extends Component {
               </ListGroup.Item>
 
               <ListGroup.Item>
-                <Link to="/lists">
+                <Link to={`/lists/${userId}`}>
                   <div className="flexSidebars">
                     <GoNote size={30} />
                     <p className="sidebarTopics">Lists</p>
@@ -91,12 +113,25 @@ class Sidebar extends Component {
                 </Link>
               </ListGroup.Item>
 
-              <button className="tweetBtn" type="button">
+              <ListGroup.Item>
+                <div className="flexSidebars" id="signout" onClick={this.handleSignout}>
+                  <FiLogOut size={30} color="rgb(231, 105, 105)" />
+                  <p className="logout">Logout</p>
+                </div>
+              </ListGroup.Item>
+
+              <button className="tweetBtn" type="button" onClick={this.showPostTweetModal}>
                 Tweet
               </button>
             </ListGroup>
           </nav>
         </div>
+        {this.state.showPostTweetModal ? (
+            <PostTweetModal
+              showPostTweetModal={this.showPostTweetModal}
+              showPostTweetModalState={this.state.showPostTweetModal}
+            />
+          ) : null}
       </div>
     );
   }
