@@ -4,9 +4,9 @@
 }
 .btn-info-solid {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 25px;
+  font-size: 15px;
   color: white;
-  letter-spacing: 1px;
+  font-weight: 900;
   line-height: 15px;
   border: 2px solid #00acee;
   border-radius: 40px;
@@ -18,9 +18,9 @@
 }
 .btn-info-transparent {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 25px;
+  font-size: 15px;
   color: #00acee;
-  letter-spacing: 1px;
+  font-weight: 900;
   line-height: 15px;
   border: 2px solid #00acee;
   border-radius: 40px;
@@ -44,6 +44,21 @@
   margin-top: 25%;
   margin-left: 30%;
 }
+.info-transparent-login {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 900;
+  color: #00acee;
+  line-height: 15px;
+  border: 1px solid #00acee;
+  border-radius: 40px;
+  background: transparent;
+  transition: all 0.3s ease 0s;
+  height: 42%;
+  width: 70%;
+  margin-top: 40%;
+  margin-left: 10%;
+}
 
 .container {
   margin-left: 0px;
@@ -57,10 +72,12 @@
 }
 
 .home {
-  background-image: url('../Image/twitter.png');
+  background-image: url('../Image/twitterImage.png');
+  background-size: 104%;
   background-repeat: repeat-y;
   width: 50%;
 }
+
 .modal {
   top: 10%;
   left: 10%;
@@ -126,7 +143,6 @@ input[type='text'] {
   border-bottom: 2px solid darkgray;
   border-top: 0px;
   border-radius: 0px;
-  font-weight: bold;
   outline: 0;
   color: black;
   padding-left: 0px;
@@ -139,7 +155,6 @@ input[type='password'] {
   border-bottom: 2px solid darkgray;
   border-top: 0px;
   border-radius: 0px;
-  font-weight: bold;
   outline: 0;
   color: black;
   padding-left: 0px;
@@ -172,7 +187,6 @@ input[type='email'] {
   border-bottom: 2px solid darkgray;
   border-top: 0px;
   border-radius: 0px;
-  font-weight: bold;
   outline: 0;
   color: black;
   padding-left: 0px;
@@ -254,18 +268,18 @@ input[type='email'] {
 .createAccount {
   margin-bottom: 3%;
 }
-.margin{
+.margin {
   margin-top: 0%;
 }
-.marginTop20{
-  margin-top:1%;
+.marginTop20 {
+  margin-top: 1%;
 }
-.marginTop2{
-  margin-top:3%;
+.marginTop2 {
+  margin-top: 3%;
 }
-.signupMargin{
+.signupMargin {
   margin-top: 10%;
-  width:100%;
+  width: 100%;
 }
 .form-label-margin {
   color: gray;
@@ -276,4 +290,15 @@ input[type='email'] {
 
 *:focus {
   outline: 0 !important;
+}
+.registerModalHeader{
+  flex-direction : row !important;
+}
+
+.error::before{
+  content: "\200B";
+}
+
+.loginUserNameError::before{
+  content: "\200B";
 }
