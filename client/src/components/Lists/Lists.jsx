@@ -5,10 +5,12 @@
 import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { MdPlaylistAdd } from 'react-icons/md';
 import Sidebar from '../Sidebar/Sidebar';
 import SearchBar from '../Search/SearchBar';
 import { listActions } from '../../js/actions';
 import ListCard from './ListCard';
+import './Lists.css';
 
 class Lists extends Component {
   constructor(props) {
@@ -29,7 +31,12 @@ class Lists extends Component {
           <Sidebar />
         </div>
         <div className="cardWidth">
-          <div className="paperHeight">Lists</div>
+          <div className="paperHeight">
+            <div>Lists</div>
+            <div className="newListIcon">
+              <MdPlaylistAdd size={25} />
+            </div>
+          </div>
           <div className="tabMargin">
             <Tabs
               defaultActiveKey="owned"

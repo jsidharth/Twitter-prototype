@@ -1,0 +1,10 @@
+
+.newListIcon {
+    margin-left: 500px;
+    margin-right: 10px;
+    color: #00ACEE;
+}
+
+.newListIcon:hover {
+    color: #008abe;
+}
