@@ -24,6 +24,7 @@ class EditProfileModal extends Component {
     this.handleOnChange = this.handleOnChange.bind(this);
     this.updateProfile = this.updateProfile.bind(this);
     this.uploadImage = this.uploadImage.bind(this);
+    this.deactivate = this.deactivate.bind(this);
   }
 
   componentDidMount() {
@@ -38,10 +39,23 @@ class EditProfileModal extends Component {
     });
   }
 
-  handleOnChange = e => {
+  componentWillReceiveProps(newProps) {
+    const { profile } = newProps;
     this.setState({
       [e.target.name]: e.target.value,
     });
+      name: profile.name,
+      bio: profile.bio,
+      location: profile.location,
+      website: profile.website,
+      // dob: profile.dob,
+      profilePic: profile.profilePic,
+    });
+  }
+
+  deactivate = () => {
+    const payload = { userId: this.props.userId };
+    this.props.deactivate(payload);
   };
 
   updateProfile = () => {
@@ -58,7 +72,7 @@ class EditProfileModal extends Component {
     this.props.showProfileModal();
   };
 
-  uploadImage = e => {
+  uploadImage = () => {
     const data = new FormData();
     if (this.uploadProfileImage.files && this.uploadProfileImage.files.length) {
       data.append('file', this.uploadProfileImage.files[0] || '');
@@ -70,17 +84,11 @@ class EditProfileModal extends Component {
     }
   };
 
-  componentWillReceiveProps(newProps) {
-    const { profile } = newProps;
+  handleOnChange = e => {
     this.setState({
-      name: profile.name,
-      bio: profile.bio,
-      location: profile.location,
-      website: profile.website,
-      // dob: profile.dob,
-      profilePic: profile.profilePic,
+      [e.target.name]: e.target.value,
     });
-  }
+  };
 
   render() {
     const imgSrc = this.props.user.profilePic
@@ -173,6 +181,11 @@ class EditProfileModal extends Component {
                 </div> */}
             </form>
           </Modal.Body>
+          <Modal.Footer className="deactivate" onClick={this.deactivate}>
+            <div>
+              <p>Deactivate</p>
+            </div>
+          </Modal.Footer>
         </Modal>
       </div>
     );
@@ -189,6 +202,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   upload: data => dispatch(imageActions.upload(data)),
   updateProfile: data => dispatch(userActions.updateProfile(data)),
+  deactivate: data => dispatch(userActions.deactivate(data)),
 });
 
 export default connect(
