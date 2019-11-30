@@ -7,13 +7,12 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { MdKeyboardBackspace } from 'react-icons/md';
 import { TiLocationOutline } from 'react-icons/ti';
-import { GoCalendar ,GoNote} from 'react-icons/go';
+import { GoCalendar, GoNote } from 'react-icons/go';
 import { GiBalloons } from 'react-icons/gi';
 import { Tabs, Tab } from 'react-bootstrap';
 import TweetCard from '../TweetCard/TweetCard';
 import Sidebar from '../Sidebar/Sidebar';
 import SearchBar from '../Search/SearchBar';
-
 
 import './Profile.css';
 import { userActions, tweetActions } from '../../js/actions/index';

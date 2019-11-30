@@ -80,3 +80,11 @@
     display: flex;
     flex-direction: column;
 }
+.deactivate{
+    color:red;
+    padding-bottom: 0% !important;
+}
+
+.deactivate:hover{
+    background-color: #ffe6e6    ;
+}

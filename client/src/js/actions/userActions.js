@@ -1,5 +1,6 @@
 import axios from 'axios';
 import cookie from 'js-cookie';
+import { toast } from 'react-toastify';
 import actionTypes from '../constants/index';
 import { ROOT_URL } from '../../constant/constant';
 import { history } from '../helper/history';
@@ -33,13 +34,23 @@ export const login = payload => {
       .then(response => {
         console.log('Status Code : ', response.status);
         console.log(response.data);
-        if (response.status === 200 && response.data.active) {
+        if (response.status === 200) {
           dispatch({
             type: actionTypes.USER_LOGIN,
             payload: response.data,
           });
           cookie.set('token', response.data.token);
           history.push('/home');
+          if (!response.data.previousState) {
+            toast.success('Your account has been activated !!', {
+              position: 'top-center',
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+            });
+          }
         }
       })
       .catch(error => {
@@ -121,6 +132,26 @@ export const unfollow = payload => {
         console.log(response.data);
         if (response.status === 200) {
           return Promise.resolve();
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+};
+
+export const deactivate = payload => {
+  return dispatch => {
+    console.log(`${payload.userId}`);
+    return axios
+      .put(`${ROOT_URL}/user/deactivate/${payload.userId}`)
+      .then(response => {
+        console.log('Status Code : ', response.status);
+        console.log(response.data);
+        if (response.status === 200) {
+          cookie.remove('token');
+          localStorage.clear();
+          history.push('/');
         }
       })
       .catch(error => {
