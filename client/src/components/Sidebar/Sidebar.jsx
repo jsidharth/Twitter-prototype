@@ -10,11 +10,17 @@ import { GoHome, GoMail, GoNote, GoGraph } from 'react-icons/go';
 import { FiBookmark, FiLogOut } from 'react-icons/fi';
 import cookie from 'js-cookie';
 import './Sidebar.css';
+import PostTweetModal from '../PostTweetModal/PostTweetModal';
 
 class Sidebar extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      showPostTweetModal: false
+    };
+
+    this.showPostTweetModal = this.showPostTweetModal.bind(this);
+
   }
 
   handleSignout = e => {
@@ -22,6 +28,12 @@ class Sidebar extends Component {
     cookie.remove('token');
     localStorage.clear();
     window.location.href = '/';
+  };
+  
+  showPostTweetModal = () => {
+    this.setState({
+      showPostTweetModal: !this.state.showPostTweetModal,
+    });
   };
 
   render() {
@@ -108,12 +120,18 @@ class Sidebar extends Component {
                 </div>
               </ListGroup.Item>
 
-              <button className="tweetBtn" type="button">
+              <button className="tweetBtn" type="button" onClick={this.showPostTweetModal}>
                 Tweet
               </button>
             </ListGroup>
           </nav>
         </div>
+        {this.state.showPostTweetModal ? (
+            <PostTweetModal
+              showPostTweetModal={this.showPostTweetModal}
+              showPostTweetModalState={this.state.showPostTweetModal}
+            />
+          ) : null}
       </div>
     );
   }

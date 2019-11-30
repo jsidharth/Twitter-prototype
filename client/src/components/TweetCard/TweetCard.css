@@ -68,8 +68,8 @@
 }
 
 .tweetImage {
-  max-width: 500px;
-  max-height: 600px;
+  max-width: 450px;
+  max-height: 500px;
   object-fit: contain;
 }
 
