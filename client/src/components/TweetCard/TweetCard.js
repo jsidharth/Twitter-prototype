@@ -48,8 +48,6 @@ class TweetCard extends Component {
       // const bookmarkedAlreadyButton = <MdBookmark size={25} color="#1da1f2" />;
 
       // const renderBookmarkButton = bookmarks.includes(tweet._id) ? bookmarkedAlreadyButton : bookmarkButton;
-      // console.log('bookmarks..', this.props.bookmarks);
-      // console.log(this.props.tweets);
 
       return (
         <div className="cardWidth" key={tweet._id}>
@@ -78,8 +76,8 @@ class TweetCard extends Component {
                   <div className="flexNameHandle">
                     <p className="tweetUserName">{tweet.name}</p>
                     <p className="tweetUserHandle">@{tweet.handle}</p>
-                    <p className="tweetUserName">.</p>
-                    <p className="tweetDate">
+                    {/* <p className="tweetUserName">.</p> */}
+                    <p className="tweetDate1">
                       {myDate[1]} {myDate[2]}, {myDate[3]}
                     </p>
                   </div>
