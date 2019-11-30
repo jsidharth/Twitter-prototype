@@ -44,14 +44,12 @@ class CommentModal extends Component {
                 tweetText: this.state.tweetText,
                 imageUrl: this.props.imageUrl,
             };
-            console.log(data);
             this.props.replyTweet(data);
             this.props.showCommentModal();
         }
     }
 
     render() {
-        console.log(this.props);
 
         const { tweetProfilePic, tweetUserName, tweetUserHandle, tweetDate, tweetBody, tweetUserId, currentUser, tweetId } = this.props;
 
