@@ -9,7 +9,8 @@ import createEngine from 'redux-storage-engine-localstorage';
 import rootReducer from '../reducers/index';
 
 const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
- const reducer = rootReducer;
+// const reducer = rootReducer;
+const reducer = storage.reducer(rootReducer);
 const engine = createEngine('current-session-key');
 const middleware = storage.createMiddleware(engine);
 const store = createStore(reducer, storeEnhancers(applyMiddleware(thunk, middleware)));

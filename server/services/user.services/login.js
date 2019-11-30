@@ -24,6 +24,7 @@ const handleRequest = async (userDetails, callback) => {
       active: user.active,
       bookmarks: user.bookmarks,
       profilePic: user.profilePic,
+      handle: user.handle,
     });
   }
 };

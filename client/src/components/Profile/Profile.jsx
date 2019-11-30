@@ -11,6 +11,8 @@ import { Tabs, Tab } from 'react-bootstrap';
 import TweetCard from '../TweetCard/TweetCard';
 import Sidebar from '../Sidebar/Sidebar';
 import SearchBar from '../Search/SearchBar';
+import {GoNote} from 'react-icons/go';
+
 import './Profile.css';
 import { userActions, tweetActions } from '../../js/actions/index';
 
@@ -256,6 +258,14 @@ class Profile extends Component {
                     </div>
                     Followers
                   </div>
+                </div>
+              </Link>
+              <Link to={`/lists/${this.props.match.params.userId}`}>
+                <div className="flexListIcon">
+                  <div className="listIcon">
+                    <GoNote size={20} />
+                  </div>
+                  <p className="sidebarTopics">Lists</p>
                 </div>
               </Link>
             </div>

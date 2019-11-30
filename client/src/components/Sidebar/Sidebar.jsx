@@ -87,7 +87,7 @@ class Sidebar extends Component {
               </ListGroup.Item>
 
               <ListGroup.Item>
-                <Link to="/lists">
+                <Link to={`/lists/${userId}`}>
                   <div className="flexSidebars">
                     <GoNote size={30} />
                     <p className="sidebarTopics">Lists</p>

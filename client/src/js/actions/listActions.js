@@ -1,18 +1,16 @@
-/* eslint-disable no-param-reassign */
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 import actionTypes from '../constants/index';
 import { ROOT_URL } from '../../constant/constant';
-import { history } from '../helper/history';
 
-export const getSearchSuggestions = payload => {
+export const getLists = payload => {
   return dispatch => {
     console.log(payload);
-    return axios.get(`${ROOT_URL}/search/${payload}`).then(response => {
+    return axios.get(`${ROOT_URL}/list/getLists/${payload}`).then(response => {
       console.log('Status Code : ', response.status);
       if (response.status === 200) {
         dispatch({
-          type: actionTypes.SEARCH_SUGGESTIONS,
+          type: actionTypes.GET_LISTS,
           payload: response.data,
         });
       }
@@ -20,22 +18,15 @@ export const getSearchSuggestions = payload => {
   };
 };
 
-export const getSearchResults = payload => {
-  payload = encodeURIComponent(payload);
+export const getListDetails = payload => {
   return dispatch => {
     console.log(payload);
-    return axios.get(`${ROOT_URL}/search/${payload}`).then(response => {
+    return axios.get(`${ROOT_URL}/list/getListDetails/${payload}`).then(response => {
       console.log('Status Code : ', response.status);
       if (response.status === 200) {
         dispatch({
-          type: actionTypes.SEARCH_RESULTS,
+          type: actionTypes.GET_LIST_DETAILS,
           payload: response.data,
-        });
-        history.push({
-          pathname: '/search',
-          state: {
-            searchTerm: payload,
-          },
         });
       }
     });

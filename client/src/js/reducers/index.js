@@ -5,6 +5,7 @@ import user from './userReducer';
 import message from './messageReducer';
 import search from './searchReducer';
 import analytics from './analyticsReducer';
+import list from './listReducer';
 
 const rootReducer = combineReducers({
   image,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   message,
   search,
   analytics,
+  list,
 });
 
 export default rootReducer;
