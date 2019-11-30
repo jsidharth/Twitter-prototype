@@ -42,6 +42,7 @@ const handleRequest = (tweetId, callback) => {
             created_at: tweet.createdAt,
             likes: tweet.likes,
             profilePic: user.profilePic,
+            userId: user._id,
           };
           let tweetCommentPromise = Promise.resolve();
           if (tweet.comments && tweet.comments.length) {
@@ -68,6 +69,7 @@ const handleRequest = (tweetId, callback) => {
                   created_at: comment.createdAt,
                   likes: tweet.likes,
                   profilePic: commentUser.profilePic,
+                  userId: user._id,
                 };
               });
             });

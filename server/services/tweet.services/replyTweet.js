@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import Tweets from '../../models/tweet.model';
 import Users from '../../models/user.model';
+import getTweetDetail from './tweetDetail';
 
 const handleRequest = async (tweetDetails, callback) => {
   let { tweetText } = tweetDetails;
@@ -25,7 +26,7 @@ const handleRequest = async (tweetDetails, callback) => {
     user.tweets.push(tweet._id);
     await user.save();
     // Add tweeet to parent tweets comment array
-    const parentTweet = await Tweets.findById(tweetDetails.parentTweetID);
+    const parentTweet = await Tweets.findById(tweetDetails.parentTweetID).populate('comments');
     if (!parentTweet) {
       callback(
         {
@@ -36,9 +37,7 @@ const handleRequest = async (tweetDetails, callback) => {
     } else {
       parentTweet.comments.push(tweet._id);
       parentTweet.save();
-      callback(null, {
-        message: 'Reply posted!',
-      });
+      getTweetDetail.handleRequest(parentTweet._id, callback);
     }
   }
 };

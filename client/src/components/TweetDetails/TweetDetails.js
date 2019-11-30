@@ -10,14 +10,20 @@ import { AiOutlineRetweet } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { tweetActions } from '../../js/actions/index';
 import Sidebar from '../Sidebar/Sidebar';
+import CommentModal from '../CommentModal/CommentModal';
+import TweetCard from '../TweetCard/TweetCard';
 
 class TweetDetails extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      showCommentModal: false,
+      tweet: {}
+    };
     this.likeTweet = this.likeTweet.bind(this);
     this.unlikeTweet = this.unlikeTweet.bind(this);
     this.bookmarkTweet = this.bookmarkTweet.bind(this);
+    this.showCommentModal = this.showCommentModal.bind(this);
   }
 
   componentDidMount() {
@@ -27,6 +33,24 @@ class TweetDetails extends Component {
 
     const { getTweetDetails } = this.props;
     getTweetDetails(data);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.tweetID !== prevProps.match.params.tweetID) {
+      const { getTweetDetails } = this.props;
+      const data = {
+        tweetId: this.props.match.params.tweetID,
+      };
+      getTweetDetails(data);
+    }
+  }
+
+  // Render the tweet detail after a comment has been posted
+  componentWillReceiveProps(nextProps) {
+    const { tweet } = nextProps;
+    this.setState({
+      tweet
+    });
   }
 
   likeTweet = e => {
@@ -50,11 +74,26 @@ class TweetDetails extends Component {
     });
   };
 
+  showCommentModal = () => {
+    this.setState({
+      showCommentModal: !this.state.showCommentModal,
+    });
+  };
+
   render() {
-    const { tweet } = this.props;
-    let myDate = new Date(tweet.created_at);
-    myDate = myDate.toString();
-    myDate = myDate.split(' ');
+    const { tweet } = this.state;
+    const tweetUserId = tweet.userId;
+    var myDate;
+    var timeValue;
+    if (tweet.created_at) {
+      myDate = new Date(tweet.created_at);
+      myDate = myDate.toString().split(' ');
+      timeValue = myDate[4].split(':');
+      var time = myDate[4].split(':');
+      var date = myDate[1] + ' ' + myDate[2] + ',' + myDate[3];
+      time = timeValue[0] + ':' + timeValue[1];
+    }
+
     let likeButton, unlikeButton, renderLikeButton;
     if (tweet.body) {
       likeButton = <FaRegHeart size={20} id={tweet._id} onClick={this.likeTweet} />;
@@ -81,6 +120,20 @@ class TweetDetails extends Component {
       <div className="flexTweetDetails">
         <Sidebar />
         <div>
+          {this.state.showCommentModal ? (
+            <CommentModal
+              showCommentModal={this.showCommentModal}
+              showCommentModalState={this.state.showCommentModal}
+              tweetProfilePic={tweet.profilePic}
+              tweetUserName={tweet.name}
+              tweetUserHandle={tweet.handle}
+              tweetDate={date}
+              tweetBody={tweet.body}
+              tweetUserId={tweetUserId}
+              tweetId={tweet._id}
+              currentUser={this.props.user}
+            />
+          ) : null}
           <div className="cardContainer">
             <div className="cardWidth">
               <div className="paperHeight">
@@ -103,18 +156,18 @@ class TweetDetails extends Component {
                 <div className="flexNameHandle">
                   <p className="tweetUserName">{tweet.name}</p>
                   <p className="tweetUserHandle">@{tweet.handle}</p>
-                  <p className="tweetUserName">.</p>
-                  <p className="tweetDate">
-                    {myDate[1]} {myDate[2]}, {myDate[3]}
-                  </p>
                 </div>
                 <p className="tweetBody">{tweet.body}</p>
                 {tweet.image ? <img src={tweet.image} alt="Tweet" className="tweetImage" /> : null}
               </div>
             </div>
+            <div className="flexDateTime">
+              <p className="tweetTimeDetails">{time}</p>
+              <p className="tweetDateDetails">{date}</p>
+            </div>
             <div className="flexCardBtns">
               <div className="flexBtnCnt">
-                <FiMessageCircle size={20} />
+                <FiMessageCircle size={20} onClick={this.showCommentModal} />
                 <div>{tweet.comments_count > 0 ? tweet.comments_count : null}</div>
               </div>
               <div className="flexBtnCnt">
@@ -126,10 +179,17 @@ class TweetDetails extends Component {
                 <div>{tweet.likes_count > 0 ? tweet.likes_count : null}</div>
               </div>
               <div className="flexBtnCnt">
-                <MdBookmarkBorder size={20} id={tweet._id} onClick={this.bookmarkTweet}/>
+                <MdBookmarkBorder size={20} id={tweet._id} onClick={this.bookmarkTweet} />
               </div>
             </div>
           </div>
+          {tweet.comments && tweet.comments.length ? (
+            <TweetCard
+              tweets={tweet.comments}
+              likeTweet={this.likeTweet}
+              unlikeTweet={this.unlikeTweet}
+            />
+          ) : null}
         </div>
       </div>
     );
@@ -139,6 +199,7 @@ class TweetDetails extends Component {
 const mapStateToProps = state => ({
   tweet: state.tweet.currentTweet,
   userId: state.user.currentUser._id,
+  user: state.user.currentUser,
 });
 
 const mapDispatchToProps = dispatch => ({
