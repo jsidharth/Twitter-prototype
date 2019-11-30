@@ -5,6 +5,8 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import Modal from 'react-bootstrap/Modal';
+import { imageActions, userActions } from '../../js/actions/index';
+import { AiOutlinePicture } from 'react-icons/ai';
 import './EditProfileModal.css';
 import { connect } from 'react-redux';
 
@@ -16,23 +18,23 @@ class EditProfileModal extends Component {
         bio: '',
         location: '',
         website: '',
-        dob: '',
+        // dob: '',
+        profilePic: '',
     };
     this.handleOnChange = this.handleOnChange.bind(this);
-    //this.handleSave = this.handleSave.bind(this);
+    this.updateProfile = this.updateProfile.bind(this);
+    this.uploadImage = this.uploadImage.bind(this);
   }
 
   componentDidMount() {
-    const data = {
-      userId: this.props.userId,
-    };
-    const { name, bio, location, website, dob } = this.props.profile;
+    const { name, bio, location, website, dob, profilePic } = this.props.profile;
     this.setState({
       name,
       bio,
       location,
       website,
-      dob
+      // dob,
+      profilePic,
     });
   }
 
@@ -42,10 +44,31 @@ class EditProfileModal extends Component {
     })
   };
 
-  // handleEditProfile(event) {
-  //   alert("This Save");
-  //   event.preventDefault();
-  // }
+  updateProfile = () => {
+    const payload = {
+      _id: this.props.userId,
+      name: this.state.name,
+      bio: this.state.bio,
+      location: this.state.location,
+      website: this.state.website,
+      // dob: this.state.dob,
+      profilePic: this.state.profilePic,
+    }
+    this.props.updateProfile(payload);
+    this.props.showProfileModal();
+  }
+
+  uploadImage = e => {
+    const data = new FormData();
+    if (this.uploadProfileImage.files && this.uploadProfileImage.files.length) {
+      data.append('file', this.uploadProfileImage.files[0] || '');
+      this.props.upload(data).then(() => {
+        this.setState({
+          profilePic: this.props.imageUrl
+        })
+      });
+    }
+  };
 
   componentWillReceiveProps(newProps) {
     const { profile } = newProps;
@@ -54,12 +77,13 @@ class EditProfileModal extends Component {
       bio: profile.bio,
       location: profile.location,
       website: profile.website,
-      dob: profile.dob,
+      // dob: profile.dob,
+      profilePic: profile.profilePic,
     });
   }
 
   render() {
-    // const { userId } = this.props;
+    const imgSrc = this.props.user.profilePic ? this.props.user.profilePic : '/images/default_profile_bigger.png';
     return (
       <div>
         <Modal
@@ -69,29 +93,54 @@ class EditProfileModal extends Component {
           centered
         >
           <Modal.Header closeButton>
-            <button className="saveBtn" type="button" onClick={this.props.editUserProfile}>
+            <button className="saveBtn" type="button" onClick={this.updateProfile}>
                 Save
               </button>
             <Modal.Title className="modalTitle">Edit Profile</Modal.Title>
           </Modal.Header>
 
-          <Modal.Body className="EditForm">
+          <Modal.Body className="editForm">
+            <img src={this.state.profilePic ? this.state.profilePic : imgSrc} className="uploadProfileImage" alt="Profile"/>
+            <div className="flexUploadImage">
+              <div className="flexIconCharsCount">
+                <div className="iconUpload">
+                  <input
+                    className="inputStyle"
+                    accept="image/*"
+                    id="icon-button-file"
+                    type="file"
+                    onChange={this.uploadImage}
+                    ref={ref => {
+                      this.uploadProfileImage = ref;
+                    }}
+                  />
+                  <label htmlFor="icon-button-file">
+                    <AiOutlinePicture color="#1da1f2" size={25} />
+                  </label>
+                </div>
+              </div>
+            </div>
             <form>
-            <img
-                src={'/images/default_profile.png'}
-                className="profileImage"
-                alt="User profile"
-              /><br/><br/>
-                <label className="inputTitle">Name</label><br/>
-                <input className="inputDetails" type="text" name="name" onChange={this.handleOnChange} value={this.state.name}/><br/><br/>
-                <label className="inputTitle">Bio</label><br/>
-                <input className="inputDetails" type="text" name="bio" onChange={this.handleOnChange} value={this.state.bio}/><br/><br/>
-                <label className="inputTitle">Location</label><br/>
-                <input className="inputDetails" type="text" name="location" onChange={this.handleOnChange} value={this.state.location}/><br/><br/>
-                <label className="inputTitle">Website</label><br/>
-                <input className="inputDetails" type="text" name="website" onChange={this.handleOnChange} value={this.state.website}/><br/><br/>
-                {/* <label className="inputTitle">Birth Date</label><br/>
-                <input className="inputDetails" type="text" name="dob" onChange={this.handleOnChange} value={profile.dob}/><br/><br/> */}
+              <div className="flexLabelInput">
+              <label className="inputTitle">Name</label> 
+              <input className="inputDetails" type="text" name="name" onChange={this.handleOnChange} value={this.state.name}/>  
+              </div>
+              <div className="flexLabelInput">
+                <label className="inputTitle">Bio</label> 
+                <input className="inputDetails" type="text" name="bio" onChange={this.handleOnChange} value={this.state.bio}/>  
+                </div>
+                <div className="flexLabelInput">
+                <label className="inputTitle">Location</label> 
+                <input className="inputDetails" type="text" name="location" onChange={this.handleOnChange} value={this.state.location}/>  
+                </div>
+                <div className="flexLabelInput">
+                <label className="inputTitle">Website</label>
+                <input className="inputDetails" type="text" name="website" onChange={this.handleOnChange} value={this.state.website}/> 
+                </div>
+                {/* <div className="flexLabelInput">
+                <label className="inputTitle">Birth Date</label> 
+                <input className="inputDetails" type="text" name="dob" onChange={this.handleOnChange} value={this.state.dob}/>  
+                </div> */}
             </form>
           </Modal.Body>
         </Modal>
@@ -103,9 +152,14 @@ class EditProfileModal extends Component {
 const mapStateToProps = state => ({
   profile: state.user.profile,
   userId: state.user.currentUser._id,
+  imageUrl: state.image.imageUrl,
+  user: state.user.currentUser,
 });
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  upload: data => dispatch(imageActions.upload(data)),
+  updateProfile: data => dispatch(userActions.updateProfile(data)),
+});
 
 export default connect(
   mapStateToProps,

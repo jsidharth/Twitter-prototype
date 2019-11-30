@@ -63,11 +63,17 @@ export const getUserProfile = payload => {
   };
 };
 
-export const editUserProfile = payload => {
+export const updateProfile = payload => {
   return dispatch => {
     return axios.put(`${ROOT_URL}/user/details/`, payload).then(response => {
       console.log('Status Code : ', response.status);
-      return Promise.resolve();
+      console.log('Here', response.data);
+      if (response.status === 200) {
+        dispatch({
+          type: actionTypes.GET_USER_PROFILE,
+          payload: response.data,
+        });
+      }
     });
   };
 };

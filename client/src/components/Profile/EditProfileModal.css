@@ -4,12 +4,16 @@
     text-align: center;
     font-weight: 800;
     border-radius: 20px;
-    width: 15%;
-    height: 30px;
+    width: 25%;
+    height: 35px;
     font-size: 14px;
     outline: none;
     border: 0;
     margin-left: 10px;
+}
+
+.editForm {
+    width: 130%;
 }
 
 .inputTitle {
@@ -18,13 +22,34 @@
 
 .inputDetails {
     margin-left: 10px;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
 .profileImage {
-    margin-left: 10px;
-    max-width: 60px;
-    max-height: 60px;
+    object-fit: cover;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 250px;
+  }
+
+.flexUploadImage {
+  margin-left: 24%;
+  margin-top: 5px;
+}
+
+  .uploadProfileImage {
+    margin: 0 auto;
+    max-width: 150px;
+    max-height: 150px;
     border-radius: 50%;
+    text-align: center;
+    margin-left: 25%;
+  }
+
+.modal-title {
+    width: 800px;
 }
 
 .modal-header {
@@ -44,8 +69,14 @@
 .modalTitle {
     margin-right: 200px;
     margin-left: 50px;
+    margin-top: 0px;
 }
 
 .button.close {
     padding: 0;
+}
+
+.flexLabelInput {
+    display: flex;
+    flex-direction: column;
 }

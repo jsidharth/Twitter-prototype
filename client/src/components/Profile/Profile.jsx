@@ -95,12 +95,6 @@ class Profile extends Component {
     });
   };
 
-  showProfileModal = () => {
-    this.setState({ 
-      showProfileModal: !this.state.showProfileModal
-     });
-  };
-
   retweet = e => {
     const retweetPayload = {
       tweetId: e.target.id,
@@ -133,6 +127,13 @@ class Profile extends Component {
   mouseOut = () => {
     this.setState({ mouseHoverClassName: 'followingBtn', mouseHoverButtonText: 'Following' });
   };
+
+  showProfileModal = () => {
+    this.setState({ 
+      showProfileModal: !this.state.showProfileModal
+     });
+  };
+
   render() {
     const { profile, likedTweets } = this.props;
 
@@ -161,9 +162,20 @@ class Profile extends Component {
       });
     renderButton =
       this.props.userId == profile._id ? (
-        <button type="button" className="editProfileBtn">
-          Edit Profile
-        </button>
+        // <button type="button" className="editProfileBtn" onClick={this.props.editUserProfile}>
+        //   Edit Profile
+        // </button>
+        <div>
+          <button type="button" className="editProfileBtn" onClick={this.showProfileModal}>
+                    Edit Profile
+          </button>
+            {this.showProfileModal ? (
+              <EditProfileModal
+                showProfileModal={this.showProfileModal}
+                showProfileModalState={this.state.showProfileModal}
+              />
+            ) : null}
+        </div>
       ) : isFollower ? (
         <button
           onMouseEnter={this.mouseIn}
@@ -197,6 +209,7 @@ class Profile extends Component {
               </div>
             </div>
             <div className="cardContent">
+              {console.log(profile.profilePic)}
               <img
                 src={profile.profilePic || '/images/default_profile.png'}
                 className="profileImage"
