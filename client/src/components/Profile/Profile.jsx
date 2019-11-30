@@ -1,3 +1,5 @@
+/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
@@ -5,21 +7,23 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { MdKeyboardBackspace } from 'react-icons/md';
 import { TiLocationOutline } from 'react-icons/ti';
-import { GoCalendar } from 'react-icons/go';
+import { GoCalendar ,GoNote} from 'react-icons/go';
 import { GiBalloons } from 'react-icons/gi';
 import { Tabs, Tab } from 'react-bootstrap';
 import TweetCard from '../TweetCard/TweetCard';
 import Sidebar from '../Sidebar/Sidebar';
 import SearchBar from '../Search/SearchBar';
-import {GoNote} from 'react-icons/go';
+
 
 import './Profile.css';
 import { userActions, tweetActions } from '../../js/actions/index';
+import EditProfileModal from './EditProfileModal';
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showProfileModal: false,
       mouseHoverClassName: 'followingBtn',
       mouseHoverButtonText: 'Following',
     };
@@ -28,6 +32,7 @@ class Profile extends Component {
     this.unlikeTweet = this.unlikeTweet.bind(this);
     this.deleteTweet = this.deleteTweet.bind(this);
     this.bookmarkTweet = this.bookmarkTweet.bind(this);
+    this.showProfileModal = this.showProfileModal.bind(this);
     this.retweet = this.retweet.bind(this);
     this.follow = this.follow.bind(this);
     this.unfollow = this.unfollow.bind(this);
@@ -36,7 +41,6 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-
     const data = {
       userId: this.props.match.params.userId,
     };
@@ -46,8 +50,7 @@ class Profile extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    
-    if(this.props.match.params.userId !== prevProps.match.params.userId){
+    if (this.props.match.params.userId !== prevProps.match.params.userId) {
       const { getUserProfile, getLikedTweets } = this.props;
       const data = {
         userId: this.props.match.params.userId,
@@ -145,6 +148,12 @@ class Profile extends Component {
     this.setState({ mouseHoverClassName: 'followingBtn', mouseHoverButtonText: 'Following' });
   };
 
+  showProfileModal = () => {
+    this.setState({
+      showProfileModal: !this.state.showProfileModal,
+    });
+  };
+
   render() {
     const { profile, likedTweets } = this.props;
 
@@ -172,9 +181,17 @@ class Profile extends Component {
       });
     renderButton =
       this.props.userId == profile._id ? (
-        <button type="button" className="editProfileBtn">
-          Edit Profile
-        </button>
+        <div>
+          <button type="button" className="editProfileBtn" onClick={this.showProfileModal}>
+            Edit Profile
+          </button>
+          {this.showProfileModal ? (
+            <EditProfileModal
+              showProfileModal={this.showProfileModal}
+              showProfileModalState={this.state.showProfileModal}
+            />
+          ) : null}
+        </div>
       ) : isFollower ? (
         <button
           onMouseEnter={this.mouseIn}

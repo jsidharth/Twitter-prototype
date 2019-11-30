@@ -64,6 +64,21 @@ export const getUserProfile = payload => {
   };
 };
 
+export const updateProfile = payload => {
+  return dispatch => {
+    return axios.put(`${ROOT_URL}/user/details/`, payload).then(response => {
+      console.log('Status Code : ', response.status);
+      console.log('Here', response.data);
+      if (response.status === 200) {
+        dispatch({
+          type: actionTypes.GET_USER_PROFILE,
+          payload: response.data,
+        });
+      }
+    });
+  };
+};
+
 export const getLikedTweets = payload => {
   return dispatch => {
     return axios.get(`${ROOT_URL}/user/like/${payload.userId}`).then(response => {
