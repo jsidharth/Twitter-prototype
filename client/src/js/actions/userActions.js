@@ -107,7 +107,7 @@ export const getLikedTweets = payload => {
 };
 
 export const follow = payload => {
-  return dispatch => {
+  return () => {
     return axios
       .post(`${ROOT_URL}/user/follow`, payload)
       .then(response => {
@@ -116,6 +116,7 @@ export const follow = payload => {
         if (response.status === 200) {
           return Promise.resolve();
         }
+        return Promise.reject();
       })
       .catch(error => {
         console.log(error);
@@ -124,7 +125,7 @@ export const follow = payload => {
 };
 
 export const unfollow = payload => {
-  return dispatch => {
+  return () => {
     return axios
       .post(`${ROOT_URL}/user/unfollow`, payload)
       .then(response => {
@@ -133,6 +134,7 @@ export const unfollow = payload => {
         if (response.status === 200) {
           return Promise.resolve();
         }
+        return Promise.reject();
       })
       .catch(error => {
         console.log(error);
@@ -141,7 +143,7 @@ export const unfollow = payload => {
 };
 
 export const deactivate = payload => {
-  return dispatch => {
+  return () => {
     console.log(`${payload.userId}`);
     return axios
       .put(`${ROOT_URL}/user/deactivate/${payload.userId}`)
