@@ -6,7 +6,6 @@ import { history } from '../helper/history';
 
 export const register = payload => {
   return dispatch => {
-    console.log(`${ROOT_URL}/user/register`);
     return axios
       .post(`${ROOT_URL}/user/register`, payload)
       .then(response => {
@@ -28,7 +27,6 @@ export const register = payload => {
 };
 export const login = payload => {
   return dispatch => {
-    console.log(`${ROOT_URL}/user/login`);
     return axios
       .post(`${ROOT_URL}/user/login`, payload)
       .then(response => {
@@ -78,5 +76,39 @@ export const getLikedTweets = payload => {
       }
       return Promise.resolve();
     });
+  };
+};
+
+export const follow = payload => {
+  return dispatch => {
+    return axios
+      .post(`${ROOT_URL}/user/follow`, payload)
+      .then(response => {
+        console.log('Status Code : ', response.status);
+        console.log(response.data);
+        if (response.status === 200) {
+          return Promise.resolve();
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+};
+
+export const unfollow = payload => {
+  return dispatch => {
+    return axios
+      .post(`${ROOT_URL}/user/unfollow`, payload)
+      .then(response => {
+        console.log('Status Code : ', response.status);
+        console.log(response.data);
+        if (response.status === 200) {
+          return Promise.resolve();
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 };

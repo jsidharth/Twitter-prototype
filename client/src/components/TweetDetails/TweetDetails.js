@@ -24,13 +24,13 @@ class TweetDetails extends Component {
     this.unlikeTweet = this.unlikeTweet.bind(this);
     this.bookmarkTweet = this.bookmarkTweet.bind(this);
     this.showCommentModal = this.showCommentModal.bind(this);
+    this.retweet = this.retweet.bind(this);
   }
 
   componentDidMount() {
     const data = {
       tweetId: this.props.match.params.tweetID,
     };
-
     const { getTweetDetails } = this.props;
     getTweetDetails(data);
   }
@@ -63,6 +63,13 @@ class TweetDetails extends Component {
   unlikeTweet = e => {
     let data = { tweetId: e.target.id, userId: this.props.userId };
     this.props.unlikeTweet(data).then(() => {
+      this.props.getTweetDetails(data);
+    });
+  };
+
+  retweet = e => {
+    let data = { tweetId: e.target.id, userId: this.props.userId };
+    this.props.retweet(data).then(() => {
       this.props.getTweetDetails(data);
     });
   };
@@ -171,7 +178,7 @@ class TweetDetails extends Component {
                 <div>{tweet.comments_count > 0 ? tweet.comments_count : null}</div>
               </div>
               <div className="flexBtnCnt">
-                <AiOutlineRetweet size={20} />
+                <AiOutlineRetweet size={20} id={tweet._id} onClick={this.retweet} />
                 <div>{tweet.retweet_count > 0 ? tweet.retweet_count : null}</div>
               </div>
               <div className="flexBtnCnt">
@@ -206,6 +213,7 @@ const mapDispatchToProps = dispatch => ({
   getTweetDetails: data => dispatch(tweetActions.getTweetDetails(data)),
   likeTweet: data => dispatch(tweetActions.likeTweet(data)),
   unlikeTweet: data => dispatch(tweetActions.unlikeTweet(data)),
+  retweet: data => dispatch(tweetActions.retweet(data)),
   bookmarkTweet: data => dispatch(tweetActions.bookmarkTweet(data)),
 });
 

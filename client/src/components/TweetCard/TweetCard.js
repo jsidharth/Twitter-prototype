@@ -94,7 +94,7 @@ class TweetCard extends Component {
                 <div>{tweet.comments_count > 0 ? tweet.comments_count : null}</div>
               </div>
               <div className="flexBtnCnt">
-                <AiOutlineRetweet size={20} />
+                <AiOutlineRetweet size={20} id={tweet._id} onClick={this.props.retweet} />
                 <div>{tweet.retweet_count > 0 ? tweet.retweet_count : null}</div>
               </div>
               <div className="flexBtnCnt">
