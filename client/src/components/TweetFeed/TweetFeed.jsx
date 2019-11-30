@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
@@ -26,28 +27,28 @@ class TweetFeed extends Component {
   }
 
   likeTweet = e => {
-    let data = { tweetId: e.target.id, userId: this.props.userId };
+    const data = { tweetId: e.target.id, userId: this.props.userId };
     this.props.likeTweet(data).then(() => {
       this.props.fetchFeed(data);
     });
   };
 
   unlikeTweet = e => {
-    let data = { tweetId: e.target.id, userId: this.props.userId };
+    const data = { tweetId: e.target.id, userId: this.props.userId };
     this.props.unlikeTweet(data).then(() => {
       this.props.fetchFeed(data);
     });
   };
 
   bookmarkTweet = e => {
-    let data = { tweetId: e.target.id, userId: this.props.userId };
+    const data = { tweetId: e.target.id, userId: this.props.userId };
     this.props.bookmarkTweet(data).then(() => {
       this.props.fetchFeed(data);
     });
   };
 
   retweet = e => {
-    let data = { tweetId: e.target.id, userId: this.props.userId };
+    const data = { tweetId: e.target.id, userId: this.props.userId };
     this.props.retweet(data).then(() => {
       this.props.fetchFeed(data);
     });

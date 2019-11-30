@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
@@ -55,7 +56,7 @@ class TweetDetails extends Component {
   }
 
   likeTweet = e => {
-    let data = { tweetId: e.target.id, userId: this.props.userId };
+    const data = { tweetId: e.target.id, userId: this.props.userId };
     const detailsPayload = { tweetId: this.state.tweet._id};
     this.props.likeTweet(data).then(() => {
       this.props.getTweetDetails(detailsPayload);
@@ -63,7 +64,7 @@ class TweetDetails extends Component {
   };
 
   unlikeTweet = e => {
-    let data = { tweetId: e.target.id, userId: this.props.userId };
+    const data = { tweetId: e.target.id, userId: this.props.userId };
     const detailsPayload = { tweetId: this.state.tweet._id};
     this.props.unlikeTweet(data).then(() => {
       this.props.getTweetDetails(detailsPayload);
@@ -71,7 +72,7 @@ class TweetDetails extends Component {
   };
 
   retweet = e => {
-    let data = { tweetId: e.target.id, userId: this.props.userId };
+    const data = { tweetId: e.target.id, userId: this.props.userId };
     const detailsPayload = { tweetId: this.state.tweet._id};
     this.props.retweet(data).then(() => {
       this.props.getTweetDetails(detailsPayload);
@@ -79,7 +80,7 @@ class TweetDetails extends Component {
   };
 
   bookmarkTweet = e => {
-    let data = { tweetId: e.target.id, userId: this.props.userId };
+    const data = { tweetId: e.target.id, userId: this.props.userId };
     const detailsPayload = { tweetId: this.state.tweet._id};
     this.props.bookmarkTweet(data).then(() => {
       this.props.getTweetDetails(detailsPayload);
@@ -117,7 +118,9 @@ class TweetDetails extends Component {
       time = timeValue[0] + ':' + timeValue[1];
     }
 
-    let likeButton, unlikeButton, detailRenderLikeButton;
+    let likeButton;
+    let unlikeButton;
+    let detailRenderLikeButton;
     if (tweet.body) {
       likeButton = <FaRegHeart size={20} id={tweet._id} onClick={this.likeTweet} />;
       unlikeButton = (

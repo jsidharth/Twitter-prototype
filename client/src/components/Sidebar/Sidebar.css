@@ -88,3 +88,12 @@
 *:focus {
     outline: 0 !important;
 }
+
+.logout {
+    color: rgb(231, 105, 105);
+    text-decoration: none;
+    font-family: Helvetica Neue;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-top: 5px;
+}
