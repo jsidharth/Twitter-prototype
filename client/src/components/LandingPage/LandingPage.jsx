@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable react/prop-types */
+/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import './LandingPage.css';
@@ -38,10 +41,10 @@ class LandingPage extends Component {
   }
 
   dateChangeHandler = date => {
-    this.setState({ date: date });
+    this.setState({ date });
     if (date) {
-      let month = date.getMonth() + 1;
-      this.setState({ dateOfBirth: month + '/' + date.getDate() + '/' + date.getFullYear() });
+      const month = date.getMonth() + 1;
+      this.setState({ dateOfBirth: `${month}/${date.getDate()}/${date.getFullYear()}` });
     } else {
       this.setState({ dateOfBirth: '' });
     }
@@ -79,43 +82,38 @@ class LandingPage extends Component {
     if (this.state.password.length >= 6) {
       this.setState({ passwordError: '' });
       return true;
-    } else {
-      this.setState({ passwordError: '6 Characters minimum' });
-      return false;
     }
+    this.setState({ passwordError: '6 Characters minimum' });
+    return false;
   };
 
   isNameValid = () => {
     if (/^[a-zA-Z ]+$/.test(this.state.name)) {
       this.setState({ nameError: '' });
       return true;
-    } else {
-      this.setState({ nameError: 'Name needs to be all alphabets' });
-      return false;
     }
+    this.setState({ nameError: 'Name needs to be all alphabets' });
+    return false;
   };
 
   isEmailValid = () => {
     if (/\S+@\S+\.\S+/.test(this.state.email)) {
       this.setState({ emailError: '' });
       return true;
-    } else {
-      this.setState({ emailError: 'Email format invalid' });
-      return false;
     }
+    this.setState({ emailError: 'Email format invalid' });
+    return false;
   };
 
   checkAgeAbove18 = () => {
-    var dob = moment(this.state.date);
-    var today = moment(new Date());
-    var diffDuration = moment.duration(today.diff(dob));
-    console.log();
-    let ageInYears = diffDuration.years();
+    const dob = moment(this.state.date);
+    const today = moment(new Date());
+    const diffDuration = moment.duration(today.diff(dob));
+    const ageInYears = diffDuration.years();
     if (ageInYears >= 18) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   };
 
   isAgeValid = () => {
@@ -123,22 +121,20 @@ class LandingPage extends Component {
       if (this.checkAgeAbove18()) {
         this.setState({ dateError: '' });
         return true;
-      } else {
-        this.setState({ dateError: 'You must be 18 years or above' });
-        return false;
       }
-    } else {
-      this.setState({ dateError: '' });
-
-      return true;
+      this.setState({ dateError: 'You must be 18 years or above' });
+      return false;
     }
+    this.setState({ dateError: '' });
+
+    return true;
   };
 
   showStep2Modal = () => {
-    let nameValidity = this.isNameValid();
-    let emailValidity = this.isEmailValid();
-    let ageValidity = this.isAgeValid();
-    let passwordValidity = this.isPasswordValid();
+    const nameValidity = this.isNameValid();
+    const emailValidity = this.isEmailValid();
+    const ageValidity = this.isAgeValid();
+    const passwordValidity = this.isPasswordValid();
     if (
       this.state.name &&
       this.state.email &&
@@ -156,29 +152,42 @@ class LandingPage extends Component {
     this.setState({ showStep2: false });
   };
 
-  isLoginNameValid = () => {
-    if (/\S+@\S+\.\S+/.test(this.state.loginUserName)) {
-      this.setState({ loginUserNameError: '' });
-      return true;
-    } else {
+  checkFieldsEmpty = () => {
+    let isLoginName = true;
+    let isPassword = true;
+    if (!this.state.loginUserName.length) {
+      isLoginName = false;
+      this.setState({ loginUserNameError: 'This is a required field' });
+    } else if (!/\S+@\S+\.\S+/.test(this.state.loginUserName)) {
+      isLoginName = false;
       this.setState({ loginUserNameError: 'Wrong format of Email' });
-      return false;
+    } else {
+      isLoginName = true;
+      this.setState({ loginUserNameError: '' });
     }
+    if (!this.state.loginPassword.length) {
+      isPassword = false;
+      this.setState({ loginPasswordError: 'This is a required field' });
+    } else {
+      isPassword = true;
+      this.setState({ loginPasswordError: '' });
+    }
+    return isLoginName && isPassword;
   };
 
   login = () => {
-    let userDetails = {
+    const userDetails = {
       email: this.state.loginUserName,
       password: this.state.loginPassword,
     };
-    let loginNameValidity = this.isLoginNameValid();
-    if (loginNameValidity && this.state.loginPassword) {
+    const checkFieldsEmpty = this.checkFieldsEmpty();
+    if (checkFieldsEmpty) {
       this.props.login(userDetails);
     }
   };
 
   register = () => {
-    let userDetails = {
+    const userDetails = {
       email: this.state.email,
       name: this.state.name,
       dob: this.state.dateOfBirth,
@@ -196,7 +205,7 @@ class LandingPage extends Component {
       <div>
         {redirectVar}
         <Row className="main1">
-          <Col xs={6} className="home"></Col>
+          <Col xs={6} className="home" />
           <Col xs={6} className="">
             <Row>
               <Col md={4}>
@@ -211,7 +220,7 @@ class LandingPage extends Component {
                     onChange={this.loginUserNameChangeHandler}
                   />
                 </Row>
-                <label class="loginUserNameError">{this.state.loginUserNameError}</label>
+                <label className="loginUserNameError">{this.state.loginUserNameError}</label>
               </Col>
               <Col md={4}>
                 <Row>
@@ -225,17 +234,16 @@ class LandingPage extends Component {
                     onChange={this.loginPasswordChangeHandler}
                   />
                 </Row>
-                <label className="error">{this.state.loginPasswordError}</label>
+                <label className="loginUserNameError">{this.state.loginPasswordError}</label>
               </Col>
               <Col md={2}>
-                <button type="button" className=" btn-info-transparent-login" onClick={this.login}>
+                <button type="button" className=" info-transparent-login" onClick={this.login}>
                   Log In
                 </button>
               </Col>
-              <Col md={1}></Col>
             </Row>
             <Row className="twitterImage">
-              <Col md={3}></Col>
+              <Col md={3} />
               <Col md={6}>
                 <img
                   src="https://upload.wikimedia.org/wikipedia/fr/thumb/c/c8/Twitter_Bird.svg/944px-Twitter_Bird.svg.png"
@@ -244,39 +252,39 @@ class LandingPage extends Component {
                   alt="Main logo link to home"
                 />{' '}
               </Col>
-              <Col md={3}></Col>
+              <Col md={3} />
             </Row>
             <Row className="">
-              <Col md={3}></Col>
+              <Col md={3} />
               <Col md={6}>
                 <h2 className="bolder">See what's happening in the world right now.</h2>
               </Col>
-              <Col md={3}></Col>
+              <Col md={3} />
             </Row>
             <Row className="joinTwitter">
-              <Col md={3}></Col>
+              <Col md={3} />
               <Col md={6}>
-                <h4 className="bolder">Join Twitter Today.</h4>
+                <h4 className="bolder">Join Twitter today.</h4>
               </Col>
-              <Col md={3}></Col>
+              <Col md={3} />
             </Row>
             <Row className="">
-              <Col md={3}></Col>
+              <Col md={3} />
               <Col md={6}>
                 <button type="button" className=" btn-info-solid" onClick={this.showStep1Modal}>
                   Sign Up
                 </button>
               </Col>
-              <Col md={3}></Col>
+              <Col md={3} />
             </Row>
             <Row>
-              <Col md={3}></Col>
+              <Col md={3} />
               <Col md={6}>
                 <button type="button" className=" btn-info-transparent">
                   Log In
                 </button>
               </Col>
-              <Col md={3}></Col>
+              <Col md={3} />
             </Row>
           </Col>
 
@@ -287,8 +295,8 @@ class LandingPage extends Component {
               onHide={this.hideStep1Modal}
               centered
             >
-              <Modal.Header>
-                <Col md={5}></Col>
+              <Modal.Header className="registerModalHeader">
+                <Col md={5} />
                 <Col md={3}>
                   <img
                     src="https://upload.wikimedia.org/wikipedia/fr/thumb/c/c8/Twitter_Bird.svg/944px-Twitter_Bird.svg.png"
@@ -333,7 +341,7 @@ class LandingPage extends Component {
                   <Col md={1} />
                 </Row>
                 <Row>
-                  <Col md={1}></Col>
+                  <Col md={1} />
                   <Col md={10}>
                     <Row className="margin">
                       <h6 className="">Email</h6>
@@ -350,7 +358,7 @@ class LandingPage extends Component {
                   <Col md={1} />
                 </Row>
                 <Row>
-                  <Col md={1}></Col>
+                  <Col md={1} />
                   <Col md={10}>
                     <Row className="margin">
                       <h6 className="">Password</h6>
@@ -380,7 +388,11 @@ class LandingPage extends Component {
                       </h6>
                     </Row>
                     <Row>
-                      <DatePicker onChange={this.dateChangeHandler} value={this.state.date} />
+                      <DatePicker
+                        onChange={this.dateChangeHandler}
+                        value={this.state.date}
+                        format="M/d/y"
+                      />
                     </Row>
                     <label className="error">{this.state.dateError}</label>
                   </Col>
@@ -404,11 +416,11 @@ class LandingPage extends Component {
                     <p className="next">Back</p>
                   </button>
                 </Col>
-                <Col md={2}></Col>
+                <Col md={2} />
                 <Col md={4}>
                   <h4 className="bolder">Step 2 of 2</h4>
                 </Col>
-                <Col md={4}></Col>
+                <Col md={4} />
               </Modal.Header>
               <Modal.Body className="step2-modal-body">
                 <Row className="marginTop20">
@@ -435,9 +447,9 @@ class LandingPage extends Component {
                   <Col md={1} />
                 </Row>
                 <Row className="marginTop2">
-                  <Col md={1}></Col>
+                  <Col md={1} />
                   <Col md={10}>
-                    <Row >
+                    <Row>
                       <h6 className="">Email</h6>
                     </Row>
                     <Row>
@@ -452,7 +464,7 @@ class LandingPage extends Component {
                   <Col md={1} />
                 </Row>
                 <Row>
-                  <Col md={1}></Col>
+                  <Col md={1} />
                   <Col md={10}>
                     <Row className="marginTop2">
                       <h6 className="">Password</h6>
@@ -489,7 +501,7 @@ class LandingPage extends Component {
               <Modal.Footer>
                 <Row>
                   <Row>
-                    <Col md={2}></Col>
+                    <Col md={2} />
                     <Col md={8} className="marginLeft">
                       <h6 className="form-label">
                         By signing up, you agree to the
@@ -499,12 +511,16 @@ class LandingPage extends Component {
                         email when provided.
                       </h6>
                     </Col>
-                    <Col md={2}></Col>
+                    <Col md={2} />
                   </Row>
                   <Row>
-                    <Col md={7}></Col>
+                    <Col md={7} />
                     <Col md={5} className="signupMargin">
-                      <button className="btn-info-solid-signup" onClick={this.register}>
+                      <button
+                        type="button"
+                        className="btn-info-solid-signup"
+                        onClick={this.register}
+                      >
                         Sign Up
                       </button>
                     </Col>
