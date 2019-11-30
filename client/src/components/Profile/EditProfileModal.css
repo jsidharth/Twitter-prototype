@@ -40,12 +40,12 @@
 }
 
 .uploadProfileImage {
-  margin: 0 auto;
-  max-width: 150px;
-  max-height: 150px;
-  border-radius: 50%;
-  text-align: center;
-  margin-left: 25%;
+    margin: 0 auto;
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 50%;
+    text-align: center;
+    margin-left: 25%;
 }
 
 .modal-title {
@@ -54,6 +54,11 @@
 
 .modal-header {
   flex-direction: row-reverse;
+}
+
+.iconUploadForProfile {
+    margin-left: 70px;
+    display: 'none';
 }
 
 .modal-header .close {

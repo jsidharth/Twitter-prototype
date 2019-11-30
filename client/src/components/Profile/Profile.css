@@ -10,12 +10,22 @@
   border-radius: 50%;
 }
 
+.userBio{
+  margin-left: 10px;
+}
+
 .cardContainer {
-  width: 600px;
+  width: 650px;
 }
 
 .cardWidth {
-  width: 600px;
+  width: 650px;
+}
+
+.userBioProfile {
+  font-weight: 500px;
+  margin-bottom: 5px;
+  font-size: 15px;
 }
 
 .cardContent {
@@ -59,6 +69,7 @@
   font-size: 17px;
   color: #657786;
   margin-left: 10px;
+  margin-bottom: 5px;
 }
 
 .personalDetails {
