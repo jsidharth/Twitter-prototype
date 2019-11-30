@@ -21,6 +21,13 @@ const handleRequest = async (listDetails, callback) => {
       },
       null
     );
+  } else if (!_.find(user.subscribedLists, new ObjectId(listDetails.listId))) {
+    callback(
+      {
+        message: 'You are not subscribed to this list!',
+      },
+      null
+    );
   } else {
     user.subscribedLists.pull(listDetails.listId);
     user.save();
