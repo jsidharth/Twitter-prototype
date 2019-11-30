@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import Tweets from '../../models/tweet.model';
 import Users from '../../models/user.model';
+import getTweetDetail from './tweetDetail';
 
 const handleRequest = async (tweetDetails, callback) => {
   let { tweetText } = tweetDetails;
@@ -35,10 +36,8 @@ const handleRequest = async (tweetDetails, callback) => {
       );
     } else {
       parentTweet.comments.push(tweet._id);
-      parentTweet.save();
-      callback(null, {
-        message: 'Reply posted!',
-      });
+      await parentTweet.save();
+      getTweetDetail.handleRequest(parentTweet._id, callback);
     }
   }
 };

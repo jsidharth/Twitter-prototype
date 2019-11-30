@@ -34,12 +34,25 @@ class Profile extends Component {
   }
 
   componentDidMount() {
+
     const data = {
       userId: this.props.match.params.userId,
     };
     const { getUserProfile, getLikedTweets } = this.props;
     getUserProfile(data);
     getLikedTweets(data);
+  }
+
+  componentDidUpdate(prevProps) {
+    
+    if(this.props.match.params.userId !== prevProps.match.params.userId){
+      const { getUserProfile, getLikedTweets } = this.props;
+      const data = {
+        userId: this.props.match.params.userId,
+      };
+      getUserProfile(data);
+      getLikedTweets(data);
+    }
   }
 
   likeTweet = e => {

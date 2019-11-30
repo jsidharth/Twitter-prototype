@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import './PostTweet.css';
-import { Icon } from '@material-ui/core';
-import { InsertPhoto } from '@material-ui/icons';
 import { connect } from 'react-redux';
+import { AiOutlinePicture } from 'react-icons/ai';
 import { imageActions, tweetActions } from '../../js/actions/index';
 
 class PostTweet extends Component {
@@ -33,7 +32,6 @@ class PostTweet extends Component {
   };
 
   postTweet = () => {
-    // change userId
 
     if (this.state.tweetText.length > 280) {
       console.log('max length exceeded');
@@ -79,7 +77,7 @@ class PostTweet extends Component {
               </div>
             </div>
             {this.props.imageUrl ? (
-              <img src={this.props.imageUrl} className="tweetImage" alt="Tweet" />
+              <img src={this.props.imageUrl} className="tweetImagePost" alt="Tweet" />
             ) : null}
             <div className="flexUploadTweet">
               <div className="flexIconCharsCount">
@@ -95,9 +93,7 @@ class PostTweet extends Component {
                     }}
                   />
                   <label htmlFor="icon-button-file">
-                    <Icon color="primary">
-                      <InsertPhoto />
-                    </Icon>
+                    <AiOutlinePicture color="#1da1f2" size={20} />
                   </label>
                 </div>
                 <div className="countMessageStyle">{`${count} characters remaining`}</div>

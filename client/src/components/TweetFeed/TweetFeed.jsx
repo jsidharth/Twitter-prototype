@@ -69,7 +69,7 @@ class TweetFeed extends Component {
     if (this.props.feed) {
       renderFeed = this.props.feed;
     }
-
+    
     let renderBookmarks = null;
     if (this.props.bookmarkedTweets) {
       renderBookmarks = this.props.bookmarkedTweets;
