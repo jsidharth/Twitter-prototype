@@ -5,7 +5,7 @@ import getDetails from './getDetails';
 const handleRequest = (userDetails, callback) => {
   const updateData = {
     name: userDetails.name,
-    // dob: userDetails.dob,
+    dob: userDetails.dob,
     profilePic: userDetails.profilePic,
     bio: userDetails.bio,
     location: userDetails.location,
