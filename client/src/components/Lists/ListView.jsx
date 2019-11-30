@@ -114,6 +114,7 @@ class ListView extends Component {
 
 const mapStateToProps = state => ({
   currentList: state.list.listDetails,
+  userId: state.user.currentUser._id,
 });
 
 const mapDispatchToProps = dispatch => ({
