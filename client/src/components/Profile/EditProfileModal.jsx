@@ -39,20 +39,6 @@ class EditProfileModal extends Component {
     });
   }
 
-  componentWillReceiveProps(newProps) {
-    const { profile } = newProps;
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-      name: profile.name,
-      bio: profile.bio,
-      location: profile.location,
-      website: profile.website,
-      // dob: profile.dob,
-      profilePic: profile.profilePic,
-    });
-  }
-
   deactivate = () => {
     const payload = { userId: this.props.userId };
     this.props.deactivate(payload);
