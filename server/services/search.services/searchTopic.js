@@ -56,7 +56,9 @@ const handleRequest = async (searchTerm, callback) => {
       );
     });
     updateTweetViewsPromise.then(() => {
-      callback(null, { tweets: updatedTweets });
+      callback(null, {
+        tweets: updatedTweets,
+      });
     });
   } else {
     callback(null, {

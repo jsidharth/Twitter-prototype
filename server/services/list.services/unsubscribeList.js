@@ -17,22 +17,15 @@ const handleRequest = async (listDetails, callback) => {
   } else if (_.find(user.ownedLists, new ObjectId(listDetails.listId))) {
     callback(
       {
-        message: 'You cannot subscribe to your own list!',
-      },
-      null
-    );
-  } else if (_.find(user.subscribedLists, new ObjectId(listDetails.listId))) {
-    callback(
-      {
-        message: 'You have already subscribed to the list!',
+        message: 'You cannot unsubscribe from your own list!',
       },
       null
     );
   } else {
-    user.subscribedLists.addToSet(listDetails.listId);
+    user.subscribedLists.pull(listDetails.listId);
     user.save();
     callback(null, {
-      message: 'Subscribed to List',
+      message: 'Unsubscribed from List',
     });
   }
 };
