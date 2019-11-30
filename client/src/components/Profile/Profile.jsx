@@ -162,9 +162,6 @@ class Profile extends Component {
       });
     renderButton =
       this.props.userId == profile._id ? (
-        // <button type="button" className="editProfileBtn" onClick={this.props.editUserProfile}>
-        //   Edit Profile
-        // </button>
         <div>
           <button type="button" className="editProfileBtn" onClick={this.showProfileModal}>
                     Edit Profile
