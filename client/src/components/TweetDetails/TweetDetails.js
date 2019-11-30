@@ -25,6 +25,7 @@ class TweetDetails extends Component {
     this.bookmarkTweet = this.bookmarkTweet.bind(this);
     this.showCommentModal = this.showCommentModal.bind(this);
     this.retweet = this.retweet.bind(this);
+    this.deleteTweet = this.deleteTweet.bind(this);
   }
 
   componentDidMount() {
@@ -55,29 +56,44 @@ class TweetDetails extends Component {
 
   likeTweet = e => {
     let data = { tweetId: e.target.id, userId: this.props.userId };
+    const detailsPayload = { tweetId: this.state.tweet._id};
     this.props.likeTweet(data).then(() => {
-      this.props.getTweetDetails(data);
+      this.props.getTweetDetails(detailsPayload);
     });
   };
 
   unlikeTweet = e => {
     let data = { tweetId: e.target.id, userId: this.props.userId };
+    const detailsPayload = { tweetId: this.state.tweet._id};
     this.props.unlikeTweet(data).then(() => {
-      this.props.getTweetDetails(data);
+      this.props.getTweetDetails(detailsPayload);
     });
   };
 
   retweet = e => {
     let data = { tweetId: e.target.id, userId: this.props.userId };
+    const detailsPayload = { tweetId: this.state.tweet._id};
     this.props.retweet(data).then(() => {
-      this.props.getTweetDetails(data);
+      this.props.getTweetDetails(detailsPayload);
     });
   };
 
   bookmarkTweet = e => {
     let data = { tweetId: e.target.id, userId: this.props.userId };
+    const detailsPayload = { tweetId: this.state.tweet._id};
     this.props.bookmarkTweet(data).then(() => {
-      this.props.getTweetDetails(data);
+      this.props.getTweetDetails(detailsPayload);
+    });
+  };
+
+  deleteTweet = e => {
+    const data = {
+      tweetId: e.target.id,
+      userId: this.props.userId,
+    };
+    const detailsPayload = { tweetId: this.state.tweet._id};
+    this.props.deleteTweet(data).then(() => {
+      this.props.getTweetDetails(detailsPayload);
     });
   };
 
@@ -101,7 +117,7 @@ class TweetDetails extends Component {
       time = timeValue[0] + ':' + timeValue[1];
     }
 
-    let likeButton, unlikeButton, renderLikeButton;
+    let likeButton, unlikeButton, detailRenderLikeButton;
     if (tweet.body) {
       likeButton = <FaRegHeart size={20} id={tweet._id} onClick={this.likeTweet} />;
       unlikeButton = (
@@ -119,7 +135,7 @@ class TweetDetails extends Component {
           />
         </svg>
       );
-      renderLikeButton = tweet.likes.includes(this.props.userId) ? unlikeButton : likeButton;
+      detailRenderLikeButton = tweet.likes.includes(this.props.userId) ? unlikeButton : likeButton;
     }
     const imgSrc = tweet.profilePic ? tweet.profilePic : '/images/default_profile_bigger.png';
 
@@ -182,7 +198,7 @@ class TweetDetails extends Component {
                 <div>{tweet.retweet_count > 0 ? tweet.retweet_count : null}</div>
               </div>
               <div className="flexBtnCnt">
-                <div>{renderLikeButton}</div>
+                <div>{detailRenderLikeButton}</div>
                 <div>{tweet.likes_count > 0 ? tweet.likes_count : null}</div>
               </div>
               <div className="flexBtnCnt">
@@ -195,6 +211,9 @@ class TweetDetails extends Component {
               tweets={tweet.comments}
               likeTweet={this.likeTweet}
               unlikeTweet={this.unlikeTweet}
+              deleteTweet={this.deleteTweet}
+              bookmarkTweet={this.bookmarkTweet}
+              retweet={this.retweet}
             />
           ) : null}
         </div>

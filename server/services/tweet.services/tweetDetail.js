@@ -67,7 +67,7 @@ const handleRequest = (tweetId, callback) => {
                   body: comment.body,
                   image: comment.image,
                   created_at: comment.createdAt,
-                  likes: tweet.likes,
+                  likes: comment.likes,
                   profilePic: commentUser.profilePic,
                   userId: user._id,
                 };
