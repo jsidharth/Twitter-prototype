@@ -140,7 +140,6 @@ class Profile extends Component {
     let birthDate = new Date(profile.dob);
     birthDate = birthDate.toString();
     birthDate = birthDate.split(' ');
-    console.log(profile.dob);
 
     let joinedDate = new Date(profile.createdAt);
     joinedDate = joinedDate.toString();
@@ -206,7 +205,6 @@ class Profile extends Component {
               </div>
             </div>
             <div className="cardContent">
-              {console.log(profile.profilePic)}
               <img
                 src={profile.profilePic || '/images/default_profile.png'}
                 className="profileImage"

@@ -1,27 +1,25 @@
+/* eslint-disable no-underscore-dangle */
 import Users from '../../models/user.model';
+import getDetails from './getDetails';
 
 const handleRequest = (userDetails, callback) => {
   const updateData = {
     name: userDetails.name,
-    email: userDetails.email,
-    dob: userDetails.dob,
+    // dob: userDetails.dob,
     profilePic: userDetails.profilePic,
     bio: userDetails.bio,
     location: userDetails.location,
     website: userDetails.website,
-    handle: userDetails.handle,
   };
 
   // eslint-disable-next-line no-underscore-dangle
-  Users.findOneAndUpdate({ _id: userDetails._id }, updateData, { new: true }).exec(
-    (err, result) => {
-      if (err || result == null) {
-        callback(err, null);
-      } else {
-        callback(null, result);
-      }
+  Users.findOneAndUpdate({ _id: userDetails._id }, updateData, { new: true }).exec((err, user) => {
+    if (err || user == null) {
+      callback(err, null);
+    } else {
+      getDetails.handleRequest(user._id, callback);
     }
-  );
+  });
 };
 
 export default {
