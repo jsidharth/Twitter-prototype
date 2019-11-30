@@ -1,0 +1,137 @@
+.commentModal {
+  min-width: 45%;
+  border-radius: 20px;
+}
+
+.profileImageCommentModal {
+  margin: 0 auto;
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 50%;
+}
+
+.modal-header {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+}
+
+.modal-header .close {
+  margin: none;
+  padding: none;
+  color: #1da1f2;
+}
+
+.modal-header .close:hover {
+  color: #1da1f2;
+}
+
+.commentModalUserDetails {
+  display: inline-flex;
+}
+
+.flexNameHandleCommentModal {
+  display: flex;
+  flex-direction: row;
+}
+
+.tweetUserNameCommentModal {
+  margin-right: 10px;
+  margin-left: 10px;
+  font-weight: bold;
+  font-size: 17px;
+  margin-bottom: 5px;
+}
+
+.tweetUserHandleCommentModal {
+  font-size: 17px;
+  color: #657786;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+.tweetDateDetailsCommentModal {
+  font-size: 17px;
+  color: #657786;
+  margin-bottom: 5px;
+}
+
+.commentDetailsBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.bodyCommentModal {
+  margin-left: 10px;
+  margin-bottom: 15px;
+}
+
+.commentTitle {
+  margin-left: 95%;
+}
+
+.replyingToCommentModal {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.handle {
+  margin-left: 5px;
+}
+
+.userClickHandle {
+  display: flex;
+  flex-direction: row;
+}
+
+.tweetReplyDiv {
+  display: inline-block;
+  min-height: 150px;
+  width: 95%;
+  margin-bottom: 10px;
+}
+
+.textArea {
+  margin-left: 10px;
+  margin-top: 0px;
+  width: 97%;
+  height: 100%;
+  outline: none;
+  margin-top: 0px;
+  overflow: auto;
+  resize: none;
+  border: none;
+  font-size: 19px;
+  font-weight: 400;
+  overflow-wrap: break-word;
+}
+
+.tweetReply {
+  display: flex;
+  flex-direction: row;
+}
+
+.countMessageStyleComment {
+  font-size: 17px;
+  font-weight: 400;
+  color: #b3b3b3;
+  margin-left: 10px;
+  margin-top: 1px;
+}
+
+.replyTweetBtn {
+  background-color: #1da1f2;
+  color: white;
+  text-align: center;
+  font-weight: 700;
+  float: right;
+  margin-top: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border-radius: 20px;
+  font-size: 15px;
+  outline: none;
+}

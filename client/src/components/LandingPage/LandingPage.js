@@ -6,9 +6,9 @@ import Col from 'react-bootstrap/Col';
 import DatePicker from 'react-date-picker';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import { userActions } from '../../js/actions';
 import { Redirect } from 'react-router';
 import cookie from 'js-cookie';
+import { userActions } from '../../js/actions';
 
 class LandingPage extends Component {
   constructor(props) {
@@ -36,6 +36,7 @@ class LandingPage extends Component {
     this.hideStep2Modal = this.hideStep2Modal.bind(this);
     this.nameChangeHandler = this.nameChangeHandler.bind(this);
   }
+
   dateChangeHandler = date => {
     this.setState({ date: date });
     if (date) {
@@ -49,26 +50,32 @@ class LandingPage extends Component {
   nameChangeHandler = e => {
     this.setState({ name: e.target.value });
   };
+
   emailChangeHandler = e => {
     this.setState({ email: e.target.value });
   };
+
   passwordChangeHandler = e => {
     this.setState({ password: e.target.value });
   };
+
   loginUserNameChangeHandler = e => {
     this.setState({ loginUserName: e.target.value });
   };
+
   loginPasswordChangeHandler = e => {
     this.setState({ loginPassword: e.target.value });
   };
+
   showStep1Modal = () => {
     this.setState({ showStep1: true, showStep2: false });
   };
+
   hideStep1Modal = () => {
     this.setState({ showStep1: false });
   };
+
   isPasswordValid = () => {
-    console.log(this.state.password.length);
     if (this.state.password.length >= 6) {
       this.setState({ passwordError: '' });
       return true;
@@ -77,6 +84,7 @@ class LandingPage extends Component {
       return false;
     }
   };
+
   isNameValid = () => {
     if (/^[a-zA-Z ]+$/.test(this.state.name)) {
       this.setState({ nameError: '' });
@@ -86,6 +94,7 @@ class LandingPage extends Component {
       return false;
     }
   };
+
   isEmailValid = () => {
     if (/\S+@\S+\.\S+/.test(this.state.email)) {
       this.setState({ emailError: '' });
@@ -95,6 +104,7 @@ class LandingPage extends Component {
       return false;
     }
   };
+
   checkAgeAbove18 = () => {
     var dob = moment(this.state.date);
     var today = moment(new Date());
@@ -107,6 +117,7 @@ class LandingPage extends Component {
       return false;
     }
   };
+
   isAgeValid = () => {
     if (this.state.dateOfBirth) {
       if (this.checkAgeAbove18()) {
@@ -122,6 +133,7 @@ class LandingPage extends Component {
       return true;
     }
   };
+
   showStep2Modal = () => {
     let nameValidity = this.isNameValid();
     let emailValidity = this.isEmailValid();
@@ -139,9 +151,11 @@ class LandingPage extends Component {
       this.setState({ showStep2: true, showStep1: false });
     }
   };
+
   hideStep2Modal = () => {
     this.setState({ showStep2: false });
   };
+
   isLoginNameValid = () => {
     if (/\S+@\S+\.\S+/.test(this.state.loginUserName)) {
       this.setState({ loginUserNameError: '' });
@@ -151,6 +165,7 @@ class LandingPage extends Component {
       return false;
     }
   };
+
   login = () => {
     let userDetails = {
       email: this.state.loginUserName,
@@ -161,6 +176,7 @@ class LandingPage extends Component {
       this.props.login(userDetails);
     }
   };
+
   register = () => {
     let userDetails = {
       email: this.state.email,
@@ -170,6 +186,7 @@ class LandingPage extends Component {
     };
     this.props.register(userDetails);
   };
+
   render() {
     let redirectVar = '';
     if (cookie.get('token')) {

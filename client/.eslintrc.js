@@ -28,5 +28,6 @@ module.exports = {
         "ignoreRegExpLiterals": true
       }
     ]
-  }
+  },
+  "parser": "babel-eslint"
 }

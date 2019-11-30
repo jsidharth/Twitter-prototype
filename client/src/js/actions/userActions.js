@@ -96,6 +96,7 @@ export const follow = payload => {
       });
   };
 };
+
 export const unfollow = payload => {
   return dispatch => {
     return axios

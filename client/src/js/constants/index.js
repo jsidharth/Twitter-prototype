@@ -22,6 +22,7 @@ const actionTypes = {
   GET_LISTS: 'GET_LISTS',
   GET_LIST_DETAILS: 'GET_LIST_DETAILS',
   BOOKMARK_TWEET: 'BOOKMARK_TWEET',
+  REPLY_TWEET: 'REPLY_TWEET',
 };
 
 export default actionTypes;
