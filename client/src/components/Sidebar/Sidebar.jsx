@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
 import { Navbar, ListGroup } from 'react-bootstrap';
@@ -5,7 +7,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FaRegUserCircle } from 'react-icons/fa';
 import { GoHome, GoMail, GoNote, GoGraph } from 'react-icons/go';
-import { FiBookmark } from 'react-icons/fi';
+import { FiBookmark, FiLogOut } from 'react-icons/fi';
+import cookie from 'js-cookie';
 import './Sidebar.css';
 
 class Sidebar extends Component {
@@ -13,6 +16,13 @@ class Sidebar extends Component {
     super(props);
     this.state = {};
   }
+
+  handleSignout = e => {
+    e.preventDefault();
+    cookie.remove('token');
+    localStorage.clear();
+    window.location.href = '/';
+  };
 
   render() {
     const { userId } = this.props;
@@ -89,6 +99,13 @@ class Sidebar extends Component {
                     <p className="sidebarTopics">Analytics</p>
                   </div>
                 </Link>
+              </ListGroup.Item>
+
+              <ListGroup.Item>
+                <div className="flexSidebars" id="signout" onClick={this.handleSignout}>
+                  <FiLogOut size={30} color="rgb(231, 105, 105)" />
+                  <p className="logout">Logout</p>
+                </div>
               </ListGroup.Item>
 
               <button className="tweetBtn" type="button">

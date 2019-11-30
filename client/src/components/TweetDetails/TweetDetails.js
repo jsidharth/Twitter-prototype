@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
@@ -30,28 +31,28 @@ class TweetDetails extends Component {
   }
 
   likeTweet = e => {
-    let data = { tweetId: e.target.id, userId: this.props.userId };
+    const data = { tweetId: e.target.id, userId: this.props.userId };
     this.props.likeTweet(data).then(() => {
       this.props.getTweetDetails(data);
     });
   };
 
   unlikeTweet = e => {
-    let data = { tweetId: e.target.id, userId: this.props.userId };
+    const data = { tweetId: e.target.id, userId: this.props.userId };
     this.props.unlikeTweet(data).then(() => {
       this.props.getTweetDetails(data);
     });
   };
 
   retweet = e => {
-    let data = { tweetId: e.target.id, userId: this.props.userId };
+    const data = { tweetId: e.target.id, userId: this.props.userId };
     this.props.retweet(data).then(() => {
       this.props.getTweetDetails(data);
     });
   };
 
   bookmarkTweet = e => {
-    let data = { tweetId: e.target.id, userId: this.props.userId };
+    const data = { tweetId: e.target.id, userId: this.props.userId };
     this.props.bookmarkTweet(data).then(() => {
       this.props.getTweetDetails(data);
     });
@@ -62,7 +63,9 @@ class TweetDetails extends Component {
     let myDate = new Date(tweet.created_at);
     myDate = myDate.toString();
     myDate = myDate.split(' ');
-    let likeButton, unlikeButton, renderLikeButton;
+    let likeButton;
+    let unlikeButton;
+    let renderLikeButton;
     if (tweet.body) {
       likeButton = <FaRegHeart size={20} id={tweet._id} onClick={this.likeTweet} />;
       unlikeButton = (
