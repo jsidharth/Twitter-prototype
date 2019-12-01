@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/destructuring-assignment */
@@ -71,19 +73,7 @@ class GetConversationThread extends Component {
                             <div>
                               <div className="messageInfoLoggedInUser">
                                 <div className="messageBoxLoggedInUser">
-                                  <div className="messageContent">
-                                    {/* {eachMessage.body.trim().length!==0? } */}
-                                    {eachMessage.body}
-                                    {/* {eachMessage.body.trim().length !== 0 ? eachMessage.body : ''} */}
-                                    {console.log(
-                                      'Message length: ',
-                                      eachMessage.body.trim().length,
-                                    )}
-                                    {/* if(eachMessage.body.trim().length !===0)
-                                    
-                                      eachMessage.body
-                                    } */}
-                                  </div>
+                                  <div className="messageContent">{eachMessage.body}</div>
                                 </div>
                               </div>
                               <div className="messageTimeStampLoggedInUser">

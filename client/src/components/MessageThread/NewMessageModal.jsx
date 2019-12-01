@@ -1,3 +1,8 @@
+/* eslint-disable react/no-deprecated */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable react/no-unused-state */
+/* eslint-disable react/sort-comp */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
@@ -31,10 +36,10 @@ class NewMessageModal extends Component {
     }
   };
 
-  composeMessage = (e) => {
+  composeMessage = e => {
     const payload = {
-      "user_1": this.props.userId,
-      "user_2": e.target.id,
+      user_1: this.props.userId,
+      user_2: e.target.id,
     };
 
     const data = {
@@ -43,15 +48,16 @@ class NewMessageModal extends Component {
     this.props.composeMessage(payload).then(() => {
       this.props.getMessageDetails(data).then(() => {
         this.props.showMessageModal();
-      })
+      });
     });
-  }
+  };
 
   componentWillReceiveProps(nextProps) {
     this.setState({
       suggestions: nextProps.searchSuggestions,
     });
   }
+
   render() {
     console.log(this.state.suggestions);
 
@@ -78,33 +84,44 @@ class NewMessageModal extends Component {
               autoComplete="off"
               onChange={this.handleOnInputChange}
             />
-           
           </div>
           <div className="searchSuggestion">
             {this.state.suggestions && this.state.suggestions.length
               ? this.state.suggestions.map(user => {
-                return (
-                  <div id={user._id} onClick={e => this.composeMessage(e)}>
-                    
-                    <div id={user._id} key={user._id}>
-                      <div id={user._id}>
-                        <div id={user._id} className="flexImageUser">
-                          <div id={user._id}>
-                            {/* Include user profile image if available */}
-                            <img id={user._id} src={user.profilePic ? user.profilePic : '/images/default_profile_bigger.png'} className="userProfileImageCard" alt="user" />
-                          </div>
-                          <div>
-                            <div id={user._id} className="flexNameHandleUserCard">
-                              <p id={user._id} className="userCardUserName">{user.name}</p>
-                              <p id={user._id} className="userCardUserHandle">@{user.handle}</p>
+                  return (
+                    <div id={user._id} onClick={e => this.composeMessage(e)}>
+                      <div id={user._id} key={user._id}>
+                        <div id={user._id}>
+                          <div id={user._id} className="flexImageUser">
+                            <div id={user._id}>
+                              {/* Include user profile image if available */}
+                              <img
+                                id={user._id}
+                                src={
+                                  user.profilePic
+                                    ? user.profilePic
+                                    : '/images/default_profile_bigger.png'
+                                }
+                                className="userProfileImageCard"
+                                alt="user"
+                              />
+                            </div>
+                            <div>
+                              <div id={user._id} className="flexNameHandleUserCard">
+                                <p id={user._id} className="userCardUserName">
+                                  {user.name}
+                                </p>
+                                <p id={user._id} className="userCardUserHandle">
+                                  @{user.handle}
+                                </p>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })
+                  );
+                })
               : null}
           </div>
         </Modal.Body>
@@ -130,5 +147,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(NewMessageModal);
-
-
