@@ -8,6 +8,9 @@
   display: flex;
   flex-direction: column;
   margin-right: 80px;
+  /* position: sticky;
+  position: -webkit-sticky;
+  top: 0; */
 }
 
 .list-group-item {
