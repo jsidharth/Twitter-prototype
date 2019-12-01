@@ -13,7 +13,12 @@ const handleRequest = async (userId, callback) => {
     user.active = false;
     const updatedUser = await user.save();
     if (updatedUser.active === true) {
-      callback({ message: 'Account Deactivation Failed!' }, null);
+      callback(
+        {
+          message: 'Account Deactivation Failed!',
+        },
+        null
+      );
     } else {
       callback(null, {
         message: 'Account Deactivation Successful!',

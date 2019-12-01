@@ -13,6 +13,10 @@ const handleRequest = async (userDetails, callback) => {
       null
     );
   } else {
+    let previouslyActive = true;
+    if (!user.active) {
+      previouslyActive = false;
+    }
     user.active = true;
     await user.save();
     callback(null, {
@@ -25,6 +29,8 @@ const handleRequest = async (userDetails, callback) => {
       bookmarks: user.bookmarks,
       profilePic: user.profilePic,
       handle: user.handle,
+      subscribedLists: user.subscribedLists,
+      previousState: previouslyActive,
     });
   }
 };

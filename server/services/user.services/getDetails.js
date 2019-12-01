@@ -8,8 +8,16 @@ import Tweets from '../../models/tweet.model';
 
 const handleRequest = (userId, callback) => {
   Users.findOne(
-    { _id: userId },
-    { bookmarks: 0, ownedLists: 0, subscribedLists: 0, __v: 0, updatedAt: 0 }
+    {
+      _id: userId,
+    },
+    {
+      bookmarks: 0,
+      ownedLists: 0,
+      subscribedLists: 0,
+      __v: 0,
+      updatedAt: 0,
+    }
   )
     .populate('tweets')
     .populate('retweets')
@@ -18,7 +26,12 @@ const handleRequest = (userId, callback) => {
     .lean()
     .exec((err, result) => {
       if (err || result == null) {
-        callback({ message: 'Fetch User Detail Failed!' }, null);
+        callback(
+          {
+            message: 'Fetch User Detail Failed!',
+          },
+          null
+        );
       } else {
         let dateExists = false;
         const todaysDate = moment().format('L');
@@ -33,7 +46,10 @@ const handleRequest = (userId, callback) => {
           });
         }
         if (!dateExists) {
-          viewsArray.push({ date: todaysDate, count_views: 1 });
+          viewsArray.push({
+            date: todaysDate,
+            count_views: 1,
+          });
         }
         if (result.tweets && result.tweets.length) {
           result.tweets = result.tweets
@@ -100,8 +116,12 @@ const handleRequest = (userId, callback) => {
           result.retweets = retweets;
           // Update profile views for each date
           Users.findOneAndUpdate(
-            { _id: userId },
-            { views: viewsArray },
+            {
+              _id: userId,
+            },
+            {
+              views: viewsArray,
+            },
             {
               new: true,
             }
@@ -114,7 +134,9 @@ const handleRequest = (userId, callback) => {
           callback(null, result);
           Promise.map(combinedTweets, eachTweet => {
             return Tweets.findByIdAndUpdate(eachTweet, {
-              $inc: { views: 1 },
+              $inc: {
+                views: 1,
+              },
             }).then(() => {});
           }).then(() => {
             console.log('Updated views');

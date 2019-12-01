@@ -84,7 +84,7 @@ class NewMessageModal extends Component {
             {this.state.suggestions && this.state.suggestions.length
               ? this.state.suggestions.map(user => {
                 return (
-                  <div id={user._id} onClick= {e => this.composeMessage(e)}>
+                  <div id={user._id} onClick={e => this.composeMessage(e)}>
                     
                     <div id={user._id} key={user._id}>
                       <div id={user._id}>

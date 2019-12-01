@@ -1,99 +1,98 @@
 .sidebar {
-    margin-left: 70px;
-    padding-top: 20px;
-    padding-left: 20px;
-    height: 100vh;
-    width: 200px;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    margin-right: 80px;
-}
+  margin-left: 70px;
+  padding-top: 20px;
+  padding-left: 20px;
+  height: 100vh;
+  width: 200px;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  margin-right: 80px;
+ }
 
 .list-group-item {
-    padding-left: 10% !important;
-    padding-right: 10% !important;
-    padding-top: 5% !important;
-    padding-bottom: 5% !important;
-    border-bottom: 0px !important;
-    border-top: 0px !important;
+  padding-left: 10% !important;
+  padding-right: 10% !important;
+  padding-top: 5% !important;
+  padding-bottom: 5% !important;
+  border-bottom: 0px !important;
+  border-top: 0px !important;
 }
 
 .sidebar a:hover {
-    color: #00acee;
-    text-decoration: none;
-    font-family: Helvetica Neue;
-    font-weight: bold;
+  color: #00acee;
+  text-decoration: none;
+  font-family: Helvetica Neue;
+  font-weight: bold;
 }
 
 .sidebar a {
-    color: black;
-    text-decoration: none;
-    font-family: Helvetica Neue;
-    font-weight: bold;
+  color: black;
+  text-decoration: none;
+  font-family: Helvetica Neue;
+  font-weight: bold;
 }
 
 .btn-twitter {
-    background: #00ACEE;
-    color: #fff;
-    border-width: 10px;
-    border-style: solid;
-    border-color: #00ACEE;
-    border-radius: 15px;
-    font-size: medium;
-
+  background: #00acee;
+  color: #fff;
+  border-width: 10px;
+  border-style: solid;
+  border-color: #00acee;
+  border-radius: 15px;
+  font-size: medium;
 }
 
 .btn-twitter:link,
 .btn-twitter:visited {
-    color: #fff;
+  color: #fff;
 }
 
 .btn-twitter:active {
-    color: #fff;
+  color: #fff;
 }
 
 .sidebar .btn-twitter:hover {
-    color: #fff
+  color: #fff;
 }
 
 .flexSidebars {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .sidebarTopics {
-    margin-left: 10px;
-    margin-top: 5px;
+  margin-left: 10px;
+  margin-top: 5px;
 }
 
 .tweetBtn {
-    background-color: #1DA1F2;
-    color: white;
-    text-align: center;
-    font-weight: 700;
-    margin-top: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 7px;
-    padding-bottom: 7px;
-    border-radius: 20px;
-    width: 100%;
-    height: 45px;
-    font-size: 15px;
-    outline: none;
-    border: 0;
+  background-color: #1da1f2;
+  color: white;
+  text-align: center;
+  font-weight: 700;
+  margin-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border-radius: 20px;
+  width: 100%;
+  height: 45px;
+  font-size: 15px;
+  outline: none;
+  border: 0;
 }
 
 *:focus {
-    outline: 0 !important;
+  outline: 0 !important;
 }
 
 .logout {
-    color: rgb(231, 105, 105);
-    text-decoration: none;
-    font-family: Helvetica Neue;
-    font-weight: bold;
-    margin-left: 10px;
-    margin-top: 5px;
+  color: rgb(231, 105, 105);
+  text-decoration: none;
+  font-family: Helvetica Neue;
+  font-weight: bold;
+  margin-left: 10px;
+  margin-top: 5px;
 }

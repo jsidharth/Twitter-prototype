@@ -2,11 +2,23 @@ import moment from 'moment';
 import Users from '../../models/user.model';
 
 const handleRequest = (userId, callback) => {
-  Users.findOne({ _id: userId }, { tweets: 1 })
+  Users.findOne(
+    {
+      _id: userId,
+    },
+    {
+      tweets: 1,
+    }
+  )
     .populate('tweets')
     .exec((err, result) => {
       if (err || !result) {
-        callback({ message: 'Fetch number of tweets Failed!' }, null);
+        callback(
+          {
+            message: 'Fetch number of tweets Failed!',
+          },
+          null
+        );
       } else {
         // number of tweets in the previous day
         const responseArray = [];
@@ -43,7 +55,9 @@ const handleRequest = (userId, callback) => {
         });
         // number of tweets in the previous hour
         let previousHourCount = 0;
-        const startTime = moment().subtract({ hours: 1 });
+        const startTime = moment().subtract({
+          hours: 1,
+        });
         const endTime = moment();
         result.tweets.forEach(tweetElement => {
           if (
@@ -53,9 +67,18 @@ const handleRequest = (userId, callback) => {
             previousHourCount += 1;
           }
         });
-        responseArray.push({ timeFrame: 'Hour', tweetCount: previousHourCount });
-        responseArray.push({ timeFrame: 'Day', tweetCount: previousDayCount });
-        responseArray.push({ timeFrame: 'Month', tweetCount: previousMonthCount });
+        responseArray.push({
+          timeFrame: 'Hour',
+          tweetCount: previousHourCount,
+        });
+        responseArray.push({
+          timeFrame: 'Day',
+          tweetCount: previousDayCount,
+        });
+        responseArray.push({
+          timeFrame: 'Month',
+          tweetCount: previousMonthCount,
+        });
         callback(null, responseArray);
       }
     });
