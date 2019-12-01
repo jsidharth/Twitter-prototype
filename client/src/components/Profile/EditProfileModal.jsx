@@ -175,13 +175,6 @@ class EditProfileModal extends Component {
               </div>
               <div className="flexLabelInput">
                 <label className="inputTitle">Birth Date</label>
-                {/* <input
-                  className="inputDetails"
-                  type="text"
-                  name="dob"
-                  onChange={this.handleOnChange}
-                  value={this.state.dob}
-                /> */}
                 <div className="dateStyling">
                   <DatePicker
                     className="dateDetails"
