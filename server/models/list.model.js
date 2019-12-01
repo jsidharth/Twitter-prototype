@@ -12,10 +12,6 @@ const listSchema = new Schema(
       type: String,
       default: '',
     },
-    private: {
-      type: Boolean,
-      default: false,
-    },
     members: [
       {
         type: Schema.Types.ObjectId,

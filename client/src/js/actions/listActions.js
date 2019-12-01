@@ -4,10 +4,8 @@ import {
   toast
 } from 'react-toastify';
 import actionTypes from '../constants/index';
-
-import {
-  ROOT_URL
-} from '../../constant/constant';
+import { toast } from 'react-toastify';
+import { ROOT_URL } from '../../constant/constant';
 
 export const getLists = payload => {
   return dispatch => {
@@ -96,5 +94,23 @@ export const unsubscribeList = payload => {
       .catch(error => {
         console.log(error);
       });
+  };
+};
+export const createList = payload => {
+  return dispatch => {
+    console.log(payload);
+    return axios.post(`${ROOT_URL}/list/create`, payload).then(response => {
+      console.log('Status Code : ', response.status);
+      if (response.status === 200) {
+        toast.info(response.data.message, {
+          position: 'bottom-center',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      }
+    });
   };
 };
