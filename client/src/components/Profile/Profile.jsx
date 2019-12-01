@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { MdKeyboardBackspace } from 'react-icons/md';
 import { TiLocationOutline } from 'react-icons/ti';
-import { GoCalendar ,GoNote} from 'react-icons/go';
+import { GoCalendar, GoNote } from 'react-icons/go';
 import { GiBalloons } from 'react-icons/gi';
 import { Tabs, Tab } from 'react-bootstrap';
 import TweetCard from '../TweetCard/TweetCard';
@@ -127,16 +127,16 @@ class Profile extends Component {
   follow = e => {
     const data = { followerId: this.props.profile._id, userId: this.props.userId };
     this.props.follow(data).then(() => {
-      const data = { userId: this.props.profile._id };
-      this.props.getUserProfile(data);
+      const profilePayload = { userId: this.props.profile._id };
+      this.props.getUserProfile(profilePayload);
     });
   };
 
   unfollow = e => {
     const data = { followerId: this.props.profile._id, userId: this.props.userId };
     this.props.unfollow(data).then(() => {
-      const data = { userId: this.props.profile._id };
-      this.props.getUserProfile(data);
+      const profilePayload = { userId: this.props.profile._id };
+      this.props.getUserProfile(profilePayload);
     });
   };
 

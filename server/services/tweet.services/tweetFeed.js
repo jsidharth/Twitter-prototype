@@ -5,8 +5,8 @@ import Promise from 'bluebird';
 import Users from '../../models/user.model';
 import Tweets from '../../models/tweet.model';
 
-const handleRequest = (userId, callback) => {
-  Users.findById(userId)
+const handleRequest = (params, callback) => {
+  Users.findById(params.userId)
     .populate({
       path: 'following',
       populate: {
@@ -75,10 +75,15 @@ const handleRequest = (userId, callback) => {
         .compact()
         .flattenDeep()
         .value();
+      const size = results.length || 0;
+      // Splice based on the offset and count for pagination
       results =
         results && results.length
-          ? results.sort((first, second) => moment(second.created_at).diff(first.created_at))
+          ? results
+              .sort((first, second) => moment(second.created_at).diff(first.created_at))
+              .splice(params.offset, params.count)
           : [];
+      callback(null, { results, size });
       let updateTweetViewsPromise = Promise.resolve();
       if (results && results.length) {
         updateTweetViewsPromise = Promise.map(results, tweet => {
@@ -86,7 +91,7 @@ const handleRequest = (userId, callback) => {
         });
       }
       updateTweetViewsPromise.then(() => {
-        callback(null, results);
+        console.log('Views updated!');
       });
     });
 };
