@@ -60,16 +60,15 @@ class EditProfileModal extends Component {
     this.props.showProfileModal();
   };
 
-  // dateChangeHandler = date => {
-  //   this.setState({ date: date });
-  //   if (date) {
-  //     let month = date.getMonth() + 1;
-  //     this.setState({ dateOfBirth: month + '/' + date.getDate() + '/' + date.getFullYear() });
-  //   } else {
-  //     this.setState({ dateOfBirth: '' });
-  //   }
-  // };
-
+  dateChangeHandler = date => {
+    this.setState({ date });
+    if (date) {
+      const month = date.getMonth() + 1;
+      this.setState({ dob: `${month}/${date.getDate()}/${date.getFullYear()}` });
+    } else {
+      this.setState({ dob: '' });
+    }
+  };
 
   uploadImage = () => {
     const data = new FormData();
@@ -183,7 +182,13 @@ class EditProfileModal extends Component {
                   onChange={this.handleOnChange}
                   value={this.state.dob}
                 /> */}
-                <DatePicker onChange={this.dateChangeHandler} value={this.state.date} />
+                <div className="dateStyling">
+                  <DatePicker
+                    className="dateDetails"
+                    onChange={this.dateChangeHandler}
+                    value={this.state.date}
+                  />
+                </div>
               </div>
             </form>
           </Modal.Body>
