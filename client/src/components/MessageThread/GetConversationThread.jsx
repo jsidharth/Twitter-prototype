@@ -13,32 +13,36 @@ class GetConversationThread extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      new_message: ''
+      new_message: '',
     };
     this.handleChange = this.handleChange.bind(this);
   }
-  handleActiveMessage = (e) => {
-     const payload = {
-       userId: this.props.userId,
-       convId: e.target.id
-     };
-     this.props.setActiveMessage(payload);
-   }
-   handleChange = (e) => {
-    this.setState({
-      [e.target.id]: e.target.value
-    });
-   }
 
-   sendMessage = (e) => {
+  handleActiveMessage = e => {
     const payload = {
-      "user_1": this.props.activeConv.user_1._id,
-      "user_2": this.props.activeConv.user_2._id,
-      "sender": this.props.userId,
-      "body": this.state.new_message
+      userId: this.props.userId,
+      convId: e.target.id,
     };
-    this.props.sendMessage(payload)
-   }
+    this.props.setActiveMessage(payload);
+  };
+
+  handleChange = e => {
+    this.setState({
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  sendMessage = e => {
+    if (this.state.new_message.trim().length !== 0) {
+      const payload = {
+        user_1: this.props.activeConv.user_1._id,
+        user_2: this.props.activeConv.user_2._id,
+        sender: this.props.userId,
+        body: this.state.new_message,
+      };
+      this.props.sendMessage(payload);
+    }
+  };
 
   render() {
     const { activeConv, userId } = this.props;
@@ -46,58 +50,77 @@ class GetConversationThread extends Component {
       activeConv.user_1._id === userId ? activeConv.user_2 : activeConv.user_1;
     return (
       <div>
-      <div className="flexConversationScreen">
-        <div className="cardWidth">
-          <div className="conversationHeight">
-            <div className="convoUserName">{messageThreadUser.name}</div>
-            <div className="convoUserHandle">@{messageThreadUser.handle}</div>
+        <div className="flexConversationScreen">
+          <div className="cardWidth">
+            <div className="conversationHeight">
+              <div className="convoUserName">{messageThreadUser.name}</div>
+              <div className="convoUserHandle">@{messageThreadUser.handle}</div>
+            </div>
           </div>
-        </div>
-        <div className="messageThreadBody">
-        {activeConv.messages && activeConv.messages.length
-          ? activeConv.messages.map(eachMessage => {
-              let myDate = new Date(eachMessage.createdAt);
-              myDate = myDate.toString().split(' ');
-              const timeValue = myDate[4].split(':');
-              return (
-                <div>
-                  {eachMessage.sender === userId ? (
-                     
+          <div className="messageThreadBody">
+            {activeConv.messages && activeConv.messages.length
+              ? activeConv.messages.map(eachMessage => {
+                  let myDate = new Date(eachMessage.createdAt);
+                  myDate = myDate.toString().split(' ');
+                  const timeValue = myDate[4].split(':');
+                  return (
                     <div>
-                      {!eachMessage.body ? null :
-                      <div>
-                      <div className="messageInfoLoggedInUser">
-                        <div className="messageBoxLoggedInUser">
-                          <div className="messageContent">{eachMessage.body}</div>
+                      {eachMessage.sender === userId ? (
+                        <div>
+                          {!eachMessage.body ? null : (
+                            <div>
+                              <div className="messageInfoLoggedInUser">
+                                <div className="messageBoxLoggedInUser">
+                                  <div className="messageContent">
+                                    {/* {eachMessage.body.trim().length!==0? } */}
+                                    {eachMessage.body}
+                                    {/* {eachMessage.body.trim().length !== 0 ? eachMessage.body : ''} */}
+                                    {console.log(
+                                      'Message length: ',
+                                      eachMessage.body.trim().length,
+                                    )}
+                                    {/* if(eachMessage.body.trim().length !===0)
+                                    
+                                      eachMessage.body
+                                    } */}
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="messageTimeStampLoggedInUser">
+                                {myDate[0]}, {timeValue[0]}:{timeValue[1]}
+                              </div>
+                            </div>
+                          )}
                         </div>
-                      </div>
-                      <div className="messageTimeStampLoggedInUser">
-                        {myDate[0]}, {timeValue[0]}:{timeValue[1]}
-                      </div></div>}
-                    </div>
-                  ) : (
-                    
-                    <div>
-                      <div className="messageInfoSenderUser">
-                        <div className="messageBoxSenderUser">
-                          <div className="messageContent">{!eachMessage.body ? null : eachMessage.body}</div>
+                      ) : (
+                        <div>
+                          <div className="messageInfoSenderUser">
+                            <div className="messageBoxSenderUser">
+                              <div className="messageContent">
+                                {!eachMessage.body ? null : eachMessage.body}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="messageTimeStampSenderUser">
+                            {myDate[0]}, {timeValue[0]}:{timeValue[1]}
+                          </div>
                         </div>
-                      </div>
-                      <div className="messageTimeStampSenderUser">
-                        {myDate[0]}, {timeValue[0]}:{timeValue[1]}
-                      </div>
+                      )}
                     </div>
-                  )}
-                </div>
-              );
-            })
-          : null}
+                  );
+                })
+              : null}
           </div>
         </div>
         <div className="conversationCardWidth">
           <div className="conversationHeight">
             <div className="autoExpandDiv1">
-              <textarea className="textArea1" placeholder="Start a new message" id = "new_message"onChange={this.handleChange}/>
+              <textarea
+                className="textArea1"
+                placeholder="Start a new message"
+                id="new_message"
+                onChange={this.handleChange}
+              />
               <div className="sendIcon" onClick={e => this.sendMessage(e)}>
                 <MdSend size={25} />
               </div>
@@ -115,5 +138,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   sendMessage: data => dispatch(messageActions.sendMessage(data)),
-})
-export default connect(mapStateToProps, mapDispatchToProps)(GetConversationThread);
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(GetConversationThread);

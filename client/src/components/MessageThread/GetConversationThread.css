@@ -43,7 +43,7 @@
     margin-top: -11%;
     color: #00ACEE; 
     padding-top: 10px;
-    padding-left: 25px;
+    padding-left: 75px;
 }
 
 .sendIcon:hover {
@@ -129,7 +129,8 @@
   padding-top: 20px;
   padding-left: 10px;
   font-size: 15px;
-  width: 100%;
+  width: 90%;
+  border: none;
 }
 
 
