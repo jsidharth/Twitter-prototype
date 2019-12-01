@@ -15,13 +15,14 @@
     min-height: 25px;
   }
 
-  .conversationCardWidth {
+  /* .conversationCardWidth {
     /* margin-top: 100%; */
-  }
+   
 
   .messageThreadBody {
     min-height: 650px;
     max-height: 650px;
+    margin-right: 10px;
   }
 
   .convoUserName {
@@ -39,12 +40,13 @@
   }
 
   .sendIcon {
-    margin-left: 510px;
+    margin-left: 580px;
     margin-top: -11%;
+    margin-right: 15px;
     color: #00ACEE; 
     padding-top: 10px;
-    padding-left: 75px;
-}
+    padding-left: 25px;
+  }
 
 .sendIcon:hover {
   color: #008abe;
@@ -67,7 +69,8 @@
     flex: start;
     padding: 10px;
     background-color: #00ACEE;;
-    min-width: 100px;
+    max-width: 400px;
+    min-width: 40px;
     height: 50px;
     text-align: center;
     border: 1px solid#00ACEE;;
@@ -86,7 +89,8 @@
 .messageBoxSenderUser {
   padding: 10px;
   background-color: #d8d8d8;
-  min-width: 100px;
+  max-width: 400px;
+  min-width: 40px;
   height: 50px;
   text-align: center;
   border: 1px solid #d8d8d8;
@@ -130,7 +134,6 @@
   padding-left: 10px;
   font-size: 15px;
   width: 90%;
-  border: none;
 }
 
 
