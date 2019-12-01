@@ -31,9 +31,7 @@ const handleRequest = async (listDetails, callback) => {
   } else {
     user.subscribedLists.addToSet(listDetails.listId);
     user.save();
-    callback(null, {
-      message: 'Subscribed to List',
-    });
+    callback(null, user.subscribedLists);
   }
 };
 

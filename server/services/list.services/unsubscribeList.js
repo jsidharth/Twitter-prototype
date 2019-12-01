@@ -31,9 +31,7 @@ const handleRequest = async (listDetails, callback) => {
   } else {
     user.subscribedLists.pull(listDetails.listId);
     user.save();
-    callback(null, {
-      message: 'Unsubscribed from List',
-    });
+    callback(null, user.subscribedLists);
   }
 };
 

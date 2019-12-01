@@ -29,6 +29,7 @@ const handleRequest = async (userDetails, callback) => {
       bookmarks: user.bookmarks,
       profilePic: user.profilePic,
       handle: user.handle,
+      subscribedLists: user.subscribedLists,
       previousState: previouslyActive,
     });
   }
