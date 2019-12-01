@@ -41,7 +41,16 @@ const handleRequest = (userId, callback) => {
           moment(second.created_at).diff(first.created_at)
         );
         Promise.map(updatedLikedTweets, tweet => {
-          return Tweets.findOneAndUpdate({ _id: tweet._id }, { $inc: { views: 1 } });
+          return Tweets.findOneAndUpdate(
+            {
+              _id: tweet._id,
+            },
+            {
+              $inc: {
+                views: 1,
+              },
+            }
+          );
         }).then(() => {
           callback(null, updatedLikedTweets);
         });

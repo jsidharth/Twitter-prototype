@@ -91,8 +91,14 @@ const handleRequest = (tweetId, callback) => {
             if (combinedTweets && combinedTweets.length) {
               updateTweetViewsPromise = Promise.map(combinedTweets, eachTweetId => {
                 return Tweets.findOneAndUpdate(
-                  { _id: new ObjectId(eachTweetId) },
-                  { $inc: { views: 1 } }
+                  {
+                    _id: new ObjectId(eachTweetId),
+                  },
+                  {
+                    $inc: {
+                      views: 1,
+                    },
+                  }
                 );
               });
             }
