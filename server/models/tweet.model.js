@@ -10,15 +10,46 @@ const tweetSchema = new Schema(
       minlength: 1,
       maxlength: 280,
     },
-    image: { type: String, default: '' },
-    likes: [{ type: Schema.Types.ObjectId, ref: 'Users' }],
-    retweets: [{ type: Schema.Types.ObjectId, ref: 'Tweets' }],
-    comments: [{ type: Schema.Types.ObjectId, ref: 'Tweets' }],
-    hashtags: [{ type: String }],
-    views: { type: Number },
-    retweetUsers: [{ type: Schema.Types.ObjectId, ref: 'Users' }],
+    image: {
+      type: String,
+      default: '',
+    },
+    likes: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Users',
+      },
+    ],
+    retweets: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Tweets',
+      },
+    ],
+    comments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Tweets',
+      },
+    ],
+    hashtags: [
+      {
+        type: String,
+      },
+    ],
+    views: {
+      type: Number,
+    },
+    retweetUsers: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Users',
+      },
+    ],
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
 const Tweets = mongoose.model('Tweets', tweetSchema);

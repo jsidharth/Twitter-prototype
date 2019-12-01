@@ -72,6 +72,28 @@ listRouter.post('/subscribe', (req, res) => {
   );
 });
 
+listRouter.post('/unsubscribe', (req, res) => {
+  console.log('Inside POST Unsubscribe from List');
+  console.log('Request Body: ', req.body);
+  kafka.makeRequest(
+    'listTopic',
+    {
+      body: req.body,
+      action: 'LIST_UNSUBSCRIBE',
+    },
+    (err, result) => {
+      if (err) {
+        console.log('Error ', err);
+        res.status(500).json({
+          message: err.message,
+        });
+      } else {
+        res.status(200).json(result);
+      }
+    }
+  );
+});
+
 listRouter.get('/getListDetails/:listId', (req, res) => {
   console.log('Inside GET Lists');
   console.log('Request Body: ', req.params.listId);

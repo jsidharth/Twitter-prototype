@@ -39,7 +39,9 @@ const handleRequest = async (tweetId, callback) => {
   await Tweets.deleteOne({
     _id: tweetId,
   });
-  callback(null, { message: 'Tweet Deleted Successfully' });
+  callback(null, {
+    message: 'Tweet Deleted Successfully'
+  });
 };
 
 export default {

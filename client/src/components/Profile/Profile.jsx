@@ -181,39 +181,47 @@ class Profile extends Component {
     }
     let renderButton = '';
     let isFollower = false;
-    profile.followers &&
+    if (profile.followers) {
       profile.followers.forEach(element => {
         if (element._id === this.props.userId) {
           isFollower = true;
         }
       });
-    renderButton =
-      this.props.userId == profile._id ? (
-        <div>
-          <button type="button" className="editProfileBtn" onClick={this.showProfileModal}>
-            Edit Profile
+      if (this.props.userId === profile._id) {
+        renderButton = (
+          <div>
+            <button type="button" className="editProfileBtn" onClick={this.showProfileModal}>
+              Edit Profile
+            </button>
+            {this.showProfileModal ? (
+              <EditProfileModal
+                showProfileModal={this.showProfileModal}
+                showProfileModalState={this.state.showProfileModal}
+              />
+            ) : null}
+          </div>
+        );
+      } else if (isFollower) {
+        renderButton = (
+          <button
+            type="button"
+            onMouseEnter={this.mouseIn}
+            onMouseLeave={this.mouseOut}
+            className={this.state.mouseHoverClassName}
+            onClick={this.unfollow}
+          >
+            {this.state.mouseHoverButtonText}
           </button>
-          {this.showProfileModal ? (
-            <EditProfileModal
-              showProfileModal={this.showProfileModal}
-              showProfileModalState={this.state.showProfileModal}
-            />
-          ) : null}
-        </div>
-      ) : isFollower ? (
-        <button
-          onMouseEnter={this.mouseIn}
-          onMouseLeave={this.mouseOut}
-          className={this.state.mouseHoverClassName}
-          onClick={this.unfollow}
-        >
-          {this.state.mouseHoverButtonText}
-        </button>
-      ) : (
-        <button className="followBtn" onClick={this.follow}>
-          Follow
-        </button>
-      );
+        );
+      } else {
+        renderButton = (
+          <button type="button" className="followBtn" onClick={this.follow}>
+            Follow
+          </button>
+        );
+      }
+    }
+
     return (
       <div className="flexHomeScreen">
         <div>

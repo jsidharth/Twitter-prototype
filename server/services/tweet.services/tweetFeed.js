@@ -82,7 +82,16 @@ const handleRequest = (userId, callback) => {
       let updateTweetViewsPromise = Promise.resolve();
       if (results && results.length) {
         updateTweetViewsPromise = Promise.map(results, tweet => {
-          return Tweets.findOneAndUpdate({ _id: tweet._id }, { $inc: { views: 1 } });
+          return Tweets.findOneAndUpdate(
+            {
+              _id: tweet._id,
+            },
+            {
+              $inc: {
+                views: 1,
+              },
+            }
+          );
         });
       }
       updateTweetViewsPromise.then(() => {
