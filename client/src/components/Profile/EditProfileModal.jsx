@@ -6,6 +6,7 @@
 import React, { Component } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { AiOutlinePicture } from 'react-icons/ai';
+import DatePicker from 'react-date-picker';
 import './EditProfileModal.css';
 import { connect } from 'react-redux';
 import { imageActions, userActions } from '../../js/actions/index';
@@ -18,8 +19,9 @@ class EditProfileModal extends Component {
       bio: '',
       location: '',
       website: '',
-      // dob: '',
+      dob: '',
       profilePic: '',
+      date: '',
     };
     this.handleOnChange = this.handleOnChange.bind(this);
     this.updateProfile = this.updateProfile.bind(this);
@@ -28,14 +30,14 @@ class EditProfileModal extends Component {
   }
 
   componentDidMount() {
-    const { name, bio, location, website, dob, profilePic } = this.props.profile;
+    const { name, bio, location, website, date, profilePic } = this.props.profile;
     this.setState({
       name,
       bio,
       location,
       website,
-      // dob,
       profilePic,
+      date,
     });
   }
 
@@ -51,11 +53,21 @@ class EditProfileModal extends Component {
       bio: this.state.bio,
       location: this.state.location,
       website: this.state.website,
-      // dob: this.state.dob,
+      dob: this.state.dob,
       profilePic: this.state.profilePic,
     };
     this.props.updateProfile(payload);
     this.props.showProfileModal();
+  };
+
+  dateChangeHandler = date => {
+    this.setState({ date });
+    if (date) {
+      const month = date.getMonth() + 1;
+      this.setState({ dob: `${month}/${date.getDate()}/${date.getFullYear()}` });
+    } else {
+      this.setState({ dob: '' });
+    }
   };
 
   uploadImage = () => {
@@ -161,10 +173,16 @@ class EditProfileModal extends Component {
                   value={this.state.website}
                 />
               </div>
-              {/* <div className="flexLabelInput">
-                <label className="inputTitle">Birth Date</label> 
-                <input className="inputDetails" type="text" name="dob" onChange={this.handleOnChange} value={this.state.dob}/>  
-                </div> */}
+              <div className="flexLabelInput">
+                <label className="inputTitle">Birth Date</label>
+                <div className="dateStyling">
+                  <DatePicker
+                    className="dateDetails"
+                    onChange={this.dateChangeHandler}
+                    value={this.state.date}
+                  />
+                </div>
+              </div>
             </form>
           </Modal.Body>
           <Modal.Footer className="deactivate" onClick={this.deactivate}>

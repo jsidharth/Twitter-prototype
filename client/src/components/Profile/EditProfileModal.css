@@ -24,6 +24,14 @@
   margin-left: 10px;
   width: 100%;
   margin-bottom: 20px;
+  font-size: 15px;
+}
+
+.dateDetails {
+  margin-left: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+  font-size: 15px;
 }
 
 .profileImage {
@@ -92,4 +100,12 @@
 
 .deactivate:hover {
   background-color: #ffe6e6;
+}
+
+.dateStyling {
+  width: 25%;
+}
+
+.input[type='text'] {
+  background-color: #f9f9f9;
 }
