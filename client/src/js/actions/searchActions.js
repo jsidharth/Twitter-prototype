@@ -41,3 +41,18 @@ export const getSearchResults = payload => {
     });
   };
 };
+
+export const getSearchMembersForList = payload => {
+  return dispatch => {
+    console.log(payload);
+    return axios.get(`${ROOT_URL}/search/${payload}`).then(response => {
+      console.log('Status Code : ', response.status);
+      if (response.status === 200) {
+        dispatch({
+          type: actionTypes.SEARCH_MEMBERS_RESULTS,
+          payload: response.data,
+        });
+      }
+    });
+  };
+};

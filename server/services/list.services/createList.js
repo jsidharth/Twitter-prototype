@@ -6,7 +6,6 @@ const handleRequest = async (listDetails, callback) => {
   const list = await Lists.create({
     name: listDetails.name,
     description: listDetails.description,
-    private: listDetails.private,
     members: listDetails.members,
   });
   if (!list) {

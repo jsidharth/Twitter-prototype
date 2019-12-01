@@ -6,7 +6,6 @@ const listSchema = new Schema(
   {
     name: { type: String, required: [true, 'List name is mandatory'] },
     description: { type: String, default: '' },
-    private: { type: Boolean, default: false },
     members: [{ type: Schema.Types.ObjectId, ref: 'Users' }],
   },
   { timestamps: true }
