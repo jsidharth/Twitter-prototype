@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { MDBContainer } from 'mdbreact';
 import { connect } from 'react-redux';
+import { history } from '../../js/helper/history';
 import { analyticsActions } from '../../js/actions/index';
 
 class MostLikedTweets extends Component {
@@ -19,11 +20,8 @@ class MostLikedTweets extends Component {
   }
 
   componentDidMount() {
-    const data = {
-      userId: this.props.userId,
-    };
     const { fetchMostLikedTweet } = this.props;
-    fetchMostLikedTweet(data).then(() => {
+    fetchMostLikedTweet().then(() => {
       const yAxis = this.props.mostLikedTweetData.map(element => {
         return element.likesCount;
       });
@@ -98,11 +96,20 @@ class MostLikedTweets extends Component {
     });
   }
 
+  elementClicked = element => {
+    history.push(`/home/status/${this.props.mostLikedTweetData[element[0]._index].tweetId}`);
+  };
+
   render() {
     return (
       <MDBContainer>
         <div className="fontChanges">Most Liked Tweets</div>
-        <Bar data={this.state.dataBar} options={this.state.barChartOptions} height={150} />
+        <Bar
+          data={this.state.dataBar}
+          options={this.state.barChartOptions}
+          height={150}
+          onElementsClick={this.elementClicked}
+        />
       </MDBContainer>
     );
   }
@@ -115,7 +122,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchMostLikedTweet: data => dispatch(analyticsActions.getMostLikedTweets(data)),
+  fetchMostLikedTweet: () => dispatch(analyticsActions.getMostLikedTweets()),
 });
 
 export default connect(

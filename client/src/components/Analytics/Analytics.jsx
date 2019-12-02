@@ -29,9 +29,9 @@ class Analytics extends Component {
           <Row className="border">
             <ProfileViews />
             <MostViewedTweets />
-            <NumberOfTweets />
             <MostLikedTweets />
             <MostRetweetedTweets />
+            <NumberOfTweets />
           </Row>
         </Col>
       </Row>

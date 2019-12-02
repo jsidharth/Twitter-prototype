@@ -7,19 +7,19 @@ import numberOfTweets from '../services/analytics.services/numberOfTweets';
 const handleRequest = (payload, callback) => {
   switch (payload.action) {
     case 'ANALYTICS_TWEET_RETWEETS':
-      mostRetweets.handleRequest(payload.userId, callback);
+      mostRetweets.handleRequest(callback);
       break;
     case 'ANALYTICS_TWEET_LIKES':
-      mostLikes.handleRequest(payload.userId, callback);
+      mostLikes.handleRequest(callback);
       break;
     case 'ANALYTICS_TWEET_VIEWS':
-      mostViews.handleRequest(payload.userId, callback);
+      mostViews.handleRequest(callback);
       break;
     case 'ANALYTICS_PROFILE_VIEWS_PER_DAY':
       profileViews.handleRequest(payload.userId, callback);
       break;
     case 'ANALYTICS_NUMBER_OF_TWEETS':
-      numberOfTweets.handleRequest(payload.userId, callback);
+      numberOfTweets.handleRequest(callback);
       break;
     default:
       break;

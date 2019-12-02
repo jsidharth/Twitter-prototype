@@ -98,7 +98,7 @@ class ProfileViews extends Component {
   render() {
     return (
       <MDBContainer>
-        <div className="fontChanges">Profile views for the last month</div>
+        <div className="fontChanges">My profile views for the last month</div>
         <Line data={this.state.dataLine} options={this.state.lineChartOptions} />
       </MDBContainer>
     );
