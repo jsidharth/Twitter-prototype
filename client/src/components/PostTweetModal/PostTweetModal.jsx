@@ -6,7 +6,6 @@ import { imageActions, tweetActions } from '../../js/actions/index';
 import './PostTweetModal.css';
 
 class PostTweetModal extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -17,7 +16,6 @@ class PostTweetModal extends Component {
     this.tweetTextHandler = this.tweetTextHandler.bind(this);
     this.uploadImage = this.uploadImage.bind(this);
     this.postTweet = this.postTweet.bind(this);
-
   }
 
   tweetTextHandler = e => {
@@ -35,7 +33,6 @@ class PostTweetModal extends Component {
   };
 
   postTweet = () => {
-
     if (this.state.tweetText.length > 280) {
       console.log('max length exceeded');
     } else {
@@ -46,7 +43,12 @@ class PostTweetModal extends Component {
       };
       this.props.postTweet(data).then(() => {
         this.props.showPostTweetModal();
-        this.props.fetchFeed(data);
+        const fetchFeedPayload = {
+          userId: this.props.userId,
+          count: 10,
+          offset: 0,
+        };
+        this.props.fetchUpdatedFeed(fetchFeedPayload);
         this.setState({
           tweetText: '',
         });
@@ -55,7 +57,6 @@ class PostTweetModal extends Component {
   };
 
   render() {
-
     var count = 280 - this.state.tweetText.length;
     const { user } = this.props;
 
@@ -66,13 +67,12 @@ class PostTweetModal extends Component {
         onHide={this.props.showPostTweetModal}
         centered
       >
-        <Modal.Header closeButton>
-        </Modal.Header>
+        <Modal.Header closeButton></Modal.Header>
         <Modal.Body>
           <div className="flexImageTweet">
             <div>
               <img
-                src={user.profilePic ? user.profilePic : "/images/default_profile_bigger.png"}
+                src={user.profilePic ? user.profilePic : '/images/default_profile_bigger.png'}
                 className="profileImageTweet"
                 alt="User profile"
               />
@@ -118,7 +118,6 @@ class PostTweetModal extends Component {
       </Modal>
     );
   }
-
 }
 
 const mapStateToProps = state => ({
@@ -131,7 +130,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   upload: data => dispatch(imageActions.upload(data)),
   postTweet: data => dispatch(tweetActions.postTweet(data)),
-  fetchFeed: data => dispatch(tweetActions.fetchFeed(data)),
+  fetchUpdatedFeed: data => dispatch(tweetActions.fetchUpdatedFeed(data)),
 });
 
 export default connect(

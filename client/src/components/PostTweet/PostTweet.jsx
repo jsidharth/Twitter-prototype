@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import './PostTweet.css';
 import { connect } from 'react-redux';
@@ -32,17 +34,22 @@ class PostTweet extends Component {
   };
 
   postTweet = () => {
-
     if (this.state.tweetText.length > 280) {
       console.log('max length exceeded');
     } else {
+      const { userId, imageUrl, fetchUpdatedFeed } = this.props;
       const data = {
-        userId: this.props.userId,
+        userId,
         tweetText: this.state.tweetText,
-        imageUrl: this.props.imageUrl,
+        imageUrl,
       };
       this.props.postTweet(data).then(() => {
-        this.props.fetchFeed(data);
+        const fetchFeedPayload = {
+          userId,
+          count: 10,
+          offset: 0,
+        };
+        fetchUpdatedFeed(fetchFeedPayload);
         this.setState({
           tweetText: '',
         });
@@ -62,8 +69,8 @@ class PostTweet extends Component {
             <div className="flexImageTweet">
               <div>
                 <img
-                src={user.profilePic ? user.profilePic : "/images/default_profile_bigger.png"}
-                className="profileImageTweet"
+                  src={user.profilePic ? user.profilePic : '/images/default_profile_bigger.png'}
+                  className="profileImageTweet"
                   alt="User profile"
                 />
               </div>
@@ -121,7 +128,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   upload: data => dispatch(imageActions.upload(data)),
   postTweet: data => dispatch(tweetActions.postTweet(data)),
-  fetchFeed: data => dispatch(tweetActions.fetchFeed(data)),
+  fetchUpdatedFeed: data => dispatch(tweetActions.fetchUpdatedFeed(data)),
 });
 
 export default connect(

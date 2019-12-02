@@ -31,15 +31,24 @@ export const postTweet = payload => {
 
 export const fetchFeed = payload => {
   return dispatch => {
-    return axios.get(`${ROOT_URL}/tweet/feed/${payload.userId}`).then(response => {
-      console.log('Status Code : ', response.status);
-      if (response.status === 200) {
-        dispatch({
-          type: actionTypes.TWEET_FEED,
-          payload: response.data,
-        });
-      }
-    });
+    return axios
+      .get(`${ROOT_URL}/tweet/feed/${payload.userId}`, {
+        params: {
+          count: payload.count,
+          offset: payload.offset,
+        },
+      })
+      .then(response => {
+        console.log('Status Code : ', response.status);
+        if (response.status === 200) {
+          dispatch({
+            type: actionTypes.TWEET_FEED,
+            payload: response.data.results,
+          });
+          return Promise.resolve(response.data.size);
+        }
+        return Promise.resolve();
+      });
   };
 };
 
@@ -173,5 +182,28 @@ export const retweet = payload => {
         });
       }
     });
+  };
+};
+
+export const fetchUpdatedFeed = payload => {
+  return dispatch => {
+    return axios
+      .get(`${ROOT_URL}/tweet/feed/${payload.userId}`, {
+        params: {
+          count: payload.count,
+          offset: payload.offset,
+        },
+      })
+      .then(response => {
+        console.log('Status Code : ', response.status);
+        if (response.status === 200) {
+          dispatch({
+            type: actionTypes.UPDATE_TWEET_FEED,
+            payload: response.data.results,
+          });
+          return Promise.resolve(response.data.size);
+        }
+        return Promise.resolve();
+      });
   };
 };
