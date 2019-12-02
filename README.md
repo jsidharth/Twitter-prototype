@@ -55,3 +55,62 @@ This a prototype of Twitter.com built using MERN stack. The prototype is built a
 * Tweets with most likes
 * Number of tweets
 * Profile views for current user
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+### Prerequisites
+
+You will need Node.js installed on your machine.
+
+To install Node.js on Mac:
+```
+brew install nodejs
+```
+
+To install Node.js on Linux:
+```
+apt-get install nodejs
+```
+
+### Installing
+
+Clone the contents of the Git repository to your local:
+```
+git clone https://github.com/savyasachi16/Grubhub-Prototype.git
+```
+
+Go into the client directory and run the following command:
+```
+npm install
+
+```
+Go into the middleware directory and run the following command:
+```
+npm install
+```
+Go into the server directory and run the following command:
+```
+npm install
+```
+
+To run the client, go into the client directory and run the following command:
+```
+npm start
+```
+To run the middleware, go into the client directory and run the following command:
+```
+npm start
+```
+To run the server, go into the server directory and run the following command:
+```
+npm start
+```
+
+To use the application, visit the following url from your browser:
+http://localhost:3001/
+
+## License
+
+This project is licensed under the MIT License.
