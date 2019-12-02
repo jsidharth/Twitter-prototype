@@ -7,9 +7,9 @@ const initialState = {
 const imageReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.UPLOAD_IMAGE:
-      console.log(action.payload.image);
       return { ...state, imageUrl: action.payload.image };
-
+    case actionTypes.RESET_IMAGE_STATE:
+      return { ...state, imageUrl: ''};
     default:
       break;
   }
