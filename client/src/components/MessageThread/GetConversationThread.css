@@ -61,19 +61,18 @@
 }
 
 .messageBoxLoggedInUser {
-    display: flex;
-    flex: start;
-    padding: 10px;
-    background-color: #00ACEE;;
-    max-width: 400px;
-    min-width: 40px;
-    height: 50px;
-    text-align: center;
-    border: 1px solid#00ACEE;;
-    border-radius: 15px;
-    color: white;
-    margin-right: 10px;
-    margin-top: 10px;
+  display: flex;
+  flex: start;
+  padding: 10px;
+  background-color: #00ACEE;;
+  max-width: 400px;
+  min-width: 40px;
+  text-align: center;
+  border: 1px solid#00ACEE;;
+  border-radius: 15px;
+  color: white;
+  margin-right: 10px;
+  margin-top: 10px;
 }
 
 .messageInfoSenderUser {
@@ -83,11 +82,12 @@
 }
 
 .messageBoxSenderUser {
+  display: flex;
+  flex: start;
   padding: 10px;
   background-color: #d8d8d8;
   max-width: 400px;
   min-width: 40px;
-  height: 50px;
   text-align: center;
   border: 1px solid #d8d8d8;
   border-radius: 15px;
@@ -100,8 +100,10 @@
   padding: 0;
   margin: 0;
   font-size: 13px;
-    font-family: Helvetica Neue;
-    font-weight: 500;
+  font-family: Helvetica Neue;
+  font-weight: 500;
+  word-break: break-all !important;
+  max-height: fit-content; 
 }
 
 .messageTimeStampLoggedInUser {

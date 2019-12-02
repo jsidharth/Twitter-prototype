@@ -43,6 +43,9 @@ class GetConversationThread extends Component {
         body: this.state.new_message,
       };
       this.props.sendMessage(payload);
+      this.setState({
+        new_message: '',
+      });
     }
   };
 
@@ -110,6 +113,7 @@ class GetConversationThread extends Component {
                 placeholder="Start a new message"
                 id="new_message"
                 onChange={this.handleChange}
+                value={this.state.new_message}
               />
               <div className="sendIcon" onClick={e => this.sendMessage(e)}>
                 <MdSend size={25} />
