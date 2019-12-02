@@ -8,12 +8,15 @@ const tweetRouter = express.Router();
 
 tweetRouter.get('/feed/:userId', (req, res) => {
   console.log('Inside GET Tweet feed');
-  console.log('Request Body: ', req.params.userId);
-  const { userId } = req.params;
+  console.log('Request Body: ', req.params);
   kafka.makeRequest(
     'tweetTopic',
     {
-      userId,
+      params: {
+        userId: req.params.userId,
+        count: req.query.count,
+        offset: req.query.offset,
+      },
       action: 'TWEET_FEED',
     },
     (err, result) => {
