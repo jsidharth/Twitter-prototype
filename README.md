@@ -5,6 +5,7 @@ This a prototype of Twitter.com built using **MERN stack**. The prototype is bui
 * Node.js
 * React.js
 * Express.js
+* Redux
 * MongoDB
 * MySQL
 * Kafka Messaging Queues
