@@ -127,16 +127,16 @@ class Profile extends Component {
   follow = e => {
     const data = { followerId: this.props.profile._id, userId: this.props.userId };
     this.props.follow(data).then(() => {
-      const data = { userId: this.props.profile._id };
-      this.props.getUserProfile(data);
+      const profilePayload = { userId: this.props.profile._id };
+      this.props.getUserProfile(profilePayload);
     });
   };
 
   unfollow = e => {
     const data = { followerId: this.props.profile._id, userId: this.props.userId };
     this.props.unfollow(data).then(() => {
-      const data = { userId: this.props.profile._id };
-      this.props.getUserProfile(data);
+      const profilePayload = { userId: this.props.profile._id };
+      this.props.getUserProfile(profilePayload);
     });
   };
 
