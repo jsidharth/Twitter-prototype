@@ -54,4 +54,4 @@ This a prototype of Twitter.com built using MERN stack. The prototype is built a
 * Retweets with most views
 * Tweets with most likes
 * Number of tweets
-* Profile views for current user.
+* Profile views for current user
