@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable no-underscore-dangle */
@@ -44,82 +45,98 @@ class Sidebar extends Component {
           <div>
             <nav className="sidebar">
               <ListGroup variant="flush">
-                <ListGroup.Item>
-                  <Link to="/home">
-                    <Navbar.Brand>
-                      <img
-                        src="https://upload.wikimedia.org/wikipedia/fr/thumb/c/c8/Twitter_Bird.svg/944px-Twitter_Bird.svg.png"
-                        width="45px"
-                        height="35px"
-                        className="d-inline-block align-top"
-                        alt="Main logo link to home"
-                      />
-                      <br />
-                      <br />
-                    </Navbar.Brand>
-                  </Link>
-                </ListGroup.Item>
+                <div className="logoStyle">
+                  <ListGroup.Item>
+                    <Link to="/home">
+                      <Navbar.Brand>
+                        <img
+                          src="https://upload.wikimedia.org/wikipedia/fr/thumb/c/c8/Twitter_Bird.svg/944px-Twitter_Bird.svg.png"
+                          width="45px"
+                          height="35px"
+                          className="d-inline-block align-top"
+                          alt="Main logo link to home"
+                        />
+                      </Navbar.Brand>
+                    </Link>
+                  </ListGroup.Item>
+                </div>
 
-                <ListGroup.Item>
-                  <Link to="/home">
-                    <div className="flexSidebars">
-                      <GoHome size={30} />
-                      <p className="sidebarTopics">Home</p>
+                <div className="sectionStyle">
+                  <ListGroup.Item>
+                    <Link to="/home">
+                      <div className="flexSidebars">
+                        <GoHome size={30} />
+                        <p className="sidebarTopics">Home</p>
+                      </div>
+                    </Link>
+                  </ListGroup.Item>
+                </div>
+
+                <div className="sectionStyle">
+                  <ListGroup.Item>
+                    <Link to="/messages">
+                      <div className="flexSidebars">
+                        <GoMail size={30} />
+                        <p className="sidebarTopics">Messages</p>
+                      </div>
+                    </Link>
+                  </ListGroup.Item>
+                </div>
+
+                <div className="sectionStyle">
+                  <ListGroup.Item>
+                    <Link to="/bookmarks">
+                      <div className="flexSidebars">
+                        <FiBookmark size={30} />
+                        <p className="sidebarTopics">Bookmarks</p>
+                      </div>
+                    </Link>
+                  </ListGroup.Item>
+                </div>
+
+                <div className="sectionStyle">
+                  <ListGroup.Item>
+                    <Link to={`/lists/${userId}`}>
+                      <div className="flexSidebars">
+                        <GoNote size={30} />
+                        <p className="sidebarTopics">Lists</p>
+                      </div>
+                    </Link>
+                  </ListGroup.Item>
+                </div>
+
+                <div className="sectionStyle">
+                  <ListGroup.Item>
+                    <Link to={`/profile/${userId}`}>
+                      <div className="flexSidebars">
+                        <FaRegUserCircle size={30} />
+                        <p className="sidebarTopics">Profile</p>
+                      </div>
+                    </Link>
+                  </ListGroup.Item>
+                </div>
+
+                <div className="sectionStyle">
+                  <ListGroup.Item>
+                    <Link to="/analytics">
+                      <div className="flexSidebars">
+                        <GoGraph size={30} />
+                        <p className="sidebarTopics">Analytics</p>
+                      </div>
+                    </Link>
+                  </ListGroup.Item>
+                </div>
+
+                <div className="sectionStyle">
+                  <ListGroup.Item>
+                    <div className="Signout" id="signout" onClick={this.handleSignout}>
+                      <div className="flexSidebars">
+                        <FiLogOut size={30} />
+                        <p className="sidebarTopics">Logout</p>
+                      </div>
                     </div>
-                  </Link>
-                </ListGroup.Item>
-
-                <ListGroup.Item>
-                  <Link to="/messages">
-                    <div className="flexSidebars">
-                      <GoMail size={30} />
-                      <p className="sidebarTopics">Messages</p>
-                    </div>
-                  </Link>
-                </ListGroup.Item>
-
-                <ListGroup.Item>
-                  <Link to="/bookmarks">
-                    <div className="flexSidebars">
-                      <FiBookmark size={30} />
-                      <p className="sidebarTopics">Bookmarks</p>
-                    </div>
-                  </Link>
-                </ListGroup.Item>
-
-                <ListGroup.Item>
-                  <Link to={`/lists/${userId}`}>
-                    <div className="flexSidebars">
-                      <GoNote size={30} />
-                      <p className="sidebarTopics">Lists</p>
-                    </div>
-                  </Link>
-                </ListGroup.Item>
-
-                <ListGroup.Item>
-                  <Link to={`/profile/${userId}`}>
-                    <div className="flexSidebars">
-                      <FaRegUserCircle size={30} />
-                      <p className="sidebarTopics">Profile</p>
-                    </div>
-                  </Link>
-                </ListGroup.Item>
-
-                <ListGroup.Item>
-                  <Link to="/analytics">
-                    <div className="flexSidebars">
-                      <GoGraph size={30} />
-                      <p className="sidebarTopics">Analytics</p>
-                    </div>
-                  </Link>
-                </ListGroup.Item>
-
-                <ListGroup.Item>
-                  <div className="flexSidebars" id="signout" onClick={this.handleSignout}>
-                    <FiLogOut size={30} color="rgb(231, 105, 105)" />
-                    <p className="logout">Logout</p>
-                  </div>
-                </ListGroup.Item>
+                  </ListGroup.Item>
+                </div>
 
                 <button className="tweetBtn" type="button" onClick={this.showPostTweetModal}>
                   Tweet
