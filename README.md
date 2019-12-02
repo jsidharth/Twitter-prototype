@@ -9,8 +9,15 @@ This a prototype of Twitter.com built using MERN stack. The prototype is built a
 * MySQL
 * Kafka Messaging Queues
 * Redis Cache
-* AWS: EC2, ELB, RDS, Elascticache
-* Testing: JMeter, Mocha, Enzyme
+* AWS:
+  * EC2
+  * ELB
+  * RDS
+  * Elascticache
+* Testing:
+  * JMeter
+  * Mocha
+  * Enzyme
 
 ## Features Implemented
 ### User
