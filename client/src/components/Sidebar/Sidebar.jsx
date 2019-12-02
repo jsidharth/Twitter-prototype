@@ -45,7 +45,7 @@ class Sidebar extends Component {
           <div>
             <nav className="sidebar">
               <ListGroup variant="flush">
-                <div className="logoStyle">
+                <div>
                   <ListGroup.Item>
                     <Link to="/home">
                       <Navbar.Brand>
@@ -61,7 +61,7 @@ class Sidebar extends Component {
                   </ListGroup.Item>
                 </div>
 
-                <div className="sectionStyle">
+                <div>
                   <ListGroup.Item>
                     <Link to="/home">
                       <div className="flexSidebars">
@@ -72,7 +72,7 @@ class Sidebar extends Component {
                   </ListGroup.Item>
                 </div>
 
-                <div className="sectionStyle">
+                <div>
                   <ListGroup.Item>
                     <Link to="/messages">
                       <div className="flexSidebars">
@@ -83,7 +83,7 @@ class Sidebar extends Component {
                   </ListGroup.Item>
                 </div>
 
-                <div className="sectionStyle">
+                <div>
                   <ListGroup.Item>
                     <Link to="/bookmarks">
                       <div className="flexSidebars">
@@ -94,7 +94,7 @@ class Sidebar extends Component {
                   </ListGroup.Item>
                 </div>
 
-                <div className="sectionStyle">
+                <div>
                   <ListGroup.Item>
                     <Link to={`/lists/${userId}`}>
                       <div className="flexSidebars">
@@ -105,7 +105,7 @@ class Sidebar extends Component {
                   </ListGroup.Item>
                 </div>
 
-                <div className="sectionStyle">
+                <div>
                   <ListGroup.Item>
                     <Link to={`/profile/${userId}`}>
                       <div className="flexSidebars">
@@ -116,7 +116,7 @@ class Sidebar extends Component {
                   </ListGroup.Item>
                 </div>
 
-                <div className="sectionStyle">
+                <div>
                   <ListGroup.Item>
                     <Link to="/analytics">
                       <div className="flexSidebars">
@@ -127,7 +127,7 @@ class Sidebar extends Component {
                   </ListGroup.Item>
                 </div>
 
-                <div className="sectionStyle">
+                <div>
                   <ListGroup.Item>
                     <div className="Signout" id="signout" onClick={this.handleSignout}>
                       <div className="flexSidebars">
