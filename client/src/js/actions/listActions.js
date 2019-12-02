@@ -1,8 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
-import {
-  toast
-} from 'react-toastify';
+import { toast } from 'react-toastify';
 import actionTypes from '../constants/index';
 import { ROOT_URL } from '../../constant/constant';
 
