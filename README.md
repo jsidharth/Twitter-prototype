@@ -74,7 +74,7 @@ To install Node.js on Linux:
 apt-get install nodejs
 ```
 
-### Installing
+### Installation
 
 Clone the contents of the Git repository to your local:
 ```
@@ -93,6 +93,21 @@ npm install
 Go into the server directory and run the following command:
 ```
 npm install
+```
+
+### Running the Application
+Before starting the application, navigate into your Kafka directory and run the following command to initialize Zookeeper:
+```
+bin/zookeeper-server-start.sh config/zookeeper.properties
+```
+Initialize Kafka service with the following command:
+```
+bin/kafka-server-start.sh config/server.properties
+```
+Copy the two shell scripts createTwitterTopics.sh and deleteTwitterTopics.sh into your Kafka directory.
+Create Kafka topics with the following command:
+```
+./createTwitterTopics.sh
 ```
 
 To run the client, go into the client directory and run the following command:
