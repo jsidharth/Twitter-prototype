@@ -20,9 +20,9 @@ export const getAnalyticsProfileViewsPerDay = payload => {
       });
   };
 };
-export const getAnalyticsMostViewedTweets = payload => {
+export const getAnalyticsMostViewedTweets = () => {
   return dispatch => {
-    return axios.get(`${ROOT_URL}/analytics/mostViews/${payload.userId}`).then(response => {
+    return axios.get(`${ROOT_URL}/analytics/mostViews`).then(response => {
       console.log('Status Code : ', response.status);
       console.log(response.data);
       if (response.status === 200) {
@@ -35,9 +35,9 @@ export const getAnalyticsMostViewedTweets = payload => {
     });
   };
 };
-export const getNumberOfTweets = payload => {
+export const getNumberOfTweets = () => {
   return dispatch => {
-    return axios.get(`${ROOT_URL}/analytics/numberOfTweets/${payload.userId}`).then(response => {
+    return axios.get(`${ROOT_URL}/analytics/numberOfTweets`).then(response => {
       console.log('Status Code : ', response.status);
       console.log(response.data);
       if (response.status === 200) {
@@ -50,9 +50,9 @@ export const getNumberOfTweets = payload => {
     });
   };
 };
-export const getMostLikedTweets = payload => {
+export const getMostLikedTweets = () => {
   return dispatch => {
-    return axios.get(`${ROOT_URL}/analytics/mostLikes/${payload.userId}`).then(response => {
+    return axios.get(`${ROOT_URL}/analytics/mostLikes`).then(response => {
       console.log('Status Code : ', response.status);
       console.log(response.data);
       if (response.status === 200) {
@@ -65,9 +65,9 @@ export const getMostLikedTweets = payload => {
     });
   };
 };
-export const getMostRetweetedTweets = payload => {
+export const getMostRetweetedTweets = () => {
   return dispatch => {
-    return axios.get(`${ROOT_URL}/analytics/mostRetweets/${payload.userId}`).then(response => {
+    return axios.get(`${ROOT_URL}/analytics/mostRetweets`).then(response => {
       console.log('Status Code : ', response.status);
       console.log(response.data);
       if (response.status === 200) {

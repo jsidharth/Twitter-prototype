@@ -5,12 +5,15 @@ import React, { Component } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { connect } from 'react-redux';
 import { MDBContainer } from 'mdbreact';
+import { Redirect } from 'react-router-dom';
 import { analyticsActions } from '../../js/actions/index';
 
 class MostViewedTweets extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isElementClicked: false,
+      redirectAddress: '',
       dataDoughnut: {
         labels: [],
         datasets: [],
@@ -19,11 +22,8 @@ class MostViewedTweets extends Component {
   }
 
   componentDidMount() {
-    const data = {
-      userId: this.props.userId,
-    };
     const { fetchMostViewedTweet } = this.props;
-    fetchMostViewedTweet(data).then(() => {
+    fetchMostViewedTweet().then(() => {
       const yAxis = this.props.mostViewedTweetData.map(element => {
         return element.viewsCount;
       });
@@ -32,7 +32,6 @@ class MostViewedTweets extends Component {
         rankCount += 1;
         return `Rank ${rankCount}`;
       });
-
       this.setState({
         dataDoughnut: {
           labels: xAxis,
@@ -58,14 +57,27 @@ class MostViewedTweets extends Component {
     });
   }
 
+  elementClicked = element => {
+    this.setState({
+      isElementClicked: true,
+      redirectAddress: `/home/status/${this.props.mostViewedTweetData[element[0]._index].tweetId}`,
+    });
+  };
+
   render() {
+    let redirectLet = '';
+    if (this.state.isElementClicked) {
+      redirectLet = <Redirect to={this.state.redirectAddress} />;
+    }
     return (
       <MDBContainer>
+        {redirectLet}
         <div className="fontChanges">Most Viewed Tweets</div>
         <Doughnut
           data={this.state.dataDoughnut}
           width={400}
           options={{ responsive: true, maintainAspectRatio: true }}
+          onElementsClick={this.elementClicked}
         />
       </MDBContainer>
     );
@@ -79,7 +91,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchMostViewedTweet: data => dispatch(analyticsActions.getAnalyticsMostViewedTweets(data)),
+  fetchMostViewedTweet: () => dispatch(analyticsActions.getAnalyticsMostViewedTweets()),
 });
 
 export default connect(

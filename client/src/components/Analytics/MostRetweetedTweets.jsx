@@ -5,12 +5,15 @@ import React, { Component } from 'react';
 import { Pie } from 'react-chartjs-2';
 import { connect } from 'react-redux';
 import { MDBContainer } from 'mdbreact';
+import { Redirect } from 'react-router-dom';
 import { analyticsActions } from '../../js/actions/index';
 
 class MostViewedTweets extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isElementClicked: false,
+      redirectAddress: '',
       dataPie: {
         labels: [],
         datasets: [],
@@ -19,11 +22,8 @@ class MostViewedTweets extends Component {
   }
 
   componentDidMount() {
-    const data = {
-      userId: this.props.userId,
-    };
     const { fetchMostRetweetedTweet } = this.props;
-    fetchMostRetweetedTweet(data).then(() => {
+    fetchMostRetweetedTweet().then(() => {
       const yAxis = this.props.mostRetweetedTweetData.map(element => {
         return element.retweetCount;
       });
@@ -47,14 +47,27 @@ class MostViewedTweets extends Component {
     });
   }
 
+  elementClicked = element => {
+    this.setState({
+      isElementClicked: true,
+      redirectAddress: `/home/status/${this.props.mostRetweetedTweetData[element[0]._index].tweetId}`,
+    });
+  };
+
   render() {
+    let redirectLet = '';
+    if (this.state.isElementClicked) {
+      redirectLet = <Redirect to={this.state.redirectAddress} />;
+    }
     return (
       <MDBContainer>
+        {redirectLet}
         <div className="fontChanges">Most Retweeted Tweets</div>
         <Pie
           data={this.state.dataPie}
           width={400}
           options={{ responsive: true, maintainAspectRatio: true }}
+          onElementsClick={this.elementClicked}
         />
       </MDBContainer>
     );
@@ -68,7 +81,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchMostRetweetedTweet: data => dispatch(analyticsActions.getMostRetweetedTweets(data)),
+  fetchMostRetweetedTweet: () => dispatch(analyticsActions.getMostRetweetedTweets()),
 });
 
 export default connect(

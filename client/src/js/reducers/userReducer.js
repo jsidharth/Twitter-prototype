@@ -1,7 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-import {
-  GiArcTriomphe
-} from 'react-icons/gi';
 import actionTypes from '../constants/index';
 
 const initialState = {

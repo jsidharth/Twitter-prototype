@@ -124,7 +124,7 @@ class Profile extends Component {
     });
   };
 
-  follow = e => {
+  follow = () => {
     const data = { followerId: this.props.profile._id, userId: this.props.userId };
     this.props.follow(data).then(() => {
       const profilePayload = { userId: this.props.profile._id };
@@ -132,7 +132,7 @@ class Profile extends Component {
     });
   };
 
-  unfollow = e => {
+  unfollow = () => {
     const data = { followerId: this.props.profile._id, userId: this.props.userId };
     this.props.unfollow(data).then(() => {
       const profilePayload = { userId: this.props.profile._id };
@@ -170,7 +170,6 @@ class Profile extends Component {
     if (profile.website) {
       websiteDetails = profile.website;
       websiteDisplay = websiteDetails.split('www.');
-      console.log('Website Display: ', websiteDisplay[1]);
     }
 
     const numTweets = profile && profile.tweets ? profile.tweets.length : 0;
