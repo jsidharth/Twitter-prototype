@@ -57,25 +57,30 @@ const handleRequest = (tweetId, callback) => {
                   profilePic: 1,
                 }
               ).then(commentUser => {
-                return {
-                  _id: comment._id,
-                  name: commentUser.name,
-                  handle: commentUser.handle,
-                  likes_count: comment.likes.length || 0,
-                  comments_count: comment.comments.length || 0,
-                  retweet_count: comment.retweets.length || 0,
-                  body: comment.body,
-                  image: comment.image,
-                  created_at: comment.createdAt,
-                  likes: comment.likes,
-                  profilePic: commentUser.profilePic,
-                  userId: user._id,
-                };
+                if (commentUser.active) {
+                  return {
+                    _id: comment._id,
+                    name: commentUser.name,
+                    handle: commentUser.handle,
+                    likes_count: comment.likes.length || 0,
+                    comments_count: comment.comments.length || 0,
+                    retweet_count: comment.retweets.length || 0,
+                    body: comment.body,
+                    image: comment.image,
+                    created_at: comment.createdAt,
+                    likes: comment.likes,
+                    profilePic: commentUser.profilePic,
+                    userId: user._id,
+                  };
+                }
+                // User is inactive, hence don't show the comments
+                return '';
               });
             });
           }
           tweetCommentPromise.then(comments => {
-            tweetDetails.comments = comments;
+            tweetDetails.comments = _.compact(comments);
+            callback(null, tweetDetails);
             // Update the tweet views for every tweet
             let combinedTweets = [];
             combinedTweets.push(tweetDetails._id.toString());
@@ -103,7 +108,7 @@ const handleRequest = (tweetId, callback) => {
               });
             }
             updateTweetViewsPromise.then(() => {
-              callback(null, tweetDetails);
+              console.log('View updated');
             });
           });
         });
