@@ -12,7 +12,7 @@ import replyTweet from '../services/tweet.services/replyTweet';
 const handleRequest = (payload, callback) => {
   switch (payload.action) {
     case 'TWEET_FEED':
-      getTweetFeed.handleRequest(payload.userId, callback);
+      getTweetFeed.handleRequest(payload.params, callback);
       break;
     case 'TWEET_POST':
       postTweet.handleRequest(payload.body, callback);
