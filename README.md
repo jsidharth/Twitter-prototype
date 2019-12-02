@@ -41,4 +41,10 @@ This a prototype of Twitter.com built using MERN stack. The prototype is built a
 * General Search
 * Topic Search
 * User handle Search
+
 ### Analytics
+* Tweets with most views
+* Retweets with most views
+* Tweets with most likes
+* Number of tweets
+* Profile views for current user.
