@@ -38,4 +38,7 @@ This a prototype of Twitter.com built using MERN stack. The prototype is built a
 * Receive messages from another user
 
 ### Search
+* General Search
+* Topic Search
+* User handle Search
 ### Analytics
