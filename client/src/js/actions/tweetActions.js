@@ -13,6 +13,9 @@ export const postTweet = payload => {
           type: actionTypes.POST_TWEET,
           payload: response.data,
         });
+        dispatch({
+          type: actionTypes.RESET_IMAGE_STATE,
+        });
         toast.info(response.data.message, {
           position: 'bottom-center',
           autoClose: 2000,
