@@ -49,6 +49,9 @@ class PostTweetModal extends Component {
           offset: 0,
         };
         this.props.fetchUpdatedFeed(fetchFeedPayload);
+        this.setState({
+          tweetText: '',
+        });
       });
     }
   };
@@ -81,6 +84,7 @@ class PostTweetModal extends Component {
                 onChange={this.tweetTextHandler}
                 placeholder="What's happening?"
                 maxLength="280"
+                value={this.state.tweetText}
               ></textarea>
             </div>
           </div>

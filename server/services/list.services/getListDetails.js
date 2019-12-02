@@ -59,25 +59,28 @@ const handleRequest = async (listId, callback) => {
         // Fetching tweets and mapping tweets users
         let tweets = _.chain(members)
           .map(member => {
-            return _.map(member.tweets, tweet => ({
-              userId: member._id,
-              _id: tweet._id,
-              name: member.name,
-              handle: member.handle,
-              likes_count: tweet.likes.length || 0,
-              comments_count: tweet.comments.length || 0,
-              retweet_count: tweet.retweets.length || 0,
-              body: tweet.body,
-              image: tweet.image,
-              created_at: tweet.created_at,
-              likes: tweet.likes,
-              profilePic: member.profilePic,
-              bookmarks: member.bookmarks,
-            }));
+            if (member.active) {
+              return _.map(member.tweets, tweet => ({
+                userId: member._id,
+                _id: tweet._id,
+                name: member.name,
+                handle: member.handle,
+                likes_count: tweet.likes.length || 0,
+                comments_count: tweet.comments.length || 0,
+                retweet_count: tweet.retweets.length || 0,
+                body: tweet.body,
+                image: tweet.image,
+                created_at: tweet.created_at,
+                likes: tweet.likes,
+                profilePic: member.profilePic,
+                bookmarks: member.bookmarks,
+              }));
+            }
+            return '';
           })
+          .compact()
           .flatten()
           .value();
-
         // Sort tweets by creation time
         if (tweets && tweets.length) {
           tweets = tweets.sort((first, second) => moment(second.created_at).diff(first.created_at));

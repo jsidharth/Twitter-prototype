@@ -50,6 +50,9 @@ class PostTweet extends Component {
           offset: 0,
         };
         fetchUpdatedFeed(fetchFeedPayload);
+        this.setState({
+          tweetText: '',
+        });
       });
     }
   };
@@ -62,24 +65,22 @@ class PostTweet extends Component {
       <div className="cardContainer">
         <div className="cardWidth">
           <div className="paperHeight">Home</div>
-          {/* <Paper className="paperHeight">Home</Paper> */}
           <div className="cardContent">
             <div className="flexImageTweet">
               <div>
-                {/* Include user profile image if available */}
                 <img
                   src={user.profilePic ? user.profilePic : '/images/default_profile_bigger.png'}
                   className="profileImageTweet"
                   alt="User profile"
                 />
               </div>
-
               <div className="autoExpandDiv">
                 <textarea
                   className="textArea"
                   onChange={this.tweetTextHandler}
                   placeholder="What's happening?"
                   maxLength="280"
+                  value={this.state.tweetText}
                 ></textarea>
               </div>
             </div>
