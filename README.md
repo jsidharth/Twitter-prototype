@@ -78,7 +78,7 @@ apt-get install nodejs
 
 Clone the contents of the Git repository to your local:
 ```
-git clone https://github.com/savyasachi16/Grubhub-Prototype.git
+git clone https://github.com/jsidharth/CMPE-273-twitter-prototype.git
 ```
 
 Go into the client directory and run the following command:
@@ -110,6 +110,10 @@ Create Kafka topics with the following command:
 ./createTwitterTopics.sh
 ```
 
+To ensure that the topics are created, use the following command to list the created topics:
+```
+bin/kafka-topics.sh --list --zookeeper localhost:2181
+```
 To run the client, go into the client directory and run the following command:
 ```
 npm start
