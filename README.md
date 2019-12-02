@@ -1,5 +1,5 @@
 # CMPE-273-twitter-prototype
-This a prototype of Twitter.com built using MERN stack. The prototype is built as a lab requirement for Enterprise Distributed Systems (CMPE - 273) class at San Jose State University, under professor Simon Shim.
+This a prototype of Twitter.com built using **MERN stack**. The prototype is built as a lab requirement for Enterprise Distributed Systems (CMPE - 273) class at San Jose State University, under professor Simon Shim.
 
 ### Technologies used
 * Node.js
@@ -9,12 +9,12 @@ This a prototype of Twitter.com built using MERN stack. The prototype is built a
 * MySQL
 * Kafka Messaging Queues
 * Redis Cache
-* AWS:
+* **AWS**:
   * EC2
   * ELB
   * RDS
   * Elascticache
-* Testing:
+* **Testing**:
   * JMeter
   * Mocha
   * Enzyme
@@ -81,30 +81,30 @@ Clone the contents of the Git repository to your local:
 git clone https://github.com/jsidharth/CMPE-273-twitter-prototype.git
 ```
 
-Go into the client directory and run the following command:
+Go into the **client** directory and run the following command:
 ```
 npm install
 
 ```
-Go into the middleware directory and run the following command:
+Go into the **middleware** directory and run the following command:
 ```
 npm install
 ```
-Go into the server directory and run the following command:
+Go into the **server** directory and run the following command:
 ```
 npm install
 ```
 
 ### Running the Application
-Before starting the application, navigate into your Kafka directory and run the following command to initialize Zookeeper:
+Before starting the application, navigate into your Kafka directory and run the following command to initialize **Zookeeper**:
 ```
 bin/zookeeper-server-start.sh config/zookeeper.properties
 ```
-Initialize Kafka service with the following command:
+Initialize **Kafka** service with the following command:
 ```
 bin/kafka-server-start.sh config/server.properties
 ```
-Copy the two shell scripts createTwitterTopics.sh and deleteTwitterTopics.sh into your Kafka directory.
+Copy the two shell scripts **createTwitterTopics.sh** and **deleteTwitterTopics.sh** into your Kafka directory.
 Create Kafka topics with the following command:
 ```
 ./createTwitterTopics.sh
@@ -114,15 +114,15 @@ To ensure that the topics are created, use the following command to list the cre
 ```
 bin/kafka-topics.sh --list --zookeeper localhost:2181
 ```
-To run the client, go into the client directory and run the following command:
+To run the **client**, go into the client directory and run the following command:
 ```
 npm start
 ```
-To run the middleware, go into the client directory and run the following command:
+To run the **middleware**, go into the client directory and run the following command:
 ```
 npm start
 ```
-To run the server, go into the server directory and run the following command:
+To run the **server**, go into the server directory and run the following command:
 ```
 npm start
 ```
