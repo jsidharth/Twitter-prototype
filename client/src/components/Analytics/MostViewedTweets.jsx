@@ -5,15 +5,13 @@ import React, { Component } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { connect } from 'react-redux';
 import { MDBContainer } from 'mdbreact';
-import { Redirect } from 'react-router-dom';
+import { history } from '../../js/helper/history';
 import { analyticsActions } from '../../js/actions/index';
 
 class MostViewedTweets extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isElementClicked: false,
-      redirectAddress: '',
       dataDoughnut: {
         labels: [],
         datasets: [],
@@ -58,20 +56,12 @@ class MostViewedTweets extends Component {
   }
 
   elementClicked = element => {
-    this.setState({
-      isElementClicked: true,
-      redirectAddress: `/home/status/${this.props.mostViewedTweetData[element[0]._index].tweetId}`,
-    });
+    history.push(`/home/status/${this.props.mostViewedTweetData[element[0]._index].tweetId}`);
   };
 
   render() {
-    let redirectLet = '';
-    if (this.state.isElementClicked) {
-      redirectLet = <Redirect to={this.state.redirectAddress} />;
-    }
     return (
       <MDBContainer>
-        {redirectLet}
         <div className="fontChanges">Most Viewed Tweets</div>
         <Doughnut
           data={this.state.dataDoughnut}

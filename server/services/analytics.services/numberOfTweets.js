@@ -13,18 +13,17 @@ const handleRequest = callback => {
     } else {
       // number of tweets in the previous day
       const responseArray = [];
+      const dateArray = [];
       let previousDayCount = 0;
+      let previousMonthCount = 0;
+      let previousHourCount = 0;
+      const startTime = moment().subtract({
+        hours: 1,
+      });
+      const endTime = moment();
       const previousDay = moment()
         .subtract(1, 'days')
         .format('L');
-      result.forEach(tweetElement => {
-        if (previousDay === moment(tweetElement.createdAt).format('L')) {
-          previousDayCount += 1;
-        }
-      });
-      // number of tweets in the previous month
-      let previousMonthCount = 0;
-      const dateArray = [];
       const startDate = moment()
         .subtract(1, 'month')
         .format('L');
@@ -37,20 +36,15 @@ const handleRequest = callback => {
           .format('L');
       }
       result.forEach(tweetElement => {
+        if (previousDay === moment(tweetElement.createdAt).format('L')) {
+          previousDayCount += 1;
+        }
         if (
           startDate <= moment(tweetElement.createdAt).format('L') &&
           stopDate >= moment(tweetElement.createdAt).format('L')
         ) {
           previousMonthCount += 1;
         }
-      });
-      // number of tweets in the previous hour
-      let previousHourCount = 0;
-      const startTime = moment().subtract({
-        hours: 1,
-      });
-      const endTime = moment();
-      result.forEach(tweetElement => {
         if (
           startTime <= moment(tweetElement.createdAt) &&
           endTime >= moment(tweetElement.createdAt)

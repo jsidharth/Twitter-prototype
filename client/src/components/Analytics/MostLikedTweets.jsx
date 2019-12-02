@@ -5,15 +5,13 @@ import React, { Component } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { MDBContainer } from 'mdbreact';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { history } from '../../js/helper/history';
 import { analyticsActions } from '../../js/actions/index';
 
 class MostLikedTweets extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isElementClicked: false,
-      redirectAddress: '',
       dataBar: {
         labels: [],
         datasets: [],
@@ -99,21 +97,12 @@ class MostLikedTweets extends Component {
   }
 
   elementClicked = element => {
-    this.setState({
-      isElementClicked: true,
-      redirectAddress: `/home/status/${this.props.mostLikedTweetData[element[0]._index].tweetId}`,
-    });
+    history.push(`/home/status/${this.props.mostLikedTweetData[element[0]._index].tweetId}`);
   };
 
   render() {
-    let redirectLet = '';
-    if (this.state.isElementClicked) {
-      redirectLet = <Redirect to={this.state.redirectAddress} />;
-    }
     return (
       <MDBContainer>
-        {redirectLet}
-
         <div className="fontChanges">Most Liked Tweets</div>
         <Bar
           data={this.state.dataBar}
