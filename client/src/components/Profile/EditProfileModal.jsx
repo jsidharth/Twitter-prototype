@@ -33,7 +33,6 @@ class EditProfileModal extends Component {
     this.isWebsiteValid = this.isWebsiteValid.bind(this);
     this.isLocationValid = this.isLocationValid.bind(this);
     this.isAgeValid = this.isAgeValid.bind(this);
-    this.trimBioSpaces = this.trimBioSpaces.bind(this);
     this.updateProfile = this.updateProfile.bind(this);
   }
 
@@ -77,18 +76,10 @@ class EditProfileModal extends Component {
     };
 
     const nameValidity = this.isNameValid();
-    const bioTrimming = this.trimBioSpaces();
     const ageValidity = this.isAgeValid();
     const websiteValidity = this.isWebsiteValid();
     const locationValidity = this.isLocationValid();
-    if (
-      this.state.name &&
-      nameValidity &&
-      ageValidity &&
-      websiteValidity &&
-      locationValidity &&
-      bioTrimming
-    ) {
+    if (this.state.name && nameValidity && ageValidity && websiteValidity && locationValidity) {
       this.props.updateProfile(payload);
       this.props.showProfileModal();
     }
@@ -101,16 +92,6 @@ class EditProfileModal extends Component {
     }
     this.setState({ nameError: 'Name can include only alphabets and non trailing spaces' });
     return false;
-  };
-
-  trimBioSpaces = () => {
-    const len = this.state.bio.trim().length;
-    if (len === 0) {
-      this.setState({
-        bio: '',
-      });
-    }
-    return true;
   };
 
   isLocationValid = () => {
@@ -180,7 +161,7 @@ class EditProfileModal extends Component {
 
   handleOnChange = e => {
     this.setState({
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value.trim(),
     });
   };
 
