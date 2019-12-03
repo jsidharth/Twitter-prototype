@@ -256,22 +256,26 @@ class Profile extends Component {
                 <p className="userBioProfile">{profile.bio}</p>
               </div>
               <div className="personalDetails">
-                <div className="flexIconDetails">
-                  <div className="iconColor">
-                    <TiLocationOutline size={20} />
+                {profile.location !== '' ? (
+                  <div className="flexIconDetails">
+                    <div className="iconColor">
+                      <TiLocationOutline size={20} />
+                    </div>
+                    <p className="tweetDate">{profile.location}</p>
                   </div>
-                  <p className="tweetDate">{profile.location}</p>
-                </div>
-                <div className="flexIconDetails">
-                  <div className="iconColor">
-                    <IoIosLink size={20} />
+                ) : null}
+                {profile.website !== '' ? (
+                  <div className="flexIconDetails">
+                    <div className="iconColor">
+                      <IoIosLink size={20} />
+                    </div>
+                    <p className="tweetDate">
+                      {websiteDisplay && websiteDisplay[1] ? (
+                        <a href={profile.website}>{websiteDisplay[1]}</a>
+                      ) : null}
+                    </p>
                   </div>
-                  <p className="tweetDate">
-                    {websiteDisplay && websiteDisplay[1] ? (
-                      <a href={profile.website}>{websiteDisplay[1]}</a>
-                    ) : null}
-                  </p>
-                </div>
+                ) : null}
                 <div className="flexIconDetails">
                   <div className="iconColor">
                     <GiBalloons size={20} />
