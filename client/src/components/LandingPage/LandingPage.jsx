@@ -79,20 +79,23 @@ class LandingPage extends Component {
   };
 
   isPasswordValid = () => {
-    if (this.state.password.length >= 6) {
+    if (this.state.password.length >= 6 && /^[A-Za-z0-9_@./#&+-]+$/.test(this.state.password)) {
       this.setState({ passwordError: '' });
       return true;
     }
-    this.setState({ passwordError: '6 Characters minimum' });
+    this.setState({
+      passwordError:
+        'Only alphanumeric characters allowed, 6 character minimum, no white spaces allowed',
+    });
     return false;
   };
 
   isNameValid = () => {
-    if (/^[a-zA-Z ]+$/.test(this.state.name)) {
+    if (/^[A-Za-z]+(?: +[A-Za-z]+)*$/.test(this.state.name)) {
       this.setState({ nameError: '' });
       return true;
     }
-    this.setState({ nameError: 'Name needs to be all alphabets' });
+    this.setState({ nameError: 'Name can include only alphabets and non trailing spaces' });
     return false;
   };
 

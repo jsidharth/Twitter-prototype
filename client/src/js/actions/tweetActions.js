@@ -82,7 +82,7 @@ export const getBookmarks = payload => {
 };
 
 export const likeTweet = payload => {
-  return dispatch => {
+  return () => {
     return axios.put(`${ROOT_URL}/tweet/like`, payload).then(response => {
       console.log('Status Code : ', response.status);
       return Promise.resolve();
@@ -91,7 +91,7 @@ export const likeTweet = payload => {
 };
 
 export const unlikeTweet = payload => {
-  return dispatch => {
+  return () => {
     return axios.put(`${ROOT_URL}/tweet/unlike`, payload).then(response => {
       console.log('Status Code : ', response.status);
       return Promise.resolve();
@@ -118,6 +118,7 @@ export const deleteTweet = payload => {
         });
         return Promise.resolve();
       }
+      return Promise.reject();
     });
   };
 };
@@ -168,7 +169,7 @@ export const replyTweet = payload => {
 };
 
 export const retweet = payload => {
-  return dispatch => {
+  return () => {
     return axios.post(`${ROOT_URL}/tweet/retweet`, payload).then(response => {
       console.log('Status Code : ', response.status);
       if (response.status === 200) {
