@@ -1,4 +1,5 @@
 /* eslint-disable react/destructuring-assignment */
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -17,38 +18,41 @@ class Bookmarks extends Component {
   }
 
   componentDidMount() {
+    const { userId } = this.props;
     const data = {
-      userId: this.props.userId,
+      userId,
     };
-    console.log('here', this.props.userId);
     const { getBookmarks } = this.props;
     getBookmarks(data);
   }
+
   likeTweet = e => {
-    const { userId } = this.props;
+    const { userId, likeTweet, getBookmarks } = this.props;
     let data = { tweetId: e.target.id, userId };
-    this.props.likeTweet(data).then(() => {
+    likeTweet(data).then(() => {
       data = { userId };
-      this.props.getBookmarks(data);
+      getBookmarks(data);
     });
   };
 
   unlikeTweet = e => {
-    const { userId } = this.props;
+    const { userId, unlikeTweet, getBookmarks } = this.props;
     let data = { tweetId: e.target.id, userId };
-    this.props.unlikeTweet(data).then(() => {
+    unlikeTweet(data).then(() => {
       data = { userId };
-      this.props.getBookmarks(data);
+      getBookmarks(data);
     });
   };
+
   render() {
     let renderBookmarks = null;
     let bookmarkedTweets = null;
+    const { tweets } = this.props;
     if (this.props.bookmarkedTweets) {
       // Contains all the id of bookmarked tweets
       renderBookmarks = this.props.bookmarkedTweets;
       // Contains all the tweets with details which are bookmarked by the user
-      bookmarkedTweets = this.props.tweets;
+      bookmarkedTweets = tweets;
     }
     return (
       <div className="flexHomeScreen">

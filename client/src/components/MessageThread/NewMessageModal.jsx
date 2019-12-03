@@ -1,17 +1,13 @@
 /* eslint-disable react/no-deprecated */
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable react/no-unused-state */
-/* eslint-disable react/sort-comp */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
-/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import { FiSearch } from 'react-icons/fi';
 import { connect } from 'react-redux';
 import { searchActions, messageActions } from '../../js/actions/index';
-import UserCard from '../UserCard/UserCard';
 import './NewMessageModal.css';
 // eslint-disable-next-line react/prefer-stateless-function
 class NewMessageModal extends Component {
@@ -19,16 +15,21 @@ class NewMessageModal extends Component {
     super(props);
     this.state = {
       suggestions: {},
-      search: '',
     };
     this.composeMessage = this.composeMessage.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      suggestions: nextProps.searchSuggestions,
+    });
+  }
+
   handleOnInputChange = event => {
-    this.setState({ search: event.target.value });
+    const { getSearchSuggestions } = this.props;
     const userHandle = event.target.value;
     if (userHandle[0] === '@' && userHandle.length > 1) {
-      this.props.getSearchSuggestions(userHandle);
+      getSearchSuggestions(userHandle);
     } else {
       this.setState({
         suggestions: {},
@@ -37,35 +38,30 @@ class NewMessageModal extends Component {
   };
 
   composeMessage = e => {
+    const { userId, composeMessage, getMessageDetails, showMessageModal } = this.props;
     const payload = {
-      user_1: this.props.userId,
+      user_1: userId,
       user_2: e.target.id,
     };
 
     const data = {
-      userId: this.props.userId,
+      userId,
     };
-    this.props.composeMessage(payload).then(() => {
-      this.props.getMessageDetails(data).then(() => {
-        this.props.showMessageModal();
+    composeMessage(payload).then(() => {
+      getMessageDetails(data).then(() => {
+        showMessageModal();
       });
     });
   };
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      suggestions: nextProps.searchSuggestions,
-    });
-  }
-
   render() {
-    console.log(this.state.suggestions);
-
+    const { showMessageModalState, showMessageModal } = this.props;
+    const { suggestions } = this.state;
     return (
       <Modal
         dialogClassName="messageModal"
-        show={this.props.showMessageModalState}
-        onHide={this.props.showMessageModal}
+        show={showMessageModalState}
+        onHide={showMessageModal}
         centered
       >
         <Modal.Header closeButton>
@@ -86,15 +82,14 @@ class NewMessageModal extends Component {
             />
           </div>
           <div className="searchSuggestion">
-            {this.state.suggestions && this.state.suggestions.length
-              ? this.state.suggestions.map(user => {
+            {suggestions && suggestions.length
+              ? suggestions.map(user => {
                   return (
                     <div id={user._id} onClick={e => this.composeMessage(e)}>
                       <div id={user._id} key={user._id}>
                         <div id={user._id}>
                           <div id={user._id} className="flexImageUser">
                             <div id={user._id}>
-                              {/* Include user profile image if available */}
                               <img
                                 id={user._id}
                                 src={
