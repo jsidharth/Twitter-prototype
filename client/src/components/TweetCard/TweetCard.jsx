@@ -17,7 +17,7 @@ class TweetCard extends Component {
   }
 
   render() {
-    const { tweets, userId, bookmarks } = this.props;
+    const { tweets, userId } = this.props;
     const renderFeed = tweets.map(tweet => {
       let myDate = new Date(tweet.created_at);
       myDate = myDate.toString();
@@ -69,14 +69,12 @@ class TweetCard extends Component {
             >
               <div className="flexImageTweet">
                 <div>
-                  {/* Include user profile image if available */}
                   <img src={imgSrc} className="profileImageTweet" alt="user" />
                 </div>
                 <div>
                   <div className="flexNameHandle">
                     <p className="tweetUserName">{tweet.name}</p>
                     <p className="tweetUserHandle">@{tweet.handle}</p>
-                    {/* <p className="tweetUserName">.</p> */}
                     <p className="tweetDate1">
                       {myDate[1]} {myDate[2]}, {myDate[3]}
                     </p>

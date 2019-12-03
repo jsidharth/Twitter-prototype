@@ -154,6 +154,9 @@ export const replyTweet = payload => {
           type: actionTypes.TWEET_DETAILS,
           payload: response.data,
         });
+        dispatch({
+          type: actionTypes.RESET_IMAGE_STATE,
+        });
         toast.info('Reply posted!', {
           position: 'bottom-center',
           autoClose: 2000,
