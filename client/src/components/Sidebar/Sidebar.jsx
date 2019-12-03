@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -11,8 +12,7 @@ import { GoHome, GoMail, GoNote, GoGraph } from 'react-icons/go';
 import { FiBookmark, FiLogOut } from 'react-icons/fi';
 import cookie from 'js-cookie';
 import './Sidebar.css';
-// import StickyBox from 'react-sticky-box';
-import Sticky from 'react-sticky-el';
+import StickyBox from 'react-sticky-box';
 import PostTweetModal from '../PostTweetModal/PostTweetModal';
 
 class Sidebar extends Component {
@@ -41,8 +41,7 @@ class Sidebar extends Component {
   render() {
     const { userId } = this.props;
     return (
-      // <StickyBox>
-      <Sticky>
+      <StickyBox>
         <div>
           <div>
             <nav className="sidebar">
@@ -153,8 +152,7 @@ class Sidebar extends Component {
             />
           ) : null}
         </div>
-      {/* </StickyBox> */}
-      </Sticky>
+      </StickyBox>
     );
   }
 }

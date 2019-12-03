@@ -42,7 +42,7 @@ export const login = payload => {
           cookie.set('token', response.data.token);
           history.push('/home');
           if (!response.data.previousState) {
-            toast.success('Your account has been activated !!', {
+            toast.success('Your account has been reactivated. Welcome back!', {
               position: 'top-center',
               autoClose: 3000,
               hideProgressBar: false,
@@ -79,7 +79,6 @@ export const updateProfile = payload => {
   return dispatch => {
     return axios.put(`${ROOT_URL}/user/details/`, payload).then(response => {
       console.log('Status Code : ', response.status);
-      console.log('Here', response.data);
       if (response.status === 200) {
         dispatch({
           type: actionTypes.GET_USER_PROFILE,

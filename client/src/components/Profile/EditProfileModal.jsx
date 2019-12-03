@@ -74,10 +74,18 @@ class EditProfileModal extends Component {
     };
 
     const nameValidity = this.isNameValid();
+    const bioTrimming = this.trimBioSpaces();
     const ageValidity = this.isAgeValid();
     const websiteValidity = this.isWebsiteValid();
     const locationValidity = this.isLocationValid();
-    if (this.state.name && nameValidity && ageValidity && websiteValidity && locationValidity) {
+    if (
+      this.state.name &&
+      nameValidity &&
+      ageValidity &&
+      websiteValidity &&
+      locationValidity &&
+      bioTrimming
+    ) {
       this.props.updateProfile(payload);
       this.props.showProfileModal();
     }
@@ -90,6 +98,16 @@ class EditProfileModal extends Component {
     }
     this.setState({ nameError: 'Name can include only alphabets and non trailing spaces' });
     return false;
+  };
+
+  trimBioSpaces = () => {
+    const len = this.state.bio.trim().length;
+    if (len === 0) {
+      this.setState({
+        bio: '',
+      });
+    }
+    return true;
   };
 
   isLocationValid = () => {
@@ -109,9 +127,7 @@ class EditProfileModal extends Component {
   isWebsiteValid = () => {
     if (
       this.state.website &&
-      /^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$/.test(
-        this.state.website,
-      )
+      /^((https):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$/.test(this.state.website)
     ) {
       this.setState({ websiteError: '' });
       return true;
@@ -119,7 +135,6 @@ class EditProfileModal extends Component {
     if (!this.state.website) {
       return true;
     }
-
     this.setState({ websiteError: 'Please enter valid URL format' });
     return false;
   };
@@ -237,7 +252,7 @@ class EditProfileModal extends Component {
                   onChange={this.handleOnChange}
                   value={this.state.name}
                 />
-                <label className="nameError">{this.state.nameError}</label>
+                <label className="error">{this.state.nameError}</label>
               </div>
               <div className="flexLabelInput">
                 <label className="inputTitle">Bio</label>
@@ -258,7 +273,7 @@ class EditProfileModal extends Component {
                   onChange={this.handleOnChange}
                   value={this.state.location}
                 />
-                <label className="locationError">{this.state.locationError}</label>
+                <label className="error">{this.state.locationError}</label>
               </div>
               <div className="flexLabelInput">
                 <label className="inputTitle">Website</label>
@@ -269,7 +284,7 @@ class EditProfileModal extends Component {
                   onChange={this.handleOnChange}
                   value={this.state.website}
                 />
-                <label className="websiteError">{this.state.websiteError}</label>
+                <label className="error">{this.state.websiteError}</label>
               </div>
               <div className="flexLabelInput">
                 <label className="inputTitle">Birth Date</label>
@@ -280,7 +295,7 @@ class EditProfileModal extends Component {
                     value={this.state.date}
                   />
                 </div>
-                <label className="dateError">{this.state.dateError}</label>
+                <label className="error">{this.state.dateError}</label>
               </div>
             </form>
           </Modal.Body>

@@ -113,28 +113,7 @@
   background-color: #f9f9f9;
 }
 
-.nameError {
-  margin-left: 10px;
-  color: red;
-  font-weight: bold;
-  font-size: 10px;
-}
-
-.dateError {
-  margin-left: 10px;
-  color: red;
-  font-weight: bold;
-  font-size: 10px;
-}
-
-.websiteError {
-  margin-left: 10px;
-  color: red;
-  font-weight: bold;
-  font-size: 10px;
-}
-
-.locationError {
+.error {
   margin-left: 10px;
   color: red;
   font-weight: bold;
