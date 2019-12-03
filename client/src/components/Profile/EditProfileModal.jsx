@@ -28,6 +28,10 @@ class EditProfileModal extends Component {
     this.updateProfile = this.updateProfile.bind(this);
     this.uploadImage = this.uploadImage.bind(this);
     this.deactivate = this.deactivate.bind(this);
+    this.checkAgeAbove18 = this.checkAgeAbove18.bind(this);
+    this.isNameValid = this.isNameValid.bind(this);
+    this.isWebsiteValid = this.isWebsiteValid.bind(this);
+    this.isAgeValid = this.isAgeValid.bind(this);
   }
 
   componentDidMount() {
@@ -71,9 +75,11 @@ class EditProfileModal extends Component {
 
     const nameValidity = this.isNameValid();
     const ageValidity = this.isAgeValid();
-    if(this.state.name && nameValidity && ageValidity) {
-    this.props.updateProfile(payload);
-    this.props.showProfileModal();
+    const websiteValidity = this.isWebsiteValid();
+    const locationValidity = this.isLocationValid();
+    if (this.state.name && nameValidity && ageValidity && websiteValidity && locationValidity) {
+      this.props.updateProfile(payload);
+      this.props.showProfileModal();
     }
   };
 
@@ -83,6 +89,38 @@ class EditProfileModal extends Component {
       return true;
     }
     this.setState({ nameError: 'Name can include only alphabets and non trailing spaces' });
+    return false;
+  };
+
+  isLocationValid = () => {
+    if (this.state.location && /^[A-Za-z]+(?: +[A-Za-z]+)*$/.test(this.state.location)) {
+      this.setState({ locationError: '' });
+      return true;
+    }
+    if (!this.state.location) {
+      return true;
+    }
+    this.setState({
+      locationError: 'Location can include only alphabets and non trailing spaces',
+    });
+    return false;
+  };
+
+  isWebsiteValid = () => {
+    if (
+      this.state.website &&
+      /^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$/.test(
+        this.state.website,
+      )
+    ) {
+      this.setState({ websiteError: '' });
+      return true;
+    }
+    if (!this.state.website) {
+      return true;
+    }
+
+    this.setState({ websiteError: 'Please enter valid URL format' });
     return false;
   };
 
@@ -128,6 +166,23 @@ class EditProfileModal extends Component {
     });
   };
 
+  closeModal = () => {
+    const { name, bio, location, website, dob, profilePic } = this.props.profile;
+    this.setState({
+      name,
+      bio,
+      location,
+      website,
+      profilePic,
+      date: new Date(moment(dob).format('MM-DD-YYYY')),
+      nameError: '',
+      dateError: '',
+      locationError: '',
+      websiteError: '',
+    });
+    this.props.showProfileModal();
+  };
+
   render() {
     const imgSrc = this.props.user.profilePic
       ? this.props.user.profilePic
@@ -137,7 +192,7 @@ class EditProfileModal extends Component {
         <Modal
           dialogClassName="profileModal"
           show={this.props.showProfileModalState}
-          onHide={this.props.showProfileModal}
+          onHide={this.closeModal}
           centered
         >
           <Modal.Header closeButton>
@@ -203,6 +258,7 @@ class EditProfileModal extends Component {
                   onChange={this.handleOnChange}
                   value={this.state.location}
                 />
+                <label className="locationError">{this.state.locationError}</label>
               </div>
               <div className="flexLabelInput">
                 <label className="inputTitle">Website</label>
@@ -213,6 +269,7 @@ class EditProfileModal extends Component {
                   onChange={this.handleOnChange}
                   value={this.state.website}
                 />
+                <label className="websiteError">{this.state.websiteError}</label>
               </div>
               <div className="flexLabelInput">
                 <label className="inputTitle">Birth Date</label>

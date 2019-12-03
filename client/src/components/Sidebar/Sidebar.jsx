@@ -11,7 +11,8 @@ import { GoHome, GoMail, GoNote, GoGraph } from 'react-icons/go';
 import { FiBookmark, FiLogOut } from 'react-icons/fi';
 import cookie from 'js-cookie';
 import './Sidebar.css';
-import StickyBox from 'react-sticky-box';
+// import StickyBox from 'react-sticky-box';
+import Sticky from 'react-sticky-el';
 import PostTweetModal from '../PostTweetModal/PostTweetModal';
 
 class Sidebar extends Component {
@@ -40,7 +41,8 @@ class Sidebar extends Component {
   render() {
     const { userId } = this.props;
     return (
-      <StickyBox>
+      // <StickyBox>
+      <Sticky>
         <div>
           <div>
             <nav className="sidebar">
@@ -151,7 +153,8 @@ class Sidebar extends Component {
             />
           ) : null}
         </div>
-      </StickyBox>
+      {/* </StickyBox> */}
+      </Sticky>
     );
   }
 }

@@ -126,3 +126,17 @@
   font-weight: bold;
   font-size: 10px;
 }
+
+.websiteError {
+  margin-left: 10px;
+  color: red;
+  font-weight: bold;
+  font-size: 10px;
+}
+
+.locationError {
+  margin-left: 10px;
+  color: red;
+  font-weight: bold;
+  font-size: 10px;
+}
