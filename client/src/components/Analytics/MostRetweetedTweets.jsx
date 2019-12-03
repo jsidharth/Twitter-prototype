@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import { Pie } from 'react-chartjs-2';
 import { connect } from 'react-redux';
 import { MDBContainer } from 'mdbreact';
+import { history } from '../../js/helper/history';
 import { analyticsActions } from '../../js/actions/index';
 
 class MostViewedTweets extends Component {
@@ -19,11 +20,8 @@ class MostViewedTweets extends Component {
   }
 
   componentDidMount() {
-    const data = {
-      userId: this.props.userId,
-    };
     const { fetchMostRetweetedTweet } = this.props;
-    fetchMostRetweetedTweet(data).then(() => {
+    fetchMostRetweetedTweet().then(() => {
       const yAxis = this.props.mostRetweetedTweetData.map(element => {
         return element.retweetCount;
       });
@@ -47,6 +45,10 @@ class MostViewedTweets extends Component {
     });
   }
 
+  elementClicked = element => {
+    history.push(`/home/status/${this.props.mostRetweetedTweetData[element[0]._index].tweetId}`);
+  };
+
   render() {
     return (
       <MDBContainer>
@@ -55,6 +57,7 @@ class MostViewedTweets extends Component {
           data={this.state.dataPie}
           width={400}
           options={{ responsive: true, maintainAspectRatio: true }}
+          onElementsClick={this.elementClicked}
         />
       </MDBContainer>
     );
@@ -68,7 +71,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchMostRetweetedTweet: data => dispatch(analyticsActions.getMostRetweetedTweets(data)),
+  fetchMostRetweetedTweet: () => dispatch(analyticsActions.getMostRetweetedTweets()),
 });
 
 export default connect(

@@ -5,14 +5,11 @@ const kafka = require('../../kafka/client');
 
 const analyticsRouter = express.Router();
 
-analyticsRouter.get('/mostViews/:userId', (req, res) => {
+analyticsRouter.get('/mostViews', (req, res) => {
   console.log('Inside GET analytics most views');
-  console.log('Request Body: ', req.params.userId);
-  const { userId } = req.params;
   kafka.makeRequest(
     'analyticsTopic',
     {
-      userId,
       action: 'ANALYTICS_TWEET_VIEWS',
     },
     (err, result) => {
@@ -28,14 +25,11 @@ analyticsRouter.get('/mostViews/:userId', (req, res) => {
   );
 });
 
-analyticsRouter.get('/mostRetweets/:userId', (req, res) => {
+analyticsRouter.get('/mostRetweets', (req, res) => {
   console.log('Inside GET analytics retweets');
-  console.log('Request Body: ', req.params.userId);
-  const { userId } = req.params;
   kafka.makeRequest(
     'analyticsTopic',
     {
-      userId,
       action: 'ANALYTICS_TWEET_RETWEETS',
     },
     (err, result) => {
@@ -50,14 +44,11 @@ analyticsRouter.get('/mostRetweets/:userId', (req, res) => {
     }
   );
 });
-analyticsRouter.get('/mostLikes/:userId', (req, res) => {
+analyticsRouter.get('/mostLikes', (req, res) => {
   console.log('Inside GET analytics most likes');
-  console.log('Request Body: ', req.params.userId);
-  const { userId } = req.params;
   kafka.makeRequest(
     'analyticsTopic',
     {
-      userId,
       action: 'ANALYTICS_TWEET_LIKES',
     },
     (err, result) => {
@@ -95,14 +86,13 @@ analyticsRouter.get('/profileViewsPerDay/:userId', (req, res) => {
   );
 });
 
-analyticsRouter.get('/numberOfTweets/:userId', (req, res) => {
+analyticsRouter.get('/numberOfTweets', (req, res) => {
   console.log('Inside GET analytics number of tweets');
   console.log('Request Body: ', req.params.userId);
-  const { userId } = req.params;
+
   kafka.makeRequest(
     'analyticsTopic',
     {
-      userId,
       action: 'ANALYTICS_NUMBER_OF_TWEETS',
     },
     (err, result) => {

@@ -1,12 +1,10 @@
 /* eslint-disable no-underscore-dangle */
-import Users from '../../models/user.model';
+import Tweets from '../../models/tweet.model';
 
-const handleRequest = (userId, callback) => {
-  let mostLikesArray = [];
-  Users.findOne({
-    _id: userId,
-  })
-    .populate('tweets', 'likes')
+const handleRequest = callback => {
+  Tweets.aggregate([{ $project: { likesCount: { $size: '$likes' }, tweetId: '$_id' } }])
+    .sort({ likesCount: -1 })
+    .limit(10)
     .exec((err, result) => {
       if (err || !result) {
         callback(
@@ -16,17 +14,7 @@ const handleRequest = (userId, callback) => {
           null
         );
       } else {
-        result.tweets.forEach(element => {
-          const eachObject = {
-            tweetId: element._id,
-            likesCount: element.likes.length,
-          };
-          mostLikesArray.push(eachObject);
-        });
-        mostLikesArray = mostLikesArray.sort(
-          (first, second) => second.likesCount - first.likesCount
-        );
-        callback(null, mostLikesArray.slice(0, 10));
+        callback(null, result);
       }
     });
 };

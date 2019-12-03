@@ -19,11 +19,8 @@ class NumberOfTweets extends Component {
   }
 
   componentDidMount() {
-    const data = {
-      userId: this.props.userId,
-    };
     const { fetchNumberOfTweets } = this.props;
-    fetchNumberOfTweets(data).then(() => {
+    fetchNumberOfTweets().then(() => {
       const xAxis = this.props.numberOfTweetsData.map(element => {
         return element.timeFrame;
       });
@@ -73,7 +70,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchNumberOfTweets: data => dispatch(analyticsActions.getNumberOfTweets(data)),
+  fetchNumberOfTweets: () => dispatch(analyticsActions.getNumberOfTweets()),
 });
 
 export default connect(
