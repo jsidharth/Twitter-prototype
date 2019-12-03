@@ -50,7 +50,7 @@ class TweetFeed extends Component {
     this.props.likeTweet(data).then(() => {
       const fetchFeedPayload = {
         userId: this.props.userId,
-        count: this.state.offset,
+        count: this.state.offset || 10,
         offset: 0,
       };
       this.props.fetchUpdatedFeed(fetchFeedPayload);
@@ -62,7 +62,7 @@ class TweetFeed extends Component {
     this.props.unlikeTweet(data).then(() => {
       const fetchFeedPayload = {
         userId: this.props.userId,
-        count: this.state.offset,
+        count: this.state.offset || 10,
         offset: 0,
       };
       this.props.fetchUpdatedFeed(fetchFeedPayload);
@@ -74,7 +74,7 @@ class TweetFeed extends Component {
     this.props.bookmarkTweet(data).then(() => {
       const fetchFeedPayload = {
         userId: this.props.userId,
-        count: this.state.offset,
+        count: this.state.offset || 10,
         offset: 0,
       };
       this.props.fetchUpdatedFeed(fetchFeedPayload);
@@ -86,7 +86,7 @@ class TweetFeed extends Component {
     this.props.retweet(data).then(() => {
       const fetchFeedPayload = {
         userId: this.props.userId,
-        count: this.state.offset,
+        count: this.state.offset || 10,
         offset: 0,
       };
       this.props.fetchUpdatedFeed(fetchFeedPayload);
@@ -101,7 +101,7 @@ class TweetFeed extends Component {
     this.props.deleteTweet(data).then(() => {
       const fetchFeedPayload = {
         userId: this.props.userId,
-        count: this.state.offset,
+        count: this.state.offset || 10,
         offset: 0,
       };
       this.props.fetchUpdatedFeed(fetchFeedPayload);
@@ -154,6 +154,9 @@ class TweetFeed extends Component {
           bookmarkTweet={this.bookmarkTweet}
           retweet={this.retweet}
           bookmarks={renderBookmarks}
+          feedOffset={this.state.offset}
+          feedCount={this.state.count}
+          fromFeed
         />
       </InfiniteScroll>
     );

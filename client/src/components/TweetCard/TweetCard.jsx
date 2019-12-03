@@ -30,7 +30,7 @@ class TweetCard extends Component {
   };
 
   render() {
-    const { tweets, userId } = this.props;
+    const { tweets, userId, feedOffset, feedCount, fromFeed } = this.props;
     const { tweetForComment } = this.state;
     const renderFeed = tweets.map(tweet => {
       let myDate = new Date(tweet.created_at);
@@ -78,6 +78,9 @@ class TweetCard extends Component {
                 tweetUserId={tweetForComment.userId}
                 tweetId={tweetForComment._id}
                 currentUser={this.props.user}
+                feedOffset={feedOffset}
+                feedCount={feedCount}
+                fromFeed={fromFeed}
               />
             ) : null}
             {tweet.retweet ? (
