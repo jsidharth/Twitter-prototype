@@ -28,6 +28,7 @@ const handleRequest = (tweetId, callback) => {
             name: 1,
             handle: 1,
             profilePic: 1,
+            active: 1,
           }
         ).then(user => {
           const tweetDetails = {
@@ -55,6 +56,7 @@ const handleRequest = (tweetId, callback) => {
                   name: 1,
                   handle: 1,
                   profilePic: 1,
+                  active: 1,
                 }
               ).then(commentUser => {
                 if (commentUser.active) {
