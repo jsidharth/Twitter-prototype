@@ -26,6 +26,15 @@ class TweetFeed extends Component {
     this.loadFunc = this.loadFunc.bind(this);
   }
 
+  componentDidMount() {
+    const fetchFeedPayload = {
+      userId: this.props.userId,
+      count: 10,
+      offset: 0,
+    };
+    this.props.fetchUpdatedFeed(fetchFeedPayload);
+  }
+
   likeTweet = e => {
     const data = { tweetId: e.target.id, userId: this.props.userId };
     this.props.likeTweet(data).then(() => {
