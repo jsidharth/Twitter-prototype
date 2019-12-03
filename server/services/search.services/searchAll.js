@@ -1,11 +1,12 @@
 /* eslint-disable no-underscore-dangle */
 import Promise from 'bluebird';
+import _ from 'lodash';
 import moment from 'moment';
 import Users from '../../models/user.model';
 import Tweets from '../../models/tweet.model';
 
 const handleRequest = async (searchTerm, callback) => {
-  const users = await Users.aggregate([
+  let users = await Users.aggregate([
     {
       $match: {
         name: {
@@ -20,9 +21,11 @@ const handleRequest = async (searchTerm, callback) => {
         bio: 1,
         handle: 1,
         profilePic: 1,
+        active: 1,
       },
     },
   ]);
+  users = _.chain(users).filter('active');
 
   const searchTweets = await Tweets.aggregate([
     {
@@ -44,6 +47,7 @@ const handleRequest = async (searchTerm, callback) => {
           name: 1,
           handle: 1,
           profilePic: 1,
+          active: 1,
         }
       );
       return {
