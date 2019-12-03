@@ -163,7 +163,16 @@ class CommentModal extends Component {
               </div>
               <div className="countMessageStyleComment">{`${count} characters remaining`}</div>
             </div>
-            <button type="button" className="replyTweetBtn" onClick={this.replyTweet}>
+            <button
+              type="button"
+              className={
+                !tweetText || tweetText.trim().length === 0
+                  ? 'disabledReplyTweetBtn'
+                  : 'replyTweetBtn'
+              }
+              onClick={this.replyTweet}
+              disabled={!tweetText || tweetText.trim().length === 0}
+            >
               Reply
             </button>
           </div>
