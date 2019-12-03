@@ -58,19 +58,24 @@ class EditProfileModal extends Component {
     return false;
   };
 
-  // updateProfile = () => {
-  //   const payload = {
-  //     _id: this.props.userId,
-  //     name: this.state.name,
-  //     bio: this.state.bio,
-  //     location: this.state.location,
-  //     website: this.state.website,
-  //     dob: this.state.date,
-  //     profilePic: this.state.profilePic,
-  //   };
-  //   this.props.updateProfile(payload);
-  //   this.props.showProfileModal();
-  // };
+  updateProfile = () => {
+    const payload = {
+      _id: this.props.userId,
+      name: this.state.name,
+      bio: this.state.bio,
+      location: this.state.location,
+      website: this.state.website,
+      dob: this.state.date,
+      profilePic: this.state.profilePic,
+    };
+
+    const nameValidity = this.isNameValid();
+    const ageValidity = this.isAgeValid();
+    if(this.state.name && nameValidity && ageValidity) {
+    this.props.updateProfile(payload);
+    this.props.showProfileModal();
+    }
+  };
 
   isNameValid = () => {
     if (/^[A-Za-z]+(?: +[A-Za-z]+)*$/.test(this.state.name)) {
@@ -92,27 +97,6 @@ class EditProfileModal extends Component {
     }
     this.setState({ dateError: '' });
     return true;
-  };
-
-  updateProfile = () => {
-    const payload = {
-      _id: this.props.userId,
-      name: this.state.name,
-      bio: this.state.bio,
-      location: this.state.location,
-      website: this.state.website,
-      dob: this.state.date,
-      profilePic: this.state.profilePic,
-    };
-
-    const nameValidity = this.isNameValid();
-    const ageValidity = this.isAgeValid();
-    if (
-      this.state.name && this.state.dob && nameValidity && ageValidity
-    ) {
-    this.props.updateProfile(payload);
-    this.props.showProfileModal();
-    }
   };
 
   dateChangeHandler = date => {
