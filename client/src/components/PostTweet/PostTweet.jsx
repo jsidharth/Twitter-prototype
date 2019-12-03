@@ -36,7 +36,7 @@ class PostTweet extends Component {
 
   postTweet = () => {
     const { tweetText } = this.state;
-    const { postTweet, userId, imageUrl, fetchUpdatedFeed  } = this.props;
+    const { postTweet, userId, imageUrl, fetchUpdatedFeed } = this.props;
     if (tweetText.length > 280) {
       console.log('max length exceeded');
     } else {
@@ -107,7 +107,16 @@ class PostTweet extends Component {
                 </div>
                 <div className="countMessageStyle">{`${count} characters remaining`}</div>
               </div>
-              <button type="button" className="postTweetBtn" onClick={this.postTweet}>
+              <button
+                type="button"
+                className={
+                  !tweetText || tweetText.trim().length === 0
+                    ? 'disabledPostTweetBtn'
+                    : 'postTweetBtn'
+                }
+                onClick={this.postTweet}
+                disabled={!tweetText || tweetText.trim().length === 0}
+              >
                 Tweet
               </button>
             </div>
