@@ -166,6 +166,7 @@ export const replyTweet = payload => {
           pauseOnHover: true,
           draggable: true,
         });
+        return Promise.resolve();
       }
     });
   };

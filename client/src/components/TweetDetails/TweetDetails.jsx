@@ -1,3 +1,4 @@
+/* eslint-disable react/no-deprecated */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
@@ -19,7 +20,7 @@ class TweetDetails extends Component {
     super(props);
     this.state = {
       showCommentModal: false,
-      tweet: {}
+      tweet: {},
     };
     this.likeTweet = this.likeTweet.bind(this);
     this.unlikeTweet = this.unlikeTweet.bind(this);
@@ -37,6 +38,14 @@ class TweetDetails extends Component {
     getTweetDetails(data);
   }
 
+  // Render the tweet detail after a comment has been posted
+  componentWillReceiveProps(nextProps) {
+    const { tweet } = nextProps;
+    this.setState({
+      tweet,
+    });
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.match.params.tweetID !== prevProps.match.params.tweetID) {
       const { getTweetDetails } = this.props;
@@ -47,17 +56,9 @@ class TweetDetails extends Component {
     }
   }
 
-  // Render the tweet detail after a comment has been posted
-  componentWillReceiveProps(nextProps) {
-    const { tweet } = nextProps;
-    this.setState({
-      tweet
-    });
-  }
-
   likeTweet = e => {
     const data = { tweetId: e.target.id, userId: this.props.userId };
-    const detailsPayload = { tweetId: this.state.tweet._id};
+    const detailsPayload = { tweetId: this.state.tweet._id };
     this.props.likeTweet(data).then(() => {
       this.props.getTweetDetails(detailsPayload);
     });
@@ -65,7 +66,7 @@ class TweetDetails extends Component {
 
   unlikeTweet = e => {
     const data = { tweetId: e.target.id, userId: this.props.userId };
-    const detailsPayload = { tweetId: this.state.tweet._id};
+    const detailsPayload = { tweetId: this.state.tweet._id };
     this.props.unlikeTweet(data).then(() => {
       this.props.getTweetDetails(detailsPayload);
     });
@@ -73,7 +74,7 @@ class TweetDetails extends Component {
 
   retweet = e => {
     const data = { tweetId: e.target.id, userId: this.props.userId };
-    const detailsPayload = { tweetId: this.state.tweet._id};
+    const detailsPayload = { tweetId: this.state.tweet._id };
     this.props.retweet(data).then(() => {
       this.props.getTweetDetails(detailsPayload);
     });
@@ -81,7 +82,7 @@ class TweetDetails extends Component {
 
   bookmarkTweet = e => {
     const data = { tweetId: e.target.id, userId: this.props.userId };
-    const detailsPayload = { tweetId: this.state.tweet._id};
+    const detailsPayload = { tweetId: this.state.tweet._id };
     this.props.bookmarkTweet(data).then(() => {
       this.props.getTweetDetails(detailsPayload);
     });
@@ -92,30 +93,33 @@ class TweetDetails extends Component {
       tweetId: e.target.id,
       userId: this.props.userId,
     };
-    const detailsPayload = { tweetId: this.state.tweet._id};
+    const detailsPayload = { tweetId: this.state.tweet._id };
     this.props.deleteTweet(data).then(() => {
       this.props.getTweetDetails(detailsPayload);
     });
   };
 
   showCommentModal = () => {
+    const { showCommentModal } = this.state;
     this.setState({
-      showCommentModal: !this.state.showCommentModal,
+      showCommentModal: !showCommentModal,
     });
   };
 
   render() {
     const { tweet } = this.state;
     const tweetUserId = tweet.userId;
-    var myDate;
-    var timeValue;
+    let myDate;
+    let timeValue;
+    let date;
+    let time;
     if (tweet.created_at) {
       myDate = new Date(tweet.created_at);
       myDate = myDate.toString().split(' ');
       timeValue = myDate[4].split(':');
-      var time = myDate[4].split(':');
-      var date = myDate[1] + ' ' + myDate[2] + ',' + myDate[3];
-      time = timeValue[0] + ':' + timeValue[1];
+      time = myDate[4].split(':');
+      date = `${myDate[1]} ${myDate[2]},${myDate[3]}`;
+      time = `${timeValue[0]}:${timeValue[1]}`;
     }
 
     let likeButton;

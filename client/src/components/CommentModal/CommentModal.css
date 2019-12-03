@@ -3,6 +3,12 @@
   border-radius: 20px;
 }
 
+.modal-content {
+  border-style: solid !important;
+  border-width: 0.5px !important;
+  border-color: #d0d4d6 !important;
+}
+
 .profileImageCommentModal {
   margin: 0 auto;
   max-width: 50px;
@@ -105,6 +111,10 @@
   font-size: 19px;
   font-weight: 400;
   overflow-wrap: break-word;
+}
+
+.modal-backdrop.show {
+  opacity: .02 !important;
 }
 
 .tweetReply {
