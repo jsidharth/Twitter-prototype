@@ -67,7 +67,7 @@ userRouter.post('/login', passport.authenticate('login'), async (req, res) => {
   );
 });
 
-userRouter.get('/details/:userId', (req, res) => {
+userRouter.get('/details/:userId', passport.authenticate('jwt'), (req, res) => {
   console.log('Inside get user details');
   console.log('Request Body: ', req.params.data);
   kafka.makeRequest(
@@ -89,7 +89,7 @@ userRouter.get('/details/:userId', (req, res) => {
   );
 });
 
-userRouter.put('/details', (req, res) => {
+userRouter.put('/details', passport.authenticate('jwt'), (req, res) => {
   console.log('Inside put user details');
   console.log('Request Body: ', req.body);
   kafka.makeRequest(
@@ -111,7 +111,7 @@ userRouter.put('/details', (req, res) => {
   );
 });
 
-userRouter.put('/deactivate/(:userId)', (req, res) => {
+userRouter.put('/deactivate/(:userId)', passport.authenticate('jwt'), (req, res) => {
   console.log('Inside put user deactivate');
   console.log('Request Body: ', req.params.userId);
   kafka.makeRequest(
@@ -133,7 +133,7 @@ userRouter.put('/deactivate/(:userId)', (req, res) => {
   );
 });
 
-userRouter.post('/follow', (req, res) => {
+userRouter.post('/follow', passport.authenticate('jwt'), (req, res) => {
   kafka.makeRequest(
     'userTopic',
     {
@@ -153,7 +153,7 @@ userRouter.post('/follow', (req, res) => {
   );
 });
 
-userRouter.post('/unfollow', (req, res) => {
+userRouter.post('/unfollow', passport.authenticate('jwt'), (req, res) => {
   kafka.makeRequest(
     'userTopic',
     {
@@ -173,7 +173,7 @@ userRouter.post('/unfollow', (req, res) => {
   );
 });
 
-userRouter.get('/like/(:userId)', (req, res) => {
+userRouter.get('/like/(:userId)', passport.authenticate('jwt'), (req, res) => {
   const { userId } = req.params;
   console.log('Inside get tweets liked by user');
   console.log('Request Body: ', userId);
