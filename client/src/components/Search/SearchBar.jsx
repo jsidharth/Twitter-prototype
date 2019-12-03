@@ -1,3 +1,4 @@
+/* eslint-disable react/no-deprecated */
 import React, { Component } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { connect } from 'react-redux';
@@ -12,6 +13,12 @@ class SearchBar extends Component {
       suggestions: {},
       search: '',
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      suggestions: nextProps.searchSuggestions,
+    });
   }
 
   handleOnInputChange = event => {
@@ -30,12 +37,6 @@ class SearchBar extends Component {
     e.preventDefault();
     this.props.getSearchResults(this.state.search);
   };
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      suggestions: nextProps.searchSuggestions,
-    });
-  }
 
   render() {
     return (
@@ -60,7 +61,7 @@ class SearchBar extends Component {
             ? this.state.suggestions.map(user => {
                 return (
                   <div key={user._id}>
-                    <UserCard user={user} long={false}></UserCard>
+                    <UserCard user={user} long={false} />
                   </div>
                 );
               })

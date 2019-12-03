@@ -5,6 +5,9 @@
 }
 
 .searchFlex {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 1rem;
     background-color: #e6ecf0;
     height: 40px;
     border-radius: 20px;
