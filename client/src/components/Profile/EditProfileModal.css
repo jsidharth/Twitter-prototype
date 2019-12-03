@@ -18,12 +18,12 @@
 
 .inputTitle {
   margin-left: 10px;
+  margin-top: 20px;
 }
 
 .inputDetails {
   margin-left: 10px;
   width: 100%;
-  margin-bottom: 20px;
   font-size: 15px;
 }
 
@@ -32,6 +32,7 @@
   width: 100%;
   margin-bottom: 20px;
   font-size: 15px;
+  margin-top: -10px;
 }
 
 .profileImage {
@@ -105,8 +106,16 @@
 
 .dateStyling {
   width: 25%;
+  margin-bottom: -10px;
 }
 
 .input[type='text'] {
   background-color: #f9f9f9;
+}
+
+.error {
+  margin-left: 10px;
+  color: red;
+  font-weight: bold;
+  font-size: 10px;
 }
