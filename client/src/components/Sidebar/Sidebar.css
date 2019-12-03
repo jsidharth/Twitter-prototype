@@ -1,3 +1,9 @@
+.StickySidebar{
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
 .sidebar {
   margin-left: 70px;
   padding-top: 20px;
