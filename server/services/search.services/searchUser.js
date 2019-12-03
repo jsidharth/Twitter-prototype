@@ -1,7 +1,8 @@
+import _ from 'lodash';
 import Users from '../../models/user.model';
 
 const handleRequest = async (searchTerm, callback) => {
-  const users = await Users.aggregate([
+  let users = await Users.aggregate([
     {
       $match: {
         handle: {
@@ -16,9 +17,11 @@ const handleRequest = async (searchTerm, callback) => {
         bio: 1,
         handle: 1,
         profilePic: 1,
+        active: 1,
       },
     },
   ]);
+  users = _.filter(users, 'active');
   callback(null, {
     users,
   });

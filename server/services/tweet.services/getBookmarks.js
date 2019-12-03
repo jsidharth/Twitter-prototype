@@ -32,7 +32,7 @@ const handleRequest = async (userId, callback) => {
             profilePic: 1,
           }
         );
-        if (tweetUser.active) {
+        if (tweetUser && tweetUser.active) {
           return {
             _id: tweet._id,
             name: tweetUser.name,
