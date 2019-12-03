@@ -1,3 +1,4 @@
+/* eslint-disable react/no-deprecated */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
@@ -16,6 +17,7 @@ class TweetFeed extends Component {
       count: 10,
       offset: 0,
       hasMore: true,
+      feed: [],
     };
 
     this.likeTweet = this.likeTweet.bind(this);
@@ -24,6 +26,23 @@ class TweetFeed extends Component {
     this.bookmarkTweet = this.bookmarkTweet.bind(this);
     this.retweet = this.retweet.bind(this);
     this.loadFunc = this.loadFunc.bind(this);
+  }
+
+  componentDidMount() {
+    const fetchFeedPayload = {
+      userId: this.props.userId,
+      count: 10,
+      offset: 0,
+    };
+    this.props.fetchUpdatedFeed(fetchFeedPayload);
+  }
+
+  // Render the tweet feed after a comment has been posted
+  componentWillReceiveProps(nextProps) {
+    const { feed } = nextProps;
+    this.setState({
+      feed,
+    });
   }
 
   likeTweet = e => {
@@ -112,10 +131,6 @@ class TweetFeed extends Component {
   };
 
   render() {
-    let renderFeed = null;
-    if (this.props.feed) {
-      renderFeed = this.props.feed;
-    }
     let renderBookmarks = null;
     if (this.props.bookmarkedTweets) {
       renderBookmarks = this.props.bookmarkedTweets;
@@ -132,7 +147,7 @@ class TweetFeed extends Component {
         }
       >
         <TweetCard
-          tweets={renderFeed}
+          tweets={this.state.feed}
           likeTweet={this.likeTweet}
           unlikeTweet={this.unlikeTweet}
           deleteTweet={this.deleteTweet}

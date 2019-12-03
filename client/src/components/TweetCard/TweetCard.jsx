@@ -8,21 +8,35 @@ import { FiMessageCircle } from 'react-icons/fi';
 import { FaRegHeart } from 'react-icons/fa';
 import { AiOutlineRetweet, AiOutlineDelete } from 'react-icons/ai';
 import { MdBookmarkBorder } from 'react-icons/md';
+import CommentModal from '../CommentModal/CommentModal';
 import './TweetCard.css';
 
 class TweetCard extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      showCommentModal: false,
+      tweetForComment: {},
+    };
+    this.showCommentModal = this.showCommentModal.bind(this);
   }
+
+  showCommentModal = tweet => {
+    const { showCommentModal } = this.state;
+    this.setState({
+      showCommentModal: !showCommentModal,
+      tweetForComment: tweet,
+    });
+  };
 
   render() {
     const { tweets, userId } = this.props;
+    const { tweetForComment } = this.state;
     const renderFeed = tweets.map(tweet => {
       let myDate = new Date(tweet.created_at);
       myDate = myDate.toString();
       myDate = myDate.split(' ');
-
+      const date = `${myDate[1]} ${myDate[2]},${myDate[3]}`;
       const imgSrc = tweet.profilePic ? tweet.profilePic : '/images/default_profile_bigger.png';
       const likeButton = <FaRegHeart size={20} id={tweet._id} onClick={this.props.likeTweet} />;
 
@@ -52,6 +66,20 @@ class TweetCard extends Component {
       return (
         <div className="cardWidth" key={tweet._id}>
           <div className="cardContentTweet">
+            {this.state.showCommentModal ? (
+              <CommentModal
+                showCommentModal={this.showCommentModal}
+                showCommentModalState={this.state.showCommentModal}
+                tweetProfilePic={tweetForComment.profilePic}
+                tweetUserName={tweetForComment.name}
+                tweetUserHandle={tweetForComment.handle}
+                tweetDate={tweetForComment.created_at}
+                tweetBody={tweetForComment.body}
+                tweetUserId={tweetForComment.userId}
+                tweetId={tweetForComment._id}
+                currentUser={this.props.user}
+              />
+            ) : null}
             {tweet.retweet ? (
               <div className="flexRetweet">
                 <p className="retweetIcon">
@@ -75,9 +103,7 @@ class TweetCard extends Component {
                   <div className="flexNameHandle">
                     <p className="tweetUserName">{tweet.name}</p>
                     <p className="tweetUserHandle">@{tweet.handle}</p>
-                    <p className="tweetDate1">
-                      {myDate[1]} {myDate[2]}, {myDate[3]}
-                    </p>
+                    <p className="tweetDate1">{date}</p>
                   </div>
                   <p className="tweetBody">{tweet.body}</p>
                   {tweet.image ? (
@@ -88,7 +114,11 @@ class TweetCard extends Component {
             </Link>
             <div className="flexCardBtns">
               <div className="flexBtnCnt">
-                <FiMessageCircle size={20} />
+                <FiMessageCircle
+                  size={20}
+                  value={tweet}
+                  onClick={() => this.showCommentModal(tweet)}
+                />
                 <div>{tweet.comments_count > 0 ? tweet.comments_count : null}</div>
               </div>
               <div className="flexBtnCnt">
@@ -123,6 +153,7 @@ class TweetCard extends Component {
 }
 const mapStateToProps = state => ({
   userId: state.user.currentUser._id,
+  user: state.user.currentUser,
   // bookmarkedTweets: state.tweet.bookmarkedTweets,
 });
 export default connect(mapStateToProps)(TweetCard);
