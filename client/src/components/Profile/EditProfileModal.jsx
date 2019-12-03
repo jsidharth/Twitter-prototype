@@ -47,6 +47,53 @@ class EditProfileModal extends Component {
     this.props.deactivate(payload);
   };
 
+  checkAgeAbove18 = () => {
+    const dob = moment(this.state.date);
+    const today = moment(new Date());
+    const diffDuration = moment.duration(today.diff(dob));
+    const ageInYears = diffDuration.years();
+    if (ageInYears >= 18) {
+      return true;
+    }
+    return false;
+  };
+
+  // updateProfile = () => {
+  //   const payload = {
+  //     _id: this.props.userId,
+  //     name: this.state.name,
+  //     bio: this.state.bio,
+  //     location: this.state.location,
+  //     website: this.state.website,
+  //     dob: this.state.date,
+  //     profilePic: this.state.profilePic,
+  //   };
+  //   this.props.updateProfile(payload);
+  //   this.props.showProfileModal();
+  // };
+
+  isNameValid = () => {
+    if (/^[A-Za-z]+(?: +[A-Za-z]+)*$/.test(this.state.name)) {
+      this.setState({ nameError: '' });
+      return true;
+    }
+    this.setState({ nameError: 'Name can include only alphabets and non trailing spaces' });
+    return false;
+  };
+
+  isAgeValid = () => {
+    if (this.state.dob) {
+      if (this.checkAgeAbove18()) {
+        this.setState({ dateError: '' });
+        return true;
+      }
+      this.setState({ dateError: 'You must be 18 years or above' });
+      return false;
+    }
+    this.setState({ dateError: '' });
+    return true;
+  };
+
   updateProfile = () => {
     const payload = {
       _id: this.props.userId,
@@ -57,18 +104,25 @@ class EditProfileModal extends Component {
       dob: this.state.date,
       profilePic: this.state.profilePic,
     };
+
+    const nameValidity = this.isNameValid();
+    const ageValidity = this.isAgeValid();
+    if (
+      this.state.name && this.state.dob && nameValidity && ageValidity
+    ) {
     this.props.updateProfile(payload);
     this.props.showProfileModal();
+    }
   };
 
   dateChangeHandler = date => {
-    console.log(date)
     this.setState({ date });
     if (date) {
       const month = date.getMonth() + 1;
       this.setState({ dob: `${month}/${date.getDate()}/${date.getFullYear()}` });
     } else {
-      this.setState({ dob: '' });
+      this.setState({ dateError: 'You must be 18 years or above' });
+      return false;
     }
   };
 
@@ -144,6 +198,7 @@ class EditProfileModal extends Component {
                   onChange={this.handleOnChange}
                   value={this.state.name}
                 />
+                <label className="nameError">{this.state.nameError}</label>
               </div>
               <div className="flexLabelInput">
                 <label className="inputTitle">Bio</label>
@@ -184,6 +239,7 @@ class EditProfileModal extends Component {
                     value={this.state.date}
                   />
                 </div>
+                <label className="dateError">{this.state.dateError}</label>
               </div>
             </form>
           </Modal.Body>
