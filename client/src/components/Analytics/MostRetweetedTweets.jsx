@@ -12,6 +12,7 @@ class MostViewedTweets extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      pieOptions: {},
       dataPie: {
         labels: [],
         datasets: [],
@@ -23,12 +24,12 @@ class MostViewedTweets extends Component {
     const { fetchMostRetweetedTweet } = this.props;
     fetchMostRetweetedTweet().then(() => {
       const yAxis = this.props.mostRetweetedTweetData.map(element => {
-        return element.retweetCount;
+        return `${element.retweetCount}`;
       });
       let rankCount = 0;
       const xAxis = this.props.mostRetweetedTweetData.map(() => {
         rankCount += 1;
-        return `Rank ${rankCount}`;
+        return `Rank${rankCount}`;
       });
 
       this.setState({
@@ -40,6 +41,22 @@ class MostViewedTweets extends Component {
               backgroundColor: ['#46A2FF', '#6BB5FF', '#90C7FF', '#B5DAFF', '#ECF6FF'],
             },
           ],
+        },
+        pieOptions: {
+          tooltips: {
+            callbacks: {
+              label(tooltipItems, data) {
+                return `${data.labels[tooltipItems.index]} : ${
+                  data.datasets[0].data[tooltipItems.index]
+                } retweets`;
+              },
+            },
+          },
+          responsive: true,
+          maintainAspectRatio: true,
+          legend: {
+            display: false,
+          },
         },
       });
     });
@@ -56,7 +73,7 @@ class MostViewedTweets extends Component {
         <Pie
           data={this.state.dataPie}
           width={400}
-          options={{ responsive: true, maintainAspectRatio: true }}
+          options={this.state.pieOptions}
           onElementsClick={this.elementClicked}
         />
       </MDBContainer>

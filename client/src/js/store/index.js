@@ -39,7 +39,7 @@ axios.interceptors.response.use(
   error => {
     if (error.response && error.response.status === 401) {
       console.log(error.response.status);
-      toast.error('Unauthorized!');
+      toast.error('Invalid username and/or password!');
     } else if (error.response && error.response.status === 500) {
       const msg = error.response.data.message
         ? error.response.data.message
