@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { AiOutlinePicture } from 'react-icons/ai';
 import DatePicker from 'react-date-picker';
+import moment from 'moment';
 import './EditProfileModal.css';
 import { connect } from 'react-redux';
 import { imageActions, userActions } from '../../js/actions/index';
@@ -30,14 +31,14 @@ class EditProfileModal extends Component {
   }
 
   componentDidMount() {
-    const { name, bio, location, website, date, profilePic } = this.props.profile;
+    const { name, bio, location, website, dob, profilePic } = this.props.profile;
     this.setState({
       name,
       bio,
       location,
       website,
       profilePic,
-      date,
+      date: new Date(moment(dob).format('MM-DD-YYYY')),
     });
   }
 
@@ -53,7 +54,7 @@ class EditProfileModal extends Component {
       bio: this.state.bio,
       location: this.state.location,
       website: this.state.website,
-      dob: this.state.dob,
+      dob: this.state.date,
       profilePic: this.state.profilePic,
     };
     this.props.updateProfile(payload);
@@ -61,6 +62,7 @@ class EditProfileModal extends Component {
   };
 
   dateChangeHandler = date => {
+    console.log(date)
     this.setState({ date });
     if (date) {
       const month = date.getMonth() + 1;
