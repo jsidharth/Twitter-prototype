@@ -2,6 +2,7 @@
 /* eslint-disable import/no-named-as-default */
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import PrivateRoute from '../privateRoute';
 import Home from './Home/Home';
 import LandingPage from './LandingPage/LandingPage';
 import Messages from './Messages/Messages';
@@ -25,16 +26,16 @@ class Main extends Component {
       <div>
         <Route exact path="/" component={LandingPage} />
         <Switch>
-          <Route path="/home/status/:tweetID" component={TweetDetails} />
-          <Route path="/home" component={Home} />
-          <Route path="/bookmarks" component={Bookmarks} />
-          <Route path="/messages" component={Messages} />
-          <Route path="/lists/:userId" component={Lists} />
-          <Route path="/list/view/:listId" component={ListView} />
-          <Route path="/profile/:userId" component={Profile} />
-          <Route path="/analytics" component={Analytics} />
-          <Route path="/search" component={SearchResults} />
-          <Route path="/follow" component={Follow} />
+          <PrivateRoute path="/home/status/:tweetID" component={TweetDetails} />
+          <PrivateRoute path="/home" component={Home} />
+          <PrivateRoute path="/bookmarks" component={Bookmarks} />
+          <PrivateRoute path="/messages" component={Messages} />
+          <PrivateRoute path="/lists/:userId" component={Lists} />
+          <PrivateRoute path="/list/view/:listId" component={ListView} />
+          <PrivateRoute path="/profile/:userId" component={Profile} />
+          <PrivateRoute path="/analytics" component={Analytics} />
+          <PrivateRoute path="/search" component={SearchResults} />
+          <PrivateRoute path="/follow" component={Follow} />
         </Switch>
       </div>
     );

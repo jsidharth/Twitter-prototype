@@ -37,7 +37,14 @@ class CommentModal extends Component {
 
   replyTweet = () => {
     const { tweetText } = this.state;
-    const { userId, tweetId, imageUrl, replyTweet, showCommentModal } = this.props;
+    const {
+      userId,
+      tweetId,
+      imageUrl,
+      replyTweet,
+      showCommentModal,
+      fetchUpdatedFeed,
+    } = this.props;
     if (tweetText.length > 280) {
       console.log('max length exceeded');
     } else {
@@ -47,7 +54,14 @@ class CommentModal extends Component {
         tweetText,
         imageUrl,
       };
-      replyTweet(data);
+      replyTweet(data).then(() => {
+        const fetchFeedPayload = {
+          userId,
+          count: 10,
+          offset: 0,
+        };
+        fetchUpdatedFeed(fetchFeedPayload);
+      });
       showCommentModal();
     }
   };
@@ -168,6 +182,7 @@ const mapDispatchToProps = dispatch => ({
   upload: data => dispatch(imageActions.upload(data)),
   replyTweet: data => dispatch(tweetActions.replyTweet(data)),
   getTweetDetails: data => dispatch(tweetActions.getTweetDetails(data)),
+  fetchUpdatedFeed: data => dispatch(tweetActions.fetchUpdatedFeed(data)),
 });
 
 export default connect(
