@@ -84,6 +84,9 @@ export const updateProfile = payload => {
           type: actionTypes.GET_USER_PROFILE,
           payload: response.data,
         });
+        dispatch({
+          type: actionTypes.RESET_IMAGE_STATE,
+        });
       }
     });
   };

@@ -112,6 +112,22 @@
     font-size: 15px;
     outline: none;
   }
+
+  .disabledPostTweetBtn {
+    background-color: #d0d4d6;
+    color: white;
+    text-align: center;
+    font-weight: 700;
+    float: right;
+    margin-top: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border-radius: 20px;
+    font-size: 15px;
+    outline: none;
+  }
   
   .flexUploadTweet {
     display: flex;
