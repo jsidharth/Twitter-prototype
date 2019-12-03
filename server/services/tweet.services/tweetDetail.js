@@ -59,7 +59,7 @@ const handleRequest = (tweetId, callback) => {
                   active: 1,
                 }
               ).then(commentUser => {
-                if (commentUser.active) {
+                if (commentUser && commentUser.active) {
                   return {
                     _id: comment._id,
                     name: commentUser.name,

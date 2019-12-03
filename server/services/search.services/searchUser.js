@@ -21,7 +21,7 @@ const handleRequest = async (searchTerm, callback) => {
       },
     },
   ]);
-  users = _.chain(users).filter('active');
+  users = _.filter(users, 'active');
   callback(null, {
     users,
   });
