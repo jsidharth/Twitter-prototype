@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
@@ -11,7 +12,6 @@ class PostTweet extends Component {
     super(props);
     this.state = {
       tweetText: '',
-      pictures: [],
     };
 
     this.tweetTextHandler = this.tweetTextHandler.bind(this);
@@ -25,25 +25,27 @@ class PostTweet extends Component {
     });
   };
 
-  uploadImage = e => {
+  uploadImage = () => {
     const data = new FormData();
-    if (this.upladTweetImage.files && this.upladTweetImage.files.length) {
-      data.append('file', this.upladTweetImage.files[0] || '');
-      this.props.upload(data);
+    const { upload } = this.props;
+    if (this.uploadTweetImage.files && this.uploadTweetImage.files.length) {
+      data.append('file', this.uploadTweetImage.files[0] || '');
+      upload(data);
     }
   };
 
   postTweet = () => {
-    if (this.state.tweetText.length > 280) {
+    const { tweetText } = this.state;
+    const { postTweet, userId, imageUrl, fetchUpdatedFeed  } = this.props;
+    if (tweetText.length > 280) {
       console.log('max length exceeded');
     } else {
-      const { userId, imageUrl, fetchUpdatedFeed } = this.props;
       const data = {
         userId,
-        tweetText: this.state.tweetText,
+        tweetText,
         imageUrl,
       };
-      this.props.postTweet(data).then(() => {
+      postTweet(data).then(() => {
         const fetchFeedPayload = {
           userId,
           count: 10,
@@ -58,8 +60,9 @@ class PostTweet extends Component {
   };
 
   render() {
-    var count = 280 - this.state.tweetText.length;
-    const { user } = this.props;
+    const { tweetText } = this.state;
+    const { imageUrl, user } = this.props;
+    const count = 280 - tweetText.length;
 
     return (
       <div className="cardContainer">
@@ -80,13 +83,11 @@ class PostTweet extends Component {
                   onChange={this.tweetTextHandler}
                   placeholder="What's happening?"
                   maxLength="280"
-                  value={this.state.tweetText}
-                ></textarea>
+                  value={tweetText}
+                />
               </div>
             </div>
-            {this.props.imageUrl ? (
-              <img src={this.props.imageUrl} className="tweetImagePost" alt="Tweet" />
-            ) : null}
+            {imageUrl ? <img src={imageUrl} className="tweetImagePost" alt="Tweet" /> : null}
             <div className="flexUploadTweet">
               <div className="flexIconCharsCount">
                 <div className="iconUpload">
@@ -97,7 +98,7 @@ class PostTweet extends Component {
                     type="file"
                     onChange={this.uploadImage}
                     ref={ref => {
-                      this.upladTweetImage = ref;
+                      this.uploadTweetImage = ref;
                     }}
                   />
                   <label htmlFor="icon-button-file">
@@ -106,13 +107,13 @@ class PostTweet extends Component {
                 </div>
                 <div className="countMessageStyle">{`${count} characters remaining`}</div>
               </div>
-              <button className="postTweetBtn" onClick={this.postTweet}>
+              <button type="button" className="postTweetBtn" onClick={this.postTweet}>
                 Tweet
               </button>
             </div>
           </div>
         </div>
-        <div className="postTweetSeparator"></div>
+        <div className="postTweetSeparator" />
       </div>
     );
   }
