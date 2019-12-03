@@ -54,13 +54,16 @@ class CommentModal extends Component {
         tweetText,
         imageUrl,
       };
+      const { feedOffset, fromFeed } = this.props;
       replyTweet(data).then(() => {
-        const fetchFeedPayload = {
-          userId,
-          count: 10,
-          offset: 0,
-        };
-        fetchUpdatedFeed(fetchFeedPayload);
+        if (fromFeed) {
+          const fetchFeedPayload = {
+            userId,
+            count: feedOffset || 10,
+            offset: 0,
+          };
+          fetchUpdatedFeed(fetchFeedPayload);
+        }
       });
       showCommentModal();
     }
