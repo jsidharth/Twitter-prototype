@@ -1,3 +1,6 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { Component } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { connect } from 'react-redux';
@@ -10,7 +13,6 @@ class PostTweetModal extends Component {
     super(props);
     this.state = {
       tweetText: '',
-      pictures: [],
     };
 
     this.tweetTextHandler = this.tweetTextHandler.bind(this);
@@ -24,31 +26,34 @@ class PostTweetModal extends Component {
     });
   };
 
-  uploadImage = e => {
+  uploadImage = () => {
+    const { upload } = this.props;
     const data = new FormData();
-    if (this.upladTweetImage.files && this.upladTweetImage.files.length) {
-      data.append('file', this.upladTweetImage.files[0] || '');
-      this.props.upload(data);
+    if (this.uploadTweetImage.files && this.uploadTweetImage.files.length) {
+      data.append('file', this.uploadTweetImage.files[0] || '');
+      upload(data);
     }
   };
 
   postTweet = () => {
-    if (this.state.tweetText.length > 280) {
+    const { tweetText } = this.state;
+    const { postTweet, userId, imageUrl, showPostTweetModal, fetchUpdatedFeed } = this.props;
+    if (tweetText.length > 280) {
       console.log('max length exceeded');
     } else {
       const data = {
-        userId: this.props.userId,
-        tweetText: this.state.tweetText,
-        imageUrl: this.props.imageUrl,
+        userId,
+        tweetText,
+        imageUrl,
       };
-      this.props.postTweet(data).then(() => {
-        this.props.showPostTweetModal();
+      postTweet(data).then(() => {
+        showPostTweetModal();
         const fetchFeedPayload = {
-          userId: this.props.userId,
+          userId,
           count: 10,
           offset: 0,
         };
-        this.props.fetchUpdatedFeed(fetchFeedPayload);
+        fetchUpdatedFeed(fetchFeedPayload);
         this.setState({
           tweetText: '',
         });
@@ -57,14 +62,15 @@ class PostTweetModal extends Component {
   };
 
   render() {
-    var count = 280 - this.state.tweetText.length;
-    const { user } = this.props;
+    const { tweetText } = this.state;
+    const { imageUrl, showPostTweetModalState, showPostTweetModal, user } = this.props;
+    const count = 280 - tweetText.length;
 
     return (
       <Modal
         dialogClassName="commentModal"
-        show={this.props.showPostTweetModalState}
-        onHide={this.props.showPostTweetModal}
+        show={showPostTweetModalState}
+        onHide={showPostTweetModal}
         centered
       >
         <Modal.Header closeButton></Modal.Header>
@@ -84,13 +90,11 @@ class PostTweetModal extends Component {
                 onChange={this.tweetTextHandler}
                 placeholder="What's happening?"
                 maxLength="280"
-                value={this.state.tweetText}
-              ></textarea>
+                value={tweetText}
+              />
             </div>
           </div>
-          {this.props.imageUrl ? (
-            <img src={this.props.imageUrl} className="tweetImagePost" alt="Tweet" />
-          ) : null}
+          {imageUrl ? <img src={imageUrl} className="tweetImagePost" alt="Tweet" /> : null}
           <div className="flexUploadTweet">
             <div className="flexIconCharsCount">
               <div className="iconUpload">
@@ -101,7 +105,7 @@ class PostTweetModal extends Component {
                   type="file"
                   onChange={this.uploadImage}
                   ref={ref => {
-                    this.upladTweetImage = ref;
+                    this.uploadTweetImage = ref;
                   }}
                 />
                 <label htmlFor="icon-button-file">
@@ -110,7 +114,7 @@ class PostTweetModal extends Component {
               </div>
               <div className="countMessageStyle">{`${count} characters remaining`}</div>
             </div>
-            <button className="postTweetBtn" onClick={this.postTweet}>
+            <button type="button" className="postTweetBtn" onClick={this.postTweet}>
               Tweet
             </button>
           </div>
