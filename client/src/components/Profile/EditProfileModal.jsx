@@ -31,7 +31,10 @@ class EditProfileModal extends Component {
     this.checkAgeAbove18 = this.checkAgeAbove18.bind(this);
     this.isNameValid = this.isNameValid.bind(this);
     this.isWebsiteValid = this.isWebsiteValid.bind(this);
+    this.isLocationValid = this.isLocationValid.bind(this);
     this.isAgeValid = this.isAgeValid.bind(this);
+    this.trimBioSpaces = this.trimBioSpaces.bind(this);
+    this.updateProfile = this.updateProfile.bind(this);
   }
 
   componentDidMount() {
