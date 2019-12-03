@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
-/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -21,23 +20,24 @@ class Lists extends Component {
     };
 
     this.showAddListModal = this.showAddListModal.bind(this);
-
   }
 
   componentDidMount() {
-    const { getLists } = this.props;
-    getLists(this.props.match.params.userId);
+    const { getLists, match } = this.props;
+    getLists(match.params.userId);
   }
 
   showAddListModal = () => {
+    const { showAddListModal } = this.state;
     this.setState({
-      showAddListModal: !this.state.showAddListModal
+      showAddListModal: !showAddListModal,
     });
   };
 
-
   render() {
-    const { ownedLists, subscribedLists, listOwner } = this.props.lists;
+    const { lists, userId, match } = this.props;
+    const { ownedLists, subscribedLists, listOwner } = lists;
+    const { showAddListModal } = this.state;
     return (
       <div className="flexHomeScreen">
         <div>
@@ -46,14 +46,11 @@ class Lists extends Component {
         <div className="cardWidth">
           <div className="paperHeight">
             <div>Lists</div>
-            {
-              this.props.match.params.userId === this.props.userId ?
-                <div className="newListIcon">
-                  <MdPlaylistAdd size={25} onClick={this.showAddListModal} />
-                </div>
-              :
-              null
-            }
+            {match.params.userId === userId ? (
+              <div className="newListIcon">
+                <MdPlaylistAdd size={25} onClick={this.showAddListModal} />
+              </div>
+            ) : null}
           </div>
           <div className="tabMargin">
             <Tabs
@@ -62,20 +59,19 @@ class Lists extends Component {
               id="profile-tab"
               className="profileTabs"
             >
-              {/* Change the API for correct data */}
               <Tab eventKey="owned" title="Owned">
                 <div className="resultsTab">
                   {ownedLists && ownedLists.length
                     ? ownedLists.map(list => {
-                      list.userPic = listOwner.profilePic;
-                      list.userName = listOwner.name;
-                      list.userHandle = listOwner.handle;
-                      return (
-                        <div>
-                          <ListCard list={list} />
-                        </div>
-                      );
-                    })
+                        list.userPic = listOwner.profilePic;
+                        list.userName = listOwner.name;
+                        list.userHandle = listOwner.handle;
+                        return (
+                          <div>
+                            <ListCard list={list} />
+                          </div>
+                        );
+                      })
                     : null}
                 </div>
               </Tab>
@@ -83,23 +79,24 @@ class Lists extends Component {
                 <div className="resultsTab">
                   {subscribedLists && subscribedLists.length
                     ? subscribedLists.map(list => {
-                      return (
-                        <div className="profileTweets">
-                          <ListCard list={list} />
-                        </div>
-                      );
-                    })
+                        return (
+                          <div className="profileTweets">
+                            <ListCard list={list} />
+                          </div>
+                        );
+                      })
                     : null}
                 </div>
               </Tab>
             </Tabs>
           </div>
         </div>
-        {this.showAddListModal ?
+        {this.showAddListModal ? (
           <AddListModal
             showAddListModal={this.showAddListModal}
-            showAddListModalState={this.state.showAddListModal} />
-          : null}
+            showAddListModalState={showAddListModal}
+          />
+        ) : null}
         <SearchBar />
       </div>
     );
