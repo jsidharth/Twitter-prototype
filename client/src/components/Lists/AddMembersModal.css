@@ -13,6 +13,21 @@
   outline: none;
 }
 
+.disabledDoneBtn {
+  background-color: #d0d4d6;
+  color: white;
+  text-align: center;
+  font-weight: 700;
+  float: right;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 20px;
+  font-size: 15px;
+  outline: none;
+}
+
 .searchMembersBar {
   margin-left: 10px;
   background-color: #e6ecf0;

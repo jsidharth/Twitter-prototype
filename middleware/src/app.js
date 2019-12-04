@@ -20,7 +20,7 @@ app.use(passport.session());
 // use cors to allow cross origin resource sharing. Take value from .env file
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: 'http://serverloadbalancer-2041451976.us-east-1.elb.amazonaws.com:3000',
     credentials: true,
   })
 );
@@ -35,7 +35,10 @@ app.use(bodyParser.json());
 // Allow Access Control
 // eslint-disable-next-line func-names
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader(
+    'Access-Control-Allow-Origin',
+    'http://serverloadbalancer-2041451976.us-east-1.elb.amazonaws.com:3000'
+  );
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
   res.setHeader(

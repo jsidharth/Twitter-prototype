@@ -22,7 +22,7 @@ class AddListModal extends Component {
 
   inputChangeHandler = e => {
     this.setState({
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value.trim(),
     });
   };
 
@@ -59,9 +59,9 @@ class AddListModal extends Component {
         >
           <Modal.Header closeButton>
             <button
-              className={!listName ? 'disabledNextBtn' : 'nextBtn'}
+              className={!listName || listName.trim().length === 0 ? 'disabledNextBtn' : 'nextBtn'}
               onClick={this.nextBtnHandler}
-              disabled={!listName}
+              disabled={!listName || listName.trim().length === 0}
               type="button"
             >
               Next

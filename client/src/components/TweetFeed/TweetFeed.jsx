@@ -1,3 +1,4 @@
+/* eslint-disable react/no-deprecated */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
@@ -16,6 +17,7 @@ class TweetFeed extends Component {
       count: 10,
       offset: 0,
       hasMore: true,
+      feed: [],
     };
 
     this.likeTweet = this.likeTweet.bind(this);
@@ -35,12 +37,20 @@ class TweetFeed extends Component {
     this.props.fetchUpdatedFeed(fetchFeedPayload);
   }
 
+  // Render the tweet feed after a comment has been posted
+  componentWillReceiveProps(nextProps) {
+    const { feed } = nextProps;
+    this.setState({
+      feed,
+    });
+  }
+
   likeTweet = e => {
     const data = { tweetId: e.target.id, userId: this.props.userId };
     this.props.likeTweet(data).then(() => {
       const fetchFeedPayload = {
         userId: this.props.userId,
-        count: this.state.offset,
+        count: this.state.offset || 10,
         offset: 0,
       };
       this.props.fetchUpdatedFeed(fetchFeedPayload);
@@ -52,7 +62,7 @@ class TweetFeed extends Component {
     this.props.unlikeTweet(data).then(() => {
       const fetchFeedPayload = {
         userId: this.props.userId,
-        count: this.state.offset,
+        count: this.state.offset || 10,
         offset: 0,
       };
       this.props.fetchUpdatedFeed(fetchFeedPayload);
@@ -64,7 +74,7 @@ class TweetFeed extends Component {
     this.props.bookmarkTweet(data).then(() => {
       const fetchFeedPayload = {
         userId: this.props.userId,
-        count: this.state.offset,
+        count: this.state.offset || 10,
         offset: 0,
       };
       this.props.fetchUpdatedFeed(fetchFeedPayload);
@@ -76,7 +86,7 @@ class TweetFeed extends Component {
     this.props.retweet(data).then(() => {
       const fetchFeedPayload = {
         userId: this.props.userId,
-        count: this.state.offset,
+        count: this.state.offset || 10,
         offset: 0,
       };
       this.props.fetchUpdatedFeed(fetchFeedPayload);
@@ -91,7 +101,7 @@ class TweetFeed extends Component {
     this.props.deleteTweet(data).then(() => {
       const fetchFeedPayload = {
         userId: this.props.userId,
-        count: this.state.offset,
+        count: this.state.offset || 10,
         offset: 0,
       };
       this.props.fetchUpdatedFeed(fetchFeedPayload);
@@ -121,10 +131,6 @@ class TweetFeed extends Component {
   };
 
   render() {
-    let renderFeed = null;
-    if (this.props.feed) {
-      renderFeed = this.props.feed;
-    }
     let renderBookmarks = null;
     if (this.props.bookmarkedTweets) {
       renderBookmarks = this.props.bookmarkedTweets;
@@ -141,13 +147,16 @@ class TweetFeed extends Component {
         }
       >
         <TweetCard
-          tweets={renderFeed}
+          tweets={this.state.feed}
           likeTweet={this.likeTweet}
           unlikeTweet={this.unlikeTweet}
           deleteTweet={this.deleteTweet}
           bookmarkTweet={this.bookmarkTweet}
           retweet={this.retweet}
           bookmarks={renderBookmarks}
+          feedOffset={this.state.offset}
+          feedCount={this.state.count}
+          fromFeed
         />
       </InfiniteScroll>
     );

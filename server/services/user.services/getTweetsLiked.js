@@ -23,7 +23,7 @@ const handleRequest = (userId, callback) => {
             },
           ],
         }).then(user => {
-          if (user.active) {
+          if (user && user.active) {
             return {
               _id: tweet._id,
               name: user.name,

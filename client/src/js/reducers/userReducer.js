@@ -37,6 +37,14 @@ const userReducer = (state = initialState, action) => {
           subscribedLists: action.payload,
         },
       };
+    case actionTypes.UPDATE_CURRENT_USER_IMAGE:
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          profilePic: action.payload,
+        },
+      };
     default:
       break;
   }

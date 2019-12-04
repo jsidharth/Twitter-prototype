@@ -48,6 +48,15 @@ class NumberOfTweets extends Component {
           scale: {
             display: true,
           },
+          tooltips: {
+            callbacks: {
+              label(tooltipItems, data) {
+                return `${data.labels[tooltipItems.index]} : ${
+                  data.datasets[0].data[tooltipItems.index]
+                } tweets`;
+              },
+            },
+          },
         },
       });
     });

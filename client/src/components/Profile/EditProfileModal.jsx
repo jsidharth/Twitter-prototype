@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { AiOutlinePicture } from 'react-icons/ai';
 import DatePicker from 'react-date-picker';
+import moment from 'moment';
 import './EditProfileModal.css';
 import { connect } from 'react-redux';
 import { imageActions, userActions } from '../../js/actions/index';
@@ -27,23 +28,40 @@ class EditProfileModal extends Component {
     this.updateProfile = this.updateProfile.bind(this);
     this.uploadImage = this.uploadImage.bind(this);
     this.deactivate = this.deactivate.bind(this);
+    this.checkAgeAbove18 = this.checkAgeAbove18.bind(this);
+    this.isNameValid = this.isNameValid.bind(this);
+    this.isWebsiteValid = this.isWebsiteValid.bind(this);
+    this.isLocationValid = this.isLocationValid.bind(this);
+    this.isAgeValid = this.isAgeValid.bind(this);
+    this.updateProfile = this.updateProfile.bind(this);
   }
 
   componentDidMount() {
-    const { name, bio, location, website, date, profilePic } = this.props.profile;
+    const { name, bio, location, website, dob, profilePic } = this.props.profile;
     this.setState({
       name,
       bio,
       location,
       website,
       profilePic,
-      date,
+      date: new Date(moment(dob).format('MM-DD-YYYY')),
     });
   }
 
   deactivate = () => {
     const payload = { userId: this.props.userId };
     this.props.deactivate(payload);
+  };
+
+  checkAgeAbove18 = () => {
+    const dob = moment(this.state.date);
+    const today = moment(new Date());
+    const diffDuration = moment.duration(today.diff(dob));
+    const ageInYears = diffDuration.years();
+    if (ageInYears >= 18) {
+      return true;
+    }
+    return false;
   };
 
   updateProfile = () => {
@@ -53,11 +71,69 @@ class EditProfileModal extends Component {
       bio: this.state.bio,
       location: this.state.location,
       website: this.state.website,
-      dob: this.state.dob,
+      dob: this.state.date,
       profilePic: this.state.profilePic,
     };
-    this.props.updateProfile(payload);
-    this.props.showProfileModal();
+
+    const nameValidity = this.isNameValid();
+    const ageValidity = this.isAgeValid();
+    const websiteValidity = this.isWebsiteValid();
+    const locationValidity = this.isLocationValid();
+    if (this.state.name && nameValidity && ageValidity && websiteValidity && locationValidity) {
+      this.props.updateProfile(payload);
+      this.props.showProfileModal();
+    }
+  };
+
+  isNameValid = () => {
+    if (/^[A-Za-z]+(?: +[A-Za-z]+)*$/.test(this.state.name)) {
+      this.setState({ nameError: '' });
+      return true;
+    }
+    this.setState({ nameError: 'Name can include only alphabets and non trailing spaces' });
+    return false;
+  };
+
+  isLocationValid = () => {
+    if (this.state.location && /^[A-Za-z]+(?: +[A-Za-z]+)*$/.test(this.state.location)) {
+      this.setState({ locationError: '' });
+      return true;
+    }
+    if (!this.state.location) {
+      return true;
+    }
+    this.setState({
+      locationError: 'Location can include only alphabets and non trailing spaces',
+    });
+    return false;
+  };
+
+  isWebsiteValid = () => {
+    if (
+      this.state.website &&
+      /^((https):\/\/)?(www.)?[a-z0-9]+\.[a-z]+(\/[a-zA-Z0-9#]+\/?)*$/.test(this.state.website)
+    ) {
+      this.setState({ websiteError: '' });
+      return true;
+    }
+    if (!this.state.website) {
+      return true;
+    }
+    this.setState({ websiteError: 'Please enter valid URL format' });
+    return false;
+  };
+
+  isAgeValid = () => {
+    if (this.state.dob) {
+      if (this.checkAgeAbove18()) {
+        this.setState({ dateError: '' });
+        return true;
+      }
+      this.setState({ dateError: 'You must be 18 years or above' });
+      return false;
+    }
+    this.setState({ dateError: '' });
+    return true;
   };
 
   dateChangeHandler = date => {
@@ -66,7 +142,8 @@ class EditProfileModal extends Component {
       const month = date.getMonth() + 1;
       this.setState({ dob: `${month}/${date.getDate()}/${date.getFullYear()}` });
     } else {
-      this.setState({ dob: '' });
+      this.setState({ dateError: 'You must be 18 years or above' });
+      return false;
     }
   };
 
@@ -84,8 +161,25 @@ class EditProfileModal extends Component {
 
   handleOnChange = e => {
     this.setState({
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value.trim(),
     });
+  };
+
+  closeModal = () => {
+    const { name, bio, location, website, dob, profilePic } = this.props.profile;
+    this.setState({
+      name,
+      bio,
+      location,
+      website,
+      profilePic,
+      date: new Date(moment(dob).format('MM-DD-YYYY')),
+      nameError: '',
+      dateError: '',
+      locationError: '',
+      websiteError: '',
+    });
+    this.props.showProfileModal();
   };
 
   render() {
@@ -97,7 +191,7 @@ class EditProfileModal extends Component {
         <Modal
           dialogClassName="profileModal"
           show={this.props.showProfileModalState}
-          onHide={this.props.showProfileModal}
+          onHide={this.closeModal}
           centered
         >
           <Modal.Header closeButton>
@@ -142,6 +236,7 @@ class EditProfileModal extends Component {
                   onChange={this.handleOnChange}
                   value={this.state.name}
                 />
+                <label className="error">{this.state.nameError}</label>
               </div>
               <div className="flexLabelInput">
                 <label className="inputTitle">Bio</label>
@@ -162,6 +257,7 @@ class EditProfileModal extends Component {
                   onChange={this.handleOnChange}
                   value={this.state.location}
                 />
+                <label className="error">{this.state.locationError}</label>
               </div>
               <div className="flexLabelInput">
                 <label className="inputTitle">Website</label>
@@ -172,6 +268,7 @@ class EditProfileModal extends Component {
                   onChange={this.handleOnChange}
                   value={this.state.website}
                 />
+                <label className="error">{this.state.websiteError}</label>
               </div>
               <div className="flexLabelInput">
                 <label className="inputTitle">Birth Date</label>
@@ -182,6 +279,7 @@ class EditProfileModal extends Component {
                     value={this.state.date}
                   />
                 </div>
+                <label className="error">{this.state.dateError}</label>
               </div>
             </form>
           </Modal.Body>

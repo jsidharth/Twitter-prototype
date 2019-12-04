@@ -1,7 +1,6 @@
 import axios from 'axios';
 import actionTypes from '../constants/index';
-
-const ROOT_URL = 'http://localhost:3001';
+import { ROOT_URL } from '../../constant/constant';
 
 // eslint-disable-next-line import/prefer-default-export
 export const upload = payload => {

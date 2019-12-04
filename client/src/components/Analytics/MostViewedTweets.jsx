@@ -12,6 +12,7 @@ class MostViewedTweets extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      donutOptions: {},
       dataDoughnut: {
         labels: [],
         datasets: [],
@@ -51,6 +52,22 @@ class MostViewedTweets extends Component {
             },
           ],
         },
+        donutOptions: {
+          tooltips: {
+            callbacks: {
+              label(tooltipItems, data) {
+                return `${data.labels[tooltipItems.index]} : ${
+                  data.datasets[0].data[tooltipItems.index]
+                } views`;
+              },
+            },
+          },
+          responsive: true,
+          maintainAspectRatio: true,
+          legend: {
+            display: false,
+          },
+        },
       });
     });
   }
@@ -66,7 +83,7 @@ class MostViewedTweets extends Component {
         <Doughnut
           data={this.state.dataDoughnut}
           width={400}
-          options={{ responsive: true, maintainAspectRatio: true }}
+          options={this.state.donutOptions}
           onElementsClick={this.elementClicked}
         />
       </MDBContainer>

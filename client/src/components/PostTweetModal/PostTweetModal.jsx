@@ -114,7 +114,16 @@ class PostTweetModal extends Component {
               </div>
               <div className="countMessageStyle">{`${count} characters remaining`}</div>
             </div>
-            <button type="button" className="postTweetBtn" onClick={this.postTweet}>
+            <button
+              type="button"
+              className={
+                !tweetText || tweetText.trim().length === 0
+                  ? 'disabledPostTweetBtn'
+                  : 'postTweetBtn'
+              }
+              onClick={this.postTweet}
+              disabled={!tweetText || tweetText.trim().length === 0}
+            >
               Tweet
             </button>
           </div>

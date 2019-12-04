@@ -37,7 +37,11 @@ const handleRequest = async (userDetails, callback) => {
       name: newUser.name,
       email: newUser.email,
       dob: moment(newUser.dob).format('MM-DD-YYYY'),
+      active: newUser.active,
+      bookmarks: newUser.bookmarks,
+      profilePic: newUser.profilePic,
       handle: newUser.handle,
+      subscribedLists: newUser.subscribedLists,
     });
   }
 };

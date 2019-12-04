@@ -1,11 +1,12 @@
 /* eslint-disable no-underscore-dangle */
 import Promise from 'bluebird';
+import _ from 'lodash';
 import moment from 'moment';
 import Users from '../../models/user.model';
 import Tweets from '../../models/tweet.model';
 
 const handleRequest = async (searchTerm, callback) => {
-  const users = await Users.aggregate([
+  let users = await Users.aggregate([
     {
       $match: {
         name: {
@@ -20,9 +21,11 @@ const handleRequest = async (searchTerm, callback) => {
         bio: 1,
         handle: 1,
         profilePic: 1,
+        active: 1,
       },
     },
   ]);
+  users = _.filter(users, 'active');
 
   const searchTweets = await Tweets.aggregate([
     {
@@ -44,22 +47,27 @@ const handleRequest = async (searchTerm, callback) => {
           name: 1,
           handle: 1,
           profilePic: 1,
+          active: 1,
         }
       );
-      return {
-        _id: tweet._id,
-        name: user.name,
-        handle: user.handle,
-        profilePic: user.profilePic,
-        likes_count: tweet.likes.length || 0,
-        comments_count: tweet.comments.length || 0,
-        retweet_count: tweet.retweets.length || 0,
-        body: tweet.body,
-        image: tweet.image,
-        created_at: tweet.createdAt,
-        likes: tweet.likes,
-      };
+      if (user && user.active) {
+        return {
+          _id: tweet._id,
+          name: user.name,
+          handle: user.handle,
+          profilePic: user.profilePic,
+          likes_count: tweet.likes.length || 0,
+          comments_count: tweet.comments.length || 0,
+          retweet_count: tweet.retweets.length || 0,
+          body: tweet.body,
+          image: tweet.image,
+          created_at: tweet.createdAt,
+          likes: tweet.likes,
+        };
+      }
+      return '';
     });
+    updatedTweets = _.compact(updatedTweets);
     updatedTweets = updatedTweets.sort((first, second) =>
       moment(second.created_at).diff(first.created_at)
     );

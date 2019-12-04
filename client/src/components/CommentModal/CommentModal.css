@@ -1,6 +1,12 @@
 .commentModal {
-  min-width: 45%;
+  min-width: 50%;
   border-radius: 20px;
+}
+
+.modal-content {
+  border-style: solid !important;
+  border-width: 0.5px !important;
+  border-color: #d0d4d6 !important;
 }
 
 .profileImageCommentModal {
@@ -107,6 +113,14 @@
   overflow-wrap: break-word;
 }
 
+.modal-backdrop.show {
+  opacity: .02 !important;
+}
+
+.modal-backdrop {
+  background-color: transparent !important;
+}
+
 .tweetReply {
   display: flex;
   flex-direction: row;
@@ -122,6 +136,22 @@
 
 .replyTweetBtn {
   background-color: #1da1f2;
+  color: white;
+  text-align: center;
+  font-weight: 700;
+  float: right;
+  margin-top: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border-radius: 20px;
+  font-size: 15px;
+  outline: none;
+}
+
+.disabledReplyTweetBtn {
+  background-color: #d0d4d6;
   color: white;
   text-align: center;
   font-weight: 700;

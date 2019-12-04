@@ -37,7 +37,14 @@ class CommentModal extends Component {
 
   replyTweet = () => {
     const { tweetText } = this.state;
-    const { userId, tweetId, imageUrl, replyTweet, showCommentModal } = this.props;
+    const {
+      userId,
+      tweetId,
+      imageUrl,
+      replyTweet,
+      showCommentModal,
+      fetchUpdatedFeed,
+    } = this.props;
     if (tweetText.length > 280) {
       console.log('max length exceeded');
     } else {
@@ -47,8 +54,19 @@ class CommentModal extends Component {
         tweetText,
         imageUrl,
       };
-      replyTweet(data);
-      showCommentModal();
+      const { feedOffset, fromFeed } = this.props;
+      replyTweet(data).then(() => {
+        if (fromFeed) {
+          const fetchFeedPayload = {
+            userId,
+            count: feedOffset || 10,
+            offset: 0,
+          };
+          fetchUpdatedFeed(fetchFeedPayload).then(() => {
+            showCommentModal();
+          });
+        }
+      });
     }
   };
 
@@ -90,7 +108,6 @@ class CommentModal extends Component {
               <div className="flexNameHandleCommentModal">
                 <p className="tweetUserNameCommentModal">{tweetUserName}</p>
                 <p className="tweetUserHandleCommentModal">@{tweetUserHandle}</p>
-                <p className="tweetUserNameCommentModal">.</p>
                 <p className="tweetDateDetailsCommentModal">{tweetDate}</p>
               </div>
               <div className="bodyCommentModal">{tweetBody}</div>
@@ -149,7 +166,16 @@ class CommentModal extends Component {
               </div>
               <div className="countMessageStyleComment">{`${count} characters remaining`}</div>
             </div>
-            <button type="button" className="replyTweetBtn" onClick={this.replyTweet}>
+            <button
+              type="button"
+              className={
+                !tweetText || tweetText.trim().length === 0
+                  ? 'disabledReplyTweetBtn'
+                  : 'replyTweetBtn'
+              }
+              onClick={this.replyTweet}
+              disabled={!tweetText || tweetText.trim().length === 0}
+            >
               Reply
             </button>
           </div>
@@ -168,6 +194,7 @@ const mapDispatchToProps = dispatch => ({
   upload: data => dispatch(imageActions.upload(data)),
   replyTweet: data => dispatch(tweetActions.replyTweet(data)),
   getTweetDetails: data => dispatch(tweetActions.getTweetDetails(data)),
+  fetchUpdatedFeed: data => dispatch(tweetActions.fetchUpdatedFeed(data)),
 });
 
 export default connect(
