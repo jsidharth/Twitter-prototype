@@ -12,9 +12,6 @@ const handleRequest = (userId, callback) => {
       _id: userId,
     },
     {
-      bookmarks: 0,
-      ownedLists: 0,
-      subscribedLists: 0,
       __v: 0,
       updatedAt: 0,
     }
