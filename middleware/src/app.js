@@ -20,7 +20,7 @@ app.use(passport.session());
 // use cors to allow cross origin resource sharing. Take value from .env file
 app.use(
   cors({
-    origin: 'http://twitter-frontend-lb-420201746.us-east-1.elb.amazonaws.com:3000',
+    origin: 'twitter-frontend-lb-420201746.us-east-1.elb.amazonaws.com:3000',
     credentials: true,
   })
 );
@@ -37,7 +37,7 @@ app.use(bodyParser.json());
 app.use((req, res, next) => {
   res.setHeader(
     'Access-Control-Allow-Origin',
-    'http://twitter-frontend-lb-420201746.us-east-1.elb.amazonaws.com/:3000'
+    'twitter-frontend-lb-420201746.us-east-1.elb.amazonaws.com/:3000'
   );
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
