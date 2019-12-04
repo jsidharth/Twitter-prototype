@@ -90,18 +90,8 @@ export const updateProfile = payload => {
           type: actionTypes.RESET_IMAGE_STATE,
         });
         dispatch({
-          type: actionTypes.USER_LOGIN,
-          payload: {
-            _id: response.data._id,
-            name: response.data.name,
-            email: response.data.email,
-            dob: moment(response.data.dob).format('MM-DD-YYYY'),
-            active: response.data.active,
-            bookmarks: response.data.bookmarks,
-            profilePic: response.data.profilePic,
-            handle: response.data.handle,
-            subscribedLists: response.data.subscribedLists,
-          },
+          type: actionTypes.UPDATE_CURRENT_USER_IMAGE,
+          payload: response.data.profilePic,
         });
       }
     });
