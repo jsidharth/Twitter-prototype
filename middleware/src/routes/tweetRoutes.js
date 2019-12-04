@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import express from 'express';
-// import passport from 'passport';
+import client from '../../config/redisConfig';
 
 const kafka = require('../../kafka/client');
 
@@ -47,9 +47,10 @@ tweetRouter.post('/post', (req, res) => {
         res.status(500).json({
           message: err.message,
         });
-      } else {
-        res.status(200).json(result);
       }
+      return client.delAsync(req.body.userId).then(() => {
+        res.status(200).json(result);
+      });
     }
   );
 });
@@ -115,9 +116,10 @@ tweetRouter.post('/retweet', (req, res) => {
         res.status(500).json({
           message: err.message,
         });
-      } else {
-        res.status(200).json(result);
       }
+      return client.delAsync(req.body.userId).then(() => {
+        res.status(200).json(result);
+      });
     }
   );
 });
@@ -181,9 +183,10 @@ tweetRouter.put('/like', (req, res) => {
         res.status(500).json({
           message: err.message,
         });
-      } else {
-        res.status(200).json(result);
       }
+      return client.delAsync(req.body.userId).then(() => {
+        res.status(200).json(result);
+      });
     }
   );
 });
@@ -203,9 +206,10 @@ tweetRouter.put('/unlike', (req, res) => {
         res.status(500).json({
           message: err.message,
         });
-      } else {
-        res.status(200).json(result);
       }
+      return client.delAsync(req.body.userId).then(() => {
+        res.status(200).json(result);
+      });
     }
   );
 });
@@ -225,9 +229,10 @@ tweetRouter.post('/reply', (req, res) => {
         res.status(500).json({
           message: err.message,
         });
-      } else {
-        res.status(200).json(result);
       }
+      return client.delAsync(req.body.userId).then(() => {
+        res.status(200).json(result);
+      });
     }
   );
 });
