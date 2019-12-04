@@ -61,7 +61,7 @@ class AddListModal extends Component {
             <button
               className={!listName || listName.trim().length === 0 ? 'disabledNextBtn' : 'nextBtn'}
               onClick={this.nextBtnHandler}
-              disabled={!listName}
+              disabled={!listName || listName.trim().length === 0}
               type="button"
             >
               Next
