@@ -17,4 +17,12 @@ routes.use('/search', passport.authenticate('jwt'), searchRoutes);
 routes.use('/list', passport.authenticate('jwt'), listRoutes);
 routes.use('/message', passport.authenticate('jwt'), messageRoutes);
 routes.use('/analytics', passport.authenticate('jwt'), analyticsRoutes);
+// Healthcheck API for ELB
+routes.get('/health', (req, res) => {
+  if (req) {
+    res.status(200).json({
+      message: 'OK!',
+    });
+  }
+});
 export default routes;
