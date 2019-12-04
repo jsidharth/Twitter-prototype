@@ -170,7 +170,9 @@ userRouter.post('/follow', passport.authenticate('jwt'), (req, res) => {
         });
       }
       return client.delAsync(req.body.userId).then(() => {
-        res.status(200).json(result);
+        return client.delAsync(req.body.followerId).then(() => {
+          res.status(200).json(result);
+        });
       });
     }
   );
@@ -191,7 +193,9 @@ userRouter.post('/unfollow', passport.authenticate('jwt'), (req, res) => {
         });
       }
       return client.delAsync(req.body.userId).then(() => {
-        res.status(200).json(result);
+        return client.delAsync(req.body.followerId).then(() => {
+          res.status(200).json(result);
+        });
       });
     }
   );
