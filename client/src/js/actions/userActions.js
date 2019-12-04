@@ -1,7 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import axios from 'axios';
 import cookie from 'js-cookie';
-import moment from 'moment';
 import { toast } from 'react-toastify';
 import actionTypes from '../constants/index';
 import { ROOT_URL } from '../../constant/constant';
