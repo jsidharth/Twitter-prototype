@@ -19,6 +19,7 @@ class TweetCard extends Component {
       tweetForComment: {},
     };
     this.showCommentModal = this.showCommentModal.bind(this);
+    this.transformDate = this.transformDate.bind(this);
   }
 
   showCommentModal = tweet => {
@@ -27,6 +28,14 @@ class TweetCard extends Component {
       showCommentModal: !showCommentModal,
       tweetForComment: tweet,
     });
+  };
+
+  transformDate = dateCreated => {
+    let myDate = new Date(dateCreated);
+    myDate = myDate.toString();
+    myDate = myDate.split(' ');
+    const date = `${myDate[1]} ${myDate[2]},${myDate[3]}`;
+    return date;
   };
 
   render() {
@@ -73,7 +82,7 @@ class TweetCard extends Component {
                 tweetProfilePic={tweetForComment.profilePic}
                 tweetUserName={tweetForComment.name}
                 tweetUserHandle={tweetForComment.handle}
-                tweetDate={tweetForComment.created_at}
+                tweetDate={this.transformDate(tweetForComment.created_at)}
                 tweetBody={tweetForComment.body}
                 tweetUserId={tweetForComment.userId}
                 tweetId={tweetForComment._id}
