@@ -1,5 +1,7 @@
+/* eslint-disable no-underscore-dangle */
 import axios from 'axios';
 import cookie from 'js-cookie';
+import moment from 'moment';
 import { toast } from 'react-toastify';
 import actionTypes from '../constants/index';
 import { ROOT_URL } from '../../constant/constant';
@@ -86,6 +88,10 @@ export const updateProfile = payload => {
         });
         dispatch({
           type: actionTypes.RESET_IMAGE_STATE,
+        });
+        dispatch({
+          type: actionTypes.UPDATE_CURRENT_USER_IMAGE,
+          payload: response.data.profilePic,
         });
       }
     });
