@@ -339,7 +339,7 @@ class LandingPage extends Component {
                         onChange={this.nameChangeHandler}
                       />
                     </Row>
-                    <label className="error">{this.state.nameError}</label>
+                    <label className="errorLabel">{this.state.nameError}</label>
                   </Col>
                   <Col md={1} />
                 </Row>
@@ -356,7 +356,7 @@ class LandingPage extends Component {
                         onChange={this.emailChangeHandler}
                       />
                     </Row>
-                    <label className="error">{this.state.emailError}</label>
+                    <label className="errorLabel">{this.state.emailError}</label>
                   </Col>
                   <Col md={1} />
                 </Row>
@@ -373,7 +373,7 @@ class LandingPage extends Component {
                         onChange={this.passwordChangeHandler}
                       />
                     </Row>
-                    <label className="error">{this.state.passwordError}</label>
+                    <label className="errorLabel">{this.state.passwordError}</label>
                   </Col>
                   <Col md={1} />
                 </Row>
@@ -397,7 +397,7 @@ class LandingPage extends Component {
                         format="M/d/y"
                       />
                     </Row>
-                    <label className="error">{this.state.dateError}</label>
+                    <label className="errorLabel">{this.state.dateError}</label>
                   </Col>
                   <Col md={1} />
                 </Row>
