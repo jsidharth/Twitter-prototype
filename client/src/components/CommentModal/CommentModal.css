@@ -1,5 +1,5 @@
 .commentModal {
-  min-width: 45%;
+  min-width: 50%;
   border-radius: 20px;
 }
 
@@ -115,6 +115,10 @@
 
 .modal-backdrop.show {
   opacity: .02 !important;
+}
+
+.modal-backdrop {
+  background-color: transparent !important;
 }
 
 .tweetReply {

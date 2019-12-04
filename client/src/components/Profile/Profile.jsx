@@ -235,7 +235,7 @@ class Profile extends Component {
                 </div>
               </Link>
               <div className="profileNumTweets">
-                Profile
+                {profile.name}
                 <div className="numTweets">{numTweets} Tweets</div>
               </div>
             </div>

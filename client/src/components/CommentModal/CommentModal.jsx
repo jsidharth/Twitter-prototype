@@ -62,10 +62,11 @@ class CommentModal extends Component {
             count: feedOffset || 10,
             offset: 0,
           };
-          fetchUpdatedFeed(fetchFeedPayload);
+          fetchUpdatedFeed(fetchFeedPayload).then(() => {
+            showCommentModal();
+          });
         }
       });
-      showCommentModal();
     }
   };
 
@@ -107,7 +108,6 @@ class CommentModal extends Component {
               <div className="flexNameHandleCommentModal">
                 <p className="tweetUserNameCommentModal">{tweetUserName}</p>
                 <p className="tweetUserHandleCommentModal">@{tweetUserHandle}</p>
-                <p className="tweetUserNameCommentModal">.</p>
                 <p className="tweetDateDetailsCommentModal">{tweetDate}</p>
               </div>
               <div className="bodyCommentModal">{tweetBody}</div>

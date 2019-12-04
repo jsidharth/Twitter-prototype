@@ -4,6 +4,7 @@
 /* eslint-disable react/no-deprecated */
 /* eslint-disable no-underscore-dangle */
 import React, { Component } from 'react';
+import _ from 'lodash';
 import Modal from 'react-bootstrap/Modal';
 import { FiSearch } from 'react-icons/fi';
 import { connect } from 'react-redux';
@@ -50,9 +51,12 @@ class AddMembersModal extends Component {
 
   addMembersToList = user => {
     const { listOfMembers } = this.state;
-    this.setState({
-      listOfMembers: listOfMembers.concat(user),
-    });
+    if (!listOfMembers.includes(user)) {
+      listOfMembers.push(user);
+      this.setState({
+        listOfMembers: _.uniqBy(listOfMembers, '_id'),
+      });
+    }
   };
 
   doneBtnHandler = () => {
@@ -96,7 +100,12 @@ class AddMembersModal extends Component {
         centered
       >
         <Modal.Header closeButton>
-          <button className="doneBtn" onClick={this.doneBtnHandler} type="button">
+          <button
+            className={!listOfMembers || listOfMembers.length === 0 ? 'disabledDoneBtn' : 'doneBtn'}
+            onClick={this.doneBtnHandler}
+            type="button"
+            disabled={!listOfMembers || listOfMembers.length === 0}
+          >
             Done
           </button>
           <Modal.Title className="newListTitle">Add members</Modal.Title>
