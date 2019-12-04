@@ -1,0 +1,189 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render correctly the Landing Page component 1`] = `
+<div>
+  
+  <div
+    className="main1 row"
+  >
+    <div
+      className="home col-6"
+    />
+    <div
+      className="col-6"
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="col-md-4"
+        >
+          <div
+            className="row"
+          >
+            <h6
+              className="login-label"
+            >
+              Email
+            </h6>
+          </div>
+          <div
+            className="row"
+          >
+            <input
+              className="login-username"
+              onChange={[Function]}
+              type="text"
+              value=""
+            />
+          </div>
+          <label
+            className="loginUserNameError"
+          >
+            
+          </label>
+        </div>
+        <div
+          className="col-md-4"
+        >
+          <div
+            className="row"
+          >
+            <h6
+              className="login-label"
+            >
+              Password
+            </h6>
+          </div>
+          <div
+            className="row"
+          >
+            <input
+              className="login-username"
+              onChange={[Function]}
+              type="password"
+              value=""
+            />
+          </div>
+          <label
+            className="loginUserNameError"
+          >
+            
+          </label>
+        </div>
+        <div
+          className="col-md-2"
+        >
+          <button
+            className=" info-transparent-login"
+            onClick={[Function]}
+            type="button"
+          >
+            Log In
+          </button>
+        </div>
+      </div>
+      <div
+        className="twitterImage row"
+      >
+        <div
+          className="col-md-3"
+        />
+        <div
+          className="col-md-6"
+        >
+          <img
+            alt="Main logo link to home"
+            height="40px"
+            src="https://upload.wikimedia.org/wikipedia/fr/thumb/c/c8/Twitter_Bird.svg/944px-Twitter_Bird.svg.png"
+            width="40px"
+          />
+           
+        </div>
+        <div
+          className="col-md-3"
+        />
+      </div>
+      <div
+        className="row"
+      >
+        <div
+          className="col-md-3"
+        />
+        <div
+          className="col-md-6"
+        >
+          <h2
+            className="bolder"
+          >
+            See what's happening in the world right now.
+          </h2>
+        </div>
+        <div
+          className="col-md-3"
+        />
+      </div>
+      <div
+        className="joinTwitter row"
+      >
+        <div
+          className="col-md-3"
+        />
+        <div
+          className="col-md-6"
+        >
+          <h4
+            className="bolder"
+          >
+            Join Twitter today.
+          </h4>
+        </div>
+        <div
+          className="col-md-3"
+        />
+      </div>
+      <div
+        className="row"
+      >
+        <div
+          className="col-md-3"
+        />
+        <div
+          className="col-md-6"
+        >
+          <button
+            className=" btn-info-solid"
+            onClick={[Function]}
+            type="button"
+          >
+            Sign Up
+          </button>
+        </div>
+        <div
+          className="col-md-3"
+        />
+      </div>
+      <div
+        className="row"
+      >
+        <div
+          className="col-md-3"
+        />
+        <div
+          className="col-md-6"
+        >
+          <button
+            className=" btn-info-transparent"
+            type="button"
+          >
+            Log In
+          </button>
+        </div>
+        <div
+          className="col-md-3"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

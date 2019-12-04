@@ -1,0 +1,440 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render correctly the FollowTab component 1`] = `
+<div
+  className="flexHomeScreen"
+>
+  <div>
+    <div
+      className="StickySidebar"
+    >
+      <div>
+        <nav
+          className="sidebar"
+        >
+          <div
+            className="list-group list-group-flush"
+            onKeyDown={[Function]}
+          >
+            <div>
+              <div
+                className="list-group-item"
+                data-rb-event-key={null}
+                disabled={false}
+                onClick={[Function]}
+              >
+                <span
+                  className="navbar-brand"
+                >
+                  <img
+                    alt="Main logo link to home"
+                    className="d-inline-block align-top"
+                    height="35px"
+                    src="https://upload.wikimedia.org/wikipedia/fr/thumb/c/c8/Twitter_Bird.svg/944px-Twitter_Bird.svg.png"
+                    width="45px"
+                  />
+                </span>
+              </div>
+            </div>
+            <div>
+              <div
+                className="list-group-item"
+                data-rb-event-key={null}
+                disabled={false}
+                onClick={[Function]}
+              >
+                <div
+                  className="flexSidebars"
+                >
+                  <svg
+                    fill="currentColor"
+                    height={30}
+                    size={30}
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 16 16"
+                    width={30}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M16 9l-3-3V2h-2v2L8 1 0 9h2l1 5c0 .55.45 1 1 1h8c.55 0 1-.45 1-1l1-5h2zm-4 5H9v-4H7v4H4L2.81 7.69 8 2.5l5.19 5.19L12 14z"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                  <p
+                    className="sidebarTopics"
+                  >
+                    Home
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div
+                className="list-group-item"
+                data-rb-event-key={null}
+                disabled={false}
+                onClick={[Function]}
+              >
+                <div
+                  className="flexSidebars"
+                >
+                  <svg
+                    fill="currentColor"
+                    height={30}
+                    size={30}
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 14 16"
+                    width={30}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M0 4v8c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1H1c-.55 0-1 .45-1 1zm13 0L7 9 1 4h12zM1 5.5l4 3-4 3v-6zM2 12l3.5-3L7 10.5 8.5 9l3.5 3H2zm11-.5l-4-3 4-3v6z"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                  <p
+                    className="sidebarTopics"
+                  >
+                    Messages
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div
+                className="list-group-item"
+                data-rb-event-key={null}
+                disabled={false}
+                onClick={[Function]}
+              >
+                <div
+                  className="flexSidebars"
+                >
+                  <svg
+                    fill="none"
+                    height={30}
+                    size={30}
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 24 24"
+                    width={30}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"
+                    />
+                  </svg>
+                  <p
+                    className="sidebarTopics"
+                  >
+                    Bookmarks
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div
+                className="list-group-item"
+                data-rb-event-key={null}
+                disabled={false}
+                onClick={[Function]}
+              >
+                <div
+                  className="flexSidebars"
+                >
+                  <svg
+                    fill="currentColor"
+                    height={30}
+                    size={30}
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 14 16"
+                    width={30}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M3 10h4V9H3v1zm0-2h6V7H3v1zm0-2h8V5H3v1zm10 6H1V3h12v9zM1 2c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1H1z"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                  <p
+                    className="sidebarTopics"
+                  >
+                    Lists
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div
+                className="list-group-item"
+                data-rb-event-key={null}
+                disabled={false}
+                onClick={[Function]}
+              >
+                <div
+                  className="flexSidebars"
+                >
+                  <svg
+                    fill="currentColor"
+                    height={30}
+                    size={30}
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 496 512"
+                    width={30}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M248 104c-53 0-96 43-96 96s43 96 96 96 96-43 96-96-43-96-96-96zm0 144c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm0-240C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 448c-49.7 0-95.1-18.3-130.1-48.4 14.9-23 40.4-38.6 69.6-39.5 20.8 6.4 40.6 9.6 60.5 9.6s39.7-3.1 60.5-9.6c29.2 1 54.7 16.5 69.6 39.5-35 30.1-80.4 48.4-130.1 48.4zm162.7-84.1c-24.4-31.4-62.1-51.9-105.1-51.9-10.2 0-26 9.6-57.6 9.6-31.5 0-47.4-9.6-57.6-9.6-42.9 0-80.6 20.5-105.1 51.9C61.9 339.2 48 299.2 48 256c0-110.3 89.7-200 200-200s200 89.7 200 200c0 43.2-13.9 83.2-37.3 115.9z"
+                    />
+                  </svg>
+                  <p
+                    className="sidebarTopics"
+                  >
+                    Profile
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div
+                className="list-group-item"
+                data-rb-event-key={null}
+                disabled={false}
+                onClick={[Function]}
+              >
+                <div
+                  className="flexSidebars"
+                >
+                  <svg
+                    fill="currentColor"
+                    height={30}
+                    size={30}
+                    stroke="currentColor"
+                    strokeWidth="0"
+                    style={
+                      Object {
+                        "color": undefined,
+                      }
+                    }
+                    viewBox="0 0 16 16"
+                    width={30}
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M16 14v1H0V0h1v14h15zM5 13H3V8h2v5zm4 0H7V3h2v10zm4 0h-2V6h2v7z"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                  <p
+                    className="sidebarTopics"
+                  >
+                    Analytics
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div
+                className="list-group-item"
+                data-rb-event-key={null}
+                disabled={false}
+                onClick={[Function]}
+              >
+                <div
+                  className="Signout"
+                  id="signout"
+                  onClick={[Function]}
+                >
+                  <div
+                    className="flexSidebars"
+                  >
+                    <svg
+                      fill="none"
+                      height={30}
+                      size={30}
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      style={
+                        Object {
+                          "color": undefined,
+                        }
+                      }
+                      viewBox="0 0 24 24"
+                      width={30}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"
+                      />
+                      <polyline
+                        points="16 17 21 12 16 7"
+                      />
+                      <line
+                        x1="21"
+                        x2="9"
+                        y1="12"
+                        y2="12"
+                      />
+                    </svg>
+                    <p
+                      className="sidebarTopics"
+                    >
+                      Logout
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              className="tweetBtn"
+              onClick={[Function]}
+              type="button"
+            >
+              Tweet
+            </button>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div
+    className="cardWidth"
+  >
+    <div
+      className="paperHeightForFollowers"
+    >
+      <div
+        className="backIcon"
+      >
+        <svg
+          fill="currentColor"
+          height={30}
+          size={30}
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+          viewBox="0 0 24 24"
+          width={30}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21z"
+          />
+        </svg>
+      </div>
+      <div
+        className="flexFollowTopPane"
+      >
+        <div
+          className="usernameFollowTab"
+        />
+        <div
+          className="handleFollowTab"
+        >
+          @
+        </div>
+      </div>
+    </div>
+    <div
+      className="tabMargin"
+    >
+      <nav
+        className="followTabs nav nav-tabs"
+        onKeyDown={[Function]}
+        role="tablist"
+      >
+        <a
+          aria-controls="follow-tab-tabpane-followers"
+          aria-selected={true}
+          className="nav-item nav-link active"
+          data-rb-event-key="followers"
+          href="#"
+          id="follow-tab-tab-followers"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="tab"
+        >
+          Followers
+        </a>
+        <a
+          aria-controls="follow-tab-tabpane-following"
+          aria-selected={false}
+          className="nav-item nav-link"
+          data-rb-event-key="following"
+          href="#"
+          id="follow-tab-tab-following"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="tab"
+          tabIndex={-1}
+        >
+          Following
+        </a>
+      </nav>
+      <div
+        className="tab-content"
+      >
+        <div
+          aria-hidden={false}
+          aria-labelledby="follow-tab-tab-followers"
+          className="tab-pane active"
+          id="follow-tab-tabpane-followers"
+          role="tabpanel"
+        >
+          <div
+            className="followerTab"
+          />
+        </div>
+        <div
+          aria-hidden={true}
+          aria-labelledby="follow-tab-tab-following"
+          className="tab-pane"
+          id="follow-tab-tabpane-following"
+          role="tabpanel"
+        >
+          <div
+            className="followingTab"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
