@@ -40,7 +40,7 @@ const handleRequest = async (tweetId, callback) => {
     _id: tweetId,
   });
   callback(null, {
-    message: 'Tweet Deleted Successfully',
+    message: 'Tweet Deleted Successfully'
   });
 };
 
