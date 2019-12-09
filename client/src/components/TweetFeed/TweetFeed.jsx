@@ -41,6 +41,7 @@ class TweetFeed extends Component {
   componentWillReceiveProps(nextProps) {
     const { feed } = nextProps;
     this.setState({
+      hasMore: true,
       feed,
     });
   }

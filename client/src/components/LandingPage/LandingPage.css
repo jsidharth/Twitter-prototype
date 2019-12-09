@@ -230,7 +230,7 @@ input[type='email'] {
   height: 40px;
   width: 300px;
 }
-.error {
+.errorLabel {
   margin-left: -10px;
   color: red;
   font-weight: bold;
@@ -295,7 +295,7 @@ input[type='email'] {
   flex-direction : row !important;
 }
 
-.error::before{
+.errorLabel::before{
   content: "\200B";
 }
 
