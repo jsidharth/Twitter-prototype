@@ -1,9 +1,7 @@
-/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-param-reassign */
 import express from 'express';
 import passport from 'passport';
 import jwt from 'jsonwebtoken';
-import client from '../../config/redisConfig';
 import { Users } from '../../config/sequelize';
 import jwtSecret from '../../config/jwtConfig';
 
@@ -71,41 +69,24 @@ userRouter.post('/login', passport.authenticate('login'), async (req, res) => {
 
 userRouter.get('/details/:userId', passport.authenticate('jwt'), (req, res) => {
   console.log('Inside get user details');
-  console.log('Request Body: ', req.params.userId);
-  const { userId } = req.params;
-  return client
-    .getAsync(userId)
-    .then(cacheResult => {
-      if (cacheResult) {
-        console.log('Inside cache');
-        res.status(200).json(JSON.parse(cacheResult));
+  console.log('Request Body: ', req.params.data);
+  kafka.makeRequest(
+    'userTopic',
+    {
+      userId: req.params.userId,
+      action: 'USER_GET_DETAILS',
+    },
+    (err, result) => {
+      if (err) {
+        console.log('Error ', err);
+        res.status(500).json({
+          message: err.message,
+        });
       } else {
-        kafka.makeRequest(
-          'userTopic',
-          {
-            userId: req.params.userId,
-            action: 'USER_GET_DETAILS',
-          },
-          (err, result) => {
-            if (err) {
-              console.log('Error ', err);
-              res.status(500).json({
-                message: err.message,
-              });
-            } else {
-              return client.setexAsync(userId, 3600, JSON.stringify(result)).then(() => {
-                res.status(200).json(result);
-              });
-            }
-          }
-        );
+        res.status(200).json(result);
       }
-    })
-    .catch(err => {
-      res.status(500).json({
-        message: err,
-      });
-    });
+    }
+  );
 });
 
 userRouter.put('/details', passport.authenticate('jwt'), (req, res) => {
@@ -124,10 +105,7 @@ userRouter.put('/details', passport.authenticate('jwt'), (req, res) => {
           message: err.message,
         });
       } else {
-        // Clear the cache as the profile data has been updated
-        return client.delAsync(req.body._id).then(() => {
-          res.status(200).json(result);
-        });
+        res.status(200).json(result);
       }
     }
   );
@@ -168,12 +146,9 @@ userRouter.post('/follow', passport.authenticate('jwt'), (req, res) => {
         res.status(500).json({
           message: err.message,
         });
+      } else {
+        res.status(200).json(result);
       }
-      return client.delAsync(req.body.userId).then(() => {
-        return client.delAsync(req.body.followerId).then(() => {
-          res.status(200).json(result);
-        });
-      });
     }
   );
 });
@@ -191,12 +166,9 @@ userRouter.post('/unfollow', passport.authenticate('jwt'), (req, res) => {
         res.status(500).json({
           message: err.message,
         });
+      } else {
+        res.status(200).json(result);
       }
-      return client.delAsync(req.body.userId).then(() => {
-        return client.delAsync(req.body.followerId).then(() => {
-          res.status(200).json(result);
-        });
-      });
     }
   );
 });

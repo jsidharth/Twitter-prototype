@@ -21,7 +21,9 @@ const handleRequest = callback => {
         hours: 1,
       });
       const endTime = moment();
-      const presentDay = moment().format('L');
+      const previousDay = moment()
+        .subtract(1, 'days')
+        .format('L');
       const startDate = moment()
         .subtract(1, 'month')
         .format('L');
@@ -34,7 +36,7 @@ const handleRequest = callback => {
           .format('L');
       }
       result.forEach(tweetElement => {
-        if (presentDay === moment(tweetElement.createdAt).format('L')) {
+        if (previousDay === moment(tweetElement.createdAt).format('L')) {
           previousDayCount += 1;
         }
         if (
